@@ -14,7 +14,7 @@ deepin-scanner 是 Deepin 操作系统上的文档扫描工具，支持扫描仪
 ## 依赖项
 
 ### 运行时依赖
-- Qt5/Qt6 Core, Gui, Widgets, Multimedia
+- Qt5/Qt6 Core, Gui, Widgets
 - DTK Widget, Gui, Core
 - SANE (Scanner Access Now Easy)
 - libtiff, libjpeg, libpng

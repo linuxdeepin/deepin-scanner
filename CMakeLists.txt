@@ -1,11 +1,17 @@
 cmake_minimum_required(VERSION 3.15)
 
+if (NOT VERSION)
+    set(VERSION 1.0.0)
+endif()
+
 # 项目基本信息
 project(deepin-scanner
-    VERSION 1.0.0
-    DESCRIPTION "Deepin scanner manager"
+    VERSION ${VERSION}
+    DESCRIPTION "Deepin document scanner"
     LANGUAGES CXX C
 )
+
+message(">>> Version: ${PROJECT_VERSION}")
 
 # 设置C++标准
 set(CMAKE_CXX_STANDARD 17)
@@ -15,10 +21,6 @@ include(GNUInstallDirs)
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
    set(CMAKE_INSTALL_PREFIX /usr)
 endif ()
-
-if (NOT VERSION)
-    set(VERSION 1.0.0)
-endif()
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
 # 引入翻译生成
@@ -38,7 +40,7 @@ endif()
 message(">>> Build with DTK: ${DTK_VERSION_MAJOR}")
 
 # 定义必需的Qt组件
-set(qt_required_components Core Gui Widgets Multimedia MultimediaWidgets)
+set(qt_required_components Core Gui Widgets)
 
 # 添加Qt6特有组件
 if (QT_DESIRED_VERSION MATCHES 6)
@@ -56,8 +58,6 @@ set(LINK_LIBS
     Qt${QT_DESIRED_VERSION}::Core
     Qt${QT_DESIRED_VERSION}::Gui
     Qt${QT_DESIRED_VERSION}::Widgets
-    Qt${QT_DESIRED_VERSION}::Multimedia
-    Qt${QT_DESIRED_VERSION}::MultimediaWidgets
     Dtk${DTK_VERSION_MAJOR}::Widget
     Dtk${DTK_VERSION_MAJOR}::Gui
     Dtk${DTK_VERSION_MAJOR}::Core

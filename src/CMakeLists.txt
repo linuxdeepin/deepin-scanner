@@ -55,7 +55,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
     INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}"
-    APP_VERSION="${APP_VERSION}"
+    APP_VERSION="${VERSION}"
 )
 
 # 包含目录

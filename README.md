@@ -14,7 +14,7 @@ Deepin Scanner is a document scanning tool for Deepin OS, supporting both scanne
 ## Dependencies
 
 ### Runtime Dependencies
-- Qt5/Qt6 Core, Gui, Widgets, Multimedia
+- Qt5/Qt6 Core, Gui, Widgets
 - DTK Widget, Gui, Core
 - SANE (Scanner Access Now Easy)
 - libtiff, libjpeg, libpng
