@@ -265,7 +265,10 @@ void ScanWidget::updateDeviceSettings()
     if (m_isScanner) {
         auto scanner = dynamic_cast<ScannerDevice*>(m_device);
         if (scanner) {
-            m_resolutionCombo->addItems({ "300", "600", "1200" });
+            auto resolutions = scanner->getSupportedResolutions();
+            for (const auto &res : resolutions) {
+                m_resolutionCombo->addItem(QString("%1 DPI").arg(res));
+            }
         }
     } else {
         auto webcam = dynamic_cast<WebcamDevice*>(m_device);
@@ -365,7 +368,10 @@ void ScanWidget::onResolutionChanged(int index)
     if (m_isScanner) {
         auto scanner = dynamic_cast<ScannerDevice*>(m_device);
         if (scanner) {
-            scanner->setResolution(m_resolutionCombo->itemText(index).toInt());
+            // "300 DPI" -> DPI
+            QString dpiStr = m_resolutionCombo->itemText(index);
+            int dpi = dpiStr.left(dpiStr.indexOf(' ')).toInt();
+            scanner->setResolution(dpi);
         }
     } else {
         auto webcam = dynamic_cast<WebcamDevice*>(m_device);
@@ -498,10 +504,21 @@ void ScanWidget::onScanFinished(const QImage &image)
 
 void ScanWidget::onScanModeChanged(int index)
 {
+    if (!m_device) return;
+
     if (m_isScanner) {
         // "平板", "ADF", "双面"
+        auto scanner = dynamic_cast<ScannerDevice*>(m_device);
+        if (scanner) {
+            ScannerDevice::ScanMode mode = static_cast<ScannerDevice::ScanMode>(index);
+            scanner->setScanMode(mode);
+        }
     } else {
         // "MJPG", "YUYV", "H264"
+        auto webcam = dynamic_cast<WebcamDevice*>(m_device);
+        if (webcam) {
+            // TODO: 实现视频格式变更逻辑
+        }
     }
     // 实现扫描模式变更逻辑
     emit deviceSettingsChanged();

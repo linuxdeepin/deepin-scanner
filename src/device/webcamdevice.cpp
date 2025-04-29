@@ -488,12 +488,7 @@ void WebcamDevice::startPreview()
     }
 
     // 确保预览开始前应用适当的摄像头参数设置
-    // adjustCommonCameraSettings();
-
-    // 为预览设置适当的亮度和曝光
-    //    setCameraAutoExposure(false);   // 禁用自动曝光
-    //    setCameraBrightness(70);   // 降低亮度
-    //    setCameraExposure(100);   // 降低曝光
+    adjustCommonCameraSettings();
 
     // 清空最新帧
     {
@@ -726,8 +721,8 @@ QImage WebcamDevice::frameToQImage(const void *data, int width, int height, int 
 
                         // 亮度校正 - 降低亮度以解决过亮问题
                         // 将Y值降低20%左右
-                        // y0 = static_cast<int>(y0 * 0.8);
-                        // y1 = static_cast<int>(y1 * 0.8);
+                        y0 = static_cast<int>(y0 * 0.8);
+                        y1 = static_cast<int>(y1 * 0.8);
 
                         int r, g, b;
 

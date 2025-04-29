@@ -17,7 +17,7 @@
 <context>
     <name>LoadingDialog</name>
     <message>
-        <location filename="../src/ui/loadingdialog.cpp" line="24"/>
+        <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -125,17 +125,17 @@ Scanner functionality will be unavailable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="293"/>
+        <location filename="../src/ui/scanwidget.cpp" line="296"/>
         <source>Initializing preview...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="300"/>
+        <location filename="../src/ui/scanwidget.cpp" line="303"/>
         <source>Device preview not available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="341"/>
+        <location filename="../src/ui/scanwidget.cpp" line="344"/>
         <source>No preview image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -155,6 +155,9 @@ Scanner functionality will be unavailable.</source>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="420"/>
+        <location filename="../src/device/scannerdevice.cpp" line="960"/>
+        <location filename="../src/device/scannerdevice.cpp" line="1145"/>
+        <location filename="../src/device/scannerdevice.cpp" line="1245"/>
         <source>Scanner not opened</source>
         <translation type="unfinished"></translation>
     </message>
@@ -270,22 +273,22 @@ Scanner functionality will be unavailable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="560"/>
+        <location filename="../src/device/webcamdevice.cpp" line="555"/>
         <source>Device not initialized or invalid file descriptor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="585"/>
+        <location filename="../src/device/webcamdevice.cpp" line="580"/>
         <source>Failed to start video stream, capture failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="626"/>
+        <location filename="../src/device/webcamdevice.cpp" line="621"/>
         <source>Failed to get image frame</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="680"/>
+        <location filename="../src/device/webcamdevice.cpp" line="675"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation type="unfinished"></translation>
     </message>
