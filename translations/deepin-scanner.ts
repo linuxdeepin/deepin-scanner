@@ -15,6 +15,14 @@
     </message>
 </context>
 <context>
+    <name>LoadingDialog</name>
+    <message>
+        <location filename="../src/ui/loadingdialog.cpp" line="24"/>
+        <source>Loading...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <location filename="../src/mainwindow.cpp" line="36"/>
@@ -33,91 +41,101 @@ Scanner functionality will be unavailable.</source>
         <source>Document Scanner</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="100"/>
+        <source>Loading devices...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="128"/>
+        <source>Opening device...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ScanWidget</name>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="70"/>
+        <location filename="../src/ui/scanwidget.cpp" line="75"/>
         <source>Scan Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="98"/>
+        <location filename="../src/ui/scanwidget.cpp" line="103"/>
         <source>Resolution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="111"/>
+        <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Color Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="124"/>
+        <location filename="../src/ui/scanwidget.cpp" line="129"/>
         <source>Image Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="144"/>
+        <location filename="../src/ui/scanwidget.cpp" line="149"/>
         <source>Scan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="151"/>
+        <location filename="../src/ui/scanwidget.cpp" line="156"/>
         <source>View Scanned Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="165"/>
+        <location filename="../src/ui/scanwidget.cpp" line="170"/>
         <source>Scan history will be shown here</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="214"/>
+        <location filename="../src/ui/scanwidget.cpp" line="219"/>
         <source>Scan Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="215"/>
+        <location filename="../src/ui/scanwidget.cpp" line="220"/>
         <source>Flatbed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="218"/>
+        <location filename="../src/ui/scanwidget.cpp" line="223"/>
         <source>Video Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="222"/>
+        <location filename="../src/ui/scanwidget.cpp" line="227"/>
         <source>Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="222"/>
+        <location filename="../src/ui/scanwidget.cpp" line="227"/>
         <source>Grayscale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="222"/>
+        <location filename="../src/ui/scanwidget.cpp" line="227"/>
         <source>Black White</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="250"/>
+        <location filename="../src/ui/scanwidget.cpp" line="254"/>
         <source>Device not initialized</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="287"/>
+        <location filename="../src/ui/scanwidget.cpp" line="293"/>
         <source>Initializing preview...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="294"/>
+        <location filename="../src/ui/scanwidget.cpp" line="300"/>
         <source>Device preview not available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="335"/>
+        <location filename="../src/ui/scanwidget.cpp" line="341"/>
         <source>No preview image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -125,7 +143,7 @@ Scanner functionality will be unavailable.</source>
 <context>
     <name>ScannerDevice</name>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="277"/>
+        <location filename="../src/device/scannerdevice.cpp" line="284"/>
         <source>No scanner devices found. Possible solutions:
 1. Ensure scanner is connected and powered on
 2. Run command: sudo gpasswd -a $USER scanner
@@ -136,22 +154,22 @@ Scanner functionality will be unavailable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="404"/>
+        <location filename="../src/device/scannerdevice.cpp" line="420"/>
         <source>Scanner not opened</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="414"/>
+        <location filename="../src/device/scannerdevice.cpp" line="430"/>
         <source>Failed to get scanner parameters: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="429"/>
+        <location filename="../src/device/scannerdevice.cpp" line="445"/>
         <source>Failed to start scan: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="935"/>
+        <location filename="../src/device/scannerdevice.cpp" line="951"/>
         <source>Failed to save test image</source>
         <translation type="unfinished"></translation>
     </message>

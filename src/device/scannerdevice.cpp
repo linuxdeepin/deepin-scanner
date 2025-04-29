@@ -13,6 +13,8 @@
 #include <QThread>
 #include <QStandardPaths>
 
+#define ADD_TEST_DEVICE 0   // Set to 1 to add a test device
+
 // --- Dummy definitions for Image/advance if not available elsewhere ---
 // Replace these with your actual definitions if they exist elsewhere
 #ifndef _WIN32
@@ -225,11 +227,13 @@ QStringList ScannerDevice::getAvailableDevices()
             qWarning() << "Try installing: sudo apt-get install libsane-extras";
         }
 
+#if ADD_TEST_DEVICE
         // 如果没有真实设备，添加一个虚拟测试设备
         if (deviceNames.isEmpty()) {
             qDebug() << "Adding a virtual test scanner device";
             deviceNames.append("test:0");
         }
+#endif
 
         return deviceNames;
     }
@@ -238,8 +242,10 @@ QStringList ScannerDevice::getAvailableDevices()
         qWarning() << "Device list is null, but status was GOOD";
         emit errorOccurred("Device list is null");
 
+#if ADD_TEST_DEVICE
         // 添加虚拟测试设备
         deviceNames.append("test:0");
+#endif
         return deviceNames;
     }
 
@@ -267,6 +273,7 @@ QStringList ScannerDevice::getAvailableDevices()
         }
     }
 
+#if ADD_TEST_DEVICE
     // 如果找不到设备，添加一个虚拟测试设备
     if (deviceNames.isEmpty()) {
         qDebug() << "No SANE devices found, adding a virtual test device";
@@ -283,10 +290,13 @@ QStringList ScannerDevice::getAvailableDevices()
                               "6. Reconnect USB cable or restart computer"));
 #    endif
     }
+#endif
 
 #else
     emit errorOccurred("SANE backend not available on this platform.");
+    #if ADD_TEST_DEVICE
     deviceNames.append("test:0");   // 在Windows上也添加测试设备
+#endif
 #endif
     return deviceNames;
 }
@@ -294,6 +304,7 @@ QStringList ScannerDevice::getAvailableDevices()
 bool ScannerDevice::openDevice(const QString &deviceName)
 {
 #ifndef _WIN32
+#if ADD_TEST_DEVICE
     // 如果是测试设备，执行虚拟扫描仪流程
     if (deviceName == "test:0") {
         m_deviceOpen = true;
@@ -301,6 +312,7 @@ bool ScannerDevice::openDevice(const QString &deviceName)
         qDebug() << "Opened virtual test scanner device";
         return true;
     }
+#endif
 
     if (!m_saneInitialized) {
         emit errorOccurred("SANE not initialized. Call initializeSane() first.");
@@ -347,6 +359,7 @@ bool ScannerDevice::openDevice(const QString &deviceName)
     return true;
 
 #else
+#if ADD_TEST_DEVICE
     // 在Windows上使用虚拟扫描仪
     if (deviceName == "test:0") {
         m_deviceOpen = true;
@@ -356,6 +369,9 @@ bool ScannerDevice::openDevice(const QString &deviceName)
     } else {
         emit errorOccurred("SANE backend not available on this platform.");
     }
+#else
+    emit errorOccurred("SANE backend not available on this platform.");
+#endif
 #endif
     return false;
 }

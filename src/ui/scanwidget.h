@@ -33,8 +33,9 @@ class ScanWidget : public QWidget
     Q_OBJECT
 public:
     explicit ScanWidget(QWidget *parent = nullptr);
+    ~ScanWidget();
 
-    void setupDeviceMode(QSharedPointer<DeviceBase> device, QString name);
+    void setupDeviceMode(DeviceBase* device, QString name);
     void setPreviewImage(const QImage &image);
     void startCameraPreview();
     void stopCameraPreview();
@@ -65,7 +66,7 @@ private:
     void connectDeviceSignals(bool bind);
     void updateDeviceSettings();
 
-    QSharedPointer<DeviceBase> m_device;
+    DeviceBase* m_device = nullptr;
     bool m_isScanner;
     QTimer m_previewTimer;
     QMutex m_previewMutex;

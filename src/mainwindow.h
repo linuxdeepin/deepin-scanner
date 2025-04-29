@@ -14,6 +14,7 @@
 #include "device/webcamdevice.h"
 #include "ui/scannerswidget.h"
 #include "ui/scanwidget.h"
+#include "ui/loadingdialog.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -25,7 +26,6 @@ public:
     ~MainWindow();
 
 private:
-    QSharedPointer<DeviceBase> m_currentDevicePtr;
     QMap<QString, QSharedPointer<DeviceBase>> m_devices;
 
     // UI Components
@@ -42,8 +42,11 @@ private slots:
     void showDeviceListView();
     void updateDeviceList();
 
+    void showLoadingDialog(const QString &message = QString(), int timeoutMs = 10000);
+    void hideLoadingDialog();
 private:
     DIconButton *m_backBtn = nullptr;
+    LoadingDialog *m_loadingDialog = nullptr;
 };
 
 #endif   // MAINWINDOW_H
