@@ -14,15 +14,15 @@
 #include <QProcess>
 #include <QScreen>
 #include <QGraphicsDropShadowEffect>
+#include <QFuture>
+#include <QFutureWatcher>
+#include <QtConcurrent>
 
 #include <DTitlebar>
 
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
-//, ui(new Ui::MainWindow) // 如果使用 .ui 文件
 {
-    // ui->setupUi(this); // 如果使用 .ui 文件
-
     // --- Initialize Devices ---
     QSharedPointer<ScannerDevice> scannerDevice(new ScannerDevice(this));
     QSharedPointer<WebcamDevice> webcamDevice(new WebcamDevice(this));
@@ -84,18 +84,20 @@ MainWindow::MainWindow(QWidget *parent)
     // 连接返回按钮信号
     connect(m_backBtn, &DIconButton::clicked,
             this, &MainWindow::showDeviceListView);
+
+    m_loadingDialog = new LoadingDialog(this);
+    m_loadingDialog->showWithTimeout();
 }
 
 MainWindow::~MainWindow()
 {
-    // scannerDevice and webcamDevice are children of MainWindow,
-    // Qt's parent-child mechanism handles deletion.
-    // Their destructors should call their respective closeDevice() methods.
+    m_devices.clear();
 }
 
 void MainWindow::updateDeviceList()
 {
     qDebug() << "Updating device list...";
+    showLoadingDialog(tr("Loading devices..."));
 
     // 检查设备是否初始化
     if (!m_devices["scanner"] || !m_devices["webcam"]) {
@@ -113,6 +115,9 @@ void MainWindow::updateDeviceList()
     } else {
         qDebug() << "Error: Failed to cast device pointers";
     }
+
+
+    QTimer::singleShot(500, m_loadingDialog, &LoadingDialog::hide);
 }
 
 void MainWindow::showScanView(const QString &device, bool isScanner)
@@ -120,18 +125,31 @@ void MainWindow::showScanView(const QString &device, bool isScanner)
     m_currentDevice = device;
     m_isCurrentScanner = isScanner;
 
-    // 设置当前设备指针
-    m_currentDevicePtr = isScanner ? m_devices["scanner"] : m_devices["webcam"];
-    qDebug() << "Current device: " << m_currentDevice;
-    // 配置扫描界面，直接传递共享指针
-    m_scanWidget->setupDeviceMode(m_currentDevicePtr, m_currentDevice);
+    showLoadingDialog(tr("Opening device..."));
 
-    m_scanWidget->startCameraPreview();
+    // 设置当前设备指针
+    auto devicePtr = isScanner ? m_devices["scanner"] : m_devices["webcam"];
+    qDebug() << "Current device: " << m_currentDevice;
+    // 使用QtConcurrent运行并行任务
+    QFuture<void> future = QtConcurrent::run([=]() {
+        // 配置扫描界面，传递原始指针
+        m_scanWidget->setupDeviceMode(devicePtr.data(), m_currentDevice);
+    });
+
+    // 等待任务完成
+    QFutureWatcher<void> watcher;
+    QEventLoop loop;
+    QObject::connect(&watcher, &QFutureWatcher<void>::finished, &loop, &QEventLoop::quit);
+    watcher.setFuture(future);
+    loop.exec();
 
     // 切换到扫描界面
     m_stackLayout->setCurrentWidget(m_scanWidget);
+    m_scanWidget->startCameraPreview();
 
     m_backBtn->setVisible(true);
+
+    QTimer::singleShot(500, m_loadingDialog, &LoadingDialog::hide);
 }
 
 void MainWindow::showDeviceListView()
@@ -139,4 +157,17 @@ void MainWindow::showDeviceListView()
     m_backBtn->setVisible(false);
     // 切换到设备列表界面
     m_stackLayout->setCurrentWidget(m_scannersWidget);
+}
+
+void MainWindow::showLoadingDialog(const QString &message, int timeoutMs)
+{
+    if (!message.isEmpty()) {
+        m_loadingDialog->setText(message);
+    }
+    m_loadingDialog->showWithTimeout(timeoutMs);
+}
+
+void MainWindow::hideLoadingDialog()
+{
+    m_loadingDialog->hide();
 }

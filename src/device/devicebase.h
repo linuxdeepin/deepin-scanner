@@ -68,6 +68,4 @@ private:
     DeviceState m_state = Disconnected;
 };
 
-using DevicePtr = QSharedPointer<DeviceBase>;
-
 #endif   // DEVICEBASE_H

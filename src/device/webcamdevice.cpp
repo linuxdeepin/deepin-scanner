@@ -207,7 +207,7 @@ bool WebcamDevice::openDevice(const QString &devicePath)
 
     // 尝试设置摄像头参数
     setCameraAutoExposure(false);
-    setCameraBrightness(40);
+    setCameraBrightness(100);
     setCameraExposure(100);
 
     // 枚举支持的分辨率
@@ -488,12 +488,7 @@ void WebcamDevice::startPreview()
     }
 
     // 确保预览开始前应用适当的摄像头参数设置
-    // adjustCommonCameraSettings();
-
-    // 为预览设置适当的亮度和曝光
-    //    setCameraAutoExposure(false);   // 禁用自动曝光
-    //    setCameraBrightness(40);   // 降低亮度
-    //    setCameraExposure(100);   // 降低曝光
+    adjustCommonCameraSettings();
 
     // 清空最新帧
     {
@@ -1343,7 +1338,7 @@ bool WebcamDevice::adjustCommonCameraSettings()
         int value;   // -1 表示设置为默认值
         const char *name;
     } commonControls[] = {
-        { V4L2_CID_BRIGHTNESS, 50, "亮度" },   // 亮度，显著降低以减少过亮
+        { V4L2_CID_BRIGHTNESS, 70, "亮度" },   // 亮度，显著降低以减少过亮
         { V4L2_CID_CONTRAST, 80, "对比度" },   // 增加对比度
         { V4L2_CID_SATURATION, 80, "饱和度" },   // 轻微降低饱和度
         { V4L2_CID_HUE, -1, "色调" },   // 色调，使用默认值

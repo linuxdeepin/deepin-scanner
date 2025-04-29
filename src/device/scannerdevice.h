@@ -26,6 +26,13 @@ class ScannerDevice : public DeviceBase
     Q_OBJECT
 
 public:
+    enum ScanMode {
+        SCAN_MODE_FLATBED,    // Flatbed scan mode
+        SCAN_MODE_ADF_SIMPLEX, // ADF simplex scan
+        SCAN_MODE_ADF_DUPLEX   // ADF duplex scan
+    };
+    Q_ENUM(ScanMode)
+
     // Helper structure used by scanning logic
     // You need to provide the definition for this based on your original code.
     struct Image
@@ -55,10 +62,25 @@ public:
     void startScan(const QString &tempOutputFilePath);
     void cancelScan();
     bool advance(Image *im);
-    bool setResolution(int dpi);
 
     // Initializes the SANE backend. Returns true on success.
     bool initializeSane() { return initialize(); }
+
+    // Scan mode related methods
+    // Set scan mode (flatbed, ADF simplex, ADF duplex)
+    bool setScanMode(ScanMode mode);
+    
+    // Get supported scan modes list
+    QList<ScanMode> getSupportedScanModes();
+    
+    // Set scan resolution (DPI)
+    bool setResolution(int dpi);
+    
+    // Get current resolution
+    int getResolution() const;
+    
+    // Get supported resolutions list
+    QList<int> getSupportedResolutions();
 
 signals:
     // // Emitted when the scan successfully completes.
@@ -71,8 +93,8 @@ signals:
     // Note: Requires modification in scan_it to emit this.
     void scanProgress(int percentage);
 
-    // 新增信号
-    void previewLineAvailable(const QImage &line);   // 用于实时预览扫描线
+    // New signal
+    void previewLineAvailable(const QImage &line);   // For real-time scan line preview
 
 private:
 #ifndef _WIN32
@@ -85,6 +107,9 @@ private:
 #endif
     bool m_deviceOpen = false;   // Flag indicating if a device is open
     bool m_usingTestDevice = false;
+
+    ScanMode m_currentScanMode = SCAN_MODE_FLATBED; // Current scan mode
+    int m_currentResolutionDPI = 300; // Current scan resolution (DPI)
 
     void generateTestImage(const QString &outputPath);
 };

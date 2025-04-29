@@ -13,6 +13,8 @@
 #include <QThread>
 #include <QStandardPaths>
 
+#define ADD_TEST_DEVICE 1   // Set to 1 to add a test device
+
 // --- Dummy definitions for Image/advance if not available elsewhere ---
 // Replace these with your actual definitions if they exist elsewhere
 #ifndef _WIN32
@@ -122,7 +124,7 @@ QStringList ScannerDevice::getAvailableDevices()
         }
     }
 
-    // 添加更详细的SANE版本信息
+    // Add more detailed SANE version information
     SANE_Int version_code;
     sane_init(&version_code, NULL);
     int major = SANE_VERSION_MAJOR(version_code);
@@ -130,7 +132,7 @@ QStringList ScannerDevice::getAvailableDevices()
     int build = SANE_VERSION_BUILD(version_code);
     qDebug() << "SANE Version:" << major << "." << minor << "." << build;
 
-    // 检查USB设备连接
+    // Check USB device connections
     QProcess lsusbProcess;
     lsusbProcess.start("lsusb", QStringList());
     lsusbProcess.waitForFinished(5000);
@@ -138,7 +140,7 @@ QStringList ScannerDevice::getAvailableDevices()
     qDebug() << "Connected USB devices:";
     qDebug() << lsusbOutput;
 
-    // 检查是否有saned进程在运行
+    // Check if saned process is running
     QProcess psProcess;
     psProcess.start("ps", QStringList() << "aux" << "|" << "grep" << "saned");
     psProcess.waitForFinished(5000);
@@ -146,7 +148,7 @@ QStringList ScannerDevice::getAvailableDevices()
     qDebug() << "SANE daemon processes:";
     qDebug() << psOutput;
 
-    // 检查后端配置
+    // Check backend configuration
     QDir backendDir("/etc/sane.d/dll.d");
     if (backendDir.exists()) {
         qDebug() << "SANE backend configurations:";
@@ -154,7 +156,7 @@ QStringList ScannerDevice::getAvailableDevices()
         for (const QString &entry : entries) {
             qDebug() << " -" << entry;
 
-            // 读取每个后端配置文件
+            // Read each backend config file
             QFile backendFile(backendDir.filePath(entry));
             if (backendFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
                 QTextStream in(&backendFile);
@@ -165,11 +167,11 @@ QStringList ScannerDevice::getAvailableDevices()
         }
     }
 
-    // 尝试使用SANE_DEBUG环境变量来获取更多信息
+    // Try using SANE_DEBUG env vars for more info
     qputenv("SANE_DEBUG_DLL", "255");
     qputenv("SANE_DEBUG_NET", "255");
 
-    // 尝试手动运行scanimage命令 - 有些系统中SANE库与scanimage使用不同的配置
+    // Try running scanimage manually - some systems have different configs
     QProcess process;
     process.start("scanimage", QStringList("-L"));
     process.waitForFinished(5000);
@@ -181,7 +183,7 @@ QStringList ScannerDevice::getAvailableDevices()
         qDebug() << "scanimage -L error:" << error;
     }
 
-    // 检查当前用户是否在scanner组中
+    // Check if current user is in scanner group
     QProcess groupsProcess;
     groupsProcess.start("groups");
     groupsProcess.waitForFinished(5000);
@@ -195,7 +197,7 @@ QStringList ScannerDevice::getAvailableDevices()
         qWarning() << "sudo usermod -a -G saned $USER";
     }
 
-    // 尝试不同的参数调用sane_get_devices
+    // Try calling sane_get_devices with different parameters
     qDebug() << "Trying sane_get_devices with SANE_TRUE (include network devices)...";
     const SANE_Device **device_list = nullptr;
     SANE_Status status = sane_get_devices(&device_list, SANE_TRUE);
@@ -212,7 +214,7 @@ QStringList ScannerDevice::getAvailableDevices()
         qWarning() << errorMsg;
         emit errorOccurred(errorMsg);
 
-        // 如果特定后端没有安装，尝试提供建议
+        // If specific backend is not installed, try to provide suggestions
         QProcess dpkgProcess;
         dpkgProcess.start("dpkg", QStringList() << "-l" << "*sane*");
         dpkgProcess.waitForFinished(5000);
@@ -225,11 +227,13 @@ QStringList ScannerDevice::getAvailableDevices()
             qWarning() << "Try installing: sudo apt-get install libsane-extras";
         }
 
-        // 如果没有真实设备，添加一个虚拟测试设备
+#if ADD_TEST_DEVICE
+        // If no real devices found, add a virtual test device
         if (deviceNames.isEmpty()) {
             qDebug() << "Adding a virtual test scanner device";
             deviceNames.append("test:0");
         }
+#endif
 
         return deviceNames;
     }
@@ -238,8 +242,10 @@ QStringList ScannerDevice::getAvailableDevices()
         qWarning() << "Device list is null, but status was GOOD";
         emit errorOccurred("Device list is null");
 
-        // 添加虚拟测试设备
+#if ADD_TEST_DEVICE
+        // Add virtual test device
         deviceNames.append("test:0");
+#endif
         return deviceNames;
     }
 
@@ -256,7 +262,7 @@ QStringList ScannerDevice::getAvailableDevices()
             if (dev->name) {
                 deviceNames.append(QString::fromUtf8(dev->name));
 
-                // 构建更详细的设备描述
+                // Build more detailed device description
                 QString deviceInfo = QString("%1 %2 (%3)")
                                              .arg(dev->vendor ? QString::fromUtf8(dev->vendor) : "Unknown")
                                              .arg(dev->model ? QString::fromUtf8(dev->model) : "Unknown")
@@ -267,13 +273,14 @@ QStringList ScannerDevice::getAvailableDevices()
         }
     }
 
-    // 如果找不到设备，添加一个虚拟测试设备
+#if ADD_TEST_DEVICE
+    // If no devices found, add a virtual test device
     if (deviceNames.isEmpty()) {
         qDebug() << "No SANE devices found, adding a virtual test device";
         deviceNames.append("test:0");
 
 #    ifdef ENABLE_POPUPS
-        // 建议一些可能的解决方法
+        // Suggest possible solutions
         emit errorOccurred(tr("No scanner devices found. Possible solutions:\n"
                               "1. Ensure scanner is connected and powered on\n"
                               "2. Run command: sudo gpasswd -a $USER scanner\n"
@@ -283,10 +290,13 @@ QStringList ScannerDevice::getAvailableDevices()
                               "6. Reconnect USB cable or restart computer"));
 #    endif
     }
+#endif
 
 #else
     emit errorOccurred("SANE backend not available on this platform.");
-    deviceNames.append("test:0");   // 在Windows上也添加测试设备
+    #if ADD_TEST_DEVICE
+    deviceNames.append("test:0");   // Also add test device on Windows
+#endif
 #endif
     return deviceNames;
 }
@@ -294,13 +304,15 @@ QStringList ScannerDevice::getAvailableDevices()
 bool ScannerDevice::openDevice(const QString &deviceName)
 {
 #ifndef _WIN32
-    // 如果是测试设备，执行虚拟扫描仪流程
+#if ADD_TEST_DEVICE
+    // If test device, execute virtual scanner flow
     if (deviceName == "test:0") {
         m_deviceOpen = true;
         m_usingTestDevice = true;
         qDebug() << "Opened virtual test scanner device";
         return true;
     }
+#endif
 
     if (!m_saneInitialized) {
         emit errorOccurred("SANE not initialized. Call initializeSane() first.");
@@ -347,7 +359,8 @@ bool ScannerDevice::openDevice(const QString &deviceName)
     return true;
 
 #else
-    // 在Windows上使用虚拟扫描仪
+#if ADD_TEST_DEVICE
+    // Use virtual scanner on Windows
     if (deviceName == "test:0") {
         m_deviceOpen = true;
         m_usingTestDevice = true;
@@ -356,6 +369,9 @@ bool ScannerDevice::openDevice(const QString &deviceName)
     } else {
         emit errorOccurred("SANE backend not available on this platform.");
     }
+#else
+    emit errorOccurred("SANE backend not available on this platform.");
+#endif
 #endif
     return false;
 }
@@ -393,7 +409,7 @@ bool ScannerDevice::isCapturing() const
 void ScannerDevice::startScan(const QString &tempOutputFilePath)
 {
 #ifndef _WIN32
-    // 如果是测试设备，生成测试图像
+    // If test device, generate test image
     if (m_usingTestDevice) {
         setState(Capturing);
         generateTestImage(tempOutputFilePath);
@@ -407,7 +423,7 @@ void ScannerDevice::startScan(const QString &tempOutputFilePath)
 
     setState(Capturing);
 
-    // 获取扫描仪参数
+    // Get scanner parameters
     SANE_Parameters params;
     SANE_Status status = sane_get_parameters(m_device, &params);
     if (status != SANE_STATUS_GOOD) {
@@ -648,7 +664,7 @@ SANE_Status ScannerDevice::scan_it(FILE *ofp)
             }
 
             if (len > 0) {
-                // 创建一个图像行并发送信号
+                // Create an image line and emit signal
                 QImage line;
                 if (parm.format == SANE_FRAME_RGB) {
                     line = QImage(reinterpret_cast<uchar *>(buffer),
@@ -872,40 +888,40 @@ cleanup:
 // 添加一个新方法来生成测试图像
 void ScannerDevice::generateTestImage(const QString & /*outputPath*/)
 {
-    // 确保/tmp/deepin-scanner目录存在
+    // Ensure /tmp/deepin-scanner directory exists
     QDir tempDir("/tmp/deepin-scanner");
     if (!tempDir.exists()) {
         tempDir.mkpath("/tmp/deepin-scanner");
     }
 
-    // 使用QUuid生成随机文件名，格式为scan_随机UUID.png
+    // Use QUuid to generate random filename: scan_temp.png
     QString fileName = QString("scan_temp.png");
     QString outputPath = QString("/tmp/deepin-scanner/%1").arg(fileName);
     qDebug() << "Generating test image at:" << outputPath;
 
-    // 创建一个测试图像
+    // Create test image
     QImage testImage(800, 600, QImage::Format_RGB888);
     testImage.fill(Qt::white);
 
-    // 绘制一些内容
+    // Draw some content
     QPainter painter(&testImage);
     painter.setPen(QPen(Qt::black, 2));
     painter.drawRect(10, 10, testImage.width() - 20, testImage.height() - 20);
 
-    // 添加文本
+    // Add text
     QFont font = painter.font();
     font.setPointSize(24);
     painter.setFont(font);
-    painter.drawText(testImage.rect(), Qt::AlignCenter, "测试扫描图像");
+    painter.drawText(testImage.rect(), Qt::AlignCenter, "Test Scan Image");
 
-    // 添加当前日期时间
+    // Add current date/time
     font.setPointSize(12);
     painter.setFont(font);
     QString dateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
     painter.drawText(QRect(10, testImage.height() - 40, testImage.width() - 20, 30),
                      Qt::AlignRight, dateTime);
 
-    // 添加一些几何图形
+    // Add geometric shapes
     painter.setBrush(QBrush(Qt::red));
     painter.drawEllipse(QPoint(100, 100), 50, 50);
 
@@ -915,16 +931,16 @@ void ScannerDevice::generateTestImage(const QString & /*outputPath*/)
     painter.setBrush(QBrush(Qt::green));
     painter.drawRoundedRect(300, 300, 200, 100, 20, 20);
 
-    // 保存图像
+    // Save image
     if (testImage.save(outputPath)) {
         qDebug() << "Test image saved successfully";
 
-        // 模拟一些延迟，模拟实际扫描过程
+        // Simulate delay like real scanning
         for (int i = 0; i < 10; i++) {
-            QThread::msleep(200);   // 200毫秒延迟
+            QThread::msleep(200);   // 200ms delay
             emit scanProgress(i * 10);   // 0% - 90%
 
-            // 发送预览行信号
+            // Send preview line signal
             QImage line = testImage.copy(0, i * 60, testImage.width(), 1);
             emit previewLineAvailable(line);
         }
@@ -936,55 +952,591 @@ void ScannerDevice::generateTestImage(const QString & /*outputPath*/)
     }
 }
 
-/**
- * @brief Set the scanner resolution in DPI
- * @param dpi The resolution in dots per inch
- * @return true if successful, false otherwise
- */
-bool ScannerDevice::setResolution(int dpi)
+// 添加设置扫描模式的方法
+bool ScannerDevice::setScanMode(ScanMode mode)
 {
 #ifndef _WIN32
     if (!m_deviceOpen || !m_device) {
-        qWarning() << "Cannot set resolution - device not open";
+        emit errorOccurred(tr("Scanner not opened"));
         return false;
     }
 
-    // Find the resolution option
-    SANE_Int option_count = 0;
-    const SANE_Option_Descriptor *option_desc = nullptr;
-    SANE_Status status = sane_control_option(m_device, 0, SANE_ACTION_GET_VALUE, &option_count, nullptr);
+    // Try to find scan source related options
+    const char* optionNames[] = {
+        "source",           // Common source option
+        "adf-mode",         // Used by some scanners
+        "scan-source",      // Used by some scanners
+        "duplex",           // For duplex scanning
+        "duplex-mode"       // Another duplex option
+    };
+
+    SANE_Status status;
+    SANE_Handle dev = m_device;
+    bool sourceSet = false;
+    bool duplexSet = false;
+
+    // 首先获取所有选项的描述信息
+    SANE_Int num_options;
+    status = sane_control_option(dev, 0, SANE_ACTION_GET_VALUE, &num_options, nullptr);
     if (status != SANE_STATUS_GOOD) {
-        qWarning() << "Failed to get option count:" << sane_strstatus(status);
+        qWarning() << "Failed to get number of options:" << sane_strstatus(status);
         return false;
     }
 
-    // Search for resolution option
-    int resolution_option = -1;
-    for (SANE_Int i = 0; i < option_count; ++i) {
-        option_desc = sane_get_option_descriptor(m_device, i);
-        if (option_desc && option_desc->name && (strcmp(option_desc->name, "resolution") == 0 || strcmp(option_desc->name, "x-resolution") == 0)) {
-            resolution_option = i;
-            break;
+    // 打印所有选项以便调试
+    qDebug() << "Scanner has" << num_options << "options:";
+    
+    for (SANE_Int i = 0; i < num_options; i++) {
+        const SANE_Option_Descriptor *opt = sane_get_option_descriptor(dev, i);
+        if (opt && opt->name) {
+            qDebug() << "Option" << i << ":" << opt->name << "-" << opt->title;
         }
     }
 
-    if (resolution_option == -1) {
-        qWarning() << "Resolution option not found on this device";
-        return false;
+    // 尝试设置源选项 (平板/ADF)
+    for (const char* option_name : optionNames) {
+        SANE_Int option_index = -1;
+        
+        // Find option index
+        for (SANE_Int i = 0; i < num_options; i++) {
+            const SANE_Option_Descriptor *opt = sane_get_option_descriptor(dev, i);
+            if (opt && opt->name && strcmp(opt->name, option_name) == 0) {
+                option_index = i;
+                qDebug() << "Found option" << option_name << "at index" << option_index;
+                break;
+            }
+        }
+        
+        if (option_index == -1) {
+            continue;  // Option name not found
+        }
+        
+        // Get option descriptor
+        const SANE_Option_Descriptor *opt = sane_get_option_descriptor(dev, option_index);
+        if (!opt || !SANE_OPTION_IS_ACTIVE(opt->cap) || !SANE_OPTION_IS_SETTABLE(opt->cap)) {
+            continue;  // Option not available/settable
+        }
+        
+        // Confirm string list type option
+        if (opt->type == SANE_TYPE_STRING && opt->constraint_type == SANE_CONSTRAINT_STRING_LIST) {
+            const SANE_String_Const *values = opt->constraint.string_list;
+            if (!values) continue;
+            
+            // 确定要设置的值
+            const char* value_to_set = nullptr;
+            
+            // Find matching pattern value
+            if (strcmp(option_name, "source") == 0 || 
+                strcmp(option_name, "scan-source") == 0) {
+                // Source option
+                if (mode == SCAN_MODE_FLATBED) {
+                    const char* flatbed_values[] = {"Flatbed", "flatbed", "platen", "normal"};
+                    for (const char* val : flatbed_values) {
+                        for (int j = 0; values[j] != nullptr; j++) {
+                            if (strcasecmp(values[j], val) == 0) {
+                                value_to_set = values[j];
+                                break;
+                            }
+                        }
+                        if (value_to_set) break;
+                    }
+                } else {
+                    // ADF mode (simplex or duplex)
+                    const char* adf_values[] = {"ADF", "Automatic Document Feeder", "adf", "document", "feeder"};
+                    for (const char* val : adf_values) {
+                        for (int j = 0; values[j] != nullptr; j++) {
+                            if (strcasecmp(values[j], val) == 0) {
+                                value_to_set = values[j];
+                                break;
+                            }
+                        }
+                        if (value_to_set) break;
+                    }
+                }
+                
+                if (value_to_set) {
+                    qDebug() << "Setting" << option_name << "to" << value_to_set;
+                    status = sane_control_option(dev, option_index, SANE_ACTION_SET_VALUE, (void*)value_to_set, nullptr);
+                    if (status == SANE_STATUS_GOOD) {
+                        sourceSet = true;
+                        qDebug() << "Successfully set" << option_name << "to" << value_to_set;
+                    } else {
+                        qWarning() << "Failed to set" << option_name << ":" << sane_strstatus(status);
+                    }
+                }
+            } else if (mode == SCAN_MODE_ADF_DUPLEX && 
+                      (strcmp(option_name, "duplex") == 0 || 
+                       strcmp(option_name, "duplex-mode") == 0 ||
+                       strcmp(option_name, "adf-mode") == 0)) {
+                // Duplex scan settings
+                const char* duplex_values[] = {"Duplex", "duplex", "yes", "true", "both", "front-back"};
+                for (const char* val : duplex_values) {
+                    for (int j = 0; values[j] != nullptr; j++) {
+                        if (strcasecmp(values[j], val) == 0) {
+                            value_to_set = values[j];
+                            break;
+                        }
+                    }
+                    if (value_to_set) break;
+                }
+                
+                if (value_to_set) {
+                    qDebug() << "Setting" << option_name << "to" << value_to_set;
+                    status = sane_control_option(dev, option_index, SANE_ACTION_SET_VALUE, (void*)value_to_set, nullptr);
+                    if (status == SANE_STATUS_GOOD) {
+                        duplexSet = true;
+                        qDebug() << "Successfully set" << option_name << "to" << value_to_set;
+                    } else {
+                        qWarning() << "Failed to set" << option_name << ":" << sane_strstatus(status);
+                    }
+                }
+            }
+        } else if (opt->type == SANE_TYPE_BOOL &&
+              (strcmp(option_name, "duplex") == 0 ||
+               strcmp(option_name, "duplex-mode") == 0)) {
+        // Boolean duplex option
+            if (mode == SCAN_MODE_ADF_DUPLEX) {
+                SANE_Bool value = SANE_TRUE;
+                status = sane_control_option(dev, option_index, SANE_ACTION_SET_VALUE, &value, nullptr);
+                if (status == SANE_STATUS_GOOD) {
+                    duplexSet = true;
+                    qDebug() << "Successfully set" << option_name << "to TRUE";
+                } else {
+                    qWarning() << "Failed to set" << option_name << ":" << sane_strstatus(status);
+                }
+            } else {
+                SANE_Bool value = SANE_FALSE;
+                status = sane_control_option(dev, option_index, SANE_ACTION_SET_VALUE, &value, nullptr);
+                if (status == SANE_STATUS_GOOD) {
+                    qDebug() << "Successfully set" << option_name << "to FALSE";
+                }
+            }
+        }
     }
 
-    // Set the resolution value
-    SANE_Word resolution_value = static_cast<SANE_Word>(dpi);
-    status = sane_control_option(m_device, resolution_option, SANE_ACTION_SET_VALUE, &resolution_value, nullptr);
-    if (status != SANE_STATUS_GOOD) {
-        qWarning() << "Failed to set resolution:" << sane_strstatus(status);
-        return false;
+    // Check if required options were set
+    if (mode == SCAN_MODE_FLATBED) {
+        return sourceSet; // Flatbed only needs source
+    } else if (mode == SCAN_MODE_ADF_SIMPLEX) {
+        return sourceSet; // Simplex ADF only needs source
+    } else if (mode == SCAN_MODE_ADF_DUPLEX) {
+        return sourceSet && duplexSet; // Duplex needs both
     }
-
-    qDebug() << "Successfully set scanner resolution to" << dpi << "DPI";
-    return true;
+    
+    return false;
 #else
-    qWarning() << "Setting resolution not supported on Windows";
+    // Virtual test device always succeeds
+    if (m_usingTestDevice) {
+        m_currentScanMode = mode;
+        return true;
+    }
+    emit scanError("SANE backend not available on this platform.");
     return false;
 #endif
+}
+
+// 获取当前扫描仪支持的扫描模式
+QList<ScannerDevice::ScanMode> ScannerDevice::getSupportedScanModes()
+{
+    QList<ScanMode> supportedModes;
+    
+#ifndef _WIN32
+    if (!m_deviceOpen || !m_device) {
+        emit errorOccurred(tr("Scanner not opened"));
+        return supportedModes;
+    }
+
+    // 平板扫描几乎所有扫描仪都支持
+    supportedModes.append(SCAN_MODE_FLATBED);
+    
+    // 检查是否支持ADF
+    bool hasAdf = false;
+    bool supportsDuplex = false;
+    
+    SANE_Handle dev = m_device;
+    SANE_Int num_options;
+    SANE_Status status = sane_control_option(dev, 0, SANE_ACTION_GET_VALUE, &num_options, nullptr);
+    
+    if (status != SANE_STATUS_GOOD) {
+        qWarning() << "Failed to get number of options:" << sane_strstatus(status);
+        return supportedModes;
+    }
+    
+    // Find source and duplex options
+    for (SANE_Int i = 0; i < num_options; i++) {
+        const SANE_Option_Descriptor *opt = sane_get_option_descriptor(dev, i);
+        if (!opt || !opt->name) continue;
+        
+        if (strcmp(opt->name, "source") == 0 || 
+            strcmp(opt->name, "scan-source") == 0) {
+            
+            if (opt->type == SANE_TYPE_STRING && 
+                opt->constraint_type == SANE_CONSTRAINT_STRING_LIST) {
+                
+                const SANE_String_Const *values = opt->constraint.string_list;
+                if (!values) continue;
+                
+                // 查找ADF相关值
+                for (int j = 0; values[j] != nullptr; j++) {
+                    if (strcasestr(values[j], "adf") || 
+                        strcasestr(values[j], "feeder") ||
+                        strcasestr(values[j], "document")) {
+                        hasAdf = true;
+                        break;
+                    }
+                }
+            }
+        } else if (strcmp(opt->name, "duplex") == 0 || 
+                   strcmp(opt->name, "duplex-mode") == 0 ||
+                   strcmp(opt->name, "adf-mode") == 0) {
+            
+            // 检查是否支持双面扫描
+            if (opt->type == SANE_TYPE_BOOL) {
+                // 布尔类型的双面选项
+                supportsDuplex = true;
+            } else if (opt->type == SANE_TYPE_STRING && 
+                       opt->constraint_type == SANE_CONSTRAINT_STRING_LIST) {
+                // 字符串类型的双面选项
+                const SANE_String_Const *values = opt->constraint.string_list;
+                if (!values) continue;
+                
+                for (int j = 0; values[j] != nullptr; j++) {
+                    if (strcasestr(values[j], "duplex") || 
+                        strcasestr(values[j], "both") ||
+                        strcasestr(values[j], "front-back")) {
+                        supportsDuplex = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
+    // Add supported modes based on detection
+    if (hasAdf) {
+        supportedModes.append(SCAN_MODE_ADF_SIMPLEX);
+        
+        if (supportsDuplex) {
+            supportedModes.append(SCAN_MODE_ADF_DUPLEX);
+        }
+    }
+#else
+    // 虚拟测试设备支持所有模式
+    if (m_usingTestDevice) {
+        supportedModes.append(SCAN_MODE_FLATBED);
+        supportedModes.append(SCAN_MODE_ADF_SIMPLEX);
+        supportedModes.append(SCAN_MODE_ADF_DUPLEX);
+    }
+#endif
+
+    return supportedModes;
+}
+
+int ScannerDevice::getResolution() const
+{
+    return m_currentResolutionDPI;
+}
+
+bool ScannerDevice::setResolution(int dpi)
+{
+    qDebug() << "Setting resolution to" << dpi << "DPI";
+#ifndef _WIN32
+    if (!m_deviceOpen || !m_device) {
+        emit errorOccurred(tr("Scanner not opened"));
+        return false;
+    }
+
+    // Common resolution option names
+    const char* resolutionOptions[] = {
+        "resolution",
+        "scan-resolution",
+        "x-resolution",
+        "y-resolution"
+    };
+
+    SANE_Status status;
+    SANE_Handle dev = m_device;
+    bool resolutionSet = false;
+
+    // Get number of options
+    SANE_Int num_options;
+    status = sane_control_option(dev, 0, SANE_ACTION_GET_VALUE, &num_options, nullptr);
+    if (status != SANE_STATUS_GOOD) {
+        qWarning() << "Failed to get number of options:" << sane_strstatus(status);
+        return false;
+    }
+
+    // Try to set resolution
+    for (const char* option_name : resolutionOptions) {
+        SANE_Int option_index = -1;
+        
+        // Find option index
+        for (SANE_Int i = 0; i < num_options; i++) {
+            const SANE_Option_Descriptor *opt = sane_get_option_descriptor(dev, i);
+            if (opt && opt->name && strcmp(opt->name, option_name) == 0) {
+                option_index = i;
+                qDebug() << "Found resolution option" << option_name << "at index" << option_index;
+                break;
+            }
+        }
+        
+        if (option_index == -1) {
+            continue;  // Option not found
+        }
+        
+        // Get option descriptor
+        const SANE_Option_Descriptor *opt = sane_get_option_descriptor(dev, option_index);
+        if (!opt || !SANE_OPTION_IS_ACTIVE(opt->cap) || !SANE_OPTION_IS_SETTABLE(opt->cap)) {
+            continue;  // Option not available/settable
+        }
+        
+        // Set resolution based on option type
+        if (opt->type == SANE_TYPE_INT) {
+            SANE_Int value = static_cast<SANE_Int>(dpi);
+            
+            // Check if resolution is within allowed range
+            if (opt->constraint_type == SANE_CONSTRAINT_RANGE) {
+                const SANE_Range *range = opt->constraint.range;
+                if (value < range->min) value = range->min;
+                if (value > range->max) value = range->max;
+                
+                // Ensure value matches step requirement
+                if (range->quant != 0) {
+                    value = ((value - range->min) / range->quant) * range->quant + range->min;
+                }
+            } else if (opt->constraint_type == SANE_CONSTRAINT_WORD_LIST) {
+                // For discrete values, find closest match
+                const SANE_Int *values = opt->constraint.word_list;
+                if (!values) continue;
+                
+                int count = values[0]; // 第一个元素是数组大小
+                int closest = -1;
+                int min_diff = INT_MAX;
+                
+                for (int i = 1; i <= count; i++) {
+                    int diff = abs(values[i] - value);
+                    if (diff < min_diff) {
+                        min_diff = diff;
+                        closest = values[i];
+                    }
+                }
+                
+                if (closest >= 0) value = closest;
+            }
+            
+            qDebug() << "Setting" << option_name << "to" << value << "DPI";
+            status = sane_control_option(dev, option_index, SANE_ACTION_SET_VALUE, &value, nullptr);
+            if (status == SANE_STATUS_GOOD) {
+                qDebug() << "Successfully set" << option_name << "to" << value << "DPI";
+                
+                if (strcmp(option_name, "resolution") == 0) {
+                    // If general resolution, break after setting
+                    m_currentResolutionDPI = value;
+                    resolutionSet = true;
+                    break;
+                } else if ((strcmp(option_name, "x-resolution") == 0) || 
+                         (strcmp(option_name, "y-resolution") == 0)) {
+                    // If X or Y resolution, may need to set both
+                    resolutionSet = true;
+                    m_currentResolutionDPI = value;
+                    // 不跳出循环，继续查找另一个方向的分辨率选项
+                }
+            } else {
+                qWarning() << "Failed to set" << option_name << ":" << sane_strstatus(status);
+            }
+        } else if (opt->type == SANE_TYPE_FIXED) {
+            // For floating point resolution values
+            SANE_Fixed value = SANE_FIX(dpi);
+            
+            if (opt->constraint_type == SANE_CONSTRAINT_RANGE) {
+                const SANE_Range *range = opt->constraint.range;
+                if (value < range->min) value = range->min;
+                if (value > range->max) value = range->max;
+                
+                // Ensure value matches step requirement
+                if (range->quant != 0) {
+                    value = ((value - range->min) / range->quant) * range->quant + range->min;
+                }
+            }
+            
+            qDebug() << "Setting" << option_name << "to" << SANE_UNFIX(value) << "DPI (fixed)";
+            status = sane_control_option(dev, option_index, SANE_ACTION_SET_VALUE, &value, nullptr);
+            if (status == SANE_STATUS_GOOD) {
+                qDebug() << "Successfully set" << option_name << "to" << SANE_UNFIX(value) << "DPI (fixed)";
+                
+                if (strcmp(option_name, "resolution") == 0) {
+                    m_currentResolutionDPI = static_cast<int>(SANE_UNFIX(value));
+                    resolutionSet = true;
+                    break;
+                } else if ((strcmp(option_name, "x-resolution") == 0) || 
+                         (strcmp(option_name, "y-resolution") == 0)) {
+                    resolutionSet = true;
+                    m_currentResolutionDPI = static_cast<int>(SANE_UNFIX(value));
+                }
+            } else {
+                qWarning() << "Failed to set" << option_name << ":" << sane_strstatus(status);
+            }
+        }
+    }
+
+    return resolutionSet;
+#else
+    // 虚拟测试设备总是返回成功
+    if (m_usingTestDevice) {
+        m_currentResolutionDPI = dpi;
+        return true;
+    }
+    emit scanError("SANE backend not available on this platform.");
+    return false;
+#endif
+}
+
+QList<int> ScannerDevice::getSupportedResolutions()
+{
+    QList<int> supportedResolutions;
+    
+#ifndef _WIN32
+    if (!m_deviceOpen || !m_device) {
+        qWarning() << "Scanner not open, cannot get supported resolutions";
+        // Return some common resolutions as defaults
+        return {75, 150, 300, 600, 1200, 2400};
+    }
+
+    // Common resolution option names
+    const char* resolutionOptions[] = {
+        "resolution",
+        "scan-resolution",
+        "x-resolution",
+        "y-resolution"
+    };
+
+    SANE_Status status;
+    SANE_Handle dev = m_device;
+
+    // Get number of options
+    SANE_Int num_options;
+    status = sane_control_option(dev, 0, SANE_ACTION_GET_VALUE, &num_options, nullptr);
+    if (status != SANE_STATUS_GOOD) {
+        qWarning() << "Failed to get number of options:" << sane_strstatus(status);
+        return {75, 150, 300, 600, 1200, 2400}; // 默认值
+    }
+
+    bool foundResolutionOption = false;
+    
+    // 遍历所有可能的分辨率选项
+    for (const char* option_name : resolutionOptions) {
+        SANE_Int option_index = -1;
+        
+        // 查找选项索引
+        for (SANE_Int i = 0; i < num_options; i++) {
+            const SANE_Option_Descriptor *opt = sane_get_option_descriptor(dev, i);
+            if (opt && opt->name && strcmp(opt->name, option_name) == 0) {
+                option_index = i;
+                qDebug() << "Found resolution option" << option_name << "at index" << option_index;
+                break;
+            }
+        }
+        
+        if (option_index == -1) {
+            continue;  // 没有找到这个选项
+        }
+        
+        // 获取选项描述符
+        const SANE_Option_Descriptor *opt = sane_get_option_descriptor(dev, option_index);
+        if (!opt || !SANE_OPTION_IS_ACTIVE(opt->cap)) {
+            continue;  // 选项不可用
+        }
+        
+        // 根据选项类型获取支持的分辨率
+        if (opt->type == SANE_TYPE_INT || opt->type == SANE_TYPE_FIXED) {
+            foundResolutionOption = true;
+            
+            // Check constraint type
+            if (opt->constraint_type == SANE_CONSTRAINT_RANGE) {
+                // Range type constraint
+                const SANE_Range *range = opt->constraint.range;
+                int min_dpi, max_dpi, step_dpi;
+                
+                if (opt->type == SANE_TYPE_INT) {
+                    min_dpi = range->min;
+                    max_dpi = range->max;
+                    step_dpi = range->quant > 0 ? range->quant : 1;
+                } else { // SANE_TYPE_FIXED
+                    min_dpi = SANE_UNFIX(range->min);
+                    max_dpi = SANE_UNFIX(range->max);
+                    step_dpi = range->quant > 0 ? SANE_UNFIX(range->quant) : 1;
+                }
+                
+                qDebug() << "Resolution range:" << min_dpi << "to" << max_dpi << "step" << step_dpi;
+                
+                // 对于范围太大的情况，使用常用分辨率值
+                if (max_dpi - min_dpi > 1000 || step_dpi <= 0) {
+                    // 添加常用分辨率（在最小和最大值范围内）
+                    for (int dpi : {75, 150, 300, 600, 1200, 2400}) {
+                        if (dpi >= min_dpi && dpi <= max_dpi) {
+                            supportedResolutions.append(dpi);
+                        }
+                    }
+                } else {
+                    // 使用步进生成值列表（但限制数量以防过多）
+                    const int MAX_VALUES = 20; // 最多添加20个值
+                    int count = 0;
+                    
+                    for (int dpi = min_dpi; dpi <= max_dpi && count < MAX_VALUES; dpi += step_dpi, count++) {
+                        supportedResolutions.append(dpi);
+                    }
+                }
+                
+                // 如果找到了resolution选项（通用分辨率），就不再继续查找
+                if (strcmp(option_name, "resolution") == 0) {
+                    break;
+                }
+                
+            } else if (opt->constraint_type == SANE_CONSTRAINT_WORD_LIST) {
+                // 离散值列表约束
+                const SANE_Int *values = opt->constraint.word_list;
+                if (!values) continue;
+                
+                int count = values[0]; // 第一个元素是数组大小
+                qDebug() << "Resolution list has" << count << "values";
+                
+                for (int i = 1; i <= count; i++) {
+                    int dpi;
+                    if (opt->type == SANE_TYPE_INT) {
+                        dpi = values[i];
+                    } else { // SANE_TYPE_FIXED
+                        dpi = SANE_UNFIX(values[i]);
+                    }
+                    supportedResolutions.append(dpi);
+                }
+                
+                // 如果找到了resolution选项（通用分辨率），就不再继续查找
+                if (strcmp(option_name, "resolution") == 0) {
+                    break;
+                }
+            }
+        }
+    }
+    
+    // 如果没有找到有效的分辨率选项，返回默认值
+    if (!foundResolutionOption || supportedResolutions.isEmpty()) {
+        qDebug() << "No resolution constraints found, using default resolution values";
+        return {75, 150, 300, 600, 1200, 2400};
+    }
+    
+    // Sort
+    std::sort(supportedResolutions.begin(), supportedResolutions.end());
+    
+    // Remove duplicates
+    supportedResolutions.erase(std::unique(supportedResolutions.begin(), supportedResolutions.end()), 
+                               supportedResolutions.end());
+    
+    qDebug() << "Supported resolutions:" << supportedResolutions;
+    
+#else
+    // Use defaults on Windows
+    supportedResolutions = {75, 150, 300, 600, 1200, 2400};
+#endif
+
+    return supportedResolutions;
 }

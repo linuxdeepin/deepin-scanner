@@ -41,6 +41,11 @@ ScanWidget::ScanWidget(QWidget *parent) : QWidget(parent),
     connect(&m_previewTimer, &QTimer::timeout, this, &ScanWidget::updatePreview);
 }
 
+ScanWidget::~ScanWidget()
+{
+    m_imageSettings.reset();
+}
+
 void ScanWidget::setupUI()
 {
     QSplitter *splitter = new QSplitter(Qt::Horizontal, this);
@@ -183,7 +188,7 @@ void ScanWidget::setupUI()
     mainLayout->addWidget(splitter);
 }
 
-void ScanWidget::setupDeviceMode(QSharedPointer<DeviceBase> device, QString name)
+void ScanWidget::setupDeviceMode(DeviceBase* device, QString name)
 {
     if (!device) return;
 
@@ -192,7 +197,7 @@ void ScanWidget::setupDeviceMode(QSharedPointer<DeviceBase> device, QString name
     // 释放之前的设备
     if (m_device) {
         m_device->closeDevice();
-        m_device.clear();
+        m_device = nullptr;
     }
 
     // 设置新设备
@@ -227,7 +232,6 @@ void ScanWidget::setupDeviceMode(QSharedPointer<DeviceBase> device, QString name
     m_colorCombo->setCurrentIndex(m_imageSettings->colorMode);
     m_formatCombo->setCurrentIndex(m_imageSettings->format);
 
-    updateDeviceSettings();
     connectDeviceSignals(true);
 }
 
@@ -236,11 +240,11 @@ void ScanWidget::connectDeviceSignals(bool bind)
     if (!m_device) return;
 
     if (bind) {
-        connect(m_device.data(), &DeviceBase::imageCaptured, this, &ScanWidget::onScanFinished);
-        connect(m_device.data(), &ScannerDevice::errorOccurred, this, &ScanWidget::handleDeviceError);
+        connect(m_device, &DeviceBase::imageCaptured, this, &ScanWidget::onScanFinished);
+        connect(m_device, &ScannerDevice::errorOccurred, this, &ScanWidget::handleDeviceError);
     } else {
-        disconnect(m_device.data(), &DeviceBase::imageCaptured, this, &ScanWidget::onScanFinished);
-        disconnect(m_device.data(), &ScannerDevice::errorOccurred, this, &ScanWidget::handleDeviceError);
+        disconnect(m_device, &DeviceBase::imageCaptured, this, &ScanWidget::onScanFinished);
+        disconnect(m_device, &ScannerDevice::errorOccurred, this, &ScanWidget::handleDeviceError);
     }
 }
 
@@ -259,12 +263,15 @@ void ScanWidget::updateDeviceSettings()
     // 更新分辨率选项
     m_resolutionCombo->clear();
     if (m_isScanner) {
-        auto scanner = qSharedPointerDynamicCast<ScannerDevice>(m_device);
+        auto scanner = dynamic_cast<ScannerDevice*>(m_device);
         if (scanner) {
-            m_resolutionCombo->addItems({ "300", "600", "1200" });
+            auto resolutions = scanner->getSupportedResolutions();
+            for (const auto &res : resolutions) {
+                m_resolutionCombo->addItem(QString("%1 DPI").arg(res));
+            }
         }
     } else {
-        auto webcam = qSharedPointerDynamicCast<WebcamDevice>(m_device);
+        auto webcam = dynamic_cast<WebcamDevice*>(m_device);
         if (webcam) {
             for (const auto &res : webcam->getSupportedResolutions()) {
                 m_resolutionCombo->addItem(QString("%1x%2").arg(res.width()).arg(res.height()));
@@ -277,12 +284,14 @@ void ScanWidget::startCameraPreview()
 {
     if (!m_device) return;
 
+    updateDeviceSettings();
+
     if (m_isScanner) {
         QIcon icon = QIcon::fromTheme("blank_doc");
         QPixmap pixmap = icon.pixmap(200, 200);
         m_previewLabel->setPixmap(pixmap);
     } else {
-        auto webcam = qSharedPointerDynamicCast<WebcamDevice>(m_device);
+        auto webcam = dynamic_cast<WebcamDevice*>(m_device);
         if (webcam) {
             m_previewLabel->setText(tr("Initializing preview..."));
             webcam->stopPreview();
@@ -303,12 +312,12 @@ void ScanWidget::stopCameraPreview()
     m_previewTimer.stop();
 
     if (m_isScanner) {
-        auto scanner = qSharedPointerDynamicCast<ScannerDevice>(m_device);
+        auto scanner = dynamic_cast<ScannerDevice*>(m_device);
         if (scanner) {
             scanner->cancelScan();
         }
     } else {
-        auto webcam = qSharedPointerDynamicCast<WebcamDevice>(m_device);
+        auto webcam = dynamic_cast<WebcamDevice*>(m_device);
         if (webcam) {
             webcam->stopPreview();
         }
@@ -319,7 +328,7 @@ void ScanWidget::updatePreview()
 {
     if (!m_device || m_isScanner) return;
 
-    auto webcam = qSharedPointerDynamicCast<WebcamDevice>(m_device);
+    auto webcam = dynamic_cast<WebcamDevice*>(m_device);
     if (webcam) {
         // 获取最新帧并更新预览
         QImage frame = webcam->getLatestFrame();
@@ -357,12 +366,15 @@ void ScanWidget::onResolutionChanged(int index)
     if (!m_device) return;
 
     if (m_isScanner) {
-        auto scanner = qSharedPointerDynamicCast<ScannerDevice>(m_device);
+        auto scanner = dynamic_cast<ScannerDevice*>(m_device);
         if (scanner) {
-            scanner->setResolution(m_resolutionCombo->itemText(index).toInt());
+            // "300 DPI" -> DPI
+            QString dpiStr = m_resolutionCombo->itemText(index);
+            int dpi = dpiStr.left(dpiStr.indexOf(' ')).toInt();
+            scanner->setResolution(dpi);
         }
     } else {
-        auto webcam = qSharedPointerDynamicCast<WebcamDevice>(m_device);
+        auto webcam = dynamic_cast<WebcamDevice*>(m_device);
         if (webcam) {
             QString res = m_resolutionCombo->itemText(index);
             QStringList parts = res.split('x');
@@ -492,10 +504,21 @@ void ScanWidget::onScanFinished(const QImage &image)
 
 void ScanWidget::onScanModeChanged(int index)
 {
+    if (!m_device) return;
+
     if (m_isScanner) {
         // "平板", "ADF", "双面"
+        auto scanner = dynamic_cast<ScannerDevice*>(m_device);
+        if (scanner) {
+            ScannerDevice::ScanMode mode = static_cast<ScannerDevice::ScanMode>(index);
+            scanner->setScanMode(mode);
+        }
     } else {
         // "MJPG", "YUYV", "H264"
+        auto webcam = dynamic_cast<WebcamDevice*>(m_device);
+        if (webcam) {
+            // TODO: 实现视频格式变更逻辑
+        }
     }
     // 实现扫描模式变更逻辑
     emit deviceSettingsChanged();
