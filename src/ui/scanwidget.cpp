@@ -9,7 +9,6 @@
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QComboBox>
-#include <QGraphicsDropShadowEffect>
 #include <QDebug>
 #include <QStandardPaths>
 #include <QDir>
@@ -31,14 +30,9 @@ static const int SETTING_COMBO_WIDTH = 220;
 
 ScanWidget::ScanWidget(QWidget *parent) : QWidget(parent),
                                           m_isScanner(false),
-                                          m_previewTimer(this),
                                           m_imageSettings(new ImageSettings())
 {
     setupUI();
-
-    // 设置预览更新定时器
-    m_previewTimer.setInterval(100);   // 10 FPS
-    connect(&m_previewTimer, &QTimer::timeout, this, &ScanWidget::updatePreview);
 }
 
 ScanWidget::~ScanWidget()
@@ -54,11 +48,6 @@ void ScanWidget::setupUI()
     DFrame *previewArea = new DFrame();
     previewArea->setMinimumSize(480, 360);
     QVBoxLayout *previewLayout = new QVBoxLayout(previewArea);
-    QGraphicsDropShadowEffect *shadow = new QGraphicsDropShadowEffect(previewArea);
-    shadow->setBlurRadius(10);
-    shadow->setOffset(2, 2);
-    previewArea->setGraphicsEffect(shadow);
-    previewArea->setBackgroundRole(QPalette::Window);
 
     m_previewLabel = new DLabel();
     m_previewLabel->setAlignment(Qt::AlignCenter);
@@ -168,11 +157,22 @@ void ScanWidget::setupUI()
     m_historyEdit = new QPlainTextEdit();
     m_historyEdit->setReadOnly(true);
     m_historyEdit->setPlaceholderText(tr("Scan history will be shown here"));
+    m_historyEdit->hide();
 
     settingsLayout->addSpacing(20);
     settingsLayout->addWidget(m_historyEdit);
+    settingsLayout->setAlignment(Qt::AlignTop);
 
-    connect(scanButton, &DPushButton::clicked, this, &ScanWidget::startScanning);
+    connect(scanButton, &DPushButton::clicked, this, [this]() {
+        // Throttle rapid clicks to avoid duplicate scanning
+        static QTimer throttle;
+        if(throttle.isActive()) return;
+        
+        throttle.setSingleShot(true);
+        throttle.start(200); // set 200ms delay
+        
+        startScanning();
+    });
     connect(viewButton, &DPushButton::clicked, this, [this]() {
         QDesktopServices::openUrl(QUrl::fromLocalFile(getSaveDirectory()));
     });
@@ -204,10 +204,6 @@ void ScanWidget::setupDeviceMode(DeviceBase* device, QString name)
     auto deviceType = device->getDeviceType();
     m_isScanner = device->getDeviceType() == DeviceBase::Scanner;
 
-    if (!device->openDevice(name)) {
-        qWarning() << "无法打开设备:" << name;
-        return;
-    }
     // clear all combo boxes
     m_modeCombo->clear();
     m_resolutionCombo->clear();
@@ -240,9 +236,11 @@ void ScanWidget::connectDeviceSignals(bool bind)
     if (!m_device) return;
 
     if (bind) {
+        connect(m_device, &DeviceBase::previewUpdated, this, &ScanWidget::onUpdatePreview);
         connect(m_device, &DeviceBase::imageCaptured, this, &ScanWidget::onScanFinished);
         connect(m_device, &ScannerDevice::errorOccurred, this, &ScanWidget::handleDeviceError);
     } else {
+        disconnect(m_device, &DeviceBase::previewUpdated, this, &ScanWidget::onUpdatePreview);
         disconnect(m_device, &DeviceBase::imageCaptured, this, &ScanWidget::onScanFinished);
         disconnect(m_device, &ScannerDevice::errorOccurred, this, &ScanWidget::handleDeviceError);
     }
@@ -309,8 +307,6 @@ void ScanWidget::stopCameraPreview()
 {
     if (!m_device) return;
 
-    m_previewTimer.stop();
-
     if (m_isScanner) {
         auto scanner = dynamic_cast<ScannerDevice*>(m_device);
         if (scanner) {
@@ -324,21 +320,7 @@ void ScanWidget::stopCameraPreview()
     }
 }
 
-void ScanWidget::updatePreview()
-{
-    if (!m_device || m_isScanner) return;
-
-    auto webcam = dynamic_cast<WebcamDevice*>(m_device);
-    if (webcam) {
-        // 获取最新帧并更新预览
-        QImage frame = webcam->getLatestFrame();
-        if (!frame.isNull()) {
-            setPreviewImage(frame);
-        }
-    }
-}
-
-void ScanWidget::setPreviewImage(const QImage &image)
+void ScanWidget::onUpdatePreview(const QImage &image)
 {
     if (image.isNull()) {
         m_previewLabel->setText(tr("No preview image"));
@@ -434,18 +416,9 @@ void ScanWidget::setSaveDirectory(const QString &dir)
 void ScanWidget::onScanFinished(const QImage &image)
 {
     QString scanDir = getSaveDirectory();
-    QString prefix = "scan";
-    if (m_device) {
-        QString deviceName = m_device->currentDeviceName();
-        // get the first part of the device name before the first space
-        // e.g. "Canon LiDE 300" -> "Canon"
-        int spacePos = deviceName.indexOf(' ');
-        prefix = spacePos > 0 ? deviceName.left(spacePos) : deviceName;
-    }
 
     // generate a file name with timestamp
-    QString fileName = QString("%1_%2.%3").arg(prefix)
-                               .arg(QDateTime::currentDateTime().toString("yyyyMMdd_hhmmss"))
+    QString fileName = QString("%1.%2").arg(QDateTime::currentDateTime().toString("yyyyMMdd_hhmmss"))
                                .arg(FORMATS[m_imageSettings->format].toLower());
 
     // handle color mode conversion

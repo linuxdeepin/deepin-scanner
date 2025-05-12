@@ -27,4 +27,4 @@ Depends:
     ${shlibs:Depends},
     ${misc:Depends},
 Description: a tool for scanning.
- Document Scanner is a tool for scanning document files, supporting PDF, JPEG, PNG, TIFF.
+ Scanner Manager is a tool for scanning document files, supporting PDF, JPEG, PNG, TIFF.

@@ -13,7 +13,6 @@
 #include <QThread>
 #include <QProcess>
 #include <QScreen>
-#include <QGraphicsDropShadowEffect>
 #include <QFuture>
 #include <QFutureWatcher>
 #include <QtConcurrent>
@@ -37,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     // --- 创建主界面 ---
-    setWindowTitle(tr("Document Scanner"));
+    setWindowTitle(tr("Scanner Manager"));
     QRect screenRect = QGuiApplication::primaryScreen()->geometry();
     resize(screenRect.width() / 2, screenRect.height() / 2);
     move((screenRect.width() - width()) / 2, (screenRect.height() - height()) / 2);
@@ -130,20 +129,24 @@ void MainWindow::showScanView(const QString &device, bool isScanner)
     // 设置当前设备指针
     auto devicePtr = isScanner ? m_devices["scanner"] : m_devices["webcam"];
     qDebug() << "Current device: " << m_currentDevice;
-    // 使用QtConcurrent运行并行任务
-    QFuture<void> future = QtConcurrent::run([=]() {
-        // 配置扫描界面，传递原始指针
-        m_scanWidget->setupDeviceMode(devicePtr.data(), m_currentDevice);
+    // open the device first via concurrent thread
+    QFuture<bool> future = QtConcurrent::run([=]() {
+        return devicePtr->openDevice(m_currentDevice);
     });
 
     // 等待任务完成
-    QFutureWatcher<void> watcher;
+    QFutureWatcher<bool> watcher;
     QEventLoop loop;
-    QObject::connect(&watcher, &QFutureWatcher<void>::finished, &loop, &QEventLoop::quit);
+    QObject::connect(&watcher, &QFutureWatcher<bool>::finished, &loop, &QEventLoop::quit);
     watcher.setFuture(future);
     loop.exec();
-
-    // 切换到扫描界面
+    if (!watcher.result()) {
+        QTimer::singleShot(500, m_loadingDialog, &LoadingDialog::hide);
+        // TODO: show error message
+        qDebug() << "Failed to open device" << m_currentDevice;
+        return;
+    }
+    m_scanWidget->setupDeviceMode(devicePtr.data(), m_currentDevice);
     m_stackLayout->setCurrentWidget(m_scanWidget);
     m_scanWidget->startCameraPreview();
 

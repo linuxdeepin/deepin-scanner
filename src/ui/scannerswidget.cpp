@@ -7,7 +7,6 @@
 #include <QSharedPointer>
 #include <QHBoxLayout>
 #include <QListWidgetItem>
-#include <QGraphicsDropShadowEffect>
 
 #include <DLabel>
 #include <DFrame>
@@ -44,6 +43,7 @@ void ScannersWidget::setupUI()
     // Device list
     deviceList = new QListWidget();
     deviceList->setSpacing(10);
+    deviceList->setSelectionMode(QAbstractItemView::NoSelection);
     mainLayout->addWidget(deviceList);
 
     connect(refreshButton, &DIconButton::clicked, this, [this]() {
@@ -84,11 +84,6 @@ void ScannersWidget::addDeviceItem(const QString &name, const QString &model,
     item->setData(Qt::UserRole + 1, isScanner);
 
     DFrame *itemWidget = new DFrame();
-    QGraphicsDropShadowEffect *shadow = new QGraphicsDropShadowEffect(itemWidget);
-    shadow->setBlurRadius(10);
-    shadow->setOffset(2, 2);
-    shadow->setColor(QColor(0, 0, 0, 50));
-    itemWidget->setGraphicsEffect(shadow);
     itemWidget->setBackgroundRole(QPalette::Window);
 
     QHBoxLayout *layout = new QHBoxLayout(itemWidget);

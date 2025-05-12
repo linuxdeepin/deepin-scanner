@@ -15,21 +15,6 @@
 #include <QDebug>
 #include "devicebase.h"
 
-// 自定义预览窗口类
-class PreviewWidget : public QWidget
-{
-    Q_OBJECT
-public:
-    explicit PreviewWidget(QWidget *parent = nullptr);
-    void updateFrame(const QImage &frame);
-
-protected:
-    void paintEvent(QPaintEvent *event) override;
-
-private:
-    QImage m_currentFrame;
-};
-
 class WebcamDevice : public DeviceBase
 {
     Q_OBJECT
@@ -53,26 +38,11 @@ public:
     void startPreview();
     void stopPreview();
 
-    QWidget *getVideoWidget();
     QSize getMaxResolution();
     bool setResolution(int width, int height);
     QList<QSize> getSupportedResolutions();
     QSize getCurrentResolution() const { return QSize(m_width, m_height); }
     QImage getLatestFrame();
-
-    // 添加分辨率到支持列表
-    void addSupportedResolution(const QSize &resolution)
-    {
-        if (!m_supportedResolutions.contains(resolution)) {
-            m_supportedResolutions.append(resolution);
-            // 按分辨率大小排序
-            std::sort(m_supportedResolutions.begin(), m_supportedResolutions.end(),
-                      [](const QSize &a, const QSize &b) {
-                          return a.width() * a.height() < b.width() * b.height();
-                      });
-            emit resolutionsChanged(m_supportedResolutions);
-        }
-    }
 
     // 设置摄像头控制参数
     bool setCameraControl(uint32_t controlId, int value);
@@ -102,12 +72,10 @@ private:
     int m_currentBuffer;   // 当前使用的缓冲区
     bool m_isInitialized;
     bool m_deviceSelected;
-    PreviewWidget *m_previewWidget;
     QTimer m_previewTimer;
     int m_width;
     int m_height;
     int m_pixelFormat;
-    // 新增成员变量
     QList<QSize> m_supportedResolutions;
     // 用于存储最新的预览帧
     QImage m_latestFrame;

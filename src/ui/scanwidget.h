@@ -36,7 +36,7 @@ public:
     ~ScanWidget();
 
     void setupDeviceMode(DeviceBase* device, QString name);
-    void setPreviewImage(const QImage &image);
+
     void startCameraPreview();
     void stopCameraPreview();
 
@@ -53,7 +53,7 @@ public slots:
     void startScanning();
 
 private slots:
-    void updatePreview();
+    void onUpdatePreview(const QImage &image);
     void onResolutionChanged(int index);
     void onColorModeChanged(int index);
     void onFormatChanged(int index);

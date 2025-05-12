@@ -1,10 +1,10 @@
 [Desktop Entry]
 Categories=Utility;Application
-Comment=Document Scanner is a scanner tool that supports a variety of scanning devices
+Comment=Scanner Manager is a scanner tool that supports a variety of scanning devices
 Exec=deepin-scanner
-GenericName=Document Scanner
+GenericName=Scanner Manager
 Icon=deepin-scanner
-Name=Document Scanner
+Name=Scanner Manager
 StartupNotify=true
 Terminal=false
 Type=Application
@@ -13,17 +13,17 @@ X-Deepin-Vendor=deepin
 
 # Translations:
 # Do not manually modify!
-Comment[en_US]=Document Scanner is a scanner tool that supports a variety of scanning devices
-Comment[zh_CN]=文档扫描器是一款支持多种扫描设备的工具
-Comment[zh_HK]=文檔掃描器是一款支援多種掃描設備的工具
-Comment[zh_TW]=文件掃描器是一款支援多種掃描設備的工具
+Comment[en_US]=Scanner Manager is a scanner tool that supports a variety of scanning devices
+Comment[zh_CN]=扫描管理器是一款支持多种扫描设备的工具
+Comment[zh_HK]=掃描管理器是一款支援多種掃描設備的工具
+Comment[zh_TW]=掃描管理器是一款支援多種掃描設備的工具
 
-GenericName[en_US]=Document Scanner
-GenericName[zh_CN]=文档扫描器
-GenericName[zh_HK]=文檔掃描器
-GenericName[zh_TW]=文件掃描器
+GenericName[en_US]=Scanner Manager
+GenericName[zh_CN]=扫描管理器
+GenericName[zh_HK]=掃描管理器
+GenericName[zh_TW]=掃描管理器
 
-Name[en_US]=Document Scanner
-Name[zh_CN]=文档扫描器
-Name[zh_HK]=文檔掃描器
-Name[zh_TW]=文件掃描器
+Name[en_US]=Scanner Manager
+Name[zh_CN]=扫描管理器
+Name[zh_HK]=掃描管理器
+Name[zh_TW]=掃描管理器

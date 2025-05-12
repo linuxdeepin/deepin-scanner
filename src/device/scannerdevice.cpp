@@ -13,7 +13,7 @@
 #include <QThread>
 #include <QStandardPaths>
 
-#define ADD_TEST_DEVICE 1   // Set to 1 to add a test device
+#define ADD_TEST_DEVICE 0   // Set to 1 to add a test device
 
 // --- Dummy definitions for Image/advance if not available elsewhere ---
 // Replace these with your actual definitions if they exist elsewhere

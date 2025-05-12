@@ -7,7 +7,7 @@ endif()
 # 项目基本信息
 project(deepin-scanner
     VERSION ${VERSION}
-    DESCRIPTION "Deepin document scanner"
+    DESCRIPTION "Deepin scanner manager"
     LANGUAGES CXX C
 )
 

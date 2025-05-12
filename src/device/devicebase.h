@@ -59,6 +59,8 @@ signals:
     void captureStarted();
     void imageCaptured(const QImage &image);
     void errorOccurred(const QString &error);
+    // preview image signal
+    void previewUpdated(const QImage &image);
 
 protected:
     void setState(DeviceState state);
