@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
     app.setApplicationVersion(APP_VERSION);
     app.setProductIcon(QIcon::fromTheme("deepin-scanner"));
     app.setApplicationAcknowledgementPage("https://www.deepin.org/acknowledgments/");
-    app.setApplicationDescription(app.translate("Application", "Document Scanner is a scanner tool that supports a variety of scanning devices"));
+    app.setApplicationDescription(app.translate("Application", "Scanner Manager is a scanner tool that supports a variety of scanning devices"));
 
     // set log format and register console and file appenders
     const QString logFormat = "%{time}{yyyyMMdd.HH:mm:ss.zzz}[%{type:1}][%{function:-35} %{line:-4} %{threadid} ] %{message}\n";

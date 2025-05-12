@@ -24,41 +24,9 @@
 #include <QMutex>
 #include <QMutexLocker>
 
-// PreviewWidget 实现
-PreviewWidget::PreviewWidget(QWidget *parent)
-    : QWidget(parent)
-{
-    setAttribute(Qt::WA_OpaquePaintEvent);
-    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    setMinimumSize(320, 240);
-}
-
-void PreviewWidget::updateFrame(const QImage &frame)
-{
-    m_currentFrame = frame;
-    update();
-}
-
-void PreviewWidget::paintEvent(QPaintEvent *event)
-{
-    QPainter painter(this);
-
-    if (m_currentFrame.isNull()) {
-        painter.fillRect(rect(), Qt::black);
-        return;
-    }
-
-    QRect targetRect = rect();
-    QSize scaled = m_currentFrame.size().scaled(targetRect.size(), Qt::KeepAspectRatio);
-    targetRect.setSize(scaled);
-    targetRect.moveCenter(rect().center());
-
-    painter.drawImage(targetRect, m_currentFrame);
-}
-
 // WebcamDevice 实现
 WebcamDevice::WebcamDevice(QObject *parent)
-    : DeviceBase(parent), m_fd(-1), m_currentBuffer(0), m_isInitialized(false), m_deviceSelected(false), m_previewWidget(new PreviewWidget), m_width(640), m_height(480), m_pixelFormat(V4L2_PIX_FMT_YUYV)
+    : DeviceBase(parent), m_fd(-1), m_currentBuffer(0), m_isInitialized(false), m_deviceSelected(false), m_width(640), m_height(480), m_pixelFormat(V4L2_PIX_FMT_YUYV)
 {
     memset(m_buffers, 0, sizeof(m_buffers));
     memset(m_bufferSizes, 0, sizeof(m_bufferSizes));
@@ -70,7 +38,6 @@ WebcamDevice::WebcamDevice(QObject *parent)
 WebcamDevice::~WebcamDevice()
 {
     closeDevice();
-    delete m_previewWidget;
 }
 
 QStringList WebcamDevice::getAvailableDevices()
@@ -544,7 +511,9 @@ void WebcamDevice::updatePreview()
         // 保存调整后的图像作为最新帧，用于捕获
         QMutexLocker locker(&m_frameMutex);
         m_latestFrame = image;
-        m_previewWidget->updateFrame(image);
+
+        // emit image
+        emit previewUpdated(image);
     }
 }
 
@@ -680,11 +649,6 @@ void WebcamDevice::captureImage()
     } else {
         stopCapturing();
     }
-}
-
-QWidget *WebcamDevice::getVideoWidget()
-{
-    return m_previewWidget;
 }
 
 QImage WebcamDevice::frameToQImage(const void *data, int width, int height, int format)
