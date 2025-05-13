@@ -42,8 +42,8 @@ private slots:
     void showDeviceListView();
     void updateDeviceList();
 
-    void showLoadingDialog(const QString &message = QString(), int timeoutMs = 10000);
-    void hideLoadingDialog();
+    void showLoading(const QString &message = QString(), int timeoutMs = 10000);
+    void hideLoading();
 private:
     DIconButton *m_backBtn = nullptr;
     LoadingDialog *m_loadingDialog = nullptr;

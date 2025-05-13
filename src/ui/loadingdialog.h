@@ -4,15 +4,15 @@
 #include <QTimer>
 #include <QLabel>
 #include <QVBoxLayout>
-#include <DSpinner>
+#include <QDialog>
 
-#include <DDialog>
+#include <DSpinner>
 
 DWIDGET_USE_NAMESPACE
 /**
  * @brief The LoadingDialog class provides a modal loading dialog with timeout
  */
-class LoadingDialog : public DDialog
+class LoadingDialog : public QDialog
 {
     Q_OBJECT
 public:

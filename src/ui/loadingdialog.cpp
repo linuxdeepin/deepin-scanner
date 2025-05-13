@@ -5,11 +5,11 @@
 #include <DSpinner>
 
 LoadingDialog::LoadingDialog(QWidget *parent)
-    : DDialog(parent)
+    : QDialog(parent)
 {
-    setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
+    setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground);
-    // setModal(true);
+    setModal(true);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->setContentsMargins(20, 20, 20, 20);
@@ -26,11 +26,6 @@ LoadingDialog::LoadingDialog(QWidget *parent)
     layout->addWidget(m_spinner, 0, Qt::AlignCenter);
     layout->addSpacing(15);
     layout->addWidget(m_textLabel, 0, Qt::AlignCenter);
-
-    QWidget *contentWidget = new QWidget(this);
-    contentWidget->setLayout(layout);
-    addContent(contentWidget);
-    setContentsMargins(0, 0, 0, 0);
 
     setFixedSize(220, 220);
 
