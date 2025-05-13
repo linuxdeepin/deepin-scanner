@@ -41,7 +41,7 @@ void ScannersWidget::setupUI()
     mainLayout->addLayout(titleLayout);
 
     // Device list
-    deviceList = new QListWidget();
+    deviceList = new DListWidget();
     deviceList->setSpacing(10);
     deviceList->setSelectionMode(QAbstractItemView::NoSelection);
     mainLayout->addWidget(deviceList);
@@ -117,8 +117,8 @@ void ScannersWidget::addDeviceItem(const QString &name, const QString &model,
     DPushButton *scanButton = new DPushButton(tr("Scan"));
     scanButton->setProperty("deviceName", name);
     scanButton->setProperty("isScanner", isScanner);
-    scanButton->setFixedWidth(150);
-    scanButton->setFixedHeight(60);
+    scanButton->setFixedWidth(200);
+    scanButton->setFixedHeight(50);
     layout->addWidget(scanButton);
     layout->setContentsMargins(10, 10, 10, 10);
 

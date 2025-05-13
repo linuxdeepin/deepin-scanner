@@ -30,7 +30,7 @@ signals:
 
 private:
     QVBoxLayout *mainLayout;
-    QListWidget *deviceList;
+    DListWidget *deviceList;
     DIconButton *refreshButton;
 
     void setupUI();

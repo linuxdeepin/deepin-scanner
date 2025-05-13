@@ -174,17 +174,8 @@ bool WebcamDevice::openDevice(const QString &devicePath)
     m_currentDeviceName = devicePath;
     setState(Connected);
 
-    // 尝试设置摄像头参数
-    setCameraAutoExposure(true);
-    setCameraBrightness(100);
-    setCameraExposure(100);
-    setCameraAutoFocus(true);
-
     // 枚举支持的分辨率
     enumerateSupportedResolutions();
-
-    // 开始预览
-    startPreview();
 
     return true;
 }
@@ -265,23 +256,7 @@ bool WebcamDevice::setResolution(int width, int height)
         qDebug() << "成功设置分辨率:" << fmt.fmt.pix.width << "x" << fmt.fmt.pix.height;
     } else {
         qDebug() << "设置分辨率失败，尝试其他像素格式";
-
-        // 尝试其他常见像素格式
-        uint32_t pixelFormatsToTry[] = {
-            V4L2_PIX_FMT_YUYV,
-            V4L2_PIX_FMT_MJPEG,
-            V4L2_PIX_FMT_YUV420,
-            V4L2_PIX_FMT_RGB24
-        };
-
-        for (uint32_t format : pixelFormatsToTry) {
-            fmt.fmt.pix.pixelformat = format;
-            if (ioctl(m_fd, VIDIOC_S_FMT, &fmt) != -1) {
-                formatSet = true;
-                qDebug() << "使用像素格式" << format << "成功设置分辨率";
-                break;
-            }
-        }
+        formatSet = selectBestPixelFormat();
     }
 
     if (!formatSet) {
@@ -295,7 +270,6 @@ bool WebcamDevice::setResolution(int width, int height)
     // 更新设备参数
     m_width = fmt.fmt.pix.width;
     m_height = fmt.fmt.pix.height;
-    m_pixelFormat = fmt.fmt.pix.pixelformat;
 
     // 初始化内存映射
     if (!initMmap()) {
@@ -305,9 +279,6 @@ bool WebcamDevice::setResolution(int width, int height)
         emit errorOccurred(tr("Memory mapping failed"));
         return false;
     }
-
-    // 调整摄像头参数以解决图像过亮的问题
-    // adjustCommonCameraSettings();
 
     // 恢复设备状态
     m_isInitialized = true;
@@ -457,8 +428,8 @@ void WebcamDevice::startPreview()
         return;
     }
 
-    // 确保预览开始前应用适当的摄像头参数设置
-    // adjustCommonCameraSettings();
+    adjustCommonCameraSettings();
+    setCameraAutoFocus(true);
 
     // 清空最新帧
     {
@@ -1168,15 +1139,34 @@ bool WebcamDevice::setCameraControl(uint32_t controlId, int value)
         }
         return false;
     }
+    auto controlName = QString::fromUtf8(reinterpret_cast<const char*>(queryctrl.name));
+    qDebug() << "控制项:" << controlName << " 范围:" << queryctrl.minimum << "-" << queryctrl.maximum << " 默认值:" << queryctrl.default_value;
 
     if (queryctrl.flags & V4L2_CTRL_FLAG_DISABLED) {
-        qDebug() << "控制项被禁用:" << queryctrl.name;
+        qDebug() << "控制项被禁用:" << controlName;
         return false;
     }
 
-    // 确保值在有效范围内
-    if (value < queryctrl.minimum) value = queryctrl.minimum;
-    if (value > queryctrl.maximum) value = queryctrl.maximum;
+    if (V4L2_CID_BRIGHTNESS == controlId) {
+        int mid = 0;
+        if (queryctrl.minimum < 0) {
+            // 亮度范围是负数
+            mid = (queryctrl.maximum + queryctrl.minimum) / 2;
+            if (mid <= 0) {
+                mid = 1;
+            }
+        } else {
+            // 亮度范围是正数
+            mid = (queryctrl.maximum - queryctrl.minimum) / 2;
+        }
+        // set percentage value of middle for brightness
+        value = mid * value / 100;
+    } else {
+        // 确保值在有效范围内
+        if (value <= queryctrl.minimum) value = queryctrl.minimum + 1;
+        if (value >= queryctrl.maximum) value = queryctrl.maximum - 1;
+    }
+    qDebug() << "设置控制项:" << controlName << "值为" << value;
 
     // 设置控制项的值
     struct v4l2_control control;
@@ -1184,11 +1174,11 @@ bool WebcamDevice::setCameraControl(uint32_t controlId, int value)
     control.value = value;
 
     if (ioctl(m_fd, VIDIOC_S_CTRL, &control) == -1) {
-        qDebug() << "设置控制项失败:" << queryctrl.name << "值:" << value << "错误:" << strerror(errno);
+        qDebug() << "设置控制项失败:" << controlName << "值:" << value << "错误:" << strerror(errno);
         return false;
     }
 
-    qDebug() << "成功设置控制项:" << queryctrl.name << "值:" << value;
+    qDebug() << "成功设置控制项:" << controlName << "值:" << value;
     return true;
 }
 
@@ -1209,16 +1199,17 @@ void WebcamDevice::listCameraControls()
 
         if (ioctl(m_fd, VIDIOC_QUERYCTRL, &queryctrl) == 0) {
             if (!(queryctrl.flags & V4L2_CTRL_FLAG_DISABLED)) {
+                auto controlName = QString::fromUtf8(reinterpret_cast<const char*>(queryctrl.name));
                 struct v4l2_control control;
                 control.id = id;
                 if (ioctl(m_fd, VIDIOC_G_CTRL, &control) == 0) {
-                    qDebug() << "  控制项:" << queryctrl.name
+                    qDebug() << "  控制项:" << controlName
                              << "ID:" << queryctrl.id
                              << "当前值:" << control.value
                              << "范围:" << queryctrl.minimum << "-" << queryctrl.maximum
                              << "默认值:" << queryctrl.default_value;
                 } else {
-                    qDebug() << "  控制项:" << queryctrl.name
+                    qDebug() << "  控制项:" << controlName
                              << "ID:" << queryctrl.id
                              << "范围:" << queryctrl.minimum << "-" << queryctrl.maximum
                              << "默认值:" << queryctrl.default_value
@@ -1235,16 +1226,17 @@ void WebcamDevice::listCameraControls()
 
         if (ioctl(m_fd, VIDIOC_QUERYCTRL, &queryctrl) == 0) {
             if (!(queryctrl.flags & V4L2_CTRL_FLAG_DISABLED)) {
+                auto controlName = QString::fromUtf8(reinterpret_cast<const char*>(queryctrl.name));
                 struct v4l2_control control;
                 control.id = id;
                 if (ioctl(m_fd, VIDIOC_G_CTRL, &control) == 0) {
-                    qDebug() << "  相机控制项:" << queryctrl.name
+                    qDebug() << "  相机控制项:" << controlName
                              << "ID:" << queryctrl.id
                              << "当前值:" << control.value
                              << "范围:" << queryctrl.minimum << "-" << queryctrl.maximum
                              << "默认值:" << queryctrl.default_value;
                 } else {
-                    qDebug() << "  相机控制项:" << queryctrl.name
+                    qDebug() << "  相机控制项:" << controlName
                              << "ID:" << queryctrl.id
                              << "范围:" << queryctrl.minimum << "-" << queryctrl.maximum
                              << "默认值:" << queryctrl.default_value
@@ -1261,16 +1253,17 @@ void WebcamDevice::listCameraControls()
 
         if (ioctl(m_fd, VIDIOC_QUERYCTRL, &queryctrl) == 0) {
             if (!(queryctrl.flags & V4L2_CTRL_FLAG_DISABLED)) {
+                auto controlName = QString::fromUtf8(reinterpret_cast<const char*>(queryctrl.name));
                 struct v4l2_control control;
                 control.id = id;
                 if (ioctl(m_fd, VIDIOC_G_CTRL, &control) == 0) {
-                    qDebug() << "  私有控制项:" << queryctrl.name
+                    qDebug() << "  私有控制项:" << controlName
                              << "ID:" << queryctrl.id
                              << "当前值:" << control.value
                              << "范围:" << queryctrl.minimum << "-" << queryctrl.maximum
                              << "默认值:" << queryctrl.default_value;
                 } else {
-                    qDebug() << "  私有控制项:" << queryctrl.name
+                    qDebug() << "  私有控制项:" << controlName
                              << "ID:" << queryctrl.id
                              << "范围:" << queryctrl.minimum << "-" << queryctrl.maximum
                              << "默认值:" << queryctrl.default_value
@@ -1281,101 +1274,136 @@ void WebcamDevice::listCameraControls()
     }
 }
 
-// 调整摄像头常见参数
 bool WebcamDevice::adjustCommonCameraSettings()
 {
     if (m_fd <= 0) {
-        qDebug() << "文件描述符无效，无法调整摄像头参数";
+        qDebug() << "[Error] Invalid file descriptor";
         return false;
     }
 
-    // 首先列出所有可用的控制项，帮助调试
+    // 调试信息：列出摄像头支持的控制项
+    qDebug() << "=== Starting camera optimization ===";
     listCameraControls();
 
-    // 常见的参数ID及它们的推荐值 - 降低默认值以解决图像过亮问题
-    const struct
-    {
+    // 参数配置策略（带智能适应）
+    struct CameraControlConfig {
         uint32_t id;
-        int value;   // -1 表示设置为默认值
-        const char *name;
-    } commonControls[] = {
-        { V4L2_CID_BRIGHTNESS, 70, "亮度" },   // 亮度，显著降低以减少过亮
-        { V4L2_CID_CONTRAST, 80, "对比度" },   // 增加对比度
-        { V4L2_CID_SATURATION, 80, "饱和度" },   // 轻微降低饱和度
-        { V4L2_CID_HUE, -1, "色调" },   // 色调，使用默认值
-        { V4L2_CID_AUTO_WHITE_BALANCE, 1, "自动白平衡" },   // 自动白平衡，启用
-        { V4L2_CID_GAMMA, 77, "伽玛" },   // 调整伽玛值
-        { V4L2_CID_GAIN, 40, "增益" },   // 大幅降低增益以减少过亮
-        { V4L2_CID_EXPOSURE, 150, "曝光" },   // 大幅降低曝光以减少过亮
-        { V4L2_CID_EXPOSURE_AUTO, V4L2_EXPOSURE_MANUAL, "自动曝光" },   // 关闭自动曝光，使用手动设置
-        { V4L2_CID_EXPOSURE_AUTO_PRIORITY, 0, "自动曝光优先级" }   // 自动曝光优先级，禁用以避免帧率下降
+        int target;  // -1=默认值, -2=不修改, -3=自动计算
+        const char* name;
+        bool required;
     };
 
-    // 尝试禁用自动控制，让我们的手动设置生效
-    v4l2_control auto_ctrl;
-    auto_ctrl.id = V4L2_CID_EXPOSURE_AUTO;
-    auto_ctrl.value = V4L2_EXPOSURE_MANUAL;
-    ioctl(m_fd, VIDIOC_S_CTRL, &auto_ctrl);
+    const CameraControlConfig configTable[] = {
+        // 自动控制组（必须先处理）
+        { V4L2_CID_EXPOSURE_AUTO,       V4L2_EXPOSURE_APERTURE_PRIORITY, "Exposure Mode",    true },
+        { V4L2_CID_AUTOGAIN,            0,                             "Auto Gain",     false },
+        
+        // 核心画质参数
+        { V4L2_CID_BRIGHTNESS,          -1,                            "Brightness",    false },
+        { V4L2_CID_CONTRAST,            38,                            "Contrast",      false },
+        { V4L2_CID_SATURATION,          88,                            "Saturation",    false },
+        { V4L2_CID_SHARPNESS,           4,                             "Sharpness",     false },
+        
+        // 动态计算参数
+        { V4L2_CID_EXPOSURE_ABSOLUTE,   -3,                            "Exposure Time", true },
+        { V4L2_CID_GAIN,                -3,                            "Gain",          true },
+        { V4L2_CID_GAMMA,               110,                           "Gamma",         false },
+        
+        // 自动优化参数
+        { V4L2_CID_AUTO_WHITE_BALANCE,  1,                             "Auto WB",       false },
+        { V4L2_CID_POWER_LINE_FREQUENCY,1,                             "Power Line",    false }
+    };
 
-    // 先禁用自动增益
-    v4l2_control gain_ctrl;
-    gain_ctrl.id = V4L2_CID_AUTOGAIN;
-    gain_ctrl.value = 0;   // 0表示禁用自动增益
-    ioctl(m_fd, VIDIOC_S_CTRL, &gain_ctrl);
+    bool successFlag = false;
+    QElapsedTimer timer;
+    timer.start();
 
-    bool anySuccess = false;
-
-    // 尝试设置每个控制项
-    for (const auto &control : commonControls) {
-        qDebug() << "尝试设置控制项:" << control.name << "为" << control.value;
-        // 查询控制项是否存在及其范围
-        struct v4l2_queryctrl queryctrl;
-        memset(&queryctrl, 0, sizeof(queryctrl));
-        queryctrl.id = control.id;
-
-        if (ioctl(m_fd, VIDIOC_QUERYCTRL, &queryctrl) == -1) {
-            // 控制项不存在，跳过
-            qDebug() << "  控制项不存在:" << control.name;
-            continue;
-        }
-
-        if (queryctrl.flags & V4L2_CTRL_FLAG_DISABLED) {
-            // 控制项被禁用，跳过
-            qDebug() << "  控制项被禁用:" << control.name;
-            continue;
-        }
-
-        // 设置控制项的值
-        int valueToSet = control.value;
-        if (valueToSet == -1) {
-            // 使用默认值
-            valueToSet = queryctrl.default_value;
-        } else {
-            // 确保值在有效范围内
-            if (valueToSet < queryctrl.minimum) valueToSet = queryctrl.minimum;
-            if (valueToSet > queryctrl.maximum) valueToSet = queryctrl.maximum;
-        }
-
-        struct v4l2_control ctrl;
-        ctrl.id = control.id;
-        ctrl.value = valueToSet;
-
-        // 重试几次，有些摄像头可能需要多次尝试
-        bool controlSet = false;
-        for (int retry = 0; retry < 3 && !controlSet; retry++) {
-            if (ioctl(m_fd, VIDIOC_S_CTRL, &ctrl) == 0) {
-                qDebug() << "  成功设置" << control.name << "为" << valueToSet;
-                anySuccess = true;
-                controlSet = true;
-            } else {
-                qDebug() << "  设置" << control.name << "失败:" << strerror(errno) << "尝试次数:" << retry + 1;
-                // 短暂等待后重试
-                QThread::msleep(50);
+    // 第一阶段：参数可行性检查
+    QMap<uint32_t, v4l2_queryctrl> validControls;
+    for (const auto& cfg : configTable) {
+        v4l2_queryctrl query = {};
+        query.id = cfg.id;
+        if (ioctl(m_fd, VIDIOC_QUERYCTRL, &query) == 0) {
+            if (!(query.flags & V4L2_CTRL_FLAG_DISABLED)) {
+                validControls.insert(cfg.id, query);
+                qDebug() << "[Precheck] Supported:" << cfg.name 
+                         << "Range:" << query.minimum << "-" << query.maximum;
             }
         }
     }
 
-    return anySuccess;
+    // 第二阶段：智能参数设置
+    for (const auto& cfg : configTable) {
+        if (!validControls.contains(cfg.id)) {
+            if (cfg.required) {
+                qDebug() << "[Critical] Missing required control:" << cfg.name;
+            }
+            continue;
+        }
+
+        const auto& query = validControls[cfg.id];
+        int finalValue = 0;
+
+        // 动态值计算策略
+        if (cfg.target == -1) {  // 使用默认值
+            finalValue = query.default_value;
+        } 
+        else if (cfg.target == -2) {  // 不修改
+            continue;
+        }
+        else if (cfg.target == -3) {  // 智能计算
+            if (cfg.id == V4L2_CID_EXPOSURE_ABSOLUTE) {
+                finalValue = std::clamp(
+                    (query.default_value + query.maximum) / 2,
+                    static_cast<int>(query.minimum),
+                    static_cast<int>(query.maximum)
+                );
+            } 
+            else if (cfg.id == V4L2_CID_GAIN) {
+                finalValue = std::min(
+                    query.default_value + 5,
+                    static_cast<int>(query.maximum)
+                );
+            }
+        }
+        else {  // 固定值
+            finalValue = std::clamp(
+                cfg.target,
+                static_cast<int>(query.minimum),
+                static_cast<int>(query.maximum)
+            );
+        }
+
+        // 设置参数（带重试机制）
+        v4l2_control ctrl = {};
+        ctrl.id = cfg.id;
+        ctrl.value = finalValue;
+        
+        for (int retry = 0; retry < 3; ++retry) {
+            if (ioctl(m_fd, VIDIOC_S_CTRL, &ctrl) == 0) {
+                qDebug() << "[Success] Set" << cfg.name << "=" << finalValue 
+                         << "(Default:" << query.default_value << ")";
+                successFlag = true;
+                break;
+            }
+            
+            if (retry == 2) {
+                qDebug() << "[Error] Failed to set" << cfg.name 
+                         << "Error:" << strerror(errno);
+                // 关键参数失败时恢复自动模式
+                if (cfg.required && cfg.id == V4L2_CID_EXPOSURE_ABSOLUTE) {
+                    v4l2_control fallback = {};
+                    fallback.id = V4L2_CID_EXPOSURE_AUTO;
+                    fallback.value = V4L2_EXPOSURE_AUTO;
+                    ioctl(m_fd, VIDIOC_S_CTRL, &fallback);
+                }
+            }
+            QThread::msleep(50 * (retry + 1));
+        }
+    }
+
+    qDebug() << "Optimization completed in" << timer.elapsed() << "ms";
+    return successFlag;
 }
 
 // Implementation of camera control shortcut methods
@@ -1399,10 +1427,9 @@ bool WebcamDevice::setCameraAutoExposure(bool enable)
     return setCameraControl(V4L2_CID_EXPOSURE_AUTO, enable ? V4L2_EXPOSURE_AUTO : V4L2_EXPOSURE_MANUAL);
 }
 
-// 添加自动对焦支持
 bool WebcamDevice::setCameraAutoFocus(bool enable)
 {
-    // 首先检查设备是否支持自动对焦
+    // 1. 首先检查设备是否支持自动对焦控制
     struct v4l2_queryctrl queryctrl;
     memset(&queryctrl, 0, sizeof(queryctrl));
     queryctrl.id = V4L2_CID_FOCUS_AUTO;
@@ -1412,17 +1439,53 @@ bool WebcamDevice::setCameraAutoFocus(bool enable)
         return false;
     }
 
-    // 设置自动对焦状态
+    // 2. 设置自动对焦模式（自动或手动）
     struct v4l2_control control;
     control.id = V4L2_CID_FOCUS_AUTO;
     control.value = enable ? 1 : 0;
 
     if (ioctl(m_fd, VIDIOC_S_CTRL, &control) == -1) {
-        qDebug() << "设置自动对焦失败:" << strerror(errno);
+        qDebug() << "设置自动对焦模式失败:" << strerror(errno);
         return false;
     }
 
-    qDebug() << "成功设置自动对焦:" << (enable ? "启用" : "禁用");
+    // 3. 如果启用自动对焦，则启动对焦过程
+    if (enable) {
+        // 检查是否支持自动对焦操作
+        memset(&queryctrl, 0, sizeof(queryctrl));
+        queryctrl.id = V4L2_CID_AUTO_FOCUS_START;
+        
+        if (ioctl(m_fd, VIDIOC_QUERYCTRL, &queryctrl) != -1) {
+            // 启动自动对焦
+            control.id = V4L2_CID_AUTO_FOCUS_START;
+            control.value = 1;
+            
+            if (ioctl(m_fd, VIDIOC_S_CTRL, &control) == -1) {
+                qDebug() << "启动自动对焦失败:" << strerror(errno);
+                // 这里不返回失败，因为可能设备不支持启动但支持自动模式
+            } else {
+                qDebug() << "自动对焦已启动";
+            }
+        } else {
+            qDebug() << "摄像头不支持启动自动对焦";
+        }
+    } else {
+        // 如果是禁用自动对焦，尝试停止可能正在进行的对焦
+        memset(&queryctrl, 0, sizeof(queryctrl));
+        queryctrl.id = V4L2_CID_AUTO_FOCUS_STOP;
+        
+        if (ioctl(m_fd, VIDIOC_QUERYCTRL, &queryctrl) != -1) {
+            control.id = V4L2_CID_AUTO_FOCUS_STOP;
+            control.value = 1;
+            
+            if (ioctl(m_fd, VIDIOC_S_CTRL, &control) == -1) {
+                qDebug() << "停止自动对焦失败:" << strerror(errno);
+            } else {
+                qDebug() << "自动对焦已停止";
+            }
+        }
+    }
+
     return true;
 }
 

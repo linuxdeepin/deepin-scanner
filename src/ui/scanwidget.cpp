@@ -307,7 +307,6 @@ void ScanWidget::startCameraPreview()
             QTimer::singleShot(100, [webcam]() {
                 webcam->startPreview();
             });
-            m_previewTimer.start();
         } else {
             m_previewLabel->setText(tr("Device preview not available"));
         }
