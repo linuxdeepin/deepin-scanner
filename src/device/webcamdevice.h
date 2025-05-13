@@ -41,7 +41,7 @@ public:
     QSize getMaxResolution();
     bool setResolution(int width, int height);
     QList<QSize> getSupportedResolutions();
-    QSize getCurrentResolution() const { return QSize(m_width, m_height); }
+    QSize getResolution() const { return QSize(m_width, m_height); }
     QImage getLatestFrame();
 
     // 设置摄像头控制参数
@@ -54,6 +54,7 @@ public:
     bool setCameraContrast(int value);
     bool setCameraExposure(int value);
     bool setCameraAutoExposure(bool enable);
+    bool setCameraAutoFocus(bool enable);   // 自动对焦控制
 
 signals:
     void captureStarted();
