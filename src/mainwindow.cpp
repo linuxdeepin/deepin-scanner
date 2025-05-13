@@ -42,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     move((screenRect.width() - width()) / 2, (screenRect.height() - height()) / 2);
 
     // 创建中心部件和堆叠布局
-    QWidget *centralWidget = new QWidget(this);
+    DWidget *centralWidget = new DWidget(this);
     m_stackLayout = new QStackedLayout(centralWidget);
 
     // 初始化两个界面
