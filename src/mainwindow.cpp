@@ -74,18 +74,14 @@ MainWindow::MainWindow(QWidget *parent)
     m_backBtn->setVisible(false);   // 初始隐藏
     titleBar->addWidget(m_backBtn, Qt::AlignLeft);
 
-    // 延迟初始化设备列表，确保设备完全初始化
-    QTimer::singleShot(300, this, [this]() {
-        qDebug() << "Initializing device list...";
-        updateDeviceList();
-    });
 
     // 连接返回按钮信号
     connect(m_backBtn, &DIconButton::clicked,
             this, &MainWindow::showDeviceListView);
 
     m_loadingDialog = new LoadingDialog(this);
-    m_loadingDialog->showWithTimeout();
+
+    updateDeviceList();
 }
 
 MainWindow::~MainWindow()
@@ -96,7 +92,7 @@ MainWindow::~MainWindow()
 void MainWindow::updateDeviceList()
 {
     qDebug() << "Updating device list...";
-    showLoadingDialog(tr("Loading devices..."));
+    showLoading(tr("Loading devices..."));
 
     // 检查设备是否初始化
     if (!m_devices["scanner"] || !m_devices["webcam"]) {
@@ -116,7 +112,7 @@ void MainWindow::updateDeviceList()
     }
 
 
-    QTimer::singleShot(500, m_loadingDialog, &LoadingDialog::hide);
+    QTimer::singleShot(500, this, &MainWindow::hideLoading);
 }
 
 void MainWindow::showScanView(const QString &device, bool isScanner)
@@ -124,7 +120,7 @@ void MainWindow::showScanView(const QString &device, bool isScanner)
     m_currentDevice = device;
     m_isCurrentScanner = isScanner;
 
-    showLoadingDialog(tr("Opening device..."));
+    showLoading(tr("Opening device..."));
 
     // 设置当前设备指针
     auto devicePtr = isScanner ? m_devices["scanner"] : m_devices["webcam"];
@@ -141,7 +137,7 @@ void MainWindow::showScanView(const QString &device, bool isScanner)
     watcher.setFuture(future);
     loop.exec();
     if (!watcher.result()) {
-        QTimer::singleShot(500, m_loadingDialog, &LoadingDialog::hide);
+        QTimer::singleShot(500, this, &MainWindow::hideLoading);
         // TODO: show error message
         qDebug() << "Failed to open device" << m_currentDevice;
         return;
@@ -152,7 +148,7 @@ void MainWindow::showScanView(const QString &device, bool isScanner)
 
     m_backBtn->setVisible(true);
 
-    QTimer::singleShot(500, m_loadingDialog, &LoadingDialog::hide);
+    QTimer::singleShot(500, this, &MainWindow::hideLoading);
 }
 
 void MainWindow::showDeviceListView()
@@ -162,7 +158,7 @@ void MainWindow::showDeviceListView()
     m_stackLayout->setCurrentWidget(m_scannersWidget);
 }
 
-void MainWindow::showLoadingDialog(const QString &message, int timeoutMs)
+void MainWindow::showLoading(const QString &message, int timeoutMs)
 {
     if (!message.isEmpty()) {
         m_loadingDialog->setText(message);
@@ -170,7 +166,7 @@ void MainWindow::showLoadingDialog(const QString &message, int timeoutMs)
     m_loadingDialog->showWithTimeout(timeoutMs);
 }
 
-void MainWindow::hideLoadingDialog()
+void MainWindow::hideLoading()
 {
-    m_loadingDialog->hide();
+    m_loadingDialog->close();
 }
