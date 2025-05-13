@@ -80,8 +80,6 @@ void ScanWidget::setupUI()
     m_modeLabel->setFixedWidth(SETTING_LABEL_WIDTH);
     m_modeCombo = new QComboBox();
     m_modeCombo->setMaximumWidth(SETTING_COMBO_WIDTH);
-    connect(m_modeCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, &ScanWidget::onScanModeChanged);
     QHBoxLayout *modeLayout = new QHBoxLayout();
     modeLayout->setSpacing(20);
     modeLayout->addWidget(m_modeLabel);
@@ -93,8 +91,6 @@ void ScanWidget::setupUI()
     resLabel->setFixedWidth(SETTING_LABEL_WIDTH);
     m_resolutionCombo = new QComboBox();
     m_resolutionCombo->setMaximumWidth(SETTING_COMBO_WIDTH);
-    connect(m_resolutionCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, &ScanWidget::onResolutionChanged);
     QHBoxLayout *resolutionLayout = new QHBoxLayout();
     resolutionLayout->setSpacing(20);
     resolutionLayout->addWidget(resLabel);
@@ -106,8 +102,6 @@ void ScanWidget::setupUI()
     colorLabel->setFixedWidth(SETTING_LABEL_WIDTH);
     m_colorCombo = new QComboBox();
     m_colorCombo->setMaximumWidth(SETTING_COMBO_WIDTH);
-    connect(m_colorCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, &ScanWidget::onColorModeChanged);
     QHBoxLayout *colorLayout = new QHBoxLayout();
     colorLayout->setSpacing(20);
     colorLayout->addWidget(colorLabel);
@@ -119,8 +113,6 @@ void ScanWidget::setupUI()
     formatLabel->setFixedWidth(SETTING_LABEL_WIDTH);
     m_formatCombo = new QComboBox();
     m_formatCombo->setMaximumWidth(SETTING_COMBO_WIDTH);
-    connect(m_formatCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, &ScanWidget::onFormatChanged);
     QHBoxLayout *formatLayout = new QHBoxLayout();
     formatLayout->setSpacing(20);
     formatLayout->addWidget(formatLabel);
@@ -167,10 +159,10 @@ void ScanWidget::setupUI()
         // Throttle rapid clicks to avoid duplicate scanning
         static QTimer throttle;
         if(throttle.isActive()) return;
-        
+
         throttle.setSingleShot(true);
-        throttle.start(200); // set 200ms delay
-        
+        throttle.start(500); // set 500ms delay for single click
+
         startScanning();
     });
     connect(viewButton, &DPushButton::clicked, this, [this]() {
@@ -194,11 +186,6 @@ void ScanWidget::setupDeviceMode(DeviceBase* device, QString name)
 
     // disconnect device signals
     connectDeviceSignals(false);
-    // 释放之前的设备
-    if (m_device) {
-        m_device->closeDevice();
-        m_device = nullptr;
-    }
 
     // 设置新设备
     auto deviceType = device->getDeviceType();
@@ -228,6 +215,8 @@ void ScanWidget::setupDeviceMode(DeviceBase* device, QString name)
     m_colorCombo->setCurrentIndex(m_imageSettings->colorMode);
     m_formatCombo->setCurrentIndex(m_imageSettings->format);
 
+    updateDeviceSettings();
+
     connectDeviceSignals(true);
 }
 
@@ -239,10 +228,20 @@ void ScanWidget::connectDeviceSignals(bool bind)
         connect(m_device, &DeviceBase::previewUpdated, this, &ScanWidget::onUpdatePreview);
         connect(m_device, &DeviceBase::imageCaptured, this, &ScanWidget::onScanFinished);
         connect(m_device, &ScannerDevice::errorOccurred, this, &ScanWidget::handleDeviceError);
+
+        connect(m_modeCombo, &QComboBox::currentIndexChanged, this, &ScanWidget::onScanModeChanged);
+        connect(m_resolutionCombo, &QComboBox::currentIndexChanged, this, &ScanWidget::onResolutionChanged);
+        connect(m_colorCombo, &QComboBox::currentIndexChanged, this, &ScanWidget::onColorModeChanged);
+        connect(m_formatCombo, &QComboBox::currentIndexChanged, this, &ScanWidget::onFormatChanged);
     } else {
         disconnect(m_device, &DeviceBase::previewUpdated, this, &ScanWidget::onUpdatePreview);
         disconnect(m_device, &DeviceBase::imageCaptured, this, &ScanWidget::onScanFinished);
         disconnect(m_device, &ScannerDevice::errorOccurred, this, &ScanWidget::handleDeviceError);
+
+        disconnect(m_modeCombo, &QComboBox::currentIndexChanged, this, &ScanWidget::onScanModeChanged);
+        disconnect(m_resolutionCombo, &QComboBox::currentIndexChanged, this, &ScanWidget::onResolutionChanged);
+        disconnect(m_colorCombo, &QComboBox::currentIndexChanged, this, &ScanWidget::onColorModeChanged);
+        disconnect(m_formatCombo, &QComboBox::currentIndexChanged, this, &ScanWidget::onFormatChanged);
     }
 }
 
@@ -260,29 +259,41 @@ void ScanWidget::updateDeviceSettings()
 {
     // 更新分辨率选项
     m_resolutionCombo->clear();
+    QStringList resolutions;
+    int defaultIndex = 0;
+
     if (m_isScanner) {
         auto scanner = dynamic_cast<ScannerDevice*>(m_device);
         if (scanner) {
-            auto resolutions = scanner->getSupportedResolutions();
-            for (const auto &res : resolutions) {
-                m_resolutionCombo->addItem(QString("%1 DPI").arg(res));
+            auto dpis = scanner->getSupportedResolutions();
+            auto currentDpi = scanner->getResolution();
+            for (const auto &res : dpis) {
+                resolutions << QString("%1 DPI").arg(res);
+                if (res == currentDpi) {
+                    defaultIndex = resolutions.size() - 1;
+                }
             }
         }
     } else {
         auto webcam = dynamic_cast<WebcamDevice*>(m_device);
         if (webcam) {
-            for (const auto &res : webcam->getSupportedResolutions()) {
-                m_resolutionCombo->addItem(QString("%1x%2").arg(res.width()).arg(res.height()));
+            auto resols = webcam->getSupportedResolutions();
+            auto currentRes = webcam->getResolution();
+            for (const auto &res : resols) {
+                resolutions << QString("%1x%2").arg(res.width()).arg(res.height());
+                if (res == currentRes) {
+                    defaultIndex = resolutions.size() - 1;
+                }
             }
         }
     }
+    m_resolutionCombo->addItems(resolutions);
+    m_resolutionCombo->setCurrentIndex(defaultIndex);
 }
 
 void ScanWidget::startCameraPreview()
 {
     if (!m_device) return;
-
-    updateDeviceSettings();
 
     if (m_isScanner) {
         QIcon icon = QIcon::fromTheme("blank_doc");

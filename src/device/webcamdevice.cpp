@@ -126,6 +126,8 @@ bool WebcamDevice::openDevice(const QString &devicePath)
     qDebug() << "设备信息: 驱动=" << reinterpret_cast<const char *>(cap.driver)
              << "名称=" << reinterpret_cast<const char *>(cap.card);
 
+    selectBestPixelFormat();
+
     // 设置合适的分辨率
     v4l2_format fmt = {};
     fmt.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
@@ -142,18 +144,18 @@ bool WebcamDevice::openDevice(const QString &devicePath)
 
     qDebug() << "当前分辨率:" << m_width << "x" << m_height;
 
-    // 如果当前分辨率太大，设置为较小的分辨率
-    if ((m_width > 640 || m_height > 480) && !m_isInitialized) {
-        fmt.fmt.pix.width = 640;
-        fmt.fmt.pix.height = 480;
-        fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_MJPEG;   // 常见格式
+    auto maxRes = getMaxResolution();
+    // try to set default resolution as max resolution
+    {
+        fmt.fmt.pix.width = maxRes.width();
+        fmt.fmt.pix.height = maxRes.height();
+        fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_MJPEG;
         fmt.fmt.pix.field = V4L2_FIELD_NONE;
-
         if (ioctl(m_fd, VIDIOC_S_FMT, &fmt) != -1) {
             m_width = fmt.fmt.pix.width;
             m_height = fmt.fmt.pix.height;
             m_pixelFormat = fmt.fmt.pix.pixelformat;
-            qDebug() << "设置分辨率为:" << m_width << "x" << m_height;
+            qDebug() << "设置分辨率成功:" << fmt.fmt.pix.width << "x" << fmt.fmt.pix.height;
         } else {
             qDebug() << "设置分辨率失败，使用当前分辨率";
         }
@@ -173,9 +175,10 @@ bool WebcamDevice::openDevice(const QString &devicePath)
     setState(Connected);
 
     // 尝试设置摄像头参数
-    setCameraAutoExposure(false);
+    setCameraAutoExposure(true);
     setCameraBrightness(100);
     setCameraExposure(100);
+    setCameraAutoFocus(true);
 
     // 枚举支持的分辨率
     enumerateSupportedResolutions();
@@ -455,7 +458,7 @@ void WebcamDevice::startPreview()
     }
 
     // 确保预览开始前应用适当的摄像头参数设置
-    adjustCommonCameraSettings();
+    // adjustCommonCameraSettings();
 
     // 清空最新帧
     {
@@ -538,11 +541,6 @@ void WebcamDevice::captureImage()
         // 确保清理当前状态
         stopCapturing();
         QThread::msleep(100);
-
-        // 应用捕获前的相机设置
-        //        setCameraAutoExposure(false);
-        //        setCameraBrightness(40);
-        //        setCameraExposure(100);
 
         // 开始捕获流程
         if (!startCapturing()) {
@@ -683,10 +681,9 @@ QImage WebcamDevice::frameToQImage(const void *data, int width, int height, int 
                         int y1 = yuyv[i + 2];
                         int v = yuyv[i + 3];
 
-                        // 亮度校正 - 降低亮度以解决过亮问题
-                        // 将Y值降低20%左右
-                        y0 = static_cast<int>(y0 * 0.8);
-                        y1 = static_cast<int>(y1 * 0.8);
+                        // 保持原始亮度值
+                        y0 = y0;
+                        y1 = y1;
 
                         int r, g, b;
 
@@ -1400,6 +1397,33 @@ bool WebcamDevice::setCameraExposure(int value)
 bool WebcamDevice::setCameraAutoExposure(bool enable)
 {
     return setCameraControl(V4L2_CID_EXPOSURE_AUTO, enable ? V4L2_EXPOSURE_AUTO : V4L2_EXPOSURE_MANUAL);
+}
+
+// 添加自动对焦支持
+bool WebcamDevice::setCameraAutoFocus(bool enable)
+{
+    // 首先检查设备是否支持自动对焦
+    struct v4l2_queryctrl queryctrl;
+    memset(&queryctrl, 0, sizeof(queryctrl));
+    queryctrl.id = V4L2_CID_FOCUS_AUTO;
+    
+    if (ioctl(m_fd, VIDIOC_QUERYCTRL, &queryctrl) == -1) {
+        qDebug() << "摄像头不支持自动对焦控制";
+        return false;
+    }
+
+    // 设置自动对焦状态
+    struct v4l2_control control;
+    control.id = V4L2_CID_FOCUS_AUTO;
+    control.value = enable ? 1 : 0;
+
+    if (ioctl(m_fd, VIDIOC_S_CTRL, &control) == -1) {
+        qDebug() << "设置自动对焦失败:" << strerror(errno);
+        return false;
+    }
+
+    qDebug() << "成功设置自动对焦:" << (enable ? "启用" : "禁用");
+    return true;
 }
 
 bool WebcamDevice::initMmap()
