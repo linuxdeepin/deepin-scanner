@@ -42,7 +42,8 @@ ScanWidget::~ScanWidget()
 
 void ScanWidget::setupUI()
 {
-    QSplitter *splitter = new QSplitter(Qt::Horizontal, this);
+    DFrame *mainFrame = new DFrame();
+    QHBoxLayout *mainLayout = new QHBoxLayout(mainFrame);
 
     // Preview area
     DFrame *previewArea = new DFrame();
@@ -54,7 +55,7 @@ void ScanWidget::setupUI()
     m_previewLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     previewLayout->addWidget(m_previewLabel);
 
-    splitter->addWidget(previewArea);
+    mainLayout->addWidget(previewArea, 9);
 
     // Settings area
     QWidget *settingsArea = new QWidget();
@@ -169,15 +170,11 @@ void ScanWidget::setupUI()
         QDesktopServices::openUrl(QUrl::fromLocalFile(getSaveDirectory()));
     });
 
-    splitter->addWidget(settingsArea);
+    mainLayout->addWidget(settingsArea, 1);
 
-    // make splitter default to right-side compressed
-    splitter->setSizes({ 9, 1 });
-    splitter->setStretchFactor(0, 1);   // left side stretchable
-    splitter->setStretchFactor(1, 0);   // right side not stretchable
-
-    QVBoxLayout *mainLayout = new QVBoxLayout(this);
-    mainLayout->addWidget(splitter);
+    QVBoxLayout *outerLayout = new QVBoxLayout(this);
+    outerLayout->addWidget(mainFrame);
+    outerLayout->setContentsMargins(0, 0, 0, 0);
 }
 
 void ScanWidget::setupDeviceMode(DeviceBase* device, QString name)

@@ -13,14 +13,16 @@
 #include <DIcon>
 #include <DPushButton>
 
-ScannersWidget::ScannersWidget(QWidget *parent) : QWidget(parent)
+ScannersWidget::ScannersWidget(QWidget *parent) : DWidget(parent)
 {
     setupUI();
 }
 
 void ScannersWidget::setupUI()
 {
-    mainLayout = new QVBoxLayout(this);
+    DFrame *mainFrame = new DFrame();
+    QVBoxLayout *mainLayout = new QVBoxLayout(mainFrame);
+    mainLayout->setContentsMargins(0, 10, 0, 10);
 
     // Title bar with refresh button
     QHBoxLayout *titleLayout = new QHBoxLayout();
@@ -30,21 +32,30 @@ void ScannersWidget::setupUI()
     font.setPointSize(font.pointSize() + 5);
     titleLabel->setFont(font);
 
-    refreshButton = new DIconButton();
+    DIconButton *refreshButton = new DIconButton();
     refreshButton->setIcon(QIcon::fromTheme("refresh"));
-    refreshButton->setIconSize(QSize(32, 32));
-    refreshButton->setFixedSize(36, 36);
+    refreshButton->setIconSize(QSize(40, 40));
+    refreshButton->setFixedSize(50, 50);
+    titleLayout->addSpacing(20);
     titleLayout->addWidget(titleLabel);
     titleLayout->addStretch();
     titleLayout->addWidget(refreshButton);
     titleLayout->addSpacing(20);
+
     mainLayout->addLayout(titleLayout);
 
     // Device list
     deviceList = new DListWidget();
-    deviceList->setSpacing(10);
+    deviceList->setSpacing(5);
     deviceList->setSelectionMode(QAbstractItemView::NoSelection);
+    deviceList->setFrameShape(QFrame::NoFrame);
+    deviceList->setContentsMargins(0, 0, 0, 0);
+
     mainLayout->addWidget(deviceList);
+
+    QVBoxLayout *outerLayout = new QVBoxLayout(this);
+    outerLayout->addWidget(mainFrame);
+    outerLayout->setContentsMargins(10, 10, 10, 10);
 
     connect(refreshButton, &DIconButton::clicked, this, [this]() {
         emit updateDeviceListRequested();
