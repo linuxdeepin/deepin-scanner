@@ -29,9 +29,7 @@ signals:
     void updateDeviceListRequested();
 
 private:
-    QVBoxLayout *mainLayout;
     DListWidget *deviceList;
-    DIconButton *refreshButton;
 
     void setupUI();
     void addDeviceItem(const QString &name, const QString &model,

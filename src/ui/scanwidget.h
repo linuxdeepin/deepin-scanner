@@ -68,7 +68,7 @@ private:
 
     DeviceBase* m_device = nullptr;
     bool m_isScanner;
-    QTimer m_previewTimer;
+
     QMutex m_previewMutex;
 
     // preview area

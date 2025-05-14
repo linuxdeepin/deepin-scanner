@@ -44,12 +44,12 @@ Scanner functionality will be unavailable.</source>
         <translation>扫描管理器</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="99"/>
+        <location filename="../src/mainwindow.cpp" line="95"/>
         <source>Loading devices...</source>
         <translation>正在加载设备...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="127"/>
+        <location filename="../src/mainwindow.cpp" line="123"/>
         <source>Opening device...</source>
         <translation>正在打开设备...</translation>
     </message>
@@ -57,32 +57,32 @@ Scanner functionality will be unavailable.</source>
 <context>
     <name>ScanWidget</name>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="64"/>
+        <location filename="../src/ui/scanwidget.cpp" line="65"/>
         <source>Scan Settings</source>
         <translation>扫描设置</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="92"/>
+        <location filename="../src/ui/scanwidget.cpp" line="91"/>
         <source>Resolution</source>
         <translation>分辨率</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="105"/>
+        <location filename="../src/ui/scanwidget.cpp" line="102"/>
         <source>Color Mode</source>
         <translation>色彩模式</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="118"/>
+        <location filename="../src/ui/scanwidget.cpp" line="113"/>
         <source>Image Format</source>
         <translation>图像格式</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="145"/>
+        <location filename="../src/ui/scanwidget.cpp" line="138"/>
         <source>View Scanned Image</source>
         <translation>查看已扫描图像</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="138"/>
+        <location filename="../src/ui/scanwidget.cpp" line="131"/>
         <source>Scan</source>
         <translation>扫描</translation>
     </message>
@@ -91,12 +91,12 @@ Scanner functionality will be unavailable.</source>
         <translation type="vanished">保存</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="215"/>
+        <location filename="../src/ui/scanwidget.cpp" line="199"/>
         <source>Scan Mode</source>
         <translation>扫描模式</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="216"/>
+        <location filename="../src/ui/scanwidget.cpp" line="200"/>
         <source>Flatbed</source>
         <translation>平板扫描</translation>
     </message>
@@ -105,22 +105,22 @@ Scanner functionality will be unavailable.</source>
         <translation type="vanished">双面扫描</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="219"/>
+        <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Video Format</source>
         <translation>视频格式</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="223"/>
+        <location filename="../src/ui/scanwidget.cpp" line="207"/>
         <source>Color</source>
         <translation>彩色</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="223"/>
+        <location filename="../src/ui/scanwidget.cpp" line="207"/>
         <source>Grayscale</source>
         <translation>灰度</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="223"/>
+        <location filename="../src/ui/scanwidget.cpp" line="207"/>
         <source>Black White</source>
         <translation>黑白</translation>
     </message>
@@ -129,27 +129,27 @@ Scanner functionality will be unavailable.</source>
         <translation type="vanished">ADF</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="159"/>
+        <location filename="../src/ui/scanwidget.cpp" line="152"/>
         <source>Scan history will be shown here</source>
         <translation>扫描历史将在此处显示</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="252"/>
+        <location filename="../src/ui/scanwidget.cpp" line="248"/>
         <source>Device not initialized</source>
         <translation>设备未初始化</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="294"/>
+        <location filename="../src/ui/scanwidget.cpp" line="302"/>
         <source>Initializing preview...</source>
         <translation>正在初始化预览...</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="301"/>
+        <location filename="../src/ui/scanwidget.cpp" line="308"/>
         <source>Device preview not available</source>
         <translation>设备预览不可用</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="326"/>
+        <location filename="../src/ui/scanwidget.cpp" line="333"/>
         <source>No preview image</source>
         <translation>无预览图像</translation>
     </message>
@@ -200,51 +200,51 @@ Scanner functionality will be unavailable.</source>
 <context>
     <name>ScannersWidget</name>
     <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="27"/>
+        <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>扫描设备</translation>
+        <translation>扫描仪设备</translation>
     </message>
     <message>
         <source>Refresh</source>
         <translation type="vanished">刷新</translation>
     </message>
     <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="61"/>
+        <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
         <translation>扫描仪</translation>
     </message>
     <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="133"/>
+        <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
         <translation>空闲</translation>
     </message>
     <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="67"/>
+        <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
         <translation>摄像头</translation>
     </message>
     <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="72"/>
+        <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
         <translation>未找到设备</translation>
     </message>
     <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="137"/>
+        <location filename="../src/ui/scannerswidget.cpp" line="148"/>
         <source>Offline</source>
         <translation>未连接</translation>
     </message>
     <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="141"/>
+        <location filename="../src/ui/scannerswidget.cpp" line="152"/>
         <source>Model: %1</source>
         <translation>型号：%1</translation>
     </message>
     <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="142"/>
+        <location filename="../src/ui/scannerswidget.cpp" line="153"/>
         <source>Status: %1</source>
         <translation>状态：%1</translation>
     </message>
     <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="117"/>
+        <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
         <translation>扫描</translation>
     </message>
@@ -252,67 +252,67 @@ Scanner functionality will be unavailable.</source>
 <context>
     <name>WebcamDevice</name>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="229"/>
+        <location filename="../src/device/webcamdevice.cpp" line="223"/>
         <source>Cannot get device path, cannot set resolution</source>
         <translation>无法获取设备路径，无法设置分辨率</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="238"/>
+        <location filename="../src/device/webcamdevice.cpp" line="232"/>
         <source>Failed to reopen device</source>
         <translation>重新打开设备失败</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="288"/>
+        <location filename="../src/device/webcamdevice.cpp" line="266"/>
         <source>Failed to set requested resolution</source>
         <translation>设置请求的分辨率失败</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="302"/>
+        <location filename="../src/device/webcamdevice.cpp" line="279"/>
         <source>Memory mapping failed</source>
         <translation>内存映射失败</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="345"/>
+        <location filename="../src/device/webcamdevice.cpp" line="319"/>
         <source>Device not properly initialized</source>
         <translation>设备未正确初始化</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="375"/>
+        <location filename="../src/device/webcamdevice.cpp" line="349"/>
         <source>Buffer initialization failed</source>
         <translation>缓冲区初始化失败</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="391"/>
+        <location filename="../src/device/webcamdevice.cpp" line="365"/>
         <source>Buffer reinitialization failed</source>
         <translation>缓冲区重新初始化失败</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="422"/>
+        <location filename="../src/device/webcamdevice.cpp" line="396"/>
         <source>Failed to enqueue buffer: %1</source>
         <translation>缓冲队列失败：%1</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="433"/>
+        <location filename="../src/device/webcamdevice.cpp" line="407"/>
         <source>Failed to start video stream: %1</source>
         <translation>启动视频流失败：%1</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="524"/>
+        <location filename="../src/device/webcamdevice.cpp" line="498"/>
         <source>Device not initialized or invalid file descriptor</source>
         <translation>设备未初始化或文件描述符无效</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="549"/>
+        <location filename="../src/device/webcamdevice.cpp" line="518"/>
         <source>Failed to start video stream, capture failed</source>
         <translation>启动视频流失败，捕获失败</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="590"/>
+        <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to get image frame</source>
         <translation>获取图像帧失败</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="644"/>
+        <location filename="../src/device/webcamdevice.cpp" line="613"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>捕获有效图像失败，请检查摄像头连接</translation>
     </message>
