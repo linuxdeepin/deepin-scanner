@@ -1,3 +1,10 @@
+deepin-scanner (0.1.4) unstable; urgency=medium
+
+  * Update version to 0.1.4
+  * Fix some UI issues.
+
+ -- re2zero <yangwu@uniontech.com>  Wed, 14 May 2025 13:03:16 +0800
+
 deepin-scanner (0.1.3) unstable; urgency=medium
 
   * Update version to 0.1.3
