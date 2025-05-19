@@ -24,6 +24,12 @@
 #include <QMutex>
 #include <QMutexLocker>
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QRegularExpression>
+#else
+#include <QRegExp>
+#endif
+
 // WebcamDevice 实现
 WebcamDevice::WebcamDevice(QObject *parent)
     : DeviceBase(parent), m_fd(-1), m_currentBuffer(0), m_isInitialized(false), m_deviceSelected(false), m_width(640), m_height(480), m_pixelFormat(V4L2_PIX_FMT_YUYV)
@@ -93,11 +99,41 @@ bool WebcamDevice::openDevice(const QString &devicePath)
     closeDevice();
     qDebug() << "打开设备:" << devicePath;
 
-    QString actualPath = devicePath;
-    int idx = devicePath.indexOf('(');
-    if (idx > 0) {
-        actualPath = devicePath.mid(idx + 1).chopped(1);
+    // the device path include name and driver, may include vender. e.g. UVC Camera (046d:0825) (/dev/video0)
+    // we only need the /dev/videoX part
+    QString actualPath;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QRegularExpression devRegExp("(/dev/video\\d+)");
+    QRegularExpressionMatch match = devRegExp.match(devicePath);
+    if (match.hasMatch()) {
+        actualPath = match.captured(1);
     }
+#else
+    QRegExp devRegExp("(/dev/video\\d+)");
+    if (devRegExp.indexIn(devicePath) != -1) {
+        actualPath = devRegExp.cap(1);
+    }
+#endif
+
+    // 如果正则匹配失败，尝试旧方法作为后备
+    if (actualPath.isEmpty()) {
+        int idx = devicePath.indexOf("/dev");
+        if (idx > 0) {
+            actualPath = devicePath.mid(idx);
+            if (actualPath.endsWith(")")) {
+                actualPath.chop(1);
+            }
+            if (!actualPath.startsWith("/dev/")) {
+                actualPath.clear();
+            }
+        }
+    }
+
+    if (actualPath.isEmpty()) {
+        qWarning() << "无法从设备路径中提取有效的/dev/路径:" << devicePath;
+        return false;
+    }
+    qDebug() << "提取的设备路径:" << actualPath;
 
     // 打开设备
     m_fd = open(actualPath.toUtf8().constData(), O_RDWR);
