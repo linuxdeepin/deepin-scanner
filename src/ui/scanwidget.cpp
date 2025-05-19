@@ -226,19 +226,19 @@ void ScanWidget::connectDeviceSignals(bool bind)
         connect(m_device, &DeviceBase::imageCaptured, this, &ScanWidget::onScanFinished);
         connect(m_device, &ScannerDevice::errorOccurred, this, &ScanWidget::handleDeviceError);
 
-        connect(m_modeCombo, &QComboBox::currentIndexChanged, this, &ScanWidget::onScanModeChanged);
-        connect(m_resolutionCombo, &QComboBox::currentIndexChanged, this, &ScanWidget::onResolutionChanged);
-        connect(m_colorCombo, &QComboBox::currentIndexChanged, this, &ScanWidget::onColorModeChanged);
-        connect(m_formatCombo, &QComboBox::currentIndexChanged, this, &ScanWidget::onFormatChanged);
+        connect(m_modeCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onScanModeChanged);
+        connect(m_resolutionCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onResolutionChanged);
+        connect(m_colorCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onColorModeChanged);
+        connect(m_formatCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onFormatChanged);
     } else {
         disconnect(m_device, &DeviceBase::previewUpdated, this, &ScanWidget::onUpdatePreview);
         disconnect(m_device, &DeviceBase::imageCaptured, this, &ScanWidget::onScanFinished);
         disconnect(m_device, &ScannerDevice::errorOccurred, this, &ScanWidget::handleDeviceError);
 
-        disconnect(m_modeCombo, &QComboBox::currentIndexChanged, this, &ScanWidget::onScanModeChanged);
-        disconnect(m_resolutionCombo, &QComboBox::currentIndexChanged, this, &ScanWidget::onResolutionChanged);
-        disconnect(m_colorCombo, &QComboBox::currentIndexChanged, this, &ScanWidget::onColorModeChanged);
-        disconnect(m_formatCombo, &QComboBox::currentIndexChanged, this, &ScanWidget::onFormatChanged);
+        disconnect(m_modeCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onScanModeChanged);
+        disconnect(m_resolutionCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onResolutionChanged);
+        disconnect(m_colorCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onColorModeChanged);
+        disconnect(m_formatCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onFormatChanged);
     }
 }
 
