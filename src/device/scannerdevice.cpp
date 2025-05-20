@@ -3,7 +3,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "scannerdevice.h"
-#include <QDebug>
+#include "ddlog.h"
+
 #include <QFile>
 #include <QApplication>   // For applicationDirPath
 #include <QDir>   // For separator
@@ -13,6 +14,8 @@
 #include <QThread>
 #include <QStandardPaths>
 
+using namespace DDLog;
+
 #define ADD_TEST_DEVICE 0   // Set to 1 to add a test device
 
 // --- Dummy definitions for Image/advance if not available elsewhere ---
@@ -21,7 +24,7 @@
 bool ScannerDevice::advance(struct ScannerDevice::Image *im)
 {
     // Dummy implementation - replace with your actual 'advance' logic
-    qWarning() << "Warning: Dummy 'advance' function called. Implement required logic.";
+    qCWarning(app) << "Dummy function called - advance() needs implementation";
     if (!im || !im->data) return false;   // Indicate failure if im or data is null
 
     // Basic placeholder logic:
@@ -32,7 +35,7 @@ bool ScannerDevice::advance(struct ScannerDevice::Image *im)
         // Minimal reallocation simulation check (needs proper implementation)
         if (im->y >= im->height) {
             // Need reallocation logic here if height grows dynamically
-            qWarning() << "Image buffer full in dummy 'advance'. Reallocation needed.";
+            qCWarning(app) << "Image buffer full in dummy 'advance'. Reallocation needed.";
             // Here, your actual advance might realloc 'im->data' and update 'im->height'.
             // If reallocation fails, return false. If successful, return true.
             return false;   // Indicate failure (buffer full and no reallocation)
@@ -45,7 +48,7 @@ bool ScannerDevice::advance(struct ScannerDevice::Image *im)
 // You will need the actual implementation.
 static void write_png_header(SANE_Frame format, int width, int height, int depth, FILE *ofp, png_structp *png_ptr_p, png_infop *info_ptr_p)
 {
-    qWarning() << "Warning: Dummy 'write_png_header' function called.";
+    qCWarning(app) << "Dummy function called - write_png_header() needs implementation";
     // Minimal setup to avoid crashes in png_write_row/end if called
     *png_ptr_p = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
     if (!*png_ptr_p) return;
@@ -71,8 +74,23 @@ static void write_png_header(SANE_Frame format, int width, int height, int depth
 ScannerDevice::ScannerDevice(QObject *parent)
     : DeviceBase(parent)
 {
+    // Set SANE_DEBUG env vars for more info
+    //   0      print severe errors only
+    //   1      print normal errors and important messages
+    //   2      print normal messages
+    //   3      print debugging messages
+    //   4      print everything
+    QString logLevel = "1";
+#ifdef QT_DEBUG
+    logLevel = "2";
+#endif
+    QByteArray logLevelBytes = logLevel.toUtf8();
+
+    qputenv("SANE_DEBUG_DLL", logLevelBytes);
+    qputenv("SANE_DEBUG_NET", logLevelBytes);
+    qputenv("SANE_DEBUG_USB", logLevelBytes);
 #ifdef _WIN32
-    qWarning() << "SANE scanning is not supported on Windows in this build.";
+    qCWarning(app) << "SANE scanning is not supported on Windows in this build";
 #endif
 }
 
@@ -82,7 +100,7 @@ ScannerDevice::~ScannerDevice()
     closeDevice();   // Ensure device is closed if open
     if (m_saneInitialized) {
         sane_exit();
-        qDebug() << "SANE exited.";
+        qCDebug(app) << "SANE backend exited successfully";
     }
 #endif
 }
@@ -98,13 +116,14 @@ bool ScannerDevice::initialize()
     SANE_Status status = sane_init(&version_code, NULL);   // Using NULL for auth_callback
     if (status != SANE_STATUS_GOOD) {
         QString errorMsg = QString("Failed to initialize SANE: %1").arg(sane_strstatus(status));
-        qWarning() << errorMsg;
+        qCCritical(app) << "SANE initialization failed"
+                             << "(status:" << sane_strstatus(status) << ")";
         emit errorOccurred(errorMsg);
         return false;
     }
     m_saneInitialized = true;
     setState(Initialized);
-    qDebug() << "SANE initialized successfully. Version code:" << version_code;
+    qCInfo(app) << "SANE backend initialized successfully" << "(version:" << version_code << ")";
     return true;
 #else
     emit errorOccurred("SANE backend not available on this platform.");
@@ -117,120 +136,44 @@ QStringList ScannerDevice::getAvailableDevices()
     QStringList deviceNames;
 #ifndef _WIN32
     if (!m_saneInitialized) {
-        qDebug() << "SANE not initialized, attempting to initialize...";
-        if (!initializeSane()) {
-            qWarning() << "Failed to initialize SANE";
-            return deviceNames;
-        }
+        qCCritical(app) << "SANE not initialized. Call initialize first.";
+        return deviceNames;
     }
 
-    // Add more detailed SANE version information
-    SANE_Int version_code;
-    sane_init(&version_code, NULL);
-    int major = SANE_VERSION_MAJOR(version_code);
-    int minor = SANE_VERSION_MINOR(version_code);
-    int build = SANE_VERSION_BUILD(version_code);
-    qDebug() << "SANE Version:" << major << "." << minor << "." << build;
-
-    // Check USB device connections
-    QProcess lsusbProcess;
-    lsusbProcess.start("lsusb", QStringList());
-    lsusbProcess.waitForFinished(5000);
-    QString lsusbOutput = QString::fromUtf8(lsusbProcess.readAllStandardOutput());
-    qDebug() << "Connected USB devices:";
-    qDebug() << lsusbOutput;
-
-    // Check if saned process is running
-    QProcess psProcess;
-    psProcess.start("ps", QStringList() << "aux" << "|" << "grep" << "saned");
-    psProcess.waitForFinished(5000);
-    QString psOutput = QString::fromUtf8(psProcess.readAllStandardOutput());
-    qDebug() << "SANE daemon processes:";
-    qDebug() << psOutput;
-
-    // Check backend configuration
-    QDir backendDir("/etc/sane.d/dll.d");
-    if (backendDir.exists()) {
-        qDebug() << "SANE backend configurations:";
-        QStringList entries = backendDir.entryList(QDir::Files);
-        for (const QString &entry : entries) {
-            qDebug() << " -" << entry;
-
-            // Read each backend config file
-            QFile backendFile(backendDir.filePath(entry));
-            if (backendFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-                QTextStream in(&backendFile);
-                QString fileContent = in.readAll();
-                qDebug() << "   Content:" << fileContent;
-                backendFile.close();
-            }
-        }
-    }
-
-    // Try using SANE_DEBUG env vars for more info
-    qputenv("SANE_DEBUG_DLL", "255");
-    qputenv("SANE_DEBUG_NET", "255");
-
-    // Try running scanimage manually - some systems have different configs
-    QProcess process;
-    process.start("scanimage", QStringList("-L"));
-    process.waitForFinished(5000);
-    QString output = QString::fromUtf8(process.readAllStandardOutput());
-    QString error = QString::fromUtf8(process.readAllStandardError());
-
-    qDebug() << "scanimage -L output:" << output;
-    if (!error.isEmpty()) {
-        qDebug() << "scanimage -L error:" << error;
-    }
-
-    // Check if current user is in scanner group
-    QProcess groupsProcess;
-    groupsProcess.start("groups");
-    groupsProcess.waitForFinished(5000);
-    QString groupsOutput = QString::fromUtf8(groupsProcess.readAllStandardOutput());
-    qDebug() << "Current user groups:" << groupsOutput;
-
-    if (!groupsOutput.contains("scanner") && !groupsOutput.contains("saned")) {
-        qWarning() << "Current user is not in the scanner or saned group!";
-        qWarning() << "This may cause permission issues. Add user to these groups with:";
-        qWarning() << "sudo usermod -a -G scanner $USER";
-        qWarning() << "sudo usermod -a -G saned $USER";
-    }
 
     // Try calling sane_get_devices with different parameters
-    qDebug() << "Trying sane_get_devices with SANE_TRUE (include network devices)...";
+    qCDebug(app) << "Attempting to get device list (include network devices)";
     const SANE_Device **device_list = nullptr;
     SANE_Status status = sane_get_devices(&device_list, SANE_TRUE);
-    qDebug() << "sane_get_devices(SANE_TRUE) status:" << sane_strstatus(status);
+    qCDebug(app) << "Device list status:" << sane_strstatus(status);
 
     if (status != SANE_STATUS_GOOD || !device_list) {
-        qDebug() << "Trying sane_get_devices with SANE_FALSE (local only)...";
+        qCDebug(app) << "Retrying device list (local devices only)";
         status = sane_get_devices(&device_list, SANE_FALSE);
-        qDebug() << "sane_get_devices(SANE_FALSE) status:" << sane_strstatus(status);
+        qCDebug(app) << "Device list retry status:" << sane_strstatus(status);
     }
 
     if (status != SANE_STATUS_GOOD) {
-        QString errorMsg = QString("Failed to get SANE device list: %1").arg(sane_strstatus(status));
-        qWarning() << errorMsg;
-        emit errorOccurred(errorMsg);
+        qCCritical(app) << "Failed to get SANE device list:" << sane_strstatus(status);
+        emit errorOccurred(QString("Failed to get SANE device list: %1").arg(sane_strstatus(status)));
 
         // If specific backend is not installed, try to provide suggestions
         QProcess dpkgProcess;
         dpkgProcess.start("dpkg", QStringList() << "-l" << "*sane*");
         dpkgProcess.waitForFinished(5000);
         QString dpkgOutput = QString::fromUtf8(dpkgProcess.readAllStandardOutput());
-        qDebug() << "Installed SANE packages:";
-        qDebug() << dpkgOutput;
+        qCDebug(app) << "Checking installed SANE packages";
+        qCDebug(app) << "Package list:" << dpkgOutput.trimmed();
 
         if (!dpkgOutput.contains("libsane-extras")) {
-            qWarning() << "libsane-extras package not found, which contains additional scanner drivers";
-            qWarning() << "Try installing: sudo apt-get install libsane-extras";
+            qCWarning(app) << "Missing libsane-extras package - may limit scanner support";
+            qCWarning(app) << "Suggested fix: sudo apt-get install libsane-extras";
         }
 
 #if ADD_TEST_DEVICE
         // If no real devices found, add a virtual test device
         if (deviceNames.isEmpty()) {
-            qDebug() << "Adding a virtual test scanner device";
+            qCDebug(app) << "Adding a virtual test scanner device";
             deviceNames.append("test:0");
         }
 #endif
@@ -239,7 +182,7 @@ QStringList ScannerDevice::getAvailableDevices()
     }
 
     if (!device_list) {
-        qWarning() << "Device list is null, but status was GOOD";
+        qCWarning(app) << "Device list is null, but status was GOOD";
         emit errorOccurred("Device list is null");
 
 #if ADD_TEST_DEVICE
@@ -249,15 +192,15 @@ QStringList ScannerDevice::getAvailableDevices()
         return deviceNames;
     }
 
-    qDebug() << "Scanning SANE devices:";
+    qCDebug(app) << "Enumerating available scanner devices";
     for (int i = 0; device_list[i] != nullptr; ++i) {
         const SANE_Device *dev = device_list[i];
         if (dev) {
-            qDebug() << "Device found:";
-            qDebug() << "  Name:" << (dev->name ? dev->name : "null");
-            qDebug() << "  Vendor:" << (dev->vendor ? dev->vendor : "null");
-            qDebug() << "  Model:" << (dev->model ? dev->model : "null");
-            qDebug() << "  Type:" << (dev->type ? dev->type : "null");
+            qCDebug(app) << "Device found:";
+            qCDebug(app) << "  Name:" << (dev->name ? dev->name : "null");
+            qCDebug(app) << "  Vendor:" << (dev->vendor ? dev->vendor : "null");
+            qCDebug(app) << "  Model:" << (dev->model ? dev->model : "null");
+            qCDebug(app) << "  Type:" << (dev->type ? dev->type : "null");
 
             if (dev->name) {
                 deviceNames.append(QString::fromUtf8(dev->name));
@@ -268,7 +211,7 @@ QStringList ScannerDevice::getAvailableDevices()
                                              .arg(dev->model ? QString::fromUtf8(dev->model) : "Unknown")
                                              .arg(dev->type ? QString::fromUtf8(dev->type) : "Unknown");
 
-                qDebug() << "Added device:" << dev->name << "-" << deviceInfo;
+                qCDebug(app) << "Added device:" << dev->name << "-" << deviceInfo;
             }
         }
     }
@@ -276,7 +219,7 @@ QStringList ScannerDevice::getAvailableDevices()
 #if ADD_TEST_DEVICE
     // If no devices found, add a virtual test device
     if (deviceNames.isEmpty()) {
-        qDebug() << "No SANE devices found, adding a virtual test device";
+        qCDebug(app) << "No SANE devices found, adding a virtual test device";
         deviceNames.append("test:0");
 
 #    ifdef ENABLE_POPUPS
@@ -309,13 +252,13 @@ bool ScannerDevice::openDevice(const QString &deviceName)
     if (deviceName == "test:0") {
         m_deviceOpen = true;
         m_usingTestDevice = true;
-        qDebug() << "Opened virtual test scanner device";
+        qCDebug(app) << "Opened virtual test scanner device";
         return true;
     }
 #endif
 
     if (!m_saneInitialized) {
-        emit errorOccurred("SANE not initialized. Call initializeSane() first.");
+        emit errorOccurred("SANE not initialized. Call initialize first.");
         return false;
     }
     if (m_deviceOpen) {
@@ -328,7 +271,7 @@ bool ScannerDevice::openDevice(const QString &deviceName)
         QString errorMsg = QString("Failed to open SANE device '%1': %2")
                                    .arg(deviceName)
                                    .arg(sane_strstatus(status));
-        qWarning() << errorMsg;
+        qCWarning(app) << errorMsg;
         emit errorOccurred(errorMsg);
         m_device = nullptr;
         m_deviceOpen = false;
@@ -338,7 +281,7 @@ bool ScannerDevice::openDevice(const QString &deviceName)
     // Set I/O mode (optional, 0 usually means blocking)
     status = sane_set_io_mode(m_device, SANE_FALSE);   // SANE_FALSE for blocking mode
     if (status != SANE_STATUS_GOOD) {
-        qWarning() << "Failed to set SANE I/O mode:" << sane_strstatus(status) << "- proceeding anyway.";
+        qCWarning(app) << "Failed to set SANE I/O mode:" << sane_strstatus(status) << "- proceeding anyway.";
         // Decide if this is critical - often it's not.
     }
 
@@ -346,16 +289,17 @@ bool ScannerDevice::openDevice(const QString &deviceName)
     SANE_Parameters pars;
     status = sane_get_parameters(m_device, &pars);
     if (status != SANE_STATUS_GOOD) {
-        qWarning() << "Failed to get initial SANE parameters:" << sane_strstatus(status);
+        qCWarning(app) << "Failed to get scanner parameters"
+                           << "(error:" << sane_strstatus(status) << ")";
         // Decide if this is critical
     } else {
-        qDebug() << "Device" << deviceName << "opened. Format:" << pars.format << " Pixels/Line:" << pars.pixels_per_line;
+        qCDebug(app) << "Device" << deviceName << "opened. Format:" << pars.format << " Pixels/Line:" << pars.pixels_per_line;
     }
 
     m_deviceOpen = true;
     m_currentDeviceName = deviceName;
     setState(Connected);
-    qDebug() << "Device" << deviceName << "opened successfully.";
+    qCDebug(app) << "Device" << deviceName << "opened successfully.";
     return true;
 
 #else
@@ -364,7 +308,7 @@ bool ScannerDevice::openDevice(const QString &deviceName)
     if (deviceName == "test:0") {
         m_deviceOpen = true;
         m_usingTestDevice = true;
-        qDebug() << "Opened virtual test scanner device on Windows";
+        qCDebug(app) << "Opened virtual test scanner device on Windows";
         return true;
     } else {
         emit errorOccurred("SANE backend not available on this platform.");
@@ -381,7 +325,7 @@ void ScannerDevice::closeDevice()
 #ifndef _WIN32
     if (m_deviceOpen && m_device) {
         sane_close(m_device);
-        qDebug() << "Closed SANE device.";
+        qCDebug(app) << "Closed SANE device.";
     }
     m_device = nullptr;
     m_deviceOpen = false;
@@ -431,13 +375,13 @@ void ScannerDevice::startScan(const QString &tempOutputFilePath)
         return;
     }
 
-    qDebug() << "Scan parameters:";
-    qDebug() << "Format:" << params.format;
-    qDebug() << "Last frame:" << params.last_frame;
-    qDebug() << "Lines:" << params.lines;
-    qDebug() << "Depth:" << params.depth;
-    qDebug() << "Pixels per line:" << params.pixels_per_line;
-    qDebug() << "Bytes per line:" << params.bytes_per_line;
+    qCDebug(app) << "Scan parameters:";
+    qCDebug(app) << "Format:" << params.format;
+    qCDebug(app) << "Last frame:" << params.last_frame;
+    qCDebug(app) << "Lines:" << params.lines;
+    qCDebug(app) << "Depth:" << params.depth;
+    qCDebug(app) << "Pixels per line:" << params.pixels_per_line;
+    qCDebug(app) << "Bytes per line:" << params.bytes_per_line;
 
     // Start the scan frame
     status = sane_start(m_device);
@@ -446,14 +390,14 @@ void ScannerDevice::startScan(const QString &tempOutputFilePath)
         return;
     }
 
-    qDebug() << "Scan started. Writing temporary PNG to:" << tempOutputFilePath;
+    qCDebug(app) << "Scan started. Writing temporary PNG to:" << tempOutputFilePath;
 
     // Open the output file pointer for scan_it
     QByteArray tempPathBytes = tempOutputFilePath.toLocal8Bit();   // Use local encoding for file paths
     FILE *ofp = fopen(tempPathBytes.constData(), "wb");   // Use "wb" for binary PNG
     if (!ofp) {
         QString errorMsg = QString("Failed to open temporary output file '%1' for writing.").arg(tempOutputFilePath);
-        qWarning() << errorMsg;
+        qCWarning(app) << errorMsg;
         emit errorOccurred(errorMsg);
         sane_cancel(m_device);   // Cancel the scan started above
         return;
@@ -468,25 +412,25 @@ void ScannerDevice::startScan(const QString &tempOutputFilePath)
     if (status != SANE_STATUS_GOOD && status != SANE_STATUS_EOF) {
         // EOF is expected at the end of a successful scan, so don't treat it as an error here.
         QString errorMsg = QString("Scan failed during read: %1").arg(sane_strstatus(status));
-        qWarning() << errorMsg;
+        qCWarning(app) << errorMsg;
         emit errorOccurred(errorMsg);
         QFile::remove(tempOutputFilePath);   // Clean up temp file on error
         // sane_cancel(m_device); // scan_it might have implicitly cancelled or finished
     } else {
-        qDebug() << "scan_it finished with status:" << sane_strstatus(status);
+        qCDebug(app) << "scan_it finished with status:" << sane_strstatus(status);
         // Load the QImage from the temporary file
         QImage scannedImage;
         if (scannedImage.load(tempOutputFilePath)) {
-            qDebug() << "Successfully loaded scanned image from temp file.";
+            qCDebug(app) << "Successfully loaded scanned image from temp file.";
             emit imageCaptured(scannedImage);
         } else {
             QString errorMsg = QString("Failed to load QImage from temporary file '%1'.").arg(tempOutputFilePath);
-            qWarning() << errorMsg;
+            qCCritical(app) << errorMsg;
             emit errorOccurred(errorMsg);
         }
         // Clean up the temporary file
         if (!QFile::remove(tempOutputFilePath)) {
-            qWarning() << "Could not remove temporary scan file:" << tempOutputFilePath;
+            qCWarning(app) << "Could not remove temporary scan file:" << tempOutputFilePath;
         }
     }
 
@@ -509,7 +453,7 @@ void ScannerDevice::cancelScan()
 #ifndef _WIN32
     if (m_deviceOpen && m_device) {
         sane_cancel(m_device);
-        qDebug() << "Sent SANE cancel request.";
+        qCDebug(app) << "Sent SANE cancel request.";
         // Note: Cancellation might not be immediate or guaranteed.
         // The ongoing sane_read might still complete or return an error status.
     }
@@ -543,7 +487,8 @@ SANE_Status ScannerDevice::scan_it(FILE *ofp)
     size_t buffer_size = (128 * 1024);   // Increased buffer size (adjust as needed)
     buffer = (SANE_Byte *)malloc(buffer_size);
     if (!buffer) {
-        qWarning() << "Failed to allocate read buffer.";
+        qCCritical(app) << "Failed to allocate read buffer"
+                           << "(size:" << buffer_size << "bytes)";
         return SANE_STATUS_NO_MEM;
     }
 
@@ -553,7 +498,7 @@ SANE_Status ScannerDevice::scan_it(FILE *ofp)
             do {
                 status = sane_start(m_device);   // Use member variable m_device
                 if (status == SANE_STATUS_WARMING_UP) {
-                    qDebug() << "Scanner warming up (multi-frame)...";
+                    qCDebug(app) << "Scanner warming up (multi-frame)...";
                     QThread::msleep(500);
                 }
             } while (status == SANE_STATUS_WARMING_UP);
@@ -561,20 +506,20 @@ SANE_Status ScannerDevice::scan_it(FILE *ofp)
             status = sane_start(m_device);
 #    endif
             if (status != SANE_STATUS_GOOD) {
-                qWarning() << "sane_start (multi-frame) failed:" << sane_strstatus(status);
+                qCWarning(app) << "sane_start (multi-frame) failed:" << sane_strstatus(status);
                 goto cleanup;   // Use goto for cleanup as in original
             }
         }
 
         status = sane_get_parameters(m_device, &parm);
         if (status != SANE_STATUS_GOOD) {
-            qWarning() << "sane_get_parameters failed:" << sane_strstatus(status);
+            qCWarning(app) << "sane_get_parameters failed:" << sane_strstatus(status);
             goto cleanup;
         }
 
         // --- Frame setup (largely same as original) ---
         if (first_frame) {
-            qDebug() << "Scan parameters - Format:" << parm.format << "Depth:" << parm.depth
+            qCDebug(app) << "Scan parameters - Format:" << parm.format << "Depth:" << parm.depth
                      << "Lines:" << parm.lines << "Pixels/Line:" << parm.pixels_per_line
                      << "Bytes/Line:" << parm.bytes_per_line;
 
@@ -592,31 +537,31 @@ SANE_Status ScannerDevice::scan_it(FILE *ofp)
                 // Write PNG header directly if height is known
                 write_png_header(parm.format, parm.pixels_per_line, parm.lines, parm.depth, ofp, &png_ptr, &info_ptr);
                 if (!png_ptr || !info_ptr) {
-                    qWarning() << "Failed to write PNG header.";
+                    qCWarning(app) << "Failed to write PNG header.";
                     status = SANE_STATUS_IO_ERROR;   // Indicate error
                     goto cleanup;
                 }
                 // Allocate buffer for one row
                 pngbuf = (png_bytep)malloc(parm.bytes_per_line);
                 if (!pngbuf) {
-                    qWarning() << "Failed to allocate PNG row buffer.";
+                    qCWarning(app) << "Failed to allocate PNG row buffer.";
                     status = SANE_STATUS_NO_MEM;
                     goto cleanup;
                 }
                 pngrow = 0;   // Reset row buffer position
             } else {
                 // --- Buffering Logic (Requires proper Image/advance) ---
-                qDebug() << "Buffering scan data (multi-frame or unknown height).";
+                qCDebug(app) << "Buffering scan data (multi-frame or unknown height).";
                 image.width = parm.bytes_per_line;
                 image.height = (parm.lines > 0) ? (parm.lines + 1) : 512;   // Initial guess or use parameter
                 image.line_buffer_size = image.width * ((parm.format == SANE_FRAME_RGB && parm.depth > 8) ? 6 : 3);   // Rough estimate for RGB16/RGB8
                 size_t initial_alloc = (size_t)image.height * image.line_buffer_size;
 
-                qDebug() << "Allocating image buffer: width=" << image.width << "initial_height=" << image.height << "bytes=" << initial_alloc;
+                qCDebug(app) << "Allocating image buffer: width=" << image.width << "initial_height=" << image.height << "bytes=" << initial_alloc;
                 image.data = (unsigned char *)malloc(initial_alloc);
 
                 if (!image.data) {
-                    qWarning() << "Failed to allocate image buffer.";
+                    qCWarning(app) << "Failed to allocate image buffer.";
                     status = SANE_STATUS_NO_MEM;
                     goto cleanup;
                 }
@@ -649,16 +594,17 @@ SANE_Status ScannerDevice::scan_it(FILE *ofp)
 
         // --- Read loop ---
         while (true) {
-            qDebug() << "Attempting to read from scanner...";
+            qCDebug(app) << "Attempting to read from scanner...";
             status = sane_read(m_device, buffer, buffer_size, &len);
-            qDebug() << "sane_read status:" << sane_strstatus(status) << "bytes read:" << len;
+            qCDebug(app) << "sane_read status:" << sane_strstatus(status) << "bytes read:" << len;
 
             if (status != SANE_STATUS_GOOD) {
                 if (status == SANE_STATUS_EOF) {
-                    qDebug() << "SANE_EOF received - scan complete";
+                    qCDebug(app) << "SANE_EOF received - scan complete";
                     break;
                 } else {
-                    qWarning() << "sane_read failed:" << sane_strstatus(status);
+                    qCWarning(app) << "Scan read operation failed"
+                                      << "(status:" << sane_strstatus(status) << ")";
                     goto cleanup;
                 }
             }
@@ -682,9 +628,10 @@ SANE_Status ScannerDevice::scan_it(FILE *ofp)
 
                 if (!line.isNull()) {
                     emit previewLineAvailable(line.copy());
-                    qDebug() << "Emitted preview line:" << line.width() << "x" << line.height();
+                    qCDebug(app) << "Preview line generated"
+                                    << "(size:" << line.width() << "x" << line.height() << ")";
                 } else {
-                    qWarning() << "Failed to create preview line image";
+                    qCWarning(app) << "Failed to create preview line image";
                 }
             }
 
@@ -711,12 +658,13 @@ SANE_Status ScannerDevice::scan_it(FILE *ofp)
                 // Check if reallocation is needed (simplified)
                 if (image.data && required_size > (size_t)image.height * image.line_buffer_size) {
                     // --- Reallocation logic needed here ---
-                    qWarning() << "Image buffer reallocation needed but not implemented!";
+                    qCWarning(app) << "Image buffer reallocation required"
+                                      << "(current size:" << image.width << "x" << image.height << ")";
                     // status = SANE_STATUS_NO_MEM; goto cleanup;
                 }
 
                 if (!image.data) {   // Check if buffer is valid
-                    qWarning() << "Image buffer is null during read.";
+                    qCWarning(app) << "Image buffer is null during read.";
                     status = SANE_STATUS_IO_ERROR;
                     goto cleanup;
                 }
@@ -737,7 +685,7 @@ SANE_Status ScannerDevice::scan_it(FILE *ofp)
                         // Now advance returns bool, check for failure
                         if (!advance(&image))   // Call advance AFTER accessing the current pixel
                         {
-                            qWarning() << "Advance failed, possibly out of memory.";
+                            qCWarning(app) << "Advance failed, possibly out of memory.";
                             status = SANE_STATUS_NO_MEM;
                             goto cleanup;
                         }
@@ -750,7 +698,7 @@ SANE_Status ScannerDevice::scan_it(FILE *ofp)
                         size_t pixel_index = (image.y * image.width + image.x);
                         // Check bounds
                         if (pixel_index * stride + offset >= required_size) {
-                            qWarning() << "Buffer overflow detected in planar copy.";
+                            qCWarning(app) << "Buffer overflow detected in planar copy.";
                             status = SANE_STATUS_IO_ERROR;
                             goto cleanup;
                         }
@@ -788,7 +736,7 @@ SANE_Status ScannerDevice::scan_it(FILE *ofp)
                         if (png_ptr && info_ptr) {
                             png_write_row(png_ptr, pngbuf);
                         } else {
-                            qWarning() << "png_ptr or info_ptr is null, cannot write row.";
+                            qCWarning(app) << "png_ptr or info_ptr is null, cannot write row.";
                             status = SANE_STATUS_IO_ERROR;   // Or another appropriate error
                             goto cleanup;
                         }
@@ -805,16 +753,16 @@ SANE_Status ScannerDevice::scan_it(FILE *ofp)
     // --- Finalize based on buffering ---
     if (must_buffer) {
         // --- Write buffered image to PNG ---
-        qDebug() << "Writing buffered image data to PNG.";
+        qCDebug(app) << "Writing buffered image data to PNG.";
         if (image.data) {
             // Update final image height based on how far 'y' advanced
             image.height = image.y + (image.x > 0 ? 1 : 0);   // Include last partial line if any
-            qDebug() << "Final buffered image height:" << image.height;
+            qCDebug(app) << "Final buffered image height:" << image.height;
 
             // Write the PNG header now that dimensions are known
             write_png_header(parm.format, parm.pixels_per_line, image.height, parm.depth, ofp, &png_ptr, &info_ptr);
             if (!png_ptr || !info_ptr) {
-                qWarning() << "Failed to write PNG header for buffered image.";
+                qCWarning(app) << "Failed to write PNG header for buffered image.";
                 status = SANE_STATUS_IO_ERROR;
                 goto cleanup;
             }
@@ -830,7 +778,7 @@ SANE_Status ScannerDevice::scan_it(FILE *ofp)
             }
 
         } else {
-            qWarning() << "Buffered image data is null, cannot write PNG.";
+            qCWarning(app) << "Buffered image data is null, cannot write PNG.";
             status = SANE_STATUS_IO_ERROR;   // Or appropriate error
             // No need for goto cleanup here, will fall through to png_write_end check
         }
@@ -838,7 +786,7 @@ SANE_Status ScannerDevice::scan_it(FILE *ofp)
     } else {
         // If not buffering, check if there's a partial row left in pngbuf
         if (pngrow > 0) {
-            qWarning() << "Warning: Scan ended with partial row data (" << pngrow << " bytes). This may indicate an incomplete scan or incorrect parameters.";
+            qCWarning(app) << "Warning: Scan ended with partial row data (" << pngrow << " bytes). This may indicate an incomplete scan or incorrect parameters.";
             // Optionally, pad the rest of the row with zeros/white and write it?
             // memset(pngbuf + pngrow, 0, parm.bytes_per_line - pngrow);
             // png_write_row(png_ptr, pngbuf);
@@ -857,7 +805,8 @@ cleanup:
     // Store final status before cleanup might change it
     SANE_Status final_status = status;
 
-    qDebug() << "Cleaning up scan resources. Final status:" << sane_strstatus(final_status);
+    qCDebug(app) << "Scan cleanup completed"
+                     << "(final status:" << sane_strstatus(final_status) << ")";
 
     // Cleanup PNG resources
     if (png_ptr || info_ptr) {   // Check before destroying
@@ -897,7 +846,8 @@ void ScannerDevice::generateTestImage(const QString & /*outputPath*/)
     // Use QUuid to generate random filename: scan_temp.png
     QString fileName = QString("scan_temp.png");
     QString outputPath = QString("/tmp/deepin-scanner/%1").arg(fileName);
-    qDebug() << "Generating test image at:" << outputPath;
+    qCInfo(app) << "Generating test scan image"
+                    << "(path:" << outputPath << ")";
 
     // Create test image
     QImage testImage(800, 600, QImage::Format_RGB888);
@@ -933,7 +883,7 @@ void ScannerDevice::generateTestImage(const QString & /*outputPath*/)
 
     // Save image
     if (testImage.save(outputPath)) {
-        qDebug() << "Test image saved successfully";
+        qCDebug(app) << "Test image saved successfully";
 
         // Simulate delay like real scanning
         for (int i = 0; i < 10; i++) {
@@ -979,17 +929,17 @@ bool ScannerDevice::setScanMode(ScanMode mode)
     SANE_Int num_options;
     status = sane_control_option(dev, 0, SANE_ACTION_GET_VALUE, &num_options, nullptr);
     if (status != SANE_STATUS_GOOD) {
-        qWarning() << "Failed to get number of options:" << sane_strstatus(status);
+        qCWarning(app) << "Failed to get number of options:" << sane_strstatus(status);
         return false;
     }
 
     // 打印所有选项以便调试
-    qDebug() << "Scanner has" << num_options << "options:";
+    qCDebug(app) << "Scanner has" << num_options << "options:";
     
     for (SANE_Int i = 0; i < num_options; i++) {
         const SANE_Option_Descriptor *opt = sane_get_option_descriptor(dev, i);
         if (opt && opt->name) {
-            qDebug() << "Option" << i << ":" << opt->name << "-" << opt->title;
+            qCDebug(app) << "Option" << i << ":" << opt->name << "-" << opt->title;
         }
     }
 
@@ -1002,7 +952,7 @@ bool ScannerDevice::setScanMode(ScanMode mode)
             const SANE_Option_Descriptor *opt = sane_get_option_descriptor(dev, i);
             if (opt && opt->name && strcmp(opt->name, option_name) == 0) {
                 option_index = i;
-                qDebug() << "Found option" << option_name << "at index" << option_index;
+                qCDebug(app) << "Found option" << option_name << "at index" << option_index;
                 break;
             }
         }
@@ -1055,13 +1005,14 @@ bool ScannerDevice::setScanMode(ScanMode mode)
                 }
                 
                 if (value_to_set) {
-                    qDebug() << "Setting" << option_name << "to" << value_to_set;
+                    qCDebug(app) << "Setting" << option_name << "to" << value_to_set;
                     status = sane_control_option(dev, option_index, SANE_ACTION_SET_VALUE, (void*)value_to_set, nullptr);
                     if (status == SANE_STATUS_GOOD) {
                         sourceSet = true;
-                        qDebug() << "Successfully set" << option_name << "to" << value_to_set;
+                        qCInfo(app) << "Scan mode option set"
+                                        << "(option:" << option_name << ", value:" << value_to_set << ")";
                     } else {
-                        qWarning() << "Failed to set" << option_name << ":" << sane_strstatus(status);
+                        qCWarning(app) << "Failed to set" << option_name << ":" << sane_strstatus(status);
                     }
                 }
             } else if (mode == SCAN_MODE_ADF_DUPLEX && 
@@ -1081,13 +1032,14 @@ bool ScannerDevice::setScanMode(ScanMode mode)
                 }
                 
                 if (value_to_set) {
-                    qDebug() << "Setting" << option_name << "to" << value_to_set;
+                    qCDebug(app) << "Setting" << option_name << "to" << value_to_set;
                     status = sane_control_option(dev, option_index, SANE_ACTION_SET_VALUE, (void*)value_to_set, nullptr);
                     if (status == SANE_STATUS_GOOD) {
                         duplexSet = true;
-                        qDebug() << "Successfully set" << option_name << "to" << value_to_set;
+                        qCInfo(app) << "Scanner option set successfully"
+                                       << "[option:" << option_name << ", value:" << value_to_set << "]";
                     } else {
-                        qWarning() << "Failed to set" << option_name << ":" << sane_strstatus(status);
+                        qCWarning(app) << "Failed to set" << option_name << ":" << sane_strstatus(status);
                     }
                 }
             }
@@ -1100,15 +1052,15 @@ bool ScannerDevice::setScanMode(ScanMode mode)
                 status = sane_control_option(dev, option_index, SANE_ACTION_SET_VALUE, &value, nullptr);
                 if (status == SANE_STATUS_GOOD) {
                     duplexSet = true;
-                    qDebug() << "Successfully set" << option_name << "to TRUE";
+                    qCDebug(app) << "Successfully set" << option_name << "to TRUE";
                 } else {
-                    qWarning() << "Failed to set" << option_name << ":" << sane_strstatus(status);
+                    qCWarning(app) << "Failed to set" << option_name << ":" << sane_strstatus(status);
                 }
             } else {
                 SANE_Bool value = SANE_FALSE;
                 status = sane_control_option(dev, option_index, SANE_ACTION_SET_VALUE, &value, nullptr);
                 if (status == SANE_STATUS_GOOD) {
-                    qDebug() << "Successfully set" << option_name << "to FALSE";
+                    qCDebug(app) << "Successfully set" << option_name << "to FALSE";
                 }
             }
         }
@@ -1158,7 +1110,7 @@ QList<ScannerDevice::ScanMode> ScannerDevice::getSupportedScanModes()
     SANE_Status status = sane_control_option(dev, 0, SANE_ACTION_GET_VALUE, &num_options, nullptr);
     
     if (status != SANE_STATUS_GOOD) {
-        qWarning() << "Failed to get number of options:" << sane_strstatus(status);
+        qCWarning(app) << "Failed to get number of options:" << sane_strstatus(status);
         return supportedModes;
     }
     
@@ -1239,7 +1191,7 @@ int ScannerDevice::getResolution() const
 
 bool ScannerDevice::setResolution(int dpi)
 {
-    qDebug() << "Setting resolution to" << dpi << "DPI";
+    qCDebug(app) << "Setting resolution to" << dpi << "DPI";
 #ifndef _WIN32
     if (!m_deviceOpen || !m_device) {
         emit errorOccurred(tr("Scanner not opened"));
@@ -1262,7 +1214,7 @@ bool ScannerDevice::setResolution(int dpi)
     SANE_Int num_options;
     status = sane_control_option(dev, 0, SANE_ACTION_GET_VALUE, &num_options, nullptr);
     if (status != SANE_STATUS_GOOD) {
-        qWarning() << "Failed to get number of options:" << sane_strstatus(status);
+        qCWarning(app) << "Failed to get number of options:" << sane_strstatus(status);
         return false;
     }
 
@@ -1275,7 +1227,7 @@ bool ScannerDevice::setResolution(int dpi)
             const SANE_Option_Descriptor *opt = sane_get_option_descriptor(dev, i);
             if (opt && opt->name && strcmp(opt->name, option_name) == 0) {
                 option_index = i;
-                qDebug() << "Found resolution option" << option_name << "at index" << option_index;
+                qCDebug(app) << "Found resolution option" << option_name << "at index" << option_index;
                 break;
             }
         }
@@ -1324,10 +1276,11 @@ bool ScannerDevice::setResolution(int dpi)
                 if (closest >= 0) value = closest;
             }
             
-            qDebug() << "Setting" << option_name << "to" << value << "DPI";
+            qCDebug(app) << "Setting" << option_name << "to" << value << "DPI";
             status = sane_control_option(dev, option_index, SANE_ACTION_SET_VALUE, &value, nullptr);
             if (status == SANE_STATUS_GOOD) {
-                qDebug() << "Successfully set" << option_name << "to" << value << "DPI";
+                qCInfo(app) << "Resolution set successfully"
+                                << "(option:" << option_name << ", value:" << value << "DPI)";
                 
                 if (strcmp(option_name, "resolution") == 0) {
                     // If general resolution, break after setting
@@ -1342,7 +1295,7 @@ bool ScannerDevice::setResolution(int dpi)
                     // 不跳出循环，继续查找另一个方向的分辨率选项
                 }
             } else {
-                qWarning() << "Failed to set" << option_name << ":" << sane_strstatus(status);
+                qCWarning(app) << "Failed to set" << option_name << ":" << sane_strstatus(status);
             }
         } else if (opt->type == SANE_TYPE_FIXED) {
             // For floating point resolution values
@@ -1359,10 +1312,10 @@ bool ScannerDevice::setResolution(int dpi)
                 }
             }
             
-            qDebug() << "Setting" << option_name << "to" << SANE_UNFIX(value) << "DPI (fixed)";
+            qCDebug(app) << "Setting" << option_name << "to" << SANE_UNFIX(value) << "DPI (fixed)";
             status = sane_control_option(dev, option_index, SANE_ACTION_SET_VALUE, &value, nullptr);
             if (status == SANE_STATUS_GOOD) {
-                qDebug() << "Successfully set" << option_name << "to" << SANE_UNFIX(value) << "DPI (fixed)";
+                qCDebug(app) << "Successfully set" << option_name << "to" << SANE_UNFIX(value) << "DPI (fixed)";
                 
                 if (strcmp(option_name, "resolution") == 0) {
                     m_currentResolutionDPI = static_cast<int>(SANE_UNFIX(value));
@@ -1374,7 +1327,7 @@ bool ScannerDevice::setResolution(int dpi)
                     m_currentResolutionDPI = static_cast<int>(SANE_UNFIX(value));
                 }
             } else {
-                qWarning() << "Failed to set" << option_name << ":" << sane_strstatus(status);
+                qCWarning(app) << "Failed to set" << option_name << ":" << sane_strstatus(status);
             }
         }
     }
@@ -1397,8 +1350,7 @@ QList<int> ScannerDevice::getSupportedResolutions()
     
 #ifndef _WIN32
     if (!m_deviceOpen || !m_device) {
-        qWarning() << "Scanner not open, cannot get supported resolutions";
-        // Return some common resolutions as defaults
+        qCWarning(app) << "Scanner device not open, returning default resolutions";
         return {75, 150, 300, 600, 1200, 2400};
     }
 
@@ -1417,7 +1369,7 @@ QList<int> ScannerDevice::getSupportedResolutions()
     SANE_Int num_options;
     status = sane_control_option(dev, 0, SANE_ACTION_GET_VALUE, &num_options, nullptr);
     if (status != SANE_STATUS_GOOD) {
-        qWarning() << "Failed to get number of options:" << sane_strstatus(status);
+        qCWarning(app) << "Failed to get number of options:" << sane_strstatus(status);
         return {75, 150, 300, 600, 1200, 2400}; // 默认值
     }
 
@@ -1432,7 +1384,7 @@ QList<int> ScannerDevice::getSupportedResolutions()
             const SANE_Option_Descriptor *opt = sane_get_option_descriptor(dev, i);
             if (opt && opt->name && strcmp(opt->name, option_name) == 0) {
                 option_index = i;
-                qDebug() << "Found resolution option" << option_name << "at index" << option_index;
+                qCDebug(app) << "Found resolution option" << option_name << "at index" << option_index;
                 break;
             }
         }
@@ -1467,7 +1419,7 @@ QList<int> ScannerDevice::getSupportedResolutions()
                     step_dpi = range->quant > 0 ? SANE_UNFIX(range->quant) : 1;
                 }
                 
-                qDebug() << "Resolution range:" << min_dpi << "to" << max_dpi << "step" << step_dpi;
+                qCDebug(app) << "Resolution range:" << min_dpi << "to" << max_dpi << "step" << step_dpi;
                 
                 // 对于范围太大的情况，使用常用分辨率值
                 if (max_dpi - min_dpi > 1000 || step_dpi <= 0) {
@@ -1498,7 +1450,7 @@ QList<int> ScannerDevice::getSupportedResolutions()
                 if (!values) continue;
                 
                 int count = values[0]; // 第一个元素是数组大小
-                qDebug() << "Resolution list has" << count << "values";
+                qCDebug(app) << "Resolution list has" << count << "values";
                 
                 for (int i = 1; i <= count; i++) {
                     int dpi;
@@ -1520,7 +1472,7 @@ QList<int> ScannerDevice::getSupportedResolutions()
     
     // 如果没有找到有效的分辨率选项，返回默认值
     if (!foundResolutionOption || supportedResolutions.isEmpty()) {
-        qDebug() << "No resolution constraints found, using default resolution values";
+        qCDebug(app) << "No resolution constraints found, using default resolution values";
         return {75, 150, 300, 600, 1200, 2400};
     }
     
@@ -1531,7 +1483,7 @@ QList<int> ScannerDevice::getSupportedResolutions()
     supportedResolutions.erase(std::unique(supportedResolutions.begin(), supportedResolutions.end()), 
                                supportedResolutions.end());
     
-    qDebug() << "Supported resolutions:" << supportedResolutions;
+    qCDebug(app) << "Supported resolutions:" << supportedResolutions;
     
 #else
     // Use defaults on Windows

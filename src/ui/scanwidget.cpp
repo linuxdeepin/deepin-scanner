@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "scanwidget.h"
+#include "ddlog.h"
 
 #include <ofd/ofd_writer.h>
 
@@ -21,6 +22,8 @@
 #include <DPushButton>
 #include <DIconButton>
 #include <DLabel>
+
+using namespace DDLog;
 
 static const QStringList FORMATS = { "PNG", "JPG", "BMP", "TIFF", "PDF", "OFD" };
 
@@ -345,7 +348,7 @@ void ScanWidget::onUpdatePreview(const QImage &image)
 
 void ScanWidget::handleDeviceError(const QString &error)
 {
-    qWarning() << "Device error:" << error;
+    qCWarning(app) << "Device error:" << error;
     m_previewLabel->setText(error);
 }
 
@@ -395,7 +398,7 @@ QString ScanWidget::getSaveDirectory()
         QDir documentsDir(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
         m_saveDir = documentsDir.filePath("scan");
         if (!documentsDir.mkpath("scan")) {
-            qWarning() << "Failed to create scan directory:" << m_saveDir;
+            qCWarning(app) << "Failed to create scan directory:" << m_saveDir;
         }
     }
     return m_saveDir;
@@ -404,20 +407,20 @@ QString ScanWidget::getSaveDirectory()
 void ScanWidget::setSaveDirectory(const QString &dir)
 {
     if (dir.isEmpty()) {
-        qWarning() << "Empty directory path provided";
+        qCWarning(app) << "Empty directory path provided";
         return;
     }
     
     QDir saveDir(dir);
     if (!saveDir.exists()) {
         if (!saveDir.mkpath(".")) {
-            qWarning() << "Failed to create directory:" << dir;
+            qCWarning(app) << "Failed to create directory:" << dir;
             return;
         }
     }
     
     m_saveDir = dir;
-    qDebug() << "Save directory set to:" << m_saveDir;
+    qCDebug(app) << "Save directory set to:" << m_saveDir;
 }
 
 void ScanWidget::onScanFinished(const QImage &image)
@@ -468,17 +471,17 @@ void ScanWidget::onScanFinished(const QImage &image)
         ofd::Writer writer;
         saveSuccess = writer.createFromImages(filePath, images, 0, 0);
         if (!saveSuccess) {
-            qWarning() << "Failed to create OFD file";
+            qCWarning(app) << "Failed to create OFD file";
         }
     }
 
     if (saveSuccess) {
-        qDebug() << "Scan saved to:" << filePath;
+        qCDebug(app) << "Scan saved to:" << filePath;
         // add the saved file path to the top of the history box
         m_historyEdit->moveCursor(QTextCursor::Start);
         m_historyEdit->insertPlainText(filePath + "\n");
     } else {
-        qWarning() << "Failed to save scan to:" << filePath;
+        qCWarning(app) << "Failed to save scan to:" << filePath;
     }
 }
 
