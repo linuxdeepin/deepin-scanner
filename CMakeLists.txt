@@ -98,6 +98,10 @@ install(FILES ${QM_FILES} DESTINATION share/${PROJECT_NAME}/translations)
 # Install help manual
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/assets/deepin-scanner DESTINATION ${CMAKE_INSTALL_PREFIX}/share/deepin-manual/manual-assets/application/)
 
+# log viewer config
+file(GLOB LOGCONFIG_FILES "${CMAKE_SOURCE_DIR}/assets/logconfig/*.json")
+install(FILES ${LOGCONFIG_FILES} DESTINATION share/deepin-log-viewer/deepin-log.conf.d)
+
 # 安装 DConfig 配置文件，1040及以下的默认DTK环境不支持DConfig
 set(DCONFIG_APPID org.deepin.scanner)
 file(GLOB DCONFIG_FILES "${CMAKE_SOURCE_DIR}/assets/configs/*.json")

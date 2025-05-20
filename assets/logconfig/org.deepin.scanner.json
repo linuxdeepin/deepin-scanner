@@ -1,0 +1,10 @@
+{
+  "name": "deepin-scanner",
+  "group": "",
+  "filter": "",
+  "exec": "/usr/bin/deepin-scanner",
+  "logType": "journal",
+  "logPath": "~/.cache/deepin/deepin-scanner/deepin-scanner.log",
+  "visible": true,
+  "version": "V1.0"
+}
