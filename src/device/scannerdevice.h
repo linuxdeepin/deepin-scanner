@@ -63,9 +63,6 @@ public:
     void cancelScan();
     bool advance(Image *im);
 
-    // Initializes the SANE backend. Returns true on success.
-    bool initializeSane() { return initialize(); }
-
     // Scan mode related methods
     // Set scan mode (flatbed, ADF simplex, ADF duplex)
     bool setScanMode(ScanMode mode);

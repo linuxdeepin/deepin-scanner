@@ -3,6 +3,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "mainwindow.h"
+#include "ddlog.h"
+
 #include <QSharedPointer>
 #include <QMessageBox>
 #include <QFileDialog>
@@ -19,21 +21,20 @@
 
 #include <DTitlebar>
 
+using namespace DDLog;
+
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
 {
     // --- Initialize Devices ---
     QSharedPointer<ScannerDevice> scannerDevice(new ScannerDevice(this));
+    scannerDevice->initialize();
     QSharedPointer<WebcamDevice> webcamDevice(new WebcamDevice(this));
+    webcamDevice->initialize();
 
     // Store devices in map
     m_devices["scanner"] = scannerDevice;
     m_devices["webcam"] = webcamDevice;
-
-    // Initialize SANE (Scanner)
-    if (!scannerDevice->initializeSane()) {
-        QMessageBox::critical(this, tr("Scanner error"), tr("Failed to initialize SANE backend.\nPlease ensure SANE libraries (e.g. sane-backends) are installed and you may need to configure permissions (e.g. add user to 'scanner' or 'saned' group).\nScanner functionality will be unavailable."));
-    }
 
     // --- 创建主界面 ---
     setWindowTitle(tr("Scanner Manager"));
@@ -91,12 +92,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateDeviceList()
 {
-    qDebug() << "Updating device list...";
+    qDebug(app) << "Updating device list...";
     showLoading(tr("Loading devices..."));
 
     // 检查设备是否初始化
     if (!m_devices["scanner"] || !m_devices["webcam"]) {
-        qDebug() << "Error: Devices not initialized";
+        qDebug(app) << "Error: Devices not initialized";
         return;
     }
 
@@ -108,7 +109,7 @@ void MainWindow::updateDeviceList()
         // 更新ScannersWidget中的设备列表
         m_scannersWidget->updateDeviceList(scanner, webcam);
     } else {
-        qDebug() << "Error: Failed to cast device pointers";
+        qDebug(app) << "Error: Failed to cast device pointers";
     }
 
 
@@ -124,7 +125,7 @@ void MainWindow::showScanView(const QString &device, bool isScanner)
 
     // 设置当前设备指针
     auto devicePtr = isScanner ? m_devices["scanner"] : m_devices["webcam"];
-    qDebug() << "Current device: " << m_currentDevice;
+    qDebug(app) << "Current device: " << m_currentDevice;
     // open the device first via concurrent thread
     QFuture<bool> future = QtConcurrent::run([=]() {
         return devicePtr->openDevice(m_currentDevice);
@@ -139,7 +140,7 @@ void MainWindow::showScanView(const QString &device, bool isScanner)
     if (!watcher.result()) {
         QTimer::singleShot(500, this, &MainWindow::hideLoading);
         // TODO: show error message
-        qDebug() << "Failed to open device" << m_currentDevice;
+        qDebug(app) << "Failed to open device" << m_currentDevice;
         return;
     }
     m_scanWidget->setupDeviceMode(devicePtr.data(), m_currentDevice);

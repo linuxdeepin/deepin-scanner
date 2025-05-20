@@ -50,6 +50,7 @@ compile_commands.json
 # AI
 .roomodes
 project_journal/
+.roo/
 
 # deepin-IDE
 .unioncode

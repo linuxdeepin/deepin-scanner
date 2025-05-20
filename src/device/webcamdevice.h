@@ -67,10 +67,10 @@ private slots:
     void updatePreview();
 
 private:
-    int m_fd;   // 设备文件描述符
-    void *m_buffers[4];   // 视频缓冲区
-    size_t m_bufferSizes[4];   // 缓冲区大小
-    int m_currentBuffer;   // 当前使用的缓冲区
+    int m_fd;   // Device file descriptor
+    void *m_buffers[4];   // Video buffers
+    size_t m_bufferSizes[4];   // Buffer sizes
+    int m_currentBuffer;   // Currently used buffer
     bool m_isInitialized;
     bool m_deviceSelected;
     QTimer m_previewTimer;
@@ -80,7 +80,7 @@ private:
     QList<QSize> m_supportedResolutions;
     // 用于存储最新的预览帧
     QImage m_latestFrame;
-    QMutex m_frameMutex;   // 保护m_latestFrame的互斥锁
+    QMutex m_frameMutex;   // Mutex lock for protecting m_latestFrame
 
     bool initMmap();
     void uninitMmap();
