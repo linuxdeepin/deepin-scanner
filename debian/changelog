@@ -1,3 +1,11 @@
+deepin-scanner (0.1.5) unstable; urgency=medium
+
+  * Update version to 0.1.5
+  * chore: [log]Format log and add manual assets.
+  * fix: Fix open device failed issue.
+
+ -- re2zero <yangwu@uniontech.com>  Thu, 29 May 2025 19:19:08 +0800
+
 deepin-scanner (0.1.4) unstable; urgency=medium
 
   * Update version to 0.1.4
