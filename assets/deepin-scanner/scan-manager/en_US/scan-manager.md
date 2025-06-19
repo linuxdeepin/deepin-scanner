@@ -1,127 +1,57 @@
-# Scan Assistant|deepin-scanner|
-
-## Overview 
-
-Scan Assistant is a tool for managing several scanning devices at a time. The interface is visual and easy to operate. 
-
-## Guide
-
-You can run, close or create a shortcut of Scan Assistant as follows.
-
-### Run Scan Assistant
-
-1. Click   ![deepin_launcher](../common/deepin_launcher.svg) in the lower left corner of the dock to enter launcher interface.
-2. Locate ![scan-manager](../common/scan_manager.svg) by scrolling the mouse wheel or searching "Scan Assistant" in the Launcher interface and click it to run. 
-3. Right-click ![scan-manager](../common/scan_manager.svg)to:
-   - Select **Send to desktop** to create a shortcut on the desktop.
-   - Select **Send to dock** to fix it onto the dock.
-   - Select **Add to startup** to add it to startup. When the computer starts up, Scan Assistant runs automatically.
-
-### Exit Scan Assistant
-
-- On Scan Assistant interface, click ![close](../common/close.svg) to exit.
-- Right-click![scan-manager](../common/scan_manager.svg)on Dock and select  **Close All** to exit.
-- On Scan Assistant interface, click  ![icon_menu](../common/icon_menu.svg) and select  **Exit**.
-
-## Operations
-
-Connect a scanning device to your computer and turn it on. 
-
-Open Scan Assistant. The system will detect the devices connected currently, such as captures and scanners.  If the device list is not displayed, corresponding driver needs to be installed.
-
-![homepage](fig/homepage.png)
-
-### Installing drivers
-
-1. Download driver package (.deb) from the official website for the scanner.
-2. Double-click the package, Package Installer starts up automatically and get ready to install it.
-3. After the driver is installed successfully, click ![refresh_button](../common/refresh_button.svg) to confirm if the scanner is displayed in the list or not. 
+## Overview
+The Scan Manager is a tool for managing scanning devices, which can manage multiple scanning devices simultaneously. The page is visualized and the operation is simple.
 
 
+## Getting Started
+You can run or close the Scan Manager, or create a shortcut in the following ways.
+### Running the Scan Manager
+1.  Click the launcher icon on the taskbar![deepin\_launcher](../common/deepin-launcher.svg)to enter the launcher page.
+2.  Scroll the mouse wheel up and down to browse or search to find the Scan Manager![scan\_manager](../common/scan_manager.svg), and click to run.
+3.  Right-click on![scan\_manager](../common/scan_manager.svg), and you can:
+*   Click **Send to Desktop** to create a shortcut on the desktop.
+*   Click **Send to Taskbar** to pin the application to the taskbar.
+*   Click **Start Automatically at Boot** to add the application to the startup items, so that the application will run automatically when the computer boots up.
 
-### Capture
+### Closing the Scan Manager
+*   Click![close](../common/close.svg)on the Scan Manager page to exit the Scan Manager.
+*   Right-click on![scan\_manager](../common/scan_manager.svg)on the taskbar and select **Close All** to exit the Scan Manager.
+*   Click  on the Scan Manager page and select **Exit** to exit the Scan Manager.
 
-1. After selecting the capture in the device list and click **Scan**, to enter the scanning interface.
-2. Scanning parameters can be set in the right side of the interface, including general settings, cropping and image processing scheme.
 
-   **General**: you can set resolution, format(i.e. image format, jpg/bmp/tif/png, as well as PDF file format) and color mode(colorful, grey, black and white) here. 
+## Introduction to Scanning Operations
+Connect the scanning device to the computer and turn on the switch of the scanning device.
+Open the Scan Manager, and the system will automatically scan all the scanning devices connected to the current computer, such as cameras and scanners. If the corresponding device list is not displayed, you need to install the driver.
+![homepage](../common/homepage.png)
 
-   **Crop**: The default setting is "no crop", but you can select "single area" or "multiple areas". If "multiple areas" is selected, you can shoot multiple files at the same time and cut them into multiple pictures.
+### Installing the Driver
+1.  Download the corresponding .deb driver installation package for the scanning device on the official website.
+2.  Double-click the driver installation package, and the software package installer will automatically start and prepare to install the software package.
+3.  After the driver is successfully installed, click the refresh button![refresh\_button](../common/refresh_button.svg)to confirm that the device is displayed in the list.
 
-   **Images**: When you have selected either "single area" or "multiple areas", may this function is available. For example, if "red seal" is selected, the document containing red seals could be clearer.
+### Camera
+1.  Select the camera in the device list and click **Scan** to enter the scanning page.
+2.  Set the scanning parameters on the right side of the page, including scanning settings, cropping, and image processing schemes.
+    **Scanning Settings**: Set the resolution, color mode, and image format of the scanned picture. Currently, three color modes of color/grayscale/black and white are supported, four image formats of jpg/bmp/tif/png are supported, and scanning to pdf and ofd documents is also supported.
+    ![camera\_settings](../common/camera_settings.png)
+3.  After completing the settings, click the scan button![scan\_botton](../common/scan_botton.png), and the scanned pictures can be viewed in "View Scanned Images".
 
-   ![camera_settings](fig/camera_settings.png)
-
-3. You can set 1:1 display scale, zoom in/out, rotate and crop the scanning area at the bottom of the interface.
-
-4. After the above mentioned settings are done, click the scan button ![scan_button](fig/scan_button.png). The captured images would be viewed in "Files" tab.
-
-### Scanner
-
-1. After selecting the scanner in the device list and click **Scan**,to enter the scanning interface.
-2. Scanning parameters can be set in the right side of the interface, including general settings, cropping and image processing scheme.
-
-   **General**: you can set mode(color24, gray8, lineart), source(ADF_FRONT, ADF_DUPLEX, FLAT_FRONT), resolution, and image here.
-
-   **Crop**: The default setting is "no crop", but you can select "single area" or "multiple areas". If "multiple areas" is selected, you can shoot multiple files at the same time and cut them into multiple pictures.
-
-   **Images**: When you have selected either "single area" or "multiple areas", may this function is available. For example, if "red seal" is selected, the document containing red seals could be clearer.
-
-   
-
-   ![scanner_settings](fig/scanner_settings.png)
-
-3. After the above mentioned settings are done, click the **Scan** button. The scanned image would be viewed in "Files" tab.
-
-### Image processing
-
-1. Click **Files** in the main interface of Scan Assistant, all scanned images would be displayed. You can click ![view_list_icons](../common/view_list_icons.svg) or![view_list_details](../common/view_list_details.svg) to view them in icon view or list view.
-
-2. Select an image and right-click, you can edit, export, rename, display in file manager, combine into PDF, attach to mail, and delete it.
-
-   ![right_menu](fig/right_menu.png)
-
-   - Edit: select this function to edit it in Draw. 
-
-   - Export: select this function to export directly. If there are many pictures, you can combine them into PDF first, and then export them to the folder in the specified location.
-   - Rename: select this function to rename it, so as to make it easy to find. 
-   - Display in file manager: select this function to open the folder where the image is stored.
-   - Attach to mail: all scanned images could be sent in mails. If there are many pictures, you can combine them into PDF first, and then attach them to mail.
 
 ## Main Menu
-
-In the main menu, you can do settings, switch window themes, view manual and get more information about Scan Assistant.
-
-### Settings
-
-1. Click![icon_menu](../common/icon_menu.svg) on the interface.
-
-2. Click **Settings** to set up the storing location, and switch on/off **Play a sound when completed**. 
-
-   ![system_settings](fig/system_settings.png)
+In the main menu, you can switch the window theme, view the help manual, etc.
 
 ### Theme
-
-The window theme includes Light Theme, Dark Theme and System Theme.
-
-1.   Click![icon_menu](../common/icon_menu.svg) on the interface.
-2.   Click **Theme** to select a theme.
+The window theme includes the light theme, the dark theme, and the system theme.
+1.  On the Scan Manager page, click![icon\_menu](../common/icon_menu.svg).
+2.  Click **Theme** and select a theme color.
 
 ### Help
-
-You can click to view the manual, which will help you further know and use Scan Assistant.
-
-1. Click![icon_menu](../common/icon_menu.svg) on the interface.
-2. Click **Help**.
-3. View the manual.
+1.  On the Scan Manager page, click![icon\_menu](../common/icon_menu.svg).
+2.  Click **Help** to view the help manual and further understand and use the Scan Manager.
 
 ### About
-
-1. Click![icon_menu](../common/icon_menu.svg) on the interface.
-2. Click **About**.
-3. View the version description.
+1.  On the Scan Manager page, click![icon\_menu](../common/icon_menu.svg).
+2.  Click **About** to view the version and introduction of the Scan Manager.
 
 ### Exit
-
-1. Click![icon_menu](../common/icon_menu.svg) on the interface.
-2. Click **Exit**.
+1.  On the Scan Manager page, click![icon\_menu](../common/icon_menu.svg).
+2.  Click **Exit**.
