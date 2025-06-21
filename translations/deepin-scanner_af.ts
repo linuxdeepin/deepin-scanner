@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_HK">
+<TS version="2.1">
 <context>
     <name>Application</name>
     <message>
         <location filename="../src/main.cpp" line="34"/>
         <source>Deepin Scanner</source>
-        <translation>掃描管理器</translation>
+        <translation>Deepin Skanner</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>掃描管理器是一款支援多種掃描設備的工具</translation>
+        <translation>Skannerbeheerder is 'n skannerinstrument wat verskeie skannerapparate ondersteun</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>加載中...</translation>
+        <translation>Ladende...</translation>
     </message>
 </context>
 <context>
@@ -27,17 +27,17 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>掃描管理器</translation>
+        <translation>Skannerbeheerder</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>加載設備...</translation>
+        <translation>Ladende apparate...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>正在打開設備...</translation>
+        <translation>Ouende apparaat...</translation>
     </message>
 </context>
 <context>
@@ -45,87 +45,87 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>掃描設定</translation>
+        <translation>Skanninstellings</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>解析度</translation>
+        <translation>Oplossing</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>色彩模式</translation>
+        <translation>Kleurmodus</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>圖像格式</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="141"/>
-        <source>View Scanned Image</source>
-        <translation>查看掃描圖像</translation>
+        <translation>Beeldformaat</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>掃描</translation>
+        <translation>Skann</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="202"/>
-        <source>Scan Mode</source>
-        <translation>掃描模式</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="203"/>
-        <source>Flatbed</source>
-        <translation>平板掃描</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="206"/>
-        <source>Video Format</source>
-        <translation>視頻格式</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="210"/>
-        <source>Color</source>
-        <translation>彩色</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="210"/>
-        <source>Grayscale</source>
-        <translation>灰度</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="210"/>
-        <source>Black White</source>
-        <translation>黑白</translation>
+        <location filename="../src/ui/scanwidget.cpp" line="141"/>
+        <source>View Scanned Image</source>
+        <translation>Bekyk skanneerde beeld</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>掃描歷史將顯示在這裡</translation>
+        <translation>Skanngeskiedenis sal hier getoon word</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="202"/>
+        <source>Scan Mode</source>
+        <translation>Skannmodus</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="203"/>
+        <source>Flatbed</source>
+        <translation>Plaat</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="206"/>
+        <source>Video Format</source>
+        <translation>Videoformaat</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="210"/>
+        <source>Color</source>
+        <translation>Kleur</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="210"/>
+        <source>Grayscale</source>
+        <translation>Grys</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="210"/>
+        <source>Black White</source>
+        <translation>Swart Wit</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>設備未初始化</translation>
+        <translation>Apparaat is nie geinitialiseer nie</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>正在初始化預覽...</translation>
+        <translation>Initialiseer voorbeeld...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>設備預覽不可用</translation>
+        <translation>Apparaatvoorbeeld is nie beskikbaar nie</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>無預覽圖像</translation>
+        <translation>Geen voorbeeldbeeld nie</translation>
     </message>
 </context>
 <context>
@@ -139,36 +139,33 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>未找到掃描設備。可能的解決方案：
-1. 確保掃描儀已連接並通電
-2. 運行命令：sudo gpasswd -a $USER scanner
-3. 重啟SANE：sudo service saned restart
-4. 安裝所需驅動包：sudo apt-get install libsane-extras
-5. 對於網絡掃描儀，檢查網絡配置
-6. 重新連接USB線或重啟電腦</translation>
+        <translation>Geen skannerapparate gevind. Moontlike oplossings:
+1. Stel seker skanner is aangesluit en aangemagtig
+2. Voer die opdrag uit: sudo gpasswd -a $USER scanner
+3. Herlaai SANE: sudo service saned restart
+4. Installeer benodigde stuurprogram: sudo apt-get install libsane-extras
+5. Vir netwerkskanner, kyk na netwerkinstellings
+6. Herverbind USB-kabel of herstart rekenaar</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
-        <location filename="../src/device/scannerdevice.cpp" line="910"/>
-        <location filename="../src/device/scannerdevice.cpp" line="1097"/>
-        <location filename="../src/device/scannerdevice.cpp" line="1197"/>
         <source>Scanner not opened</source>
-        <translation>掃描儀未打開</translation>
+        <translation>Skanner is nie geopend nie</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>獲取掃描儀參數失敗：%1</translation>
+        <translation>Gefaal om skannerparameters te kry: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>開始掃描失敗：%1</translation>
+        <translation>Gefaal om skann te begin: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>保存測試圖像失敗</translation>
+        <translation>Gefaal om toetsbeeld te spaar</translation>
     </message>
 </context>
 <context>
@@ -176,47 +173,47 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>掃描儀設備</translation>
+        <translation>Skannerapparate</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>掃描儀</translation>
+        <translation>Skanner</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>空閒</translation>
+        <translation>Lugt</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation>攝像頭</translation>
+        <translation>Webkamera</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>未找到設備</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="148"/>
-        <source>Offline</source>
-        <translation>離線</translation>
+        <translation>Geen toestelle gevind</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
         <source>Model: %1</source>
-        <translation>型號：%1</translation>
+        <translation>Model: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="153"/>
         <source>Status: %1</source>
-        <translation>狀態：%1</translation>
+        <translation>Status: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>掃描</translation>
+        <translation>Sken</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scannerswidget.cpp" line="148"/>
+        <source>Offline</source>
+        <translation>Offline</translation>
     </message>
 </context>
 <context>
@@ -224,67 +221,67 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>無法獲取設備路徑，無法設置解析度</translation>
+        <translation>Kan nie die toestelpad kry nie, kan nie resolusie instel nie</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>重新打開設備失敗</translation>
+        <translation>Kan nie die toestel heropen nie</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>設置請求的解析度失敗</translation>
+        <translation>Kan nie die gevraarde resolusie instel nie</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>記憶體映射失敗</translation>
+        <translation>Gedrag van geheuekaart misluk</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>設備未正確初始化</translation>
+        <translation>Toestel is nie korrek geinitialiseer nie</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>緩衝區初始化失敗</translation>
+        <translation>Buffer initialisering misluk</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>緩衝區重新初始化失敗</translation>
+        <translation>Buffer herinitialisering misluk</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>緩衝隊列失敗：%1</translation>
+        <translation>Kan nie die buffer in die wagtrekken nie: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>啟動視頻流失敗：%1</translation>
+        <translation>Kan nie die videostraal begin nie: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>設備未初始化或文件描述符無效</translation>
+        <translation>Toestel is nie geinitialiseer nie of ongeldige lêerdescriptor</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>啟動視頻流失敗，捕獲失敗</translation>
+        <translation>Kan nie die videostraal begin nie, opname misluk</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>獲取圖像幀失敗</translation>
+        <translation>Kan nie die beeldraam kry nie</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>捕獲有效圖像失敗，請檢查攝像頭連接</translation>
+        <translation>Kan nie geldige beeld kry nie, kontroleer assementkamera aansluiting</translation>
     </message>
 </context>
 </TS>

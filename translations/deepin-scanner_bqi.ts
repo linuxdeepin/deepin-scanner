@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_HK">
+<TS version="2.1">
 <context>
     <name>Application</name>
     <message>
         <location filename="../src/main.cpp" line="34"/>
         <source>Deepin Scanner</source>
-        <translation>掃描管理器</translation>
+        <translation>ديبين سكانر</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>掃描管理器是一款支援多種掃描設備的工具</translation>
+        <translation>مدير السكانر هو أداة تدعم مجموعة متنوعة من أجهزة السكانر</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>加載中...</translation>
+        <translation>جار التحميل...</translation>
     </message>
 </context>
 <context>
@@ -27,17 +27,17 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>掃描管理器</translation>
+        <translation>مدير السكانر</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>加載設備...</translation>
+        <translation>جار تحميل الأجهزة...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>正在打開設備...</translation>
+        <translation>جار فتح الجهاز...</translation>
     </message>
 </context>
 <context>
@@ -45,87 +45,87 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>掃描設定</translation>
+        <translation>إعدادات السكانر</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>解析度</translation>
+        <translation>الدقة</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>色彩模式</translation>
+        <translation>وضع اللون</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>圖像格式</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="141"/>
-        <source>View Scanned Image</source>
-        <translation>查看掃描圖像</translation>
+        <translation>تنسيق الصورة</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>掃描</translation>
+        <translation>السكانر</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="202"/>
-        <source>Scan Mode</source>
-        <translation>掃描模式</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="203"/>
-        <source>Flatbed</source>
-        <translation>平板掃描</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="206"/>
-        <source>Video Format</source>
-        <translation>視頻格式</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="210"/>
-        <source>Color</source>
-        <translation>彩色</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="210"/>
-        <source>Grayscale</source>
-        <translation>灰度</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="210"/>
-        <source>Black White</source>
-        <translation>黑白</translation>
+        <location filename="../src/ui/scanwidget.cpp" line="141"/>
+        <source>View Scanned Image</source>
+        <translation>عرض الصورة الممسوحة</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>掃描歷史將顯示在這裡</translation>
+        <translation>ستظهر سجل السكانر هنا</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="202"/>
+        <source>Scan Mode</source>
+        <translation>وضع السكانر</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="203"/>
+        <source>Flatbed</source>
+        <translation>الجدار</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="206"/>
+        <source>Video Format</source>
+        <translation>تنسيق الفيديو</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="210"/>
+        <source>Color</source>
+        <translation>اللون</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="210"/>
+        <source>Grayscale</source>
+        <translation>الملونة بالأبيض والأسود</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="210"/>
+        <source>Black White</source>
+        <translation>الأسود والأبيض</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>設備未初始化</translation>
+        <translation>الجهاز غير مُنشَّئ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>正在初始化預覽...</translation>
+        <translation>جار إعداد عرض مسبق...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>設備預覽不可用</translation>
+        <translation>عرض مسبق للجهاز غير متوفر</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>無預覽圖像</translation>
+        <translation>لا توجد صورة عرض مسبق</translation>
     </message>
 </context>
 <context>
@@ -139,36 +139,33 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>未找到掃描設備。可能的解決方案：
-1. 確保掃描儀已連接並通電
-2. 運行命令：sudo gpasswd -a $USER scanner
-3. 重啟SANE：sudo service saned restart
-4. 安裝所需驅動包：sudo apt-get install libsane-extras
-5. 對於網絡掃描儀，檢查網絡配置
-6. 重新連接USB線或重啟電腦</translation>
+        <translation>لم يتم العثور على أجهزة سكانر. حلول ممكنة:
+1. تأكد من اتصال السكانر وتشغيله
+2. اعد تشغيل الأمر: sudo gpasswd -a $USER scanner
+3. إعادة تشغيل SANE: sudo service saned restart
+4. تثبيت حزمة مسح متطلبة: sudo apt-get install libsane-extras
+5. بالنسبة للسكانر الشبكي، تحقق من إعدادات الشبكة
+6. إعادة الاتصال بالكابل USB أو إعادة تشغيل الكمبيوتر</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
-        <location filename="../src/device/scannerdevice.cpp" line="910"/>
-        <location filename="../src/device/scannerdevice.cpp" line="1097"/>
-        <location filename="../src/device/scannerdevice.cpp" line="1197"/>
         <source>Scanner not opened</source>
-        <translation>掃描儀未打開</translation>
+        <translation>السكانر غير مفتوح</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>獲取掃描儀參數失敗：%1</translation>
+        <translation>فشل في الحصول على معلمات السكانر: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>開始掃描失敗：%1</translation>
+        <translation>فشل في بدء السكانر: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>保存測試圖像失敗</translation>
+        <translation>فشل في حفظ صورة الاختبار</translation>
     </message>
 </context>
 <context>
@@ -176,47 +173,47 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>掃描儀設備</translation>
+        <translation>أجهزة السكانر</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>掃描儀</translation>
+        <translation>السكانر</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>空閒</translation>
+        <translation>خالی</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation>攝像頭</translation>
+        <translation>کیمیا</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>未找到設備</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="148"/>
-        <source>Offline</source>
-        <translation>離線</translation>
+        <translation>هیچ دستگاهی یافت نشد</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
         <source>Model: %1</source>
-        <translation>型號：%1</translation>
+        <translation>مدل: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="153"/>
         <source>Status: %1</source>
-        <translation>狀態：%1</translation>
+        <translation>وضعیت: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>掃描</translation>
+        <translation>اسکن</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scannerswidget.cpp" line="148"/>
+        <source>Offline</source>
+        <translation>آفلاين</translation>
     </message>
 </context>
 <context>
@@ -224,67 +221,67 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>無法獲取設備路徑，無法設置解析度</translation>
+        <translation>مسیر دستگاه به دست نمی‌آید، رزولوشن تنظیم نمی‌شود</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>重新打開設備失敗</translation>
+        <translation>عدم باز کردن مجدد دستگاه</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>設置請求的解析度失敗</translation>
+        <translation>رزولوشن مورد نظر تنظیم نشد</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>記憶體映射失敗</translation>
+        <translation>مپینگ حافظه ناموفق بود</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>設備未正確初始化</translation>
+        <translation>دستگاه به درستی اولیه سازی نشده</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>緩衝區初始化失敗</translation>
+        <translation>اولیه سازی بفر ناموفق بود</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>緩衝區重新初始化失敗</translation>
+        <translation>اولیه سازی مجدد بفر ناموفق بود</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>緩衝隊列失敗：%1</translation>
+        <translation>افزودن بفر به صف ناموفق بود: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>啟動視頻流失敗：%1</translation>
+        <translation>شروع جریان ویدیو ناموفق بود: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>設備未初始化或文件描述符無效</translation>
+        <translation>دستگاه به درستی اولیه سازی نشده یا شناسه فایل نامعتبر است</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>啟動視頻流失敗，捕獲失敗</translation>
+        <translation>شروع جریان ویدیو ناموفق بود، ضبط ناموفق بود</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>獲取圖像幀失敗</translation>
+        <translation>دریافت فریم تصویر ناموفق بود</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>捕獲有效圖像失敗，請檢查攝像頭連接</translation>
+        <translation>تصویر معتبری ضبط نشد، لطفاً اتصال کامرا را بررسی کنید</translation>
     </message>
 </context>
 </TS>

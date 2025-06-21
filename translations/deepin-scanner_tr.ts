@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_HK">
+<TS version="2.1">
 <context>
     <name>Application</name>
     <message>
         <location filename="../src/main.cpp" line="34"/>
         <source>Deepin Scanner</source>
-        <translation>掃描管理器</translation>
+        <translation>Deepin Tarama</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>掃描管理器是一款支援多種掃描設備的工具</translation>
+        <translation>Tarama Yöneticisi, çeşitli tarama cihazlarını destekleyen bir tarama aracıdır</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>加載中...</translation>
+        <translation>Yükleniyor...</translation>
     </message>
 </context>
 <context>
@@ -27,17 +27,17 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>掃描管理器</translation>
+        <translation>Tarama Yöneticisi</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>加載設備...</translation>
+        <translation>Cihazlar yükleniyor...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>正在打開設備...</translation>
+        <translation>Cihaz açılıyor...</translation>
     </message>
 </context>
 <context>
@@ -45,87 +45,87 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>掃描設定</translation>
+        <translation>Tarama Ayarları</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>解析度</translation>
+        <translation>Çözünürlük</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>色彩模式</translation>
+        <translation>Renk Modu</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>圖像格式</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="141"/>
-        <source>View Scanned Image</source>
-        <translation>查看掃描圖像</translation>
+        <translation>Görüntü Biçimi</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>掃描</translation>
+        <translation>Tara</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="202"/>
-        <source>Scan Mode</source>
-        <translation>掃描模式</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="203"/>
-        <source>Flatbed</source>
-        <translation>平板掃描</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="206"/>
-        <source>Video Format</source>
-        <translation>視頻格式</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="210"/>
-        <source>Color</source>
-        <translation>彩色</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="210"/>
-        <source>Grayscale</source>
-        <translation>灰度</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="210"/>
-        <source>Black White</source>
-        <translation>黑白</translation>
+        <location filename="../src/ui/scanwidget.cpp" line="141"/>
+        <source>View Scanned Image</source>
+        <translation>Tarama Görseli Görüntüle</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>掃描歷史將顯示在這裡</translation>
+        <translation>Tarama tarihi burada gösterilecektir</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="202"/>
+        <source>Scan Mode</source>
+        <translation>Tarama Modu</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="203"/>
+        <source>Flatbed</source>
+        <translation>Yatay masa</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="206"/>
+        <source>Video Format</source>
+        <translation>Video Biçimi</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="210"/>
+        <source>Color</source>
+        <translation>Renk</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="210"/>
+        <source>Grayscale</source>
+        <translation>Gri Tonlamalı</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="210"/>
+        <source>Black White</source>
+        <translation>Kara Beyaz</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>設備未初始化</translation>
+        <translation>Cihaz başlatılmadı</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>正在初始化預覽...</translation>
+        <translation>Önizleme başlatılıyor...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>設備預覽不可用</translation>
+        <translation>Cihaz önizlemesi mevcut değil</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>無預覽圖像</translation>
+        <translation>Önizleme görüntüsü yok</translation>
     </message>
 </context>
 <context>
@@ -139,36 +139,33 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>未找到掃描設備。可能的解決方案：
-1. 確保掃描儀已連接並通電
-2. 運行命令：sudo gpasswd -a $USER scanner
-3. 重啟SANE：sudo service saned restart
-4. 安裝所需驅動包：sudo apt-get install libsane-extras
-5. 對於網絡掃描儀，檢查網絡配置
-6. 重新連接USB線或重啟電腦</translation>
+        <translation>Tarama cihazı bulunamadı. Mümkün çözümler:
+1. Tarama cihazının bağlı ve açık olduğundan emin olun
+2. Komutu çalıştırın: sudo gpasswd -a $USER scanner
+3. SANE'ı yeniden başlatın: sudo service saned restart
+4. Gerekli sürücü paketini yükleyin: sudo apt-get install libsane-extras
+5. Ağa bağlı tarama cihazları için ağ yapılandırmasını kontrol edin
+6. USB kablosunu tekrar bağlayın veya bilgisayarı yeniden başlatın</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
-        <location filename="../src/device/scannerdevice.cpp" line="910"/>
-        <location filename="../src/device/scannerdevice.cpp" line="1097"/>
-        <location filename="../src/device/scannerdevice.cpp" line="1197"/>
         <source>Scanner not opened</source>
-        <translation>掃描儀未打開</translation>
+        <translation>Tarama cihazı açılmadı</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>獲取掃描儀參數失敗：%1</translation>
+        <translation>Tarama cihazının parametreleri alınamadı: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>開始掃描失敗：%1</translation>
+        <translation>Tarama başlatılamadı: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>保存測試圖像失敗</translation>
+        <translation>Test görüntüsü kaydedilemedi</translation>
     </message>
 </context>
 <context>
@@ -176,47 +173,47 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>掃描儀設備</translation>
+        <translation>Tarama Cihazları</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>掃描儀</translation>
+        <translation>Tarama Cihazı</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>空閒</translation>
+        <translation>Aktif değil</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation>攝像頭</translation>
+        <translation>Webcam</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>未找到設備</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="148"/>
-        <source>Offline</source>
-        <translation>離線</translation>
+        <translation>Cihaz bulunamadı</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
         <source>Model: %1</source>
-        <translation>型號：%1</translation>
+        <translation>Model: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="153"/>
         <source>Status: %1</source>
-        <translation>狀態：%1</translation>
+        <translation>Durum: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>掃描</translation>
+        <translation>Tarama</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scannerswidget.cpp" line="148"/>
+        <source>Offline</source>
+        <translation>Çevrimdışı</translation>
     </message>
 </context>
 <context>
@@ -224,67 +221,67 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>無法獲取設備路徑，無法設置解析度</translation>
+        <translation>Cihaz yolu alınamadı, çözünürlük ayarlanamadı</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>重新打開設備失敗</translation>
+        <translation>Cihaz yeniden açılamadı</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>設置請求的解析度失敗</translation>
+        <translation>İstenen çözünürlük ayarlanamadı</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>記憶體映射失敗</translation>
+        <translation>Hafıza haritası oluşturulamadı</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>設備未正確初始化</translation>
+        <translation>Cihaz düzgün şekilde başlatılmadı</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>緩衝區初始化失敗</translation>
+        <translation>Buffer başlatılamadı</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>緩衝區重新初始化失敗</translation>
+        <translation>Buffer yeniden başlatılamadı</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>緩衝隊列失敗：%1</translation>
+        <translation>Buffer sıraya konamadı: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>啟動視頻流失敗：%1</translation>
+        <translation>Video akışı başlatılamadı: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>設備未初始化或文件描述符無效</translation>
+        <translation>Cihaz başlatılmadı veya geçersiz dosya tanımlayıcısı</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>啟動視頻流失敗，捕獲失敗</translation>
+        <translation>Video akışı başlatılamadı, yakalama başarısız</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>獲取圖像幀失敗</translation>
+        <translation>Görüntü çerçevesi alınamadı</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>捕獲有效圖像失敗，請檢查攝像頭連接</translation>
+        <translation>Geçerli bir görüntü yakalanamadı, lütfen kamera bağlantısını kontrol edin</translation>
     </message>
 </context>
 </TS>
