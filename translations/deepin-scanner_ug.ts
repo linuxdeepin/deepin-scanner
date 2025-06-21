@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_HK">
+<TS version="2.1">
 <context>
     <name>Application</name>
     <message>
         <location filename="../src/main.cpp" line="34"/>
         <source>Deepin Scanner</source>
-        <translation>掃描管理器</translation>
+        <translation>دېبين سكانر</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>掃描管理器是一款支援多種掃描設備的工具</translation>
+        <translation>سكانر مانىجر د سكانر اوزلەتىش ئۇچۇن ئىشلىتىشلىق ئۇچۇن ئىشلىتىشلىق ئۇچۇن ئېتىشىش ئۆچىن ئىشلىتىشلىق ئەھۋالىدە</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>加載中...</translation>
+        <translation>چۈشۈرۈۋاتىدۇ...</translation>
     </message>
 </context>
 <context>
@@ -27,17 +27,17 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>掃描管理器</translation>
+        <translation>سكانر مانىجر</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>加載設備...</translation>
+        <translation>دەۋاملىق ئۈسكۈنەلەرلىك...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>正在打開設備...</translation>
+        <translation>دەۋاملىق ئۈسكۈنى ئېچىۋاتىدۇ...</translation>
     </message>
 </context>
 <context>
@@ -45,87 +45,87 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>掃描設定</translation>
+        <translation>سكانر قۇراللىرى</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>解析度</translation>
+        <translation>چەكلەش</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>色彩模式</translation>
+        <translation>رەڭ ھەللىرى</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>圖像格式</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="141"/>
-        <source>View Scanned Image</source>
-        <translation>查看掃描圖像</translation>
+        <translation>كۆرۈنۈش فورماتى</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>掃描</translation>
+        <translation>سكانرلاش</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="202"/>
-        <source>Scan Mode</source>
-        <translation>掃描模式</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="203"/>
-        <source>Flatbed</source>
-        <translation>平板掃描</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="206"/>
-        <source>Video Format</source>
-        <translation>視頻格式</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="210"/>
-        <source>Color</source>
-        <translation>彩色</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="210"/>
-        <source>Grayscale</source>
-        <translation>灰度</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scanwidget.cpp" line="210"/>
-        <source>Black White</source>
-        <translation>黑白</translation>
+        <location filename="../src/ui/scanwidget.cpp" line="141"/>
+        <source>View Scanned Image</source>
+        <translation>سكانرلانغان رەسىمنى كۆرۈش</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>掃描歷史將顯示在這裡</translation>
+        <translation>سكانرلاش تارىخى بۇ يەردىن كۆرۈنەيدۇ</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="202"/>
+        <source>Scan Mode</source>
+        <translation>سكانر ھەللىرى</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="203"/>
+        <source>Flatbed</source>
+        <translation>تەسىرلىق</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="206"/>
+        <source>Video Format</source>
+        <translation>ۋيدىيولار فورماتى</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="210"/>
+        <source>Color</source>
+        <translation>رەڭ</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="210"/>
+        <source>Grayscale</source>
+        <translation>كۆكۈرگە</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="210"/>
+        <source>Black White</source>
+        <translation>كۆكۈرگە</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>設備未初始化</translation>
+        <translation>دەۋاملىق ئۈسكۈنى ياخشى تەسىرلىنىشقا ئۇلنىدى</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>正在初始化預覽...</translation>
+        <translation>تەسىرلىنىش پىروۋىنى ئېچىۋاتىدۇ...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>設備預覽不可用</translation>
+        <translation>دەۋاملىق ئۈسكۈنى پىروۋىسى ئەھۋالىدى</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>無預覽圖像</translation>
+        <translation>تەسىرلىنىش پىروۋىسى بارمىسىز</translation>
     </message>
 </context>
 <context>
@@ -139,36 +139,33 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>未找到掃描設備。可能的解決方案：
-1. 確保掃描儀已連接並通電
-2. 運行命令：sudo gpasswd -a $USER scanner
-3. 重啟SANE：sudo service saned restart
-4. 安裝所需驅動包：sudo apt-get install libsane-extras
-5. 對於網絡掃描儀，檢查網絡配置
-6. 重新連接USB線或重啟電腦</translation>
+        <translation>سكانر ئۈسكۈنىلىرى ياخشى تەسىرلىنىشقا ئۇلنىدى. ئۇچۇن ئىشلىتىشلىق چېشىمەلەر:
+1. سكانرنى ئۇلنىپ ۋاقىتلىق ئۇلنىشنى تەكشۈرۈڭ
+2. چېشىمەنى ئىشلىتىڭ: sudo gpasswd -a $USER scanner
+3. SANEنى ئەھۋاللىش: sudo service saned restart
+4. ئەھۋاللىق چېشىمەنى ئىشلىتىڭ: sudo apt-get install libsane-extras
+5. ئەھۋاللىق سكانرلار ئۈچۈن ئەھۋاللىق چېشىمەنى تەكشۈرۈڭ
+6. USB كېتىنى ئەھۋاللىش ياكى كۆمپىيۇتېرنى ئەھۋاللىش</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
-        <location filename="../src/device/scannerdevice.cpp" line="910"/>
-        <location filename="../src/device/scannerdevice.cpp" line="1097"/>
-        <location filename="../src/device/scannerdevice.cpp" line="1197"/>
         <source>Scanner not opened</source>
-        <translation>掃描儀未打開</translation>
+        <translation>سكانر ئېچىلمىدى</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>獲取掃描儀參數失敗：%1</translation>
+        <translation>سكانر پارامېتىرلىرى ياخشى تەسىرلىنىشقا ئۇلنىدى: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>開始掃描失敗：%1</translation>
+        <translation>سكانرلىش باشلىنىشقا ئۇلنىدى: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>保存測試圖像失敗</translation>
+        <translation>تەسىرلىش رەسىمى ياخشى ساقلىنىشقا ئۇلنىدى</translation>
     </message>
 </context>
 <context>
@@ -176,47 +173,47 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>掃描儀設備</translation>
+        <translation>سكانر ئۈسكۈنىلىرى</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>掃描儀</translation>
+        <translation>سكانر</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>空閒</translation>
+        <translation>كىمەك</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation>攝像頭</translation>
+        <translation>ۋيبكەم</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>未找到設備</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="148"/>
-        <source>Offline</source>
-        <translation>離線</translation>
+        <translation>ھەنچە تېگىن ھەندىزىسى تېكىرەلمەيدى</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
         <source>Model: %1</source>
-        <translation>型號：%1</translation>
+        <translation>مودىل: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="153"/>
         <source>Status: %1</source>
-        <translation>狀態：%1</translation>
+        <translation>ھال: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>掃描</translation>
+        <translation>سەن</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scannerswidget.cpp" line="148"/>
+        <source>Offline</source>
+        <translation>ئۆنلاينلىق</translation>
     </message>
 </context>
 <context>
@@ -224,67 +221,67 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>無法獲取設備路徑，無法設置解析度</translation>
+        <translation>ھەندىزىسى يولىنى تېكىرەلمەيدى، ئەپەتتىكى چەكىش</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>重新打開設備失敗</translation>
+        <translation>ھەندىزىسىنى ئەڭىنىشقا باشلىقمىدى</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>設置請求的解析度失敗</translation>
+        <translation>تەكىرەلمەيدىغان چەكىشنى ئەپەتتىكى چەكىش</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>記憶體映射失敗</translation>
+        <translation>ئەملىيەت ئېنىشى چەكىش</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>設備未正確初始化</translation>
+        <translation>ھەندىزىسى ھەققىدەن چەكىش</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>緩衝區初始化失敗</translation>
+        <translation>بەفر ئېنىشى چەكىش</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>緩衝區重新初始化失敗</translation>
+        <translation>بەفر ئەڭىنىشى چەكىش</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>緩衝隊列失敗：%1</translation>
+        <translation>بەفرنى قىلغۇچىلاش چەكىش: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>啟動視頻流失敗：%1</translation>
+        <translation>ۋيدئو سىرەمەسىنى باشلىقمىدى: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>設備未初始化或文件描述符無效</translation>
+        <translation>ھەندىزىسى ئېنىشى چەكىش ھەققىدەن چەكىش</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>啟動視頻流失敗，捕獲失敗</translation>
+        <translation>ۋيدئو سىرەمەسىنى باشلىقمىدى، چەكىش چەقىلغان</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>獲取圖像幀失敗</translation>
+        <translation>ئىمسەج فرېمىسىنى تېكىرەلمەيدى</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>捕獲有效圖像失敗，請檢查攝像頭連接</translation>
+        <translation>بەلگىلى ىمسەجنى چەكىش قىلغان، كەمەرە ئۇلىنىشىنى تەكىرەڭ</translation>
     </message>
 </context>
 </TS>

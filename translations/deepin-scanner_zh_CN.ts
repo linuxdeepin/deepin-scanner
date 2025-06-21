@@ -25,18 +25,6 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <source>Failed to initialize SANE backend.
-Please ensure SANE libraries (e.g. sane-backends) are installed and you may need to configure permissions (e.g. add user to &apos;scanner&apos; or &apos;saned&apos; group).
-Scanner functionality will be unavailable.</source>
-        <translation type="vanished">初始化SANE后端失败。
-请确保已安装SANE库(如sane-backends)，您可能需要配置权限(如将用户添加到&apos;scanner&apos;或&apos;saned&apos;组)。
-扫描功能将不可用。</translation>
-    </message>
-    <message>
-        <source>Scanner error</source>
-        <translation type="vanished">扫描器错误</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
         <translation>扫描管理器</translation>
@@ -85,10 +73,6 @@ Scanner functionality will be unavailable.</source>
         <translation>扫描</translation>
     </message>
     <message>
-        <source>Save</source>
-        <translation type="vanished">保存</translation>
-    </message>
-    <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
         <translation>扫描模式</translation>
@@ -97,10 +81,6 @@ Scanner functionality will be unavailable.</source>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
         <translation>平板扫描</translation>
-    </message>
-    <message>
-        <source>Duplex</source>
-        <translation type="vanished">双面扫描</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
@@ -121,10 +101,6 @@ Scanner functionality will be unavailable.</source>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
         <translation>黑白</translation>
-    </message>
-    <message>
-        <source>ADF</source>
-        <translation type="vanished">ADF</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
@@ -201,10 +177,6 @@ Scanner functionality will be unavailable.</source>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
         <translation>扫描仪设备</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation type="vanished">刷新</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
