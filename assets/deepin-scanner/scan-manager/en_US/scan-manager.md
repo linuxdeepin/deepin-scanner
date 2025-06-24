@@ -1,3 +1,5 @@
+# Scan Manager|deepin-scanner|
+
 ## Overview
 The Scan Manager is a tool for managing scanning devices, which can manage multiple scanning devices simultaneously. The page is visualized and the operation is simple.
 
