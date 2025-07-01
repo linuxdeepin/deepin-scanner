@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Scanner Manager ye un ferramenta de scanner que suporta un gran númberu de dispositivos de scanner</translation>
+        <translation>Scanner Manager ye un herramienta de escaneo que suporta unha varietat de dispositivos de escaneo</translation>
     </message>
 </context>
 <context>
@@ -45,7 +45,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>Configuración de Escaneo</translation>
+        <translation>Configuración de escaneo</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
@@ -55,12 +55,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>Modu de Color</translation>
+        <translation>Modo de color</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>Formatu d'Imaxe</translation>
+        <translation>Formato de imaxe</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
@@ -70,17 +70,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>Ver Imaxe Escaneada</translation>
+        <translation>Ver imaxe escaneada</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>La historial de escaneos amosarase aquí</translation>
+        <translation>A istoria de escaneo aparecerá aquí</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>Modu de Escaneo</translation>
+        <translation>Modo de escaneo</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
@@ -90,7 +90,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation>Formatu de Videu</translation>
+        <translation>Formato de vídeo</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
@@ -105,27 +105,27 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>Negru y blancu</translation>
+        <translation>Negro e blanco</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>Dispositivu nun ta inicializáu</translation>
+        <translation>Dispositivo non inicializáu</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>Inicializando vista previa...</translation>
+        <translation>Inicalizando previsualización...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>Vista previa del dispositivu nun ta disponible</translation>
+        <translation>Previsualización del dispositiu non disponible</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>Imaxe de vista previa nun ta disponible</translation>
+        <translation>Imaxe de previsualización non disponible</translation>
     </message>
 </context>
 <context>
@@ -139,23 +139,23 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>Nun s'hai atopáu dispositivos de scanner. Soluciones posibles:
-1. Asegúrate de que'l scanner ta conectáu y encendíu
-2. Ejecuta l'orden: sudo gpasswd -a $USER scanner
+        <translation>Nun se atoparon dispositivos de escaneo. Soluciones posibles:
+1. Asegúrate de que l&apos;escaneador ta conectáu y encendíu
+2. Ejecuta l&apos;orde: sudo gpasswd -a $USER scanner
 3. Reinicia SANE: sudo service saned restart
-4. Instala l'embalaxe de xunto de xuridores: sudo apt-get install libsane-extras
-5. Pa scanner de xerredor, comprobando la configuración de xerredor
-6. Reconecta la guía USB o reinicia l'ordenador</translation>
+4. Instala paquete de xestionador de conductores: sudo apt-get install libsane-extras
+5. Pa escaneadores de xeración, revisa la configuración de xeración
+6. Reconecta el cable USB o reinicia l&apos;ordenador</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Scanner nun ta abiertu</translation>
+        <translation>Escaneador non abiertu</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Faiu obtener parámetros del scanner: %1</translation>
+        <translation>Faiu obtener parámetros del escaneador: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
@@ -173,47 +173,47 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>Dispositivos de Scanner</translation>
+        <translation>Dispositivos de escaneo</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>Scanner</translation>
+        <translation>Escaneador</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation type="unfinished"></translation>
+        <translation>Inactivu</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation type="unfinished"></translation>
+        <translation>Webcam</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation type="unfinished"></translation>
+        <translation>No dispositivos encontrados</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
         <source>Model: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Modelo: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="153"/>
         <source>Status: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Estado: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Escanea</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Offline</translation>
     </message>
 </context>
 <context>
@@ -221,67 +221,67 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Non se puet obtener el camínu del dispositivu, non se puet establecer la resolución</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló reabrir el dispositivu</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló establecer la resolución solicitada</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló el mapeu de memoria</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation type="unfinished"></translation>
+        <translation>El dispositivu nun ta inicializáu de forma adecuada</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló l&apos;initialización del buffer</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló la reinitialización del buffer</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló encolar el buffer: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló iniciar el estremu de video: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation type="unfinished"></translation>
+        <translation>El dispositivu nun ta inicializáu o tiene un descriptor de fitu inválidu</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló iniciar el estremu de video, captura fallida</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló obtener el marcu d&apos;imatíu</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló capturar una imatíu válida, por favor comprobe la conexón de la cámara</translation>
     </message>
 </context>
 </TS>

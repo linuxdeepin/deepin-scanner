@@ -6,12 +6,12 @@
     <message>
         <location filename="../src/main.cpp" line="34"/>
         <source>Deepin Scanner</source>
-        <translation>דפין סanner</translation>
+        <translation>Deepin Scanner</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>מנהל הסanner הוא כלי סanner שמתאים לסוגים שונים של ציוד סanner</translation>
+        <translation>Scanner Manager הוא כלי סניף שמתאילם למספר מוצרי סניף שונים</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>מטעין...</translation>
+        <translation>טוען...</translation>
     </message>
 </context>
 <context>
@@ -27,17 +27,17 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>מנהל הסanner</translation>
+        <translation>מנהל הסניף</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>מטעין ציוד...</translation>
+        <translation>טוען מוצרי סניף...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>מפתח את הרכיב...</translation>
+        <translation>פותח thiết bị...</translation>
     </message>
 </context>
 <context>
@@ -45,7 +45,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>הגדרות סanner</translation>
+        <translation>הגדרות סניף</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
@@ -65,27 +65,27 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>לסרוק</translation>
+        <translation>סרן</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>הצגת תמונה מסריקה</translation>
+        <translation>הצגת תמונה סנננה</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>ההיסטוריה של הסריקה תופיע כאן</translation>
+        <translation>ההיסטוריה של הסניף תופיע כאן</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>מצב סריקה</translation>
+        <translation>מצב סניף</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>מסורק מישור</translation>
+        <translation>טבלה</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
@@ -100,32 +100,32 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>שחור-לבן</translation>
+        <translation>שחור ולבן</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>שחור-לבן</translation>
+        <translation>שחור ולבן</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>הרכיב לא הוקם</translation>
+        <translation>ה thiết bị לא הוניט</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>מאתחל תצוגה מוקדמת...</translation>
+        <translation>מיון תצוגה...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>אין תצוגה מוקדמת של הרכיב</translation>
+        <translation>ה תצוגה של ה thiết bị לא זמינה</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>אין תמונה מוקדמת</translation>
+        <translation>אין תמונה של תצוגה</translation>
     </message>
 </context>
 <context>
@@ -139,33 +139,33 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>לא נמצאו רכיבים סanner. פתרונות אפשריים:
-1. לוודא שהסanner מחובר והנключен
-2. להזין הוראה: sudo gpasswd -a $USER scanner
-3. להשביט את SANE: sudo service saned restart
-4. להתקין את חבילת המנהל הנדרשת: sudo apt-get install libsane-extras
-5. עבור סannerים רשת, לבדוק את הגדרות הרשת
-6. להתחבר מחדש לקבל USB או להשביט את המחשב</translation>
+        <translation>לא נמצאו מוצרי סניף. פתרונות אפשריים:
+1. לוודא שה סניף מחובר ומופעל
+2. בצע את הפקודה: sudo gpasswd -a $USER scanner
+3. התחל מחדש את SANE: sudo service saned restart
+4. מנהל חבילת הרכיבים הנדרשים: sudo apt-get install libsane-extras
+5. עבור סניפים רשת, בדוק את הגדרות הרשת
+6. חibre את חבל USB או התחל מחדש את המחשב</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>הסanner לא פתוח</translation>
+        <translation>ה סניף לא פתוח</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>לא ניתן לקבל פרמטרים של הסanner: %1</translation>
+        <translation>נכשל בקבלת פרמטרים של הסניף: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>לא ניתן להתחיל את הסריקה: %1</translation>
+        <translation>נכשל בהתחלה של הסניף: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>לא ניתן לשמור את התמונה המבחן</translation>
+        <translation>נכשל בשמירת תמונה ניסית</translation>
     </message>
 </context>
 <context>
@@ -173,27 +173,27 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>רכיבי סanner</translation>
+        <translation>מוצרי סניף</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>סanner</translation>
+        <translation>סניף</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>ללא פעילות</translation>
+        <translation>מצב הפסק</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation>كاميرا וידאו</translation>
+        <translation>קAMERA</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>אין thiết bịים מוצאים</translation>
+        <translation>לא נמצאו thiết bị</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
@@ -213,7 +213,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
         <source>Offline</source>
-        <translation>לא מקושר</translation>
+        <translation>הנתק</translation>
     </message>
 </context>
 <context>
@@ -221,67 +221,67 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>לא ניתן לקבל נתיב thiết bị, לא ניתן לקבוע פתרון</translation>
+        <translation>לא ניתן לקבל מסלול ל thiết bị, לא ניתן להגדיר פתרון</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>ה실패 לשוב להתחבר ל thiết bị</translation>
+        <translation>فشل ב إعادة פתיחה של thiết bị</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>ה실패 לקבוע פתרון מבוקש</translation>
+        <translation>فشل בה установка פתרון הדרישה</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>ה실패 לتعيين תצוגת זיכרון</translation>
+        <translation>המיפוי של זיכרון נכשלה</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation> thiết bị לא הוגדר בצורה נכונה</translation>
+        <translation>ה thiết bị לא הוגדר בצורה נכונה</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>ה실패 להגדרת ב퍼</translation>
+        <translation>ה התחייבות של ב퍼 נכשלה</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>ה실패 להגדרת ב퍼 מחדש</translation>
+        <translation>ה إعادة התחייבות של ב퍼 נכשלה</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>ה실패 להכנסה של ב퍼: %1</translation>
+        <translation>فشل ב הוספת ב퍼 ל hàng: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>ה실패 להתחיל זרם וידאו: %1</translation>
+        <translation>فشل בה הפעלה של זרימת וידאו: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation> thiết bị לא הוגדר או מסמך תיאום לא תקין</translation>
+        <translation>ה thiết bị לא הוגדר או שהסימן של קובץ לא תקין</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>ה실패 להתחיל זרם וידאו, לא ניתן לקלוט</translation>
+        <translation>فشل בה הפעלה של זרימת וידאו, הזיהוי נכשלה</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>ה실패 לקבל מסגרת תמונה</translation>
+        <translation>فشل בה קבלת מסגרת תמונה</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>ה실패 לקלוט תמונה תקינה, אנא בדוק את חיבור המצלמה</translation>
+        <translation>فشل בה זיהוי תמונה תקינה, אנא בדוק את חיבור הקAMERA</translation>
     </message>
 </context>
 </TS>

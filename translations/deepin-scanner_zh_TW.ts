@@ -25,6 +25,18 @@
 <context>
     <name>MainWindow</name>
     <message>
+        <source>Failed to initialize SANE backend.
+Please ensure SANE libraries (e.g. sane-backends) are installed and you may need to configure permissions (e.g. add user to &apos;scanner&apos; or &apos;saned&apos; group).
+Scanner functionality will be unavailable.</source>
+        <translation type="vanished">初始化SANE後端失敗。
+請確保已安裝SANE庫(如sane-backends)，您可能需要配置權限(如將用戶添加到&apos;scanner&apos;或&apos;saned&apos;組)。
+掃描功能將不可用。</translation>
+    </message>
+    <message>
+        <source>Scanner error</source>
+        <translation type="vanished">掃描器錯誤</translation>
+    </message>
+    <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
         <translation>掃描管理器</translation>
@@ -73,6 +85,10 @@
         <translation>掃描</translation>
     </message>
     <message>
+        <source>Save</source>
+        <translation type="vanished">儲存</translation>
+    </message>
+    <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
         <translation>掃描模式</translation>
@@ -81,6 +97,10 @@
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
         <translation>平板掃描</translation>
+    </message>
+    <message>
+        <source>Duplex</source>
+        <translation type="vanished">雙面掃描</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
@@ -101,6 +121,10 @@
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
         <translation>黑白</translation>
+    </message>
+    <message>
+        <source>ADF</source>
+        <translation type="vanished">ADF</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
@@ -177,6 +201,10 @@
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
         <translation>掃描儀設備</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="vanished">重新整理</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>

@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Scanner Manager ni toolê ku scannerê li tayebînê scanning devices</translation>
+        <translation>Scanner Manager ku toola scanner ku taybetî scanerên xwe deyî</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>ئەمە بارکردنەوە</translation>
+        <translation>Ku dîsa</translation>
     </message>
 </context>
 <context>
@@ -32,12 +32,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>ئەمە devices بارکردنەوە</translation>
+        <translation>Ku dîsa devîs</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>ئەمە device ئەچوو</translation>
+        <translation>Ku dîsa devîs</translation>
     </message>
 </context>
 <context>
@@ -45,22 +45,22 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>ئەمە Scan Settings</translation>
+        <translation>Çîrakên Scan</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>ئەمە Resolution</translation>
+        <translation>Kêmkirina resolution</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>Color Mode</translation>
+        <translation>Kêmkirina modê color</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>Image Format</translation>
+        <translation>Formatê wisa</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
@@ -70,17 +70,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>View Scanned Image</translation>
+        <translation>Dîsa wisa scan</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>ئەمە Scan history بەشدارد</translation>
+        <translation>Tîraka scan kîrîn dîsa wisa dêwî</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>Scan Mode</translation>
+        <translation>Modê scan</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
@@ -90,7 +90,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation>Video Format</translation>
+        <translation>Formatê video</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
@@ -110,22 +110,22 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>Device نەدە بەرەتووە</translation>
+        <translation>Devîs taybetî ne</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>Preview ئەچوو</translation>
+        <translation>Ku dîsa preview</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>Device Preview نەدە بەرەتووە</translation>
+        <translation>Preview devîs taybetî ne</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>Preview image نەدە</translation>
+        <translation>Preview wisa taybetî ne</translation>
     </message>
 </context>
 <context>
@@ -139,33 +139,33 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>ئەمە scanner devices نەدە. چەمە چارەسەزیەت:
-1. Scanner بەرەتووە و ئەچوو
-2. Command چاک کردن: sudo gpasswd -a $USER scanner
+        <translation>Scanner devîs taybetî ne. Çîrakên posîbel:
+1. Hesab kirina scanner bi taybetî anî û bi taybetî ne
+2. Hesab kirina komand: sudo gpasswd -a $USER scanner
 3. Restart SANE: sudo service saned restart
-4. Driver package چاک کردن: sudo apt-get install libsane-extras
-5. Network scanners بۆ چارەسەزیەت network configuration چاک کردن
-6. USB cable چاک کردن یا computer restart</translation>
+4. Instalê paketê driver: sudo apt-get install libsane-extras
+5. Bi scannerên reş, hesab kirina konfigurasyonê reş
+6. Reconnect USB anî û restart komputer</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Scanner نەدە بەرەتووە</translation>
+        <translation>Scanner taybetî ne</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Scanner parameters چاک کردنەوە: %1</translation>
+        <translation>Kêmkirina parametreyên scanner: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Scan چاک کردنەوە: %1</translation>
+        <translation>Kêmkirina scan: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Test image چاک کردنەوە</translation>
+        <translation>Kêmkirina wisa test</translation>
     </message>
 </context>
 <context>
@@ -173,7 +173,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>Scanner Devices</translation>
+        <translation>Scanner devîs</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
@@ -183,22 +183,22 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>بەرەوە</translation>
+        <translation>بەرەق</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation>کامەرا</translation>
+        <translation>Webcam</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>هەنی دەوەمەت پەيدا کراوە</translation>
+        <translation>ئەگەر ھەیەتی بەرەق نەدۆزەن</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
         <source>Model: %1</source>
-        <translation>مۆدێل: %1</translation>
+        <translation>موديل: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="153"/>
@@ -208,12 +208,12 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>سکان کردن</translation>
+        <translation>سەن</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
         <source>Offline</source>
-        <translation>Offline</translation>
+        <translation>ئاڤلاین</translation>
     </message>
 </context>
 <context>
@@ -221,67 +221,67 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>دەوەمەت پەت نەگەیتی بکەردنەوە، رەسۆلۆشۆن نەگەیتی بکەردنەوە</translation>
+        <translation>ئەگەر دەوەت بەرەق ھەرەتی بەرەق نەدۆزەن، ھەرەتی بەرەق ھەرەتی بەرەق نەدۆزەن</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>دەوەمەت بەرەوە کەردنەوە بەناوبەستی</translation>
+        <translation>ئەگەر دەوەت بەرەق ھەرەتی بەرەق نەدۆزەن</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>رەسۆلۆشۆنە کەردنەوە بەناوبەستی</translation>
+        <translation>ئەگەر دەوەت بەرەق ھەرەتی بەرەق نەدۆزەن</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>مەمۆری ڤەمەپەینگ بەناوبەستی</translation>
+        <translation>ئەگەر دەوەت بەرەق ھەرەتی بەرەق نەدۆزەن</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>دەوەمەت چەک کردنەوە بەناوبەستی</translation>
+        <translation>بەرەق ھەرەتی بەرەق نەدۆزەن یا دەوەت بەرەق ھەرەتی بەرەق نەدۆزەن</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>بەفر چەک کردنەوە بەناوبەستی</translation>
+        <translation>بەرەق ھەرەتی بەرەق نەدۆزەن یا دەوەت بەرەق ھەرەتی بەرەق نەدۆزەن</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>بەفر چەک کردنەوە دووبارە بەناوبەستی</translation>
+        <translation>بەرەق ھەرەتی بەرەق نەدۆزەن یا دەوەت بەرەق ھەرەتی بەرەق نەدۆزەن</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>بەفر بەناوبەستی بەناوبەستی: %1</translation>
+        <translation>بەرەق ھەرەتی بەرەق نەدۆزەن: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>ڤیدیۆ ستريم بەناوبەستی: %1</translation>
+        <translation>بەرەق ھەرەتی بەرەق نەدۆزەن: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>دەوەمەت چەک کردنەوە یا فایل دەسکریتە کەردنەوە بەناوبەستی</translation>
+        <translation>بەرەق ھەرەتی بەرەق نەدۆزەن یا فايل دسکریپتور ھەرەتی بەرەق نەدۆزەن</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>ڤیدیۆ ستريم بەناوبەستی، چەک کردنەوە بەناوبەستی</translation>
+        <translation>بەرەق ھەرەتی بەرەق نەدۆزەن، ھەرەتی بەرەق نەدۆزەن</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>ئەیمەج فرەم بەناوبەستی</translation>
+        <translation>ئەگەر دەوەت بەرەق ھەرەتی بەرەق نەدۆزەن</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>ئەیمەج چەک کردنەوە بەناوبەستی، لە بەرەوە کەردنەوە دووبارە چەک کردنەوە بکەردنەوە</translation>
+        <translation>ئەگەر دەوەت بەرەق ھەرەتی بەرەق نەدۆزەن، لەوە بەرەق ھەرەتی بەرەق نەدۆزەن</translation>
     </message>
 </context>
 </TS>

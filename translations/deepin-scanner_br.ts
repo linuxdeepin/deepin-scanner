@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Scanner Manager هو أداة تدعم العديد من أجهزة التصوير</translation>
+        <translation>Scanner Manager a un arlazh de scanner ki s&apos;apòs un arlazh de scanners</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>جار التحميل...</translation>
+        <translation>Loading...</translation>
     </message>
 </context>
 <context>
@@ -32,12 +32,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>جار تحميل الأجهزة...</translation>
+        <translation>Loading devices...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>جار فتح الجهاز...</translation>
+        <translation>Opening device...</translation>
     </message>
 </context>
 <context>
@@ -45,87 +45,87 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>إعدادات التصوير</translation>
+        <translation>Scan Settings</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>الدقة</translation>
+        <translation>Resolution</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>وضع اللون</translation>
+        <translation>Color Mode</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>صيغة الصورة</translation>
+        <translation>Image Format</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>التصوير</translation>
+        <translation>Scan</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>عرض الصورة الملتقطة</translation>
+        <translation>View Scanned Image</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>ستظهر سجل التصوير هنا</translation>
+        <translation>A histori de scanners a s&apos;apòs mostrat a borto</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>وضع التصوير</translation>
+        <translation>Scan Mode</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>الجدول</translation>
+        <translation>Flatbed</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation>صيغة الفيديو</translation>
+        <translation>Video Format</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Color</source>
-        <translation>اللون</translation>
+        <translation>Color</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>الظلام بالألوان</translation>
+        <translation>Grayscale</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>أسود وأبيض</translation>
+        <translation>Black White</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>الجهاز غير مُحَدَّث</translation>
+        <translation>A dispositiv a non es iniciat</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>جار إعداد معاينة...</translation>
+        <translation>Iniciat a previzion...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>معاينة الجهاز غير متاحة</translation>
+        <translation>A previzion de dispositiv a non es disponibil</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>لا توجد صورة معاينة</translation>
+        <translation>No preview image</translation>
     </message>
 </context>
 <context>
@@ -139,33 +139,33 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>لم يتم العثور على أي أجهزة ماسح. حلول ممكنة:
-1. تأكد من أن الجهاز متصل ومُفعَّل
-2. أجرِ الأمر: sudo gpasswd -a $USER scanner
-3. أعد تشغيل SANE: sudo service saned restart
-4. تثبيت حزمة برنامج التشغيل المطلوبة: sudo apt-get install libsane-extras
-5. بالنسبة لأجهزة الماسح عبر الشبكة، تحقق من إعدادات الشبكة
-6. إعادة توصيل كابل USB أو إعادة تشغيل الكمبيوتر</translation>
+        <translation>Nan a trobat de dispositiv de scanner. Solucions posiblas:
+1. Kontrola se a scanner es konektat e akativat
+2. Executa komandu: sudo gpasswd -a $USER scanner
+3. Reiniçia SANE: sudo service saned restart
+4. Instalat paketu de driver necesari: sudo apt-get install libsane-extras
+5. Pata scanner de retea, kontrola konfigurashon de retea
+6. Re-konektat kabelu USB o reiniçia komputador</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>لم يتم فتح الماسح</translation>
+        <translation>Scanner not opened</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>فشل في الحصول على معايير الماسح: %1</translation>
+        <translation>A fallat de obtenir parametris de scanner: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>فشل في بدء التصوير: %1</translation>
+        <translation>A fallat de iniçiar scanners: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>فشل في حفظ الصورة التجريبية</translation>
+        <translation>A fallat de salvat imatge de test</translation>
     </message>
 </context>
 <context>
@@ -173,47 +173,47 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>أجهزة الماسح</translation>
+        <translation>Scanner Devices</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>الماسح</translation>
+        <translation>Scanner</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>الوضع الخامل</translation>
+        <translation>Arestad</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation>الكاميرا الخلفية</translation>
+        <translation>Kamera</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>لم يتم العثور على أجهزة</translation>
+        <translation>Nan dispositivos a gant</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
         <source>Model: %1</source>
-        <translation>النموذج: %1</translation>
+        <translation>Modelo: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="153"/>
         <source>Status: %1</source>
-        <translation>الحالة: %1</translation>
+        <translation>Estado: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>المسح</translation>
+        <translation>Scan</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
         <source>Offline</source>
-        <translation>غير متصل</translation>
+        <translation>Offline</translation>
     </message>
 </context>
 <context>
@@ -221,67 +221,67 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>لا يمكن الحصول على مسار الجهاز، لا يمكن تعديل الدقة</translation>
+        <translation>Nan pòt obtenher caminh dispositivos, nan pòt definher resolusion</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>فشل إعادة فتح الجهاز</translation>
+        <translation>Faliu obtenher reabrir dispositivos</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>فشل في تعديل الدقة المطلوبة</translation>
+        <translation>Faliu definher resolusion demandad</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>فشل تعيين خريطة الذاكرة</translation>
+        <translation>Faliu mapad memoire</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>لم يتم تهيئة الجهاز بشكل صحيح</translation>
+        <translation>Dispositivos nan pòt inicialisad korretamente</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>فشل تهيئة الع 缓冲区</translation>
+        <translation>Faliu inicialisad buffer</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>فشل إعادة تهيئة الع 缓冲区</translation>
+        <translation>Faliu reinitialisad buffer</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>فشل إدراج الع 缓冲区 في الطابور: %1</translation>
+        <translation>Faliu enfileir buffer: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>فشل بدء تدفق الفيديو: %1</translation>
+        <translation>Faliu iniciad estram video: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>لم يتم تهيئة الجهاز أو مسار ملف غير صحيح</translation>
+        <translation>Dispositivos nan pòt inicialisad ou descriptor arquiu invalid</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>فشل بدء تدفق الفيديو، فشل التقاط الصورة</translation>
+        <translation>Faliu iniciad estram video, captad faliu</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>فشل الحصول على إطارات الصورة</translation>
+        <translation>Faliu obtenher quadro imatge</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>فشل في التقاط صورة صالحة، الرجاء التحقق من اتصال الكاميرا</translation>
+        <translation>Faliu captad imatge valid, por favor verifikad konexiun kamera</translation>
     </message>
 </context>
 </TS>

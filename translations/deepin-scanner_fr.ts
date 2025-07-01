@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Scanner Manager est un outil de numérisation qui prend en charge divers appareils de numérisation</translation>
+        <translation>Scanner Manager est un outil de scan qui prend en charge divers dispositifs de scan</translation>
     </message>
 </context>
 <context>
@@ -32,12 +32,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>Chargement des appareils...</translation>
+        <translation>Chargement des dispositifs...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>Ouverture de l'appareil...</translation>
+        <translation>Ouverture du dispositif...</translation>
     </message>
 </context>
 <context>
@@ -45,7 +45,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>Paramètres de numérisation</translation>
+        <translation>Paramètres de scan</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
@@ -60,27 +60,27 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>Format d'image</translation>
+        <translation>Format d&apos;image</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>Numériser</translation>
+        <translation>Scanner</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>Voir l'image numérisée</translation>
+        <translation>Afficher l&apos;image scannée</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>L'historique des numérisations s'affichera ici</translation>
+        <translation>L&apos;historique des scans s&apos;affichera ici</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>Mode de numérisation</translation>
+        <translation>Mode de scan</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
@@ -110,7 +110,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>L'appareil n'est pas initialisé</translation>
+        <translation>Le dispositif n&apos;est pas initialisé</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
@@ -120,7 +120,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>Aucune prévisualisation disponible pour l'appareil</translation>
+        <translation>Aucune prévisualisation du dispositif disponible</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
@@ -139,33 +139,33 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>Aucun appareil de numérisation trouvé. Solutions possibles : 
-1. Vérifiez que le numérisateur est connecté et allumé 
-2. Exécutez la commande : sudo gpasswd -a $USER scanner 
-3. Redémarrez SANE : sudo service saned restart 
-4. Installez le package de pilote requis : sudo apt-get install libsane-extras 
-5. Pour les numérisateurs réseau, vérifiez la configuration réseau 
-6. Reconnectez le câble USB ou redémarrez l'ordinateur</translation>
+        <translation>Aucun périphérique de scan trouvé. Solutions possibles : 
+1. Vérifiez que le scanneur est connecté et allumé
+2. Exécutez la commande : sudo gpasswd -a $USER scanner
+3. Redémarrez SANE : sudo service saned restart
+4. Installez le package pilote requis : sudo apt-get install libsane-extras
+5. Pour les scanneurs réseau, vérifiez la configuration réseau
+6. Reconnectez le câble USB ou redémarrez l&apos;ordinateur</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Le numérisateur n'est pas ouvert</translation>
+        <translation>Le scanneur n&apos;est pas ouvert</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Échec de la récupération des paramètres du numérisateur : %1</translation>
+        <translation>Échec de la récupération des paramètres du scanneur : %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Échec du démarrage de la numérisation : %1</translation>
+        <translation>Échec du démarrage du scan : %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Échec de l'enregistrement de l'image de test</translation>
+        <translation>Échec de l&apos;enregistrement de l&apos;image de test</translation>
     </message>
 </context>
 <context>
@@ -173,12 +173,12 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>Appareils de numérisation</translation>
+        <translation>Périphériques de scan</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>Numérisateur</translation>
+        <translation>Scanneur</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
@@ -188,7 +188,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation>Caméra web</translation>
+        <translation>Caméra</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
@@ -221,42 +221,42 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>Impossible d'obtenir le chemin de l'appareil, impossible de définir la résolution</translation>
+        <translation>Impossible d&apos;obtenir le chemin de l&apos;appareil, impossible de définir la résolution</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>Échec du redémarrage de l'appareil</translation>
+        <translation>Échec de la réouverture de l&apos;appareil</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>Échec de la définition de la résolution demandée</translation>
+        <translation>Échec de la mise en place de la résolution demandée</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>Échec de la carte mémoire</translation>
+        <translation>Échec de la cartographie de la mémoire</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>L'appareil n'a pas été correctement initialisé</translation>
+        <translation>L&apos;appareil n&apos;est pas correctement initialisé</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>Échec de l'initialisation du tampon</translation>
+        <translation>Échec de l&apos;initialisation du tampon</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>Échec de la reinitialisation du tampon</translation>
+        <translation>Échec de la réinitialisation du tampon</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Échec d'ajout du tampon dans la file d'attente: %1</translation>
+        <translation>Échec d&apos;ajout du tampon dans la file d&apos;attente: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
@@ -266,7 +266,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>L'appareil n'est pas initialisé ou le descripteur de fichier est invalide</translation>
+        <translation>L&apos;appareil n&apos;est pas initialisé ou le descripteur de fichier est invalide</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
@@ -276,12 +276,12 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>Échec d'obtenir le cadre d'image</translation>
+        <translation>Échec d&apos;obtenir le cadre d&apos;image</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Échec de l'obtention d'une image valide, veuillez vérifier la connexion de la caméra</translation>
+        <translation>Échec de la capture d&apos;une image valide, veuillez vérifier la connexion de la caméra</translation>
     </message>
 </context>
 </TS>

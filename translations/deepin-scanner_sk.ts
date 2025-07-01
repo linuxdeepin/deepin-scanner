@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Správca skenerov je nástroj na skenovanie, ktorý podporuje rôzne zariadenia na skenovanie</translation>
+        <translation>Scanner Manager je nástroj na skenovanie, ktorý podporuje rôzne zariadenia na skenovanie</translation>
     </message>
 </context>
 <context>
@@ -27,7 +27,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>Správca skenerov</translation>
+        <translation>Scanner Manager</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
@@ -60,12 +60,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>Formát obrázka</translation>
+        <translation>Formát obrázku</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>Skenovať</translation>
+        <translation>Skenovanie</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
@@ -85,7 +85,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>Plochý</translation>
+        <translation>Plochá deska</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
@@ -100,12 +100,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>Šedá stupňovita</translation>
+        <translation>Šedé tóny</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>Čiernobiela</translation>
+        <translation>Čiernobiele</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
@@ -115,7 +115,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>Inicializovanie náhľadu...</translation>
+        <translation>Inicializácia náhľadu...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
@@ -125,7 +125,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>Žiadny náhľad obrázka</translation>
+        <translation>Žiadny náhľadový obrázok</translation>
     </message>
 </context>
 <context>
@@ -139,33 +139,33 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>Nenašli sa žiadne skenerovacie zariadenia. Možné riešenia:
-1. Skontrolujte, či je skener pripojený a zapnutý
+        <translation>Nenašli sa žiadne zariadenia na skenovanie. Možné riešenia:
+1. Uistite sa, že skener je pripojený a zapnutý
 2. Spustite príkaz: sudo gpasswd -a $USER scanner
-3. Restartujte SANE: sudo service saned restart
-4. Nainštalujte potrebný balíčok s vývojovými modulami: sudo apt-get install libsane-extras
-5. Pre sieťové skenerovacie zariadenia skontrolujte konfiguráciu siete
-6. Opakujte pripojenie USB káble alebo restartujte počítač</translation>
+3. Opustite SANE: sudo service saned restart
+4. Nainštalujte potrebný balíček s vývojovými programami: sudo apt-get install libsane-extras
+5. Pre sieťové skenery skontrolujte konfiguráciu siete
+6. Opäť pripojte USB kábel alebo restartujte počítač</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Skener nie je otvorený</translation>
+        <translation>Skenovanie nie je otvorené</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Nie je možné získať parametre skenera: %1</translation>
+        <translation>Nepodarilo sa získať parametre skenera: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Nie je možné spustiť skenovanie: %1</translation>
+        <translation>Nepodarilo sa spustiť skenovanie: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Nie je možné uložiť testový obrázok</translation>
+        <translation>Nepodarilo sa uložiť testový obrázok</translation>
     </message>
 </context>
 <context>
@@ -173,17 +173,17 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>Skenerovacie zariadenia</translation>
+        <translation>Zariadenia na skenovanie</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>Skener</translation>
+        <translation>Skenovanie</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>Nečinnosť</translation>
+        <translation>Nečinný</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
@@ -221,17 +221,17 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>Nemôžem získať cestu k zariadeniu, nemôžem nastaviť rozlíšenie</translation>
+        <translation>Nepodarilo sa získať cestu k zariadeniu, nie je možné nastaviť rozlíšenie</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>Zariadenie sa nepodarilo znovu otvoriť</translation>
+        <translation>Nepodarilo sa znovu otvoriť zariadenie</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>Nepodarilo sa nastaviť žiadané rozlíšenie</translation>
+        <translation>Nepodarilo sa nastaviť požadované rozlíšenie</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
@@ -241,7 +241,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>Zariadenie sa nenastavilo správne</translation>
+        <translation>Zariadenie nie je správne inicializované</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
@@ -251,37 +251,37 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>Ponovná inicializácia bufferu zlyhalo</translation>
+        <translation>Znovu inicializácia bufferu zlyhalo</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Nepodarilo sa vložiť buffer do frontu: %1</translation>
+        <translation>Nepodarilo sa zaplánovať buffer: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>Nepodarilo sa spustiť video stream: %1</translation>
+        <translation>Nepodarilo sa spustiť video prúd: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Zariadenie sa nenastavilo alebo neplatný popisovací súbor</translation>
+        <translation>Zariadenie nie je inicializované alebo neplatný súborový deskriptor</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Nepodarilo sa spustiť video stream, zachytávanie zlyhalo</translation>
+        <translation>Nepodarilo sa spustiť video prúd, zachytávanie zlyhalo</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>Nepodarilo sa získať obrázok v rámci</translation>
+        <translation>Nepodarilo sa získať obrazový rám</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Nepodarilo sa zachytiť platný obrázok, skontrolujte pripojenie kameře</translation>
+        <translation>Nepodarilo sa zachytiť platný obraz, skontrolujte pripojenie kamery</translation>
     </message>
 </context>
 </TS>

@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>Учитавање...</translation>
+        <translation>Učitavanje...</translation>
     </message>
 </context>
 <context>
@@ -32,12 +32,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>Учитавање уређаја...</translation>
+        <translation>Učitavanje uređaja...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>Отварање уређаја...</translation>
+        <translation>Otvorenje uređaja...</translation>
     </message>
 </context>
 <context>
@@ -45,87 +45,87 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>Поставке скенирања</translation>
+        <translation>Postavke skeniranja</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>Резолуција</translation>
+        <translation>Razlomak</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>Режим боја</translation>
+        <translation>Način boje</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>Формат слике</translation>
+        <translation>Format slike</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>Скенирај</translation>
+        <translation>Skeniraj</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>Погледај скенирани слику</translation>
+        <translation>Pogledaj skeniranu sliku</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>Историја скенирања ће бити приказана овде</translation>
+        <translation>Povijest skeniranja će biti prikazana ovdje</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>Режим скенирања</translation>
+        <translation>Način skeniranja</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>Плочаста</translation>
+        <translation>Ploča</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation>Формат видеа</translation>
+        <translation>Video format</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Color</source>
-        <translation>Боја</translation>
+        <translation>Boja</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>Сјајно</translation>
+        <translation>Svetlozeleni</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>Бела и црна</translation>
+        <translation>Crno-bijelo</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>Уређај није иницијализован</translation>
+        <translation>Uređaj nije inicijalizovan</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>Иницијализација прегледа...</translation>
+        <translation>Inicijalizacija pretrage...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>Преглед уређаја није доступан</translation>
+        <translation>Pregled uređaja nije dostupan</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>Нема прегледне слике</translation>
+        <translation>Nema pretrage slike</translation>
     </message>
 </context>
 <context>
@@ -139,33 +139,33 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>Нису пронађени уређаји за скенер. Возможни решења:
-1. Осигурајте да је скенер прикључен и укључен
-2. Покрените команду: sudo gpasswd -a $USER scanner
-3. Поновити покретање SANE: sudo service saned restart
-4. Инсталирајте потребни дриверски пакет: sudo apt-get install libsane-extras
-5. За мрежне скенере, проверите мрежну конфигурацију
-6. Поновите прикључење USB кабла или поновите покретање рачунара</translation>
+        <translation>Nije pronađen niti jedan uređaj za skeniranje. Moguće rješenja:
+1. Osigurajte da je skener povezan i uključen
+2. Pokrenite komandu: sudo gpasswd -a $USER scanner
+3. Ponovno pokrenite SANE: sudo service saned restart
+4. Instalirajte potreban paket za vođenje: sudo apt-get install libsane-extras
+5. Za mrežne skenere, provjerite konfiguraciju mreže
+6. Ponovno povežite USB kabl ili ponovno pokrenite računalo</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Скенер није отворен</translation>
+        <translation>Skenirajte uređaj</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Неуспешно добијање параметара скенера: %1</translation>
+        <translation>Nije moguće dobiti parametre skenera: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Неуспешно покретање скеновања: %1</translation>
+        <translation>Nije moguće pokrenuti skeniranje: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Неуспешно сачувanje тест слике</translation>
+        <translation>Nije moguće sačuvati test sliku</translation>
     </message>
 </context>
 <context>
@@ -173,17 +173,17 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>Уређаји за скенер</translation>
+        <translation>Uređaji za skeniranje</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>Скенер</translation>
+        <translation>Skeniraj</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>Učestvo</translation>
+        <translation>Neaktivno</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
@@ -193,7 +193,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>Nijedan uređaj nije pronađen</translation>
+        <translation>Nema uređaja</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
@@ -208,7 +208,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>Sken</translation>
+        <translation>Skeniranje</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
@@ -221,22 +221,22 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>Nije moguće dobiti putanju uređaja, ne može se postaviti rezolucija</translation>
+        <translation>Ne može se dobiti put do uređaja, ne može se postaviti rezolucija</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>Nije moguće ponovno otvoriti uređaj</translation>
+        <translation>Neuspešno ponovno otvaranje uređaja</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>Nije moguće postaviti traženu rezoluciju</translation>
+        <translation>Neuspešno postavljanje tražene rezolucije</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>Pametno mapiranje nije uspelo</translation>
+        <translation>Neuspešno mapa memorije</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
@@ -246,42 +246,42 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>Inicijalizacija buffera nije uspela</translation>
+        <translation>Neuspešno inicijalizovanje buffera</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>Ponovna inicijalizacija buffera nije uspela</translation>
+        <translation>Neuspešno ponovno inicijalizovanje buffera</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Neuspesno dodavanje buffera u red: %1</translation>
+        <translation>Neuspešno dodavanje buffera u red: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>Neuspesno pokretanje video struje: %1</translation>
+        <translation>Neuspešno pokretanje video strima: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Uređaj nije inicijalizovan ili je nevažeći deskriptor datoteke</translation>
+        <translation>Uređaj nije inicijalizovan ili je nevalidan deskriptor fajla</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Neuspesno pokretanje video struje, prikupljanje podataka nije uspelo</translation>
+        <translation>Neuspešno pokretanje video strima, snimanje nije uspelo</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>Neuspesno dobijanje okvira slike</translation>
+        <translation>Neuspešno dobijanje okvira slike</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Neuspesno prikupljanje važeće slike, proverite veze sa kamerom</translation>
+        <translation>Neuspešno snimanje važeće slike, molimo proverite veze sa kamerom</translation>
     </message>
 </context>
 </TS>

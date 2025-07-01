@@ -6,12 +6,12 @@
     <message>
         <location filename="../src/main.cpp" line="34"/>
         <source>Deepin Scanner</source>
-        <translation>ឌែបីន សៀះនៅ</translation>
+        <translation>Deepin Scanner</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>មេនុំដែលប្រើដើម្បីសៀះនៅ និងគាំទ្រឧបករណ៍សៀះនៅ ច្រើនប្រភេទ</translation>
+        <translation>Scanner Manager គឺជាទម្រង់ប្រើប្រាស់សម្រាប់ការបញ្ជូនសំបុត្រ ដែលគាំទ្រឧបករណ៍បញ្ជូនច្រើនប្រភេទ</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>កំពុងផ្ទះ</translation>
+        <translation>កំពុងផ្ទេរ...</translation>
     </message>
 </context>
 <context>
@@ -27,17 +27,17 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>មេនុំសៀះនៅ</translation>
+        <translation>Scanner Manager</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>កំពុងផ្ទះឧបករណ៍</translation>
+        <translation>កំពុងផ្ទេរឧបករណ៍...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>កំពុងបើកឧបករណ៍</translation>
+        <translation>កំពុងបើកឧបករណ៍...</translation>
     </message>
 </context>
 <context>
@@ -45,52 +45,52 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>ការកំណត់ត្រាសៀះនៅ</translation>
+        <translation>ការកំណត់ត្រូវបញ្ជូន</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>ការកំណត់ត្រាសៀះនៅ</translation>
+        <translation>កម្រិតភាពល្អ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>ការកំណត់ត្រាអំពីពន្លឺ</translation>
+        <translation>ការបង្ហាញពណ៌</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>រูបแบบរាង</translation>
+        <translation>រាងរូបភាព</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>សៀះនៅ</translation>
+        <translation>បញ្ជូន</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>មើលរូបសៀះនៅ</translation>
+        <translation>បានបង្ហាញរូបភាពបញ្ជូន</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>ប្រវត្តិសៀះនៅនឹងត្រូវបានបង្ហាញនៅទីនេះ</translation>
+        <translation>ប្រវត្តិការបញ្ជូននឹងត្រូវបានបង្ហាញនៅទីនេះ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>ការសៀះនៅ</translation>
+        <translation>ការបញ្ជូនប្រភេទ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>ប្រព័ន្ធសៀះនៅ</translation>
+        <translation>តំបន់ក្រឡាត្រូវបញ្ជូន</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation>រូបរាងវីដេអូ</translation>
+        <translation>រាងវីដេអូ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
@@ -100,32 +100,32 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>ស្វែងរកពណ៌</translation>
+        <translation>បំបែកពណ៌</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>ពណ៌ខ្មៅ សีត</translation>
+        <translation>ពណ៌ខ្មៅនិងសีត</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>ឧបករណ៍មិនបានផ្ទះ</translation>
+        <translation>ឧបករណ៍មិនបានចាប់ផ្តើម</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>កំពុងផ្ទះរូបបញ្ញត្តិ...</translation>
+        <translation>កំពុងចាប់ផ្តើមតម្លាភាព...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>រូបបញ្ញត្តិឧបករណ៍មិនមាន</translation>
+        <translation>តម្លាភាពឧបករណ៍មិនមាន</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>គ្មានរូបបញ្ញត្តិ</translation>
+        <translation>គ្មានរូបភាពតម្លាភាពទេ</translation>
     </message>
 </context>
 <context>
@@ -139,33 +139,33 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>គ្មានឧបករណ៍សៀះនៅមិនមាន។ ដំណោះស្រាយអាចមាន៖
-1. សុំឱ្យសៀះនៅតភ្ជាប់និងបើកអេឡិចត្រូនិច
-2. បើកកម្មវិធី: sudo gpasswd -a $USER scanner
-3. បើកឡើងវិញ SANE: sudo service saned restart
-4. ដំឡើងកម្មវិធីប្រើបាន: sudo apt-get install libsane-extras
-5. សម្រាប់ឧបករណ៍សៀះនៅតាមបណ្តាញ សុំឱ្យពិនិត្យមើលការកំណត់ត្រាបណ្តាញ
-6. បើកឡើងវិញកាប់ USB ឬបើកឡើងវិញកុំពីរ</translation>
+        <translation>មិនទាន់រកឃើញឧបករណ៍បញ្ជូន។ ដំណោះស្រាយដែលអាចធ្វើបាន៖
+1. ពិនិត្យមើលថាប្រព័ន្ធបញ្ជូនត្រូវបានភ្ជាប់និងបើកដំណើរការ
+2. បញ្ជូនคำពាក្យ៖ sudo gpasswd -a $USER scanner
+3. បើកឡើងវិញ SANE៖ sudo service saned restart
+4. ដំឡើងផ្នែកបន្ថែមប្រមាណ់៖ sudo apt-get install libsane-extras
+5. សម្រាប់ឧបករណ៍បញ្ជូនប្រព័ន្ធមើលឃើញ សិក្សាប្រព័ន្ធអ៊ីនធឺណែត
+6. ភ្ជាប់ឡើងវិញរន្ធស៊ីអែលឬបើកឡើងវិញកុំព្យូទ័រ</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>មេនុំសៀះនៅមិនបានបើក</translation>
+        <translation>មិនបានបើកប្រព័ន្ធបញ្ជូន</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>បានបញ្ចប់ការទទួលបានការកំណត់ត្រាប្រព័ន្ធសៀះនៅ: %1</translation>
+        <translation>មិនអាចទទួលបានបរិមាណប្រព័ន្ធបញ្ជូន៖ %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>បានបញ្ចប់ការចាប់ផ្ដើមសៀះនៅ: %1</translation>
+        <translation>មិនអាចចាប់ផ្តើមការបញ្ជូន៖ %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>បានបញ្ចប់ការរក្សារូបសៀះនៅតំបន់ធ្វើបាន</translation>
+        <translation>មិនអាចរក្សារូបភាពសាកល្បងទេ</translation>
     </message>
 </context>
 <context>
@@ -173,22 +173,22 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>ឧបករណ៍សៀះនៅ</translation>
+        <translation>ឧបករណ៍បញ្ជូន</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>សៀះនៅ</translation>
+        <translation>ប្រព័ន្ធបញ្ជូន</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>ស្តាប់</translation>
+        <translation>ផ្សារ</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation>កាវេប៊េម</translation>
+        <translation>កាមេរ៉ាថតរូប</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
@@ -198,7 +198,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
         <source>Model: %1</source>
-        <translation>មូដែល: %1</translation>
+        <translation>ម៉ូដែល: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="153"/>
@@ -208,12 +208,12 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>ស្កែន</translation>
+        <translation>ការថតរូប</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
         <source>Offline</source>
-        <translation>ដែលមិនមានការស្តាប់</translation>
+        <translation>បន្ថែម</translation>
     </message>
 </context>
 <context>
@@ -221,67 +221,67 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>មិនអាចទទួលបានផ្លូវឧបករណ៍ និងមិនអាចកំណត់កម្រិតដែលបានស្នើសុំ</translation>
+        <translation>មិនអាចទាញយកផ្លូវឧបករណ៍បាន ដូច្នេះមិនអាចកំណត់កម្រិតភាពស្មុគស្មាញបាន</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>បានបរាជ័យក្នុងការបើកឡើងវិញឧបករណ៍</translation>
+        <translation>មិនអាចបើកឧបករណ៍ឡើងវិញបាន</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>បានបរាជ័យក្នុងការកំណត់កម្រិតដែលបានស្នើសុំ</translation>
+        <translation>មិនអាចកំណត់កម្រិតភាពស្មុគស្មាញដែលបានសុំបាន</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>បានបរាជ័យក្នុងការធ្វើការតភ្ជាប់ផ្ទះនៃផ្ទះនៃអារម្មណ៍</translation>
+        <translation>ការតភ្ជាប់ទំនាក់ទំនងមួយចំនួនបានបរាជ័យ</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>ឧបករណ៍មិនបានបង្កើតឡើងដោយត្រឹមត្រូវ</translation>
+        <translation>ឧបករណ៍មិនត្រូវបានអភិវឌ្ឍន៍ត្រឹមត្រូវ</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>បានបរាជ័យក្នុងការបង្កើតបន្ទះកម្រិត</translation>
+        <translation>ការអភិវឌ្ឍន៍បដិវត្តន៍បានបរាជ័យ</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>បានបរាជ័យក្នុងការបង្កើតឡើងវិញបន្ទះកម្រិត</translation>
+        <translation>ការអភិវឌ្ឍន៍បដិវត្តន៍ឡើងវិញបានបរាជ័យ</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>បានបរាជ័យក្នុងការបញ្ចូលបន្ទះកម្រិត: %1</translation>
+        <translation>មិនអាចបញ្ចូលបដិវត្តន៍ទៅក្នុងសំណុំបដិវត្តន៍បាន: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>បានបរាជ័យក្នុងការបើកសារបញ្ចូលវីដេអូ: %1</translation>
+        <translation>មិនអាចបើកសារធាតុវីដេអូបាន: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>ឧបករណ៍មិនបានបង្កើតឡើង ឬមានអាគុយនៃឯកសារដែលមិនប្រក្រត់</translation>
+        <translation>ឧបករណ៍មិនត្រូវបានបើក ឬមានសេចក្តីសម្គាល់ឯកសារមិនត្រឹមត្រូវ</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>បានបរាជ័យក្នុងការបើកសារបញ្ចូលវីដេអូ និងបានបរាជ័យក្នុងការបញ្ចូលរូបថត</translation>
+        <translation>មិនអាចបើកសារធាតុវីដេអូបាន និងការបញ្ចូលរូបថតបានបរាជ័យ</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>បានបរាជ័យក្នុងការទទួលបានរូបថត</translation>
+        <translation>មិនអាចទាញយករូបថតបាន</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>បានបរាជ័យក្នុងការបញ្ចូលរូបថតដែលប្រក្រត់ សូមពិនិត្យមើលការតភ្ជាប់កាវេប៊េម</translation>
+        <translation>មិនអាចបញ្ចូលរូបថតមានតំលៃសម្រាប់បាន សូមពិនិត្យមើលការតភ្ជាប់ទៅកាមេរ៉ា</translation>
     </message>
 </context>
 </TS>

@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Scanner Manager е приложение за скенери, които поддържа различни видове скенери</translation>
+        <translation>Scanner Manager е приложение за управление на скенерите, което поддържа различни скенери</translation>
     </message>
 </context>
 <context>
@@ -37,7 +37,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>Отваряне на устройството...</translation>
+        <translation>Отваряне на устройство...</translation>
     </message>
 </context>
 <context>
@@ -45,7 +45,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>Настройки за скенери</translation>
+        <translation>Настройки за сканиране</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
@@ -55,7 +55,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>Цветен режим</translation>
+        <translation>Режим на цвят</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
@@ -70,12 +70,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>Преглед на скенереното изображение</translation>
+        <translation>Преглед на сканирания образ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>Историята на скенераните файлове ще бъде показана тук</translation>
+        <translation>Историята на сканирането ще бъде показвана тук</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
@@ -85,7 +85,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>Плоска повърхност</translation>
+        <translation>Плоско</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
@@ -95,17 +95,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Color</source>
-        <translation>Цветен</translation>
+        <translation>Цвят</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>Сиво-бял</translation>
+        <translation>Цветност</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>Черно-бял</translation>
+        <translation>Черно-бяло</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
@@ -140,12 +140,12 @@
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
         <translation>Не са намерени скенери. Възможни решения:
-1. Проверете дали скенера е свързан и включен
+1. Уверете се, че скенерът е свързан и включен
 2. Изпълнете командата: sudo gpasswd -a $USER scanner
 3. Пуснете SANE отново: sudo service saned restart
 4. Инсталирайте необходимия драйвер: sudo apt-get install libsane-extras
-5. За мрежеви скенери проверете мрежовата конфигурация
-6. Повторно свържете USB кабела или рестартирайте компютъра</translation>
+5. За мрежови скенери проверете мрежовата конфигурация
+6. Повторно свържете кабела или рестартирайте компютъра</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
@@ -155,17 +155,17 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Неуспешно получаване на параметри на скенера: %1</translation>
+        <translation>Грешка при получаване на параметрите на скенера: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Неуспешно стартиране на сканиране: %1</translation>
+        <translation>Грешка при стартиране на сканирането: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Неуспешно запазване на изображението за тест</translation>
+        <translation>Грешка при запазване на тестовото изображение</translation>
     </message>
 </context>
 <context>
@@ -183,7 +183,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>Неактивно</translation>
+        <translation>Идилно</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
@@ -193,7 +193,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>Няма намерени устройства</translation>
+        <translation>Няма устройства</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
@@ -213,7 +213,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
         <source>Offline</source>
-        <translation>Офлайн</translation>
+        <translation>Оффлайн</translation>
     </message>
 </context>
 <context>
@@ -226,7 +226,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>Неуспешно възстановяване на устройството</translation>
+        <translation>Неуспешно отваряне на устройството</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
@@ -236,7 +236,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>Неуспешно създаване на отображение в паметта</translation>
+        <translation>Неуспешно създаване на отпечатък в паметта</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
@@ -256,7 +256,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Неуспешно включване на буфер в опашката: %1</translation>
+        <translation>Неуспешно добавяне на буфер в опашката: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
@@ -266,22 +266,22 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Устройството не е инициализирано или неправилен файлов дескриптор</translation>
+        <translation>Устройството не е инициализирано или невалиден файлов дескриптор</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Неуспешно стартиране на видеоток, снимка неуспешна</translation>
+        <translation>Неуспешно стартиране на видеоток, възприемане на изображение е неуспешно</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>Неуспешно получаване на кадър</translation>
+        <translation>Неуспешно получаване на кадър на изображение</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Неуспешно получаване на валидна снимка, моля проверете връзката с камерата</translation>
+        <translation>Неуспешно възприемане на валидно изображение, моля проверете връзката с камерата</translation>
     </message>
 </context>
 </TS>

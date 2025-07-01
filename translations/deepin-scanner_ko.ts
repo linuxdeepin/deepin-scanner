@@ -6,7 +6,7 @@
     <message>
         <location filename="../src/main.cpp" line="34"/>
         <source>Deepin Scanner</source>
-        <translation>Deepin 스캐너</translation>
+        <translation>디핀 스캐너</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="38"/>
@@ -32,12 +32,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>장치 로딩 중...</translation>
+        <translation>장치를 로딩 중...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>장치 열기 중...</translation>
+        <translation>장치를 열고 있습니다...</translation>
     </message>
 </context>
 <context>
@@ -60,7 +60,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>이미지 형식</translation>
+        <translation>이미지 포맷</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
@@ -70,12 +70,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>스캔 이미지 보기</translation>
+        <translation>스캔된 이미지 보기</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>스캔 이력은 여기에 표시됩니다</translation>
+        <translation>스캔 기록은 여기에 표시됩니다</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
@@ -90,7 +90,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation>비디오 형식</translation>
+        <translation>비디오 포맷</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
@@ -115,17 +115,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>미리보기 초기화 중...</translation>
+        <translation>미리보기를 초기화 중...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>장치 미리보기 사용 불가능</translation>
+        <translation>장치 미리보기가 사용할 수 없습니다</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>미리보기 이미지 없음</translation>
+        <translation>미리보기 이미지가 없습니다</translation>
     </message>
 </context>
 <context>
@@ -139,18 +139,12 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>스캐너 장치가 발견되지 않았습니다. 가능한 해결책:
-1. 스캐너가 연결되고 전원이 켜져 있는지 확인하세요
-2. 명령어를 실행하세요: sudo gpasswd -a $USER scanner
-3. SANE 재시작: sudo service saned restart
-4. 필요한 드라이버 패키지를 설치하세요: sudo apt-get install libsane-extras
-5. 네트워크 스캐너인 경우, 네트워크 설정을 확인하세요
-6. USB 케이블을 다시 연결하거나 컴퓨터를 재시작하세요</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>스캐너가 열려 있지 않습니다</translation>
+        <translation>스캐너가 열리지 않았습니다</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
@@ -193,7 +187,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>디바이스가 발견되지 않았습니다</translation>
+        <translation>장치가 없습니다</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
@@ -221,12 +215,12 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>디바이스 경로를 가져올 수 없어 해상도를 설정할 수 없습니다</translation>
+        <translation>장치 경로를 가져올 수 없어 해상도를 설정할 수 없습니다</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>디바이스를 다시 열 수 없습니다</translation>
+        <translation>장치를 다시 열 수 없습니다</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
@@ -241,7 +235,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>디바이스가 올바르게 초기화되지 않았습니다</translation>
+        <translation>장치가 올바르게 초기화되지 않았습니다</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
@@ -256,22 +250,22 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>버퍼를 큐에 추가하는 데 실패했습니다: %1</translation>
+        <translation>버퍼를 큐에 추가할 수 없음: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>비디오 스트림을 시작하는 데 실패했습니다: %1</translation>
+        <translation>비디오 스트림을 시작할 수 없음: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>디바이스가 초기화되지 않았거나 잘못된 파일 디스크립터입니다</translation>
+        <translation>장치가 초기화되지 않았거나 잘못된 파일 디스크립터입니다</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>비디오 스트림을 시작하는 데 실패했습니다, 캡처 실패</translation>
+        <translation>비디오 스트림을 시작할 수 없으며 캡처 실패</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
@@ -281,7 +275,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>유효한 이미지를 캡처할 수 없습니다. 카메라 연결을 확인해 주세요</translation>
+        <translation>올바른 이미지를 캡처할 수 없습니다. 카메라 연결을 확인해 주세요</translation>
     </message>
 </context>
 </TS>

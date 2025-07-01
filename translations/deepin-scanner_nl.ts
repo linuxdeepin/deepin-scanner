@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Scanner Manager is a scanner tool that supports a variety of scanning devices</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -32,12 +32,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>Apparaat laden...</translation>
+        <translation>Laden van apparaten...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>Apparaat openen...</translation>
+        <translation>Openen van apparaat...</translation>
     </message>
 </context>
 <context>
@@ -45,7 +45,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>Scan-instellingen</translation>
+        <translation>Scaninstellingen</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
@@ -75,12 +75,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>Scan geschiedenissen worden hier weergegeven</translation>
+        <translation>Scanhistorie wordt hier getoond</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>Scan modus</translation>
+        <translation>Scanmodus</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
@@ -115,17 +115,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>Preview initialiseren...</translation>
+        <translation>Initialiseren van voorbeeld...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>Apparaat preview niet beschikbaar</translation>
+        <translation>Apparaatvoorbeeld is niet beschikbaar</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>Geen preview afbeelding</translation>
+        <translation>Geen voorbeeldafbeelding</translation>
     </message>
 </context>
 <context>
@@ -140,12 +140,12 @@
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
         <translation>Geen scannerapparaten gevonden. Mogelijke oplossingen:
-1. Zorg ervoor dat de scanner aangesloten en aangezet is
+1. Zorg ervoor dat de scanner is aangesloten en aangestuurd
 2. Voer de opdracht uit: sudo gpasswd -a $USER scanner
 3. Herstart SANE: sudo service saned restart
-4. Installeer het benodigde driverpakket: sudo apt-get install libsane-extras
-5. Voor netwerkscannerapparaten, controleer de netwerkinstellingen
-6. Verbind de USB-kabel opnieuw of start de computer opnieuw op</translation>
+4. Installeer het vereiste driverpakket: sudo apt-get install libsane-extras
+5. Voor netwerkscanners, controleer de netwerkconfiguratie
+6. Verbind de USB-kabel opnieuw aan of herstart de computer</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
@@ -155,17 +155,17 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Mislukt om scannerparameters op te halen: %1</translation>
+        <translation>Kan scannerparameters niet ophalen: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Mislukt om scan te starten: %1</translation>
+        <translation>Kan scan niet starten: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Mislukt om testafbeelding op te slaan</translation>
+        <translation>Kan testafbeelding niet opslaan</translation>
     </message>
 </context>
 <context>
@@ -221,7 +221,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>Kan het apparaatpad niet verkrijgen, kan resolutie niet instellen</translation>
+        <translation>Kan apparaatpad niet verkrijgen, kan resolutie niet instellen</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
@@ -266,7 +266,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Apparaat niet geïnitialiseerd of ongeldig bestandsschrijver</translation>
+        <translation>Apparaat niet geïnitialiseerd of ongeldig bestandsschrijfvoet</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>

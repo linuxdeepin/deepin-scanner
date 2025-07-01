@@ -6,12 +6,12 @@
     <message>
         <location filename="../src/main.cpp" line="34"/>
         <source>Deepin Scanner</source>
-        <translation>Deepin Սկաներ</translation>
+        <translation>Դեփին Սկաններ</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Սկաներ մանագերը սկաների աշխատակազմակարգիչ է, որը հանդես է բերում տարբեր սկանավորման սարքերի համար</translation>
+        <translation>Սկանների մանագերը սկանների գործիք է, որը համապատասխանում է տարբեր սկանավորման սարքերին</translation>
     </message>
 </context>
 <context>
@@ -27,7 +27,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>Սկաներ մանագեր</translation>
+        <translation>Սկանների մանագեր</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
@@ -37,7 +37,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>Սարքի բացում...</translation>
+        <translation>Սարքի բացումը...</translation>
     </message>
 </context>
 <context>
@@ -50,22 +50,22 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>Լուծությունը</translation>
+        <translation>Լուծություն</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>Գունային ռեժիմը</translation>
+        <translation>Գունային ռեժիմ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>Նկարի ձևաչափը</translation>
+        <translation>Նկարի ձևաչափ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>Սկանավորել</translation>
+        <translation>Սկանավորում</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
@@ -75,12 +75,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>Սկանավորման պատմությունը այստեղ կտեսնի</translation>
+        <translation>Սկանավորման պատմությունը ցուցադրվում է այստեղ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>Սկանավորման ռեժիմը</translation>
+        <translation>Սկանավորման ռեժիմ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
@@ -90,7 +90,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation>Վիդեո ձևաչափը</translation>
+        <translation>Վիդեոյի ձևաչափ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
@@ -100,22 +100,22 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>Մուգ սպան</translation>
+        <translation>Գունավ անգամային</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>Սև սպան</translation>
+        <translation>Սև սպիտակ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>Սարքը չի սկզբադրվել</translation>
+        <translation>Սարքը չի սկսվել</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>Սկանավորման նախապատկերի սկզբադրում...</translation>
+        <translation>Սկանավորման նախապատկերի սկանավորումը...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
@@ -125,7 +125,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>Նախապատկերի նկարը բացված չէ</translation>
+        <translation>Նախապատկերի նկարը բաց չէ</translation>
     </message>
 </context>
 <context>
@@ -139,33 +139,27 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>Սկաների սարքեր չեն գտնվել։ Խորանցիկ լուծումները՝
-1. Ստուգեք, թե սկաները կապված և աշխատող է արդյունքում
-2. Փորձեք կատարել հրամանը՝ sudo gpasswd -a $USER scanner
-3. Վերասկսեք SANE-ը՝ sudo service saned restart
-4. Ընդգրկեք անհրաժեշտ վարկանիշների պակետը՝ sudo apt-get install libsane-extras
-5. Ցանցային սկաների համար ստուգեք ցանցի կարգավորումները
-6. Վերակապեք USB կապը կամ վերամիարժեքացրեք համակարգչին</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Սկաները չի բացվել</translation>
+        <translation>Սկանները չեն բացվել</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Չի հնարավոր ստանալ սկաների պարամետրերը: %1</translation>
+        <translation>Սկանների պարամետրերը ստանալու ընթացքում սխալ տեղի ունեցավ: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Չի հնարավոր սկանավորել: %1</translation>
+        <translation>Սկանավորման սկանավորումը սկանավո­րելու ընթացքում սխալ տեղի ունե­ցավ: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Չի հնարավոր պահպանել փորձարկման նկարը</translation>
+        <translation>Ընթերցման տեսանյութը պահպանելու ընթացքում սխալ տեղի ունեցավ</translation>
     </message>
 </context>
 <context>
@@ -173,17 +167,17 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>Սկաների սարքեր</translation>
+        <translation>Սկանավորման սարքեր</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>Սկաներ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>Անգոտի</translation>
+        <translation>Ընթացիկ</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
@@ -193,7 +187,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>Նախագծեր չեն գտնվել</translation>
+        <translation>Նույն սարքներ չեն «գտնվում»</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
@@ -208,12 +202,12 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>Սկանավորել</translation>
+        <translation>Սկանավորում</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
         <source>Offline</source>
-        <translation>Ծածկված</translation>
+        <translation>Ծածկագիր</translation>
     </message>
 </context>
 <context>
@@ -221,67 +215,67 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>Նախագծի մակառումը ստանալ չի հնարավոր, չի կարող ստանալ լուծումը</translation>
+        <translation>Սարքի մակROCը ստանալ չի կարողանում, հետևաբար չի կարողանում արտադրությունը ստանալ</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>Նախագիծը կրկին բացելը չի հնարավոր</translation>
+        <translation>Սարքը վերաբացելու ընթացքում սխալ տեղի է ունեցել</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>Նախագծի նախատեսված լուծումը ստանալը չի հնարավոր</translation>
+        <translation>Նախատեսված արտադրությունը ստանալու ըนթացքում սխալ տեղի է ունեցել</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>Հիշողության մապինգը անհաջողվել է</translation>
+        <translation>Հիշողության մակROCը սխալ տեղի է ունեցել</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>Նախագիծը սխալ ձևակերպումով ստանալ չի հնարավոր</translation>
+        <translation>Սարքը ստանդարտացված չէ</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>Բուֆերի ստանալը չի հնարավոր</translation>
+        <translation>Բյուֆերը վերաստանդարտացնելու ընթացքում սխալ տեղի է ունեցել</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>Բուֆերի վերաստանալը չի հնարավոր</translation>
+        <translation>Բյուֆերը տեղադրելու ընթացքում սխալ տեղի է ունեցել: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Բուֆերը հանձնելը չի հնարավոր: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>Վիդեո հոսքը սկանավորելը չի հնարավոր: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Նախագիծը ստանալը չի հնարավոր կամ անվավեր ֆայլի հանձնարարական</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Վիդեո հոսքը սկանավորելը չի հնարավոր, ստանալը չի հնարավոր</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>Նկարի կառուցվածքը ստանալը չի հնարավոր</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Ստանալ ճիշտ նկարը չի հնարավոր, խնդրում ենք ստուգեք կամերայի կապը</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

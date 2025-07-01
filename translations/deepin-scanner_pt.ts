@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Gerenciador de Scanner é uma ferramenta de scanner que suporta uma variedade de dispositivos de escaneamento</translation>
+        <translation>O Scanner Manager é uma ferramenta de scanner que suporta uma variedade de dispositivos de escaneamento</translation>
     </message>
 </context>
 <context>
@@ -27,7 +27,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>Gerenciador de Scanner</translation>
+        <translation>Scanner Manager</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
@@ -75,7 +75,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>A história de escaneamento será exibida aqui</translation>
+        <translation>A história de escaneamento será mostrada aqui</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
@@ -100,7 +100,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>Cinza</translation>
+        <translation>Escala de Cinza</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
@@ -144,7 +144,7 @@
 2. Execute o comando: sudo gpasswd -a $USER scanner
 3. Reinicie o SANE: sudo service saned restart
 4. Instale o pacote de driver necessário: sudo apt-get install libsane-extras
-5. Para scanners de rede, verifique a configuração da rede
+5. Para scanners de rede, verifique a configuração de rede
 6. Reconecte o cabo USB ou reinicie o computador</translation>
     </message>
     <message>
@@ -165,7 +165,7 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Falha ao salvar a imagem de teste</translation>
+        <translation>Falha ao salvar imagem de teste</translation>
     </message>
 </context>
 <context>
@@ -188,7 +188,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation>Câmera Web</translation>
+        <translation>Câmera de vídeo</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
@@ -271,7 +271,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Falha ao iniciar o fluxo de vídeo, captura falhou</translation>
+        <translation>Falha ao iniciar o fluxo de vídeo, gravação falhou</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>

@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Scanner Manager je orodje za skeniranje, ki podpira različne naprave za skeniranje</translation>
+        <translation>Scanner Manager je orodje za skeniranje, ki podpira različne vrste skenirnih naprav</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>Nalaganje...</translation>
+        <translation>Nalagam...</translation>
     </message>
 </context>
 <context>
@@ -27,17 +27,17 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>Skenirnik Manager</translation>
+        <translation>Scanner Manager</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>Nalaganje naprav...</translation>
+        <translation>Nalagam naprave...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>Odpiranje naprave...</translation>
+        <translation>Odpri napravo...</translation>
     </message>
 </context>
 <context>
@@ -50,12 +50,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>Razteg</translation>
+        <translation>Različica</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>Način barv</translation>
+        <translation>Način barve</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
@@ -115,7 +115,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>Inicializacija predogleda...</translation>
+        <translation>Inicializiram predogled...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
@@ -139,23 +139,23 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>Ni najdenih skenirnih naprav. Možni rešitvi:
-1. Ugotovi, da je skenirnik povezan in vklopljen
+        <translation>Niso najdeni skenirne naprave. Možne rešitve:
+1. Ugotovi, da je skener povezan in vklopljen
 2. Izvedi ukaz: sudo gpasswd -a $USER scanner
 3. Ponastavi SANE: sudo service saned restart
-4. Namesti potreben vodilni paket: sudo apt-get install libsane-extras
-5. Za omrežne skenirnike preveri omrežno konfiguracijo
+4. Namesti potrebnega vodilnega paketa: sudo apt-get install libsane-extras
+5. Za omrežne skenirne naprave preveri konfiguracijo omrežja
 6. Ponovno poveži USB kabel ali ponastavi računalnik</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Skenirnik ni odprt</translation>
+        <translation>Skenirna naprava ni odprta</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Ni bilo mogoče pridobiti parametrov skenirnika: %1</translation>
+        <translation>Ni bilo mogoče pridobiti parametrov skenirne naprave: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
@@ -165,7 +165,7 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Ni bilo mogoče shraniti testne slike</translation>
+        <translation>Ni bilo mogoče shraniti testno sliko</translation>
     </message>
 </context>
 <context>
@@ -178,7 +178,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>Skenirnik</translation>
+        <translation>Skenirna naprava</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
@@ -188,12 +188,12 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation>Kamera</translation>
+        <translation>Webkamera</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>Ni ure devisov najdene</translation>
+        <translation>Ni urejenih naprav</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
@@ -221,22 +221,22 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>Ni mogoče pridobiti poti naprave, ni mogoče nastaviti razlomka</translation>
+        <translation>Ni mogoče pridobiti poti naprave, zato ni mogoče nastaviti razlages</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>Napaka pri ponovnem odpiranju naprave</translation>
+        <translation>Nastavitev naprave je spodletela</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>Napaka pri nastavitvi zahtevane razlomke</translation>
+        <translation>Nastavitev zahtevane razlages je spodletela</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>Pomnilnik ni mogoče zazemati</translation>
+        <translation>Povezava pomnilnika je spodletela</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
@@ -246,42 +246,42 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>Inicializacija puščice je spodletela</translation>
+        <translation>Inicializacija predpomnilnika je spodletela</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>Ponovna inicializacija puščice je spodletela</translation>
+        <translation>Ponovna inicializacija predpomnilnika je spodletela</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Ni mogoče vstavit puščico v vrsto: %1</translation>
+        <translation>Predpomnilnik ni uspešno vstavljen v vrsto: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>Napaka pri začetku videoposnetka: %1</translation>
+        <translation>Zagon videoposnetka je spodletel: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Naprava ni bila inicializirana ali je datotečni opisalnik neveljaven</translation>
+        <translation>Naprava ni bila inicializirana ali ima veljavno opisnico datoteke</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Napaka pri začetku videoposnetka, zajem spodletel</translation>
+        <translation>Zagon videoposnetka je spodletel, priprava je spodletela</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>Ni mogoče pridobiti okvir slike</translation>
+        <translation>Ni mogoče pridobiti sličice</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Ni mogoče pridobiti veljavne slike, prosim preverite povezavo z kamerami</translation>
+        <translation>Ni mogoče pridobiti veljave slike, preverite povezavo z kamerami</translation>
     </message>
 </context>
 </TS>

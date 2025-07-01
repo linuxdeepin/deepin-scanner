@@ -37,7 +37,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>Otvaram uređaj...</translation>
+        <translation>Otvaramo uređaj...</translation>
     </message>
 </context>
 <context>
@@ -50,7 +50,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>Različica</translation>
+        <translation>Razlučivost</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
@@ -90,7 +90,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation>Video format</translation>
+        <translation>Format videa</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
@@ -105,7 +105,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>Crno-bijelo</translation>
+        <translation>Siva i bijela</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
@@ -120,7 +120,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>Pregled uređaja nije dostupan</translation>
+        <translation>Pretraga uređaja nije dostupna</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
@@ -139,18 +139,18 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>Nije pronađen niti jedan skener uređaj. Moguće rješenja:
-1. Provjerite da li je skener priključen i uključen
-2. Pokrenite naredbu: sudo gpasswd -a $USER scanner
+        <translation>Nisu pronađeni uređaji za skeniranje. Moguće rješenja:
+1. Provjerite je li skener povezan i uključen
+2. Pokrenite komandu: sudo gpasswd -a $USER scanner
 3. Ponovno pokrenite SANE: sudo service saned restart
-4. Instalirajte potreban paket za vođenje: sudo apt-get install libsane-extras
-5. Za mrežne skener uređaje, provjerite konfiguraciju mreže
-6. Povucite USB kabel i ponovno spoite ga ili ponovno pokrenite računalo</translation>
+4. Instalirajte potreban paket za uređaj: sudo apt-get install libsane-extras
+5. Za mrežne skenere, provjerite konfiguraciju mreže
+6. Ponovno povežite USB kabl ili ponovno pokrenite računalo</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Skener nije otvoren</translation>
+        <translation>Skeniralo se nije otvorilo</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
@@ -173,17 +173,17 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>Skener uređaji</translation>
+        <translation>Uređaji za skeniranje</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>Skener</translation>
+        <translation>Skeniralo se</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>Neaktivno</translation>
+        <translation>Neproizvodno</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
@@ -208,7 +208,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>Skeniraj</translation>
+        <translation>Skeniranje</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
@@ -236,7 +236,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>Pametna mapa nije uspješno stvorena</translation>
+        <translation>Pametno mapiranje nije uspješno</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
@@ -246,7 +246,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>Buffer nije uspješno inicijaliziran</translation>
+        <translation>Inicijalizacija buffera nije uspješna</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
@@ -266,12 +266,12 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Uređaj nije inicijaliziran ili je datoteka nevažeća</translation>
+        <translation>Uređaj nije inicijaliziran ili je nevaljan deskriptor datoteke</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Nije moguće pokrenuti video tok, prijenos slike nije uspješan</translation>
+        <translation>Nije moguće pokrenuti video tok, prikupljanje je neuspješno</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
@@ -281,7 +281,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Nije moguće snimati važeću sliku, provjerite veze kamera</translation>
+        <translation>Nije moguće snimati valjatu sliku, provjerite povezivanje kamerom</translation>
     </message>
 </context>
 </TS>

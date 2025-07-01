@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Scanner Manager er en scannerværktøj, der understøtter en ræs af skanningsenheder</translation>
+        <translation>Scanner Manager er et skannerprogram, der understøtter en række forskellige skanningsenheder</translation>
     </message>
 </context>
 <context>
@@ -80,7 +80,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>Scanform</translation>
+        <translation>Scanmode</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
@@ -120,7 +120,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>Enheden har ikke tilgængelig forhåndsvisning</translation>
+        <translation>Forhåndsvisning af enhed ikke tilgængelig</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
@@ -139,33 +139,33 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>Ingen skannere fundet. Mulige løsninger:
+        <translation>Ingen skannerenheder fundet. Mulige løsninger:
 1. Sørg for, at skanneren er tilsluttet og tændt
 2. Kør kommandoen: sudo gpasswd -a $USER scanner
 3. Genstart SANE: sudo service saned restart
-4. Installer den påkrævede driverpakke: sudo apt-get install libsane-extras
-5. For netværksskannere, tjek netværkskonfigurationen
-6. Genforbind USB-kabel eller genstart computeren</translation>
+4. Installer det påkrævede drivere pakke: sudo apt-get install libsane-extras
+5. For netværks skanner, tjek netværks konfiguration
+6. Forbind USB kabel igen eller genstart computer</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Scanneren er ikke åben</translation>
+        <translation>Skanneren er ikke åben</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Fejl ved hentning af skannerparametre: %1</translation>
+        <translation>Kunne ikke hente skannerparametre: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Fejl ved opstart af scan: %1</translation>
+        <translation>Kunne ikke starte scan: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Fejl ved gemning af testbillede</translation>
+        <translation>Kunne ikke gemme testbillede</translation>
     </message>
 </context>
 <context>
@@ -173,7 +173,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>Skannerenheder</translation>
+        <translation>Scannerenheder</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
@@ -221,7 +221,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>Kan ikke få sti til enhed, kan ikke sætte oppløsning</translation>
+        <translation>Kan ikke finde enhedens sti, kan ikke sætte oppløsning</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
@@ -231,57 +231,57 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>Fejl ved indstilling af den pågældende oppløsning</translation>
+        <translation>Fejl ved indstilling af ønsket oppløsning</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>Hukommelsesudkortning fejlet</translation>
+        <translation>Hukommelsesmappning fejlede</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>Enheden blev ikke korrekt initialiseret</translation>
+        <translation>Enheden er ikke korrekt initialiseret</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>Buffer initialisering fejlet</translation>
+        <translation>Buffer initialisering fejlede</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>Buffer geninitialisering fejlet</translation>
+        <translation>Buffer geninitialisering fejlede</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Fejl ved at køe buffer: %1</translation>
+        <translation>Fejl ved opfyldelse af buffer: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>Fejl ved at starte videostrøm: %1</translation>
+        <translation>Fejl ved opstart af videostrøm: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Enheden blev ikke initialiseret eller ugyldig filbeskrivelse</translation>
+        <translation>Enheden er ikke initialiseret eller ugyldig filbeskrivelse</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Fejl ved at starte videostrøm, optagelse fejlet</translation>
+        <translation>Fejl ved opstart af videostrøm, optagelse fejlede</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>Fejl ved at få billedframe</translation>
+        <translation>Fejl ved hentning af billedframe</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Fejl ved at opfatte gyldigt billede, venligst tjek kameraforbindelsen</translation>
+        <translation>Fejl ved optagelse af gyldigt billede, tjek venligst kameraforbindelsen</translation>
     </message>
 </context>
 </TS>

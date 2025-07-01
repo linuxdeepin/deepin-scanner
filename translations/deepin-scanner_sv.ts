@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Scanner Manager är ett skannervecklare som stödjer en mängd skanningsenheter</translation>
+        <translation>Scanner Manager är ett skannervecklingstjänstprogram som stödjer ett brett utbud av skanningsenheter</translation>
     </message>
 </context>
 <context>
@@ -45,7 +45,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>Skansinställningar</translation>
+        <translation>Skanningsinställningar</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
@@ -75,12 +75,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>Skanshistorik visas här</translation>
+        <translation>Skanningshistorik visas här</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>Skansläge</translation>
+        <translation>Skanningsläge</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
@@ -110,22 +110,22 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>Enhetsintialisering misslyckades</translation>
+        <translation>Enhetsinitialisering misslyckades</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>Initierar förhandsvisning...</translation>
+        <translation>Initierar förhandsgranskning...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>Ingen förhandsvisning tillgänglig</translation>
+        <translation>Förhandsgranskning är inte tillgänglig</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>Ingen förhandsvisningsbild</translation>
+        <translation>Ingen förhandsgranskning</translation>
     </message>
 </context>
 <context>
@@ -143,9 +143,9 @@
 1. Se till att skannaren är ansluten och påslagen
 2. Kör kommandot: sudo gpasswd -a $USER scanner
 3. Starta om SANE: sudo service saned restart
-4. Installera krävda drivrutinen: sudo apt-get install libsane-extras
-5. För nätverkskannare, kontrollera nätverkskonfiguration
-6. Ansluta USB-kabel igen eller starta om datorn</translation>
+4. Installera nödvändigt drivrutin: sudo apt-get install libsane-extras
+5. För nätverkskaminer, kontrollera nätverkskonfiguration
+6. Anslut USB-kabelen igen eller starta om datorn</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
@@ -155,17 +155,17 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Misslyckades med att hämta skannarparametrar: %1</translation>
+        <translation>Misslyckades att hämta skannarparametrar: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Misslyckades med att starta skanning: %1</translation>
+        <translation>Misslyckades att starta skanning: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Misslyckades med att spara testbild</translation>
+        <translation>Misslyckades att spara testbild</translation>
     </message>
 </context>
 <context>
@@ -183,7 +183,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>Inaktiv</translation>
+        <translation>Idl</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
@@ -221,67 +221,67 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>Kan inte hämta enhetens sökväg, kan inte sätta upplösning</translation>
+        <translation>Kan inte få enhetsväg, kan inte sätta upplösning</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>Misslyckades med att återöppna enhet</translation>
+        <translation>Misslyckades att återöppna enhet</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>Misslyckades med att sätta upplösning</translation>
+        <translation>Misslyckades att sätta önskad upplösning</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>Misslyckades med att sätta den begärda upplösningen</translation>
+        <translation>Minnesmappning misslyckades</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>Minnesmappning misslyckades</translation>
+        <translation>Enhetsinitialisering misslyckades</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>Enheten är inte korrekt initierad</translation>
+        <translation>Buffertinitialisering misslyckades</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>Buffer-initiering misslyckades</translation>
+        <translation>Buffertreinitialisering misslyckades</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Buffer-reinitiering misslyckades</translation>
+        <translation>Misslyckades att lägga in buffert i kö: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>Misslyckades med att lägga in buffer: %1</translation>
+        <translation>Misslyckades att starta videostream: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Misslyckades med att starta videoflöde: %1</translation>
+        <translation>Enhetsinitialisering misslyckades eller ogiltig filbeskrivning</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Enheten är inte initierad eller ogiltig filbeskrivning</translation>
+        <translation>Misslyckades att starta videostream, upptag misslyckades</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>Misslyckades med att starta videoflöde, innehållsinsamling misslyckades</translation>
+        <translation>Misslyckades att få bildram</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Misslyckades med att få bildframe</translation>
+        <translation>Misslyckades att få en giltig bild, vänligen kontrollera kamerans anslutning</translation>
     </message>
 </context>
 </TS>

@@ -6,12 +6,12 @@
     <message>
         <location filename="../src/main.cpp" line="34"/>
         <source>Deepin Scanner</source>
-        <translation>Deepin Skanner</translation>
+        <translation>Deepin Scanner</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Skanneri juhendaja on skanneritööriist, mis toetab mitmeid skanneritehinguid</translation>
+        <translation>Scanner Manager on on laulab kujundus, mis toetab mitmeid skaneerimis seadmeid</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>Laadimine...</translation>
+        <translation>Laadimisel...</translation>
     </message>
 </context>
 <context>
@@ -27,17 +27,17 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>Skanneri juhendaja</translation>
+        <translation>Scanner Manager</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>Laadimine seadmetega...</translation>
+        <translation>Laadimisel seadmeid...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>Seadme avamine...</translation>
+        <translation>Ava seade...</translation>
     </message>
 </context>
 <context>
@@ -45,7 +45,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>Skannimise seaded</translation>
+        <translation>Skaneerimise seadistused</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
@@ -55,32 +55,32 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>Värvimodi</translation>
+        <translation>Värvusrežiim</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>Pildiformaat</translation>
+        <translation>Pildifaili vorming</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>Skannimine</translation>
+        <translation>Skaneeri</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>Vaata skannitud pilti</translation>
+        <translation>Vaata skaneeritud pilti</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>Skannimise ajalugu kuvatakse siin</translation>
+        <translation>Skaneerimise ajalugu kuvatakse siin</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>Skannimismodi</translation>
+        <translation>Skaneerimisrežiim</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
@@ -90,17 +90,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation>Videoformaat</translation>
+        <translation>Video vorming</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Color</source>
-        <translation>Värv</translation>
+        <translation>Värvus</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>Hoonu värvus</translation>
+        <translation>Hüppuvärvus</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
@@ -115,17 +115,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>Eelvaade initsialiseerimine...</translation>
+        <translation>Päringu initsialiseerimisel...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>Seadme eelvaade pole saadaval</translation>
+        <translation>Seade pole nähtav</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>Eelvaadet pole</translation>
+        <translation>Päringu pilti pole</translation>
     </message>
 </context>
 <context>
@@ -139,28 +139,28 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>Skannerseadmeid ei leitud. Võimalikud lahendused:
-1. Kontrolli, et skanner oleks ühendatud ja toites
+        <translation>Skaneerimise seadmeid ei leitud. Võimalikud lahendused:
+1. Kontrolli, et skaneer on ühendatud ja toitesüsteem on sisse lülitatud
 2. Käivita käsk: sudo gpasswd -a $USER scanner
-3. Taaskäivita SANE: sudo service saned restart
+3. Tühista SANE: sudo service saned restart
 4. Installeeri vajalik drive pakett: sudo apt-get install libsane-extras
-5. Võrgu skannerite jaoks kontrolli võrgukonfiguratsiooni
-6. Ühenda uuesti USB kabel või restarti arvutit</translation>
+5. Võrgu skaneerimiseks kontrolli võrgukonfiguratsiooni
+6. Ühenda USB kabel uuesti või restarti arvutit</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Skanneri ei avatud</translation>
+        <translation>Skaneerimis seade pole avatud</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Ei õnnestunud skanneri parameetrite saamist: %1</translation>
+        <translation>Skaneerimisparameetrid ei saa saada: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Ei õnnestunud skannimist algatada: %1</translation>
+        <translation>Skaneerimine ei õnnestunud: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
@@ -173,17 +173,17 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>Skanneriseadmed</translation>
+        <translation>Skaneerimise seadmed</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>Skanner</translation>
+        <translation>Skaneer</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>Kasutamata</translation>
+        <translation>Kütta</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
@@ -193,7 +193,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>Ajaloolisi seadet ei leitud</translation>
+        <translation>Seadmed ei leiduta</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
@@ -208,7 +208,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>Skannimine</translation>
+        <translation>Skaneerimine</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
@@ -221,47 +221,47 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>Ajaloolise seadmega teekonda ei saa, resolutsiooni seadset ei saa</translation>
+        <translation>Seadme tee saamiseks ei õnnestunud, resolutsiooni seadmine ei ole võimalik</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>Seadet ei saa uuesti avada</translation>
+        <translation>Seadme taasavaamiseks ebaõnnestus</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>Päris resolutsiooni seadset ei saa</translation>
+        <translation>Päringuks esitatud resolutsiooni seadmine ebaõnnestus</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>Mälu kuvamine ebaõnnestus</translation>
+        <translation>Mälu kuvamiseks ebaõnnestus</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>Seade ei ole korralikult initsialiseeritud</translation>
+        <translation>Seade ei ole korrektselt initsialiseeritud</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>Puffri initsialiseerimine ebaõnnestus</translation>
+        <translation>Puhveri initsialiseerimiseks ebaõnnestus</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>Puffri taas-initsialiseerimine ebaõnnestus</translation>
+        <translation>Puhveri taas-initsialiseerimiseks ebaõnnestus</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Puffri järjekorrasse lisamine ebaõnnestus: %1</translation>
+        <translation>Puhveri järjekorrasse kandmiseks ebaõnnestus: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>Video voolu ebaõnnestus: %1</translation>
+        <translation>Video vooluks esitamiseks ebaõnnestus: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
@@ -271,17 +271,17 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Video voolu ei saa algatada, kuvamine ebaõnnestus</translation>
+        <translation>Video vooluks esitamiseks ebaõnnestus, kujutis loomine ebaõnnestus</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>Kuvamise raamist ei saa</translation>
+        <translation>Pildi raamme saamiseks ebaõnnestus</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Kasutatav kuvamise saamise ebaõnnestus, kontrollige kamera ühendust</translation>
+        <translation>Korralikku pilti kujutamiseks ebaõnnestus, kontrollige kamera ühendust</translation>
     </message>
 </context>
 </TS>

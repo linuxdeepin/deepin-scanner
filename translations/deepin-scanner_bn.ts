@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>স্ক্যানার ম্যানেজার হল একটি স্ক্যানার টুল যা বিভিন্ন স্ক্যানিং ডিভাইসগুলি সমর্থন করে</translation>
+        <translation>স্ক্যানার ম্যানেজার হল একটি স্ক্যানার টুল যা বিভিন্ন স্ক্যানিং ডিভাইস সমর্থন করে</translation>
     </message>
 </context>
 <context>
@@ -50,7 +50,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>বিস্তার</translation>
+        <translation>প্রতিরোধ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
@@ -70,7 +70,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>দেখুন স্ক্যান করা ছবি</translation>
+        <translation>স্ক্যান করা ছবিটি দেখুন</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
@@ -105,12 +105,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>ক্লার ওয়াইট</translation>
+        <translation>কাল ও কালো</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>ডিভাইস প্রারম্ভিক নয়</translation>
+        <translation>ডিভাইস প্রারম্ভিক করা হয়নি</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
@@ -120,7 +120,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>ডিভাইস প্রিভিউ প্রাপ্য নয়</translation>
+        <translation>ডিভাইস প্রিভিউ প্রস্তুত করা হয়নি</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
@@ -139,13 +139,13 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>কোনো স্ক্যানার ডিভাইস খুঁজে পাওয়া যায়নি। সম্ভাবনামতে সমাধান:
-1. নিশ্চিত করুন যে স্ক্যানার সংযুক্ত এবং চালু করা হয়েছে
-2. কমান্ড চালান: sudo gpasswd -a $USER scanner
-3. SANE পুনরায় চালু করুন: sudo service saned restart
+        <translation>কোনো স্ক্যানার ডিভাইস পাওয়া গেল না। সম্ভাব্য সমাধানগুলি হল:
+1. নিশ্চিত করুন স্ক্যানার সংযুক্ত এবং চালু করা হয়েছে
+2. কমান্ডটি চালান: sudo gpasswd -a $USER scanner
+3. SANE পুনরাবৃত্তি করুন: sudo service saned restart
 4. প্রয়োজনীয় ড্রাইভার প্যাকেজ ইনস্টল করুন: sudo apt-get install libsane-extras
 5. নেটওয়ার্ক স্ক্যানারের জন্য, নেটওয়ার্ক কনফিগারেশন পরীক্ষা করুন
-6. USB কেবল পুনরায় সংযুক্ত করুন বা কম্পিউটার পুনরায় চালু করুন</translation>
+6. USB কেবল পুনরায় সংযুক্ত করুন বা কম্পিউটার পুনরাবৃত্তি করুন</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
@@ -155,17 +155,17 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>স্ক্যানার প্যারামিটার পেতে ব্যর্থ: %1</translation>
+        <translation>স্ক্যানার প্যারামিটার পাওয়া যায়নি: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>স্ক্যান শুরু করতে ব্যর্থ: %1</translation>
+        <translation>স্ক্যান শুরু করা যায়নি: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>টেস্ট ছবি সংরক্ষণ করতে ব্যর্থ</translation>
+        <translation>টেস্ট ছবি বাঁধা যায়নি</translation>
     </message>
 </context>
 <context>
@@ -193,7 +193,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>কোনো ডিভাইস খুঁজে পাওয়া যায়নি</translation>
+        <translation>কোন ডিভাইস খুঁজে পাওয়া যায় নি</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
@@ -221,67 +221,67 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>ডিভাইস পাথ পাওয়া যায়নি, রেজোলিউশন সেট করা যায়নি</translation>
+        <translation>ডিভাইস পাথ পাওয়া যায় নি, রেজোলিউশন সেট করা যায় নি</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>ডিভাইস পুনরায় খুলতে ব্যর্থ</translation>
+        <translation>ডিভাইস পুনরায় খুলতে ব্যর্থ হয়েছে</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>অনুরোধিত রেজোলিউশন সেট করতে ব্যর্থ</translation>
+        <translation>অনুরোধকৃত রেজোলিউশন সেট করতে ব্যর্থ হয়েছে</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>মেমরি ম্যাপিং ব্যর্থ</translation>
+        <translation>মেমরি ম্যাপিং ব্যর্থ হয়েছে</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>ডিভাইস সঠিকভাবে প্রারম্ভ করা হয়নি</translation>
+        <translation>ডিভাইস সঠিকভাবে ইনিশিয়াল করা नা হয়েছে</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>বাফার প্রারম্ভকরণ ব্যর্থ</translation>
+        <translation>বাফার ইনিশিয়ালাইজেশন ব্যর্থ হয়েছে</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>বাফার পুনরারম্ভকরণ ব্যর্থ</translation>
+        <translation>বাফার পুনরায় ইনিশিয়ালাইজেশন ব্যর্থ হয়েছে</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>বাফার কিউতে প্রবেশ করতে ব্যর্থ: %1</translation>
+        <translation>বাফার কিউ এ প্রবেশ করতে ব্যর্থ হয়েছে: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>ভিডিও স্ট্রিম শুরু করতে ব্যর্থ: %1</translation>
+        <translation>ভিডিও স্ট্রিম শুরু করতে ব্যর্থ হয়েছে: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>ডিভাইস প্রারম্ভ করা হয়নি বা অবৈধ ফাইল ডেস্ক্রিপ্টর</translation>
+        <translation>ডিভাইস ইনিশিয়ালাইজ করা হয় নি বা একটি অবৈধ ফাইল ডেসক্রিপ্টর</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>ভিডিও স্ট্রিম শুরু করতে ব্যর্থ, ছবি ধরতে ব্যর্থ</translation>
+        <translation>ভিডিও স্ট্রিম শুরু করতে ব্যর্থ হয়েছে, ক্যাপচার ব্যর্থ হয়েছে</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>ছবি ফ্রেম পাওয়া যায়নি</translation>
+        <translation>ছবি ফ্রেম পাওয়া যায় নি</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>বৈধ ছবি ধরতে ব্যর্থ, ক্যামেরা সংযোগ পরীক্ষা করুন</translation>
+        <translation>বৈধ ছবি ধরা যায় নি, দয়া করে ক্যামেরা সংযোগ পরীক্ষা করুন</translation>
     </message>
 </context>
 </TS>

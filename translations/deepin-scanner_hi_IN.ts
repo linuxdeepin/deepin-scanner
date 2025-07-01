@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>स्कैनर मैनेजर एक स्कैनर टूल है जो विभिन्न प्रकार के स्कैनिंग उपकरणों को समर्थन प्रदान करता है</translation>
+        <translation>स्कैनर मैनेजर एक स्कैनर टूल है जो विभिन्न प्रकार के स्कैनिंग डिवाइस को समर्थन प्रदान करता है</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>लोडिंग...</translation>
+        <translation>लोड हो रहा है...</translation>
     </message>
 </context>
 <context>
@@ -32,12 +32,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>उपकरण लोडिंग...</translation>
+        <translation>डिवाइस लोड हो रहे हैं...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>उपकरण खोला जा रहा है...</translation>
+        <translation>डिवाइस खोला जा रहा है...</translation>
     </message>
 </context>
 <context>
@@ -50,12 +50,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>विर्चुअल आकार</translation>
+        <translation>विरलन</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>रंग डिज़ाइन</translation>
+        <translation>रंग डिम</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
@@ -70,17 +70,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>स्कैन की छवि देखें</translation>
+        <translation>देखें स्कैन की छवि</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>स्कैन के इतिहास यहां दिखाए जाएंगे</translation>
+        <translation>स्कैन का इतिहास यहां दिखाया जाएगा</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>स्कैन डिज़ाइन</translation>
+        <translation>स्कैन मोड</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
@@ -110,7 +110,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>उपकरण अनियमित नहीं है</translation>
+        <translation>डिवाइस अभी तक शुरू नहीं किया गया है</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
@@ -120,7 +120,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>उपकरण प्रीव्यू उपलब्ध नहीं है</translation>
+        <translation>डिवाइस प्रीव्यू उपलब्ध नहीं है</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
@@ -139,23 +139,23 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>कोई स्कैनर उपकरण नहीं मिले। संभावित समाधान:
-1. सुनिश्चित करें कि स्कैनर कनेक्ट किया गया है और सेट किया गया है
+        <translation>कोई स्कैनर डिवाइस नहीं मिले। संभावित समाधान:
+1. सुनिश्चित करें कि स्कैनर कनेक्ट और पावर ऑन है
 2. कमांड चलाएं: sudo gpasswd -a $USER scanner
-3. SANE को फिर से शुरू करें: sudo service saned restart
+3. SANE को रीस्टार्ट करें: sudo service saned restart
 4. आवश्यक ड्राइवर पैकेज इंस्टॉल करें: sudo apt-get install libsane-extras
-5. नेटवर्क स्कैनर के लिए, नेटवर्क कॉन्फिगरेशन चेक करें
-6. USB केबल को फिर से कनेक्ट करें या कंप्यूटर को रीस्टार्ट करें</translation>
+5. नेटवर्क स्कैनर के लिए, नेटवर्क कॉन्फ़िगरेशन चेक करें
+6. USB केबल को फिर से कनेक्ट करें या कंप्यूटर रीस्टार्ट करें</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>स्कैनर खोला नहीं गया</translation>
+        <translation>स्कैनर खोला गया नहीं है</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>स्कैनर पैरामीटर प्राप्त करने में विफल: %1</translation>
+        <translation>स्कैनर पैरामीटर प्राप्त नहीं किया गया: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
@@ -173,7 +173,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>स्कैनर उपकरण</translation>
+        <translation>स्कैनर डिवाइस</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
@@ -183,37 +183,37 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation type="unfinished"></translation>
+        <translation>अकार्यशील</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation type="unfinished"></translation>
+        <translation>वेबकैम</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation type="unfinished"></translation>
+        <translation>कोई उपकरण नहीं मिला</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
         <source>Model: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>मॉडल: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="153"/>
         <source>Status: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>स्थिति: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation type="unfinished"></translation>
+        <translation>स्कैन</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>ऑफलाइन</translation>
     </message>
 </context>
 <context>
@@ -221,67 +221,67 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>उपकरण पथ प्राप्त नहीं किया जा सकता, रिज़ॉल्यूशन सेट नहीं किया जा सकता</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation type="unfinished"></translation>
+        <translation>उपकरण को फिर से खोलने में विफल</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>अनुरोधित रिज़ॉल्यूशन सेट करने में विफल</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation type="unfinished"></translation>
+        <translation>मेमोरी मैपिंग में विफल</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation type="unfinished"></translation>
+        <translation>उपकरण सही तरीके से शुरू नहीं किया गया</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation type="unfinished"></translation>
+        <translation>बफर शुरू करने में विफल</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation type="unfinished"></translation>
+        <translation>बफर को फिर से शुरू करने में विफल</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>बफर को एंक्यूअल करने में विफल: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>वीडियो स्ट्रीम शुरू करने में विफल: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation type="unfinished"></translation>
+        <translation>उपकरण शुरू नहीं किया गया या अमान्य फ़ाइल डिस्क्रिप्टर</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation type="unfinished"></translation>
+        <translation>वीडियो स्ट्रीम शुरू करने में विफल, कैप्चर में विफल</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation type="unfinished"></translation>
+        <translation>छवि फ्रेम प्राप्त नहीं किया जा सकता</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation type="unfinished"></translation>
+        <translation>मान्य छवि कैप्चर नहीं किया जा सकता, कैमरा कनेक्शन की जांच करें</translation>
     </message>
 </context>
 </TS>

@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Scanner Manager estas skanilo kiu subtenas plurajn skanilojn</translation>
+        <translation>Scanner Manager estas ilo por skanado kiu subtenas plurajn skanajn aparatojn</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>Ŝargante...</translation>
+        <translation>Ŝtariĝante...</translation>
     </message>
 </context>
 <context>
@@ -32,12 +32,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>Ŝargante aparatojn...</translation>
+        <translation>Ŝtariĝante aparatojn...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>Opendante aparato...</translation>
+        <translation>Malfermiĝante aparato...</translation>
     </message>
 </context>
 <context>
@@ -45,7 +45,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>Ŝanĝoj por skanado</translation>
+        <translation>Skanaj Aŭgajoj</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
@@ -55,7 +55,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>Kolora reĝimo</translation>
+        <translation>Kolora Modo</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
@@ -70,22 +70,22 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>Vidu skanitan bildon</translation>
+        <translation>Vidu Skanitan Bildon</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>La historio de skanado montrigos ĉi tie</translation>
+        <translation>La skanhistorio montrigos ĉi tie</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>Ŝanĝo por skanado</translation>
+        <translation>Skanmodo</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>Plata tablo</translation>
+        <translation>Plata plata</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
@@ -100,12 +100,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>Griseco</translation>
+        <translation>Grayscale</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>Nigra kaj blanka</translation>
+        <translation>Nigra Bian</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
@@ -115,17 +115,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>Inicialigante previzon...</translation>
+        <translation>Inicialigante antaŭvidon...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>Neniu previzo disponebla</translation>
+        <translation>Antaŭvida bildo de aparato ne disponebla</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>Neniu previzibila bildo</translation>
+        <translation>Neniu antaŭvida bildo</translation>
     </message>
 </context>
 <context>
@@ -139,13 +139,13 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>Neniu skanilo troveble. Eblejaj solvoj:
-1. Kontrolu, ke skanilo estas konektita kaj ligita
-2. Kunlaboru komandon: sudo gpasswd -a $USER scanner
+        <translation>Neniu skanaj aparatoj troveble. Eblejaj solvoj:
+1. Kontrolu, ĉu skanilo estas konektita kaj ligita
+2. Ekzekutu komandon: sudo gpasswd -a $USER scanner
 3. Refarigu SANE: sudo service saned restart
-4. Instalu bezonatan kondukilo: sudo apt-get install libsane-extras
-5. Por reto skaniloj, kontrolu retnan konfiguron
-6. Rekonektu USB kabelon aŭ refarigu komputilon</translation>
+4. Instalu bezonatan konduktan paketon: sudo apt-get install libsane-extras
+5. Por reto skaniloj, kontrolu reton konfiguradon
+6. Rekonektu USB kabelon aŭ refarigu komputeron</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
@@ -155,7 +155,7 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Malsukcesis akiri skanilo-parametrojn: %1</translation>
+        <translation>Malsukcesis akiri skanajn parametron: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
@@ -165,7 +165,7 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Malsukcesis konservi testbildon</translation>
+        <translation>Malsukcesis konservi testan bildon</translation>
     </message>
 </context>
 <context>
@@ -173,7 +173,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>Skanilo-aparatoj</translation>
+        <translation>Skanaj Aparatoj</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
@@ -183,7 +183,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>Malfata</translation>
+        <translation>Malfunkci</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
@@ -193,7 +193,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>Neniu aparato troviĝis</translation>
+        <translation>Neniu aparatoj troviĝis</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
@@ -221,42 +221,42 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>Ne eblas ricevi la vojon de la aparato, ne eblas agordi la rezolucio</translation>
+        <translation>Ne eblas ricevi la vojon de la aparato, ne eblas fariĝi la rezolucio</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>Malsukcesis reapertri la aparaton</translation>
+        <translation>Malsukcesis rekomenci la aparato</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>Malsukcesis agordi la deziratan rezolucio</translation>
+        <translation>Malsukcesis fari la demandatan rezolucio</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>Memoraportado malsukcesis</translation>
+        <translation>Memoro kaptado malsukcesis</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>Aparato ne malbone inicialigis</translation>
+        <translation>Aparato ne bonfiere inicialigis</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>Bufero malsukcesis inicialigi</translation>
+        <translation>Buffero inicialigado malsukcesis</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>Bufero malsukcesis re-inicialigi</translation>
+        <translation>Buffero reinitialigado malsukcesis</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Malsukcesis enkolegi buferon: %1</translation>
+        <translation>Malsukcesis enfiletri bufferon: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
@@ -266,12 +266,12 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Aparato ne inicialigis aŭ nevalida dosierŝtubo</translation>
+        <translation>Aparato ne inicialigis aŭ nevalida dosierkazo</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Malsukcesis komenci videofluon, kapto malsukcesis</translation>
+        <translation>Malsukcesis komenci videofluon, kaptado malsukcesis</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
@@ -281,7 +281,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Malsukcesis kapti validan bildon, bonvolu kontroli kameran konekton</translation>
+        <translation>Malsukcesis kapti validan bildon, bonvolu kontrolli kamera konekton</translation>
     </message>
 </context>
 </TS>

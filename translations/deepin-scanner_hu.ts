@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>A scanner Manager egy szkennereszköz, amely sokféle szkennereszközt támogat</translation>
+        <translation>A scanner Manager egy scanner eszköz, amely sokféle skaner eszközt támogat</translation>
     </message>
 </context>
 <context>
@@ -27,7 +27,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>Szkennerkezelő</translation>
+        <translation>Scanner Manager</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
@@ -45,7 +45,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>Szkenner beállítások</translation>
+        <translation>Skenner beállítások</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
@@ -65,27 +65,27 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>Szkenner</translation>
+        <translation>Skenner</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>Megtekintés szkennerelt kép</translation>
+        <translation>Megtekintés skennerelt kép</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>A szkennerés történet itt jelenik meg</translation>
+        <translation>A skennerelési történet itt jelenik meg</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>Szkenner mód</translation>
+        <translation>Skenner mód</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>Szkennerlap</translation>
+        <translation>Lapfelszín</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
@@ -100,12 +100,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>Fehérje</translation>
+        <translation>Szürkeárnyék</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>Fehér-fekete</translation>
+        <translation>Fehér fekete</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
@@ -139,28 +139,28 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>Nincs szkennereszköz található. Lehetséges megoldások:
-1. Győződjön meg róla, hogy a szkenner csatlakoztatva és bekapcsolva van
+        <translation>Nincs skaner eszköz található. Lehetséges megoldások:
+1. Győződjön meg róla, hogy a skaner csatlakozik és be van kapcsolva
 2. Futtassa a parancsot: sudo gpasswd -a $USER scanner
 3. Indítsa újra a SANE-t: sudo service saned restart
 4. Telepítse a szükséges vezérlőprogramot: sudo apt-get install libsane-extras
-5. Hálószkenner esetén ellenőrizze a hálózati konfigurációt
-6. Újra csatlakoztassa a USB kábelt vagy indítsa újra a számítógépet</translation>
+5. Hálóskaner esetén ellenőrizze a hálózati beállításokat
+6. Visszaépítsen USB kábelt vagy indítsa újra a számítógépet</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Szkenner nem nyitva</translation>
+        <translation>Skaner nem nyitva</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Nem sikerült beolvasni a szkenner paraméterei: %1</translation>
+        <translation>Nem sikerült beolvasni a skaner paraméterei: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Nem sikerült elindítani a szkennerést: %1</translation>
+        <translation>Nem sikerült elindítani a skennerést: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
@@ -173,17 +173,17 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>Szkennereszközök</translation>
+        <translation>Skenner eszközök</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>Szkenner</translation>
+        <translation>Skenner</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>Szabad</translation>
+        <translation>Innállt</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
@@ -231,7 +231,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>A kérésre történő felbontás beállítása sikertelen</translation>
+        <translation>Sikertelen a kérésre alapuló felbontás beállítása</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
@@ -241,47 +241,47 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>Az eszköz nem lett megfelelően inicializálva</translation>
+        <translation>Eszköz nem megfelelően inicializálva</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>A buffer inicializálása sikertelen</translation>
+        <translation>Buffer inicializálása sikertelen</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>A buffer újrainicializálása sikertelen</translation>
+        <translation>Buffer újrainicializálása sikertelen</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>A buffer beillesztése sikertelen: %1</translation>
+        <translation>Sikertelen a buffer beillesztése: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>A videójeladás elindítása sikertelen: %1</translation>
+        <translation>Sikertelen a videó folyam indítása: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Az eszköz nem lett inicializálva vagy érvénytelen fájlleíró</translation>
+        <translation>Eszköz nem inicializálva vagy érvénytelen fájl leíró</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>A videójeladás elindítása sikertelen, a képelfogás nem sikerült</translation>
+        <translation>Sikertelen a videó folyam indítása, a kép elkértetése sikertelen</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>A képkocka lekérdezése sikertelen</translation>
+        <translation>Sikertelen a képkocka megszerzése</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Érvényes képelfogás nem sikerült, kérjük ellenőrizze a kamera csatlakozását</translation>
+        <translation>Sikertelen érvényes kép elkértetése, kérjük ellenőrizze a kamera csatlakozását</translation>
     </message>
 </context>
 </TS>

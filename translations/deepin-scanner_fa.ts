@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>مدیریت اسکنر ابزاری است که به انواع مختلفی از دستگاه‌های اسکن کمک می‌کند</translation>
+        <translation>مدیریت اسکنر ابزاری است که پشتیبانی از انواع مختلف دستگاه‌های اسکن را فراهم می‌کند</translation>
     </message>
 </context>
 <context>
@@ -50,7 +50,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>rozحلت</translation>
+        <translation>جودایی</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
@@ -85,12 +85,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>فلت بید</translation>
+        <translation>فلات‌بید</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation>فرمت ویدیو</translation>
+        <translation>فرمت ویدئو</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
@@ -110,12 +110,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>دستگاه ایجاد نشده است</translation>
+        <translation>دستگاه اولیه‌سازی نشده است</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>در حال ایجاد پیش‌نمایش...</translation>
+        <translation>در حال اولیه‌سازی پیش‌نمایش...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
@@ -125,7 +125,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>تصویر پیش‌نمایش موجود نیست</translation>
+        <translation>هیچ تصویر پیش‌نمایشی وجود ندارد</translation>
     </message>
 </context>
 <context>
@@ -139,13 +139,13 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>هیچ دستگاه اسکنری یافت نشد. راه‌حل‌های ممکن:
-1. مطمئن شوید اسکنر به سیستم متصل و روشن است
+        <translation>هیچ دستگاه اسکنری پیدا نشد. راه‌حل‌های ممکن:
+1. مطمئن شوید اسکنر متصل و روشن است
 2. دستور زیر را اجرا کنید: sudo gpasswd -a $USER scanner
 3. SANE را باز کنید: sudo service saned restart
-4. پکیج سیستم‌عامل مورد نیاز را نصب کنید: sudo apt-get install libsane-extras
+4. بسته نرم‌افزار لازم را نصب کنید: sudo apt-get install libsane-extras
 5. برای اسکنرهای شبکه، تنظیمات شبکه را بررسی کنید
-6. کابل USB را مجدد متصل کنید یا راکتیو کامپیوتر را باز کنید</translation>
+6. کابل USB را دوباره وصل کنید یا راکست کامپیوتر</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
@@ -155,17 +155,17 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>موفق به دریافت پارامترهای اسکنر نشد: %1</translation>
+        <translation>اشکال در دریافت پارامترهای اسکنر: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>موفق به شروع اسکن نشد: %1</translation>
+        <translation>اشکال در شروع اسکن: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>موفق به ذخیره تصویر تست نشد</translation>
+        <translation>اشکال در ذخیره تصویر تست</translation>
     </message>
 </context>
 <context>
@@ -188,7 +188,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation>کامیرا</translation>
+        <translation>کاميرای وب</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
@@ -213,7 +213,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
         <source>Offline</source>
-        <translation>آفلاین</translation>
+        <translation>آفلاين</translation>
     </message>
 </context>
 <context>
@@ -226,62 +226,62 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>باز کردن دستگاه موفقیت آمیز نبود</translation>
+        <translation>باز کردن دستگاه با شکست مواجه شد</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>رزولوشن مورد نظر تنظیم نمی‌شود</translation>
+        <translation>رزولوشن درخواستی تنظیم نشد</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>مپ کردن حمایتی موفقیت آمیز نبود</translation>
+        <translation>مپینگ حافظه با شکست مواجه شد</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>دستگاه به درستی اولیه‌سازی نشده</translation>
+        <translation>دستگاه به درستی ایニشیال شده است</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>اولیه‌سازی بافر موفقیت آمیز نبود</translation>
+        <translation>اینیشیال کردن بفر با شکست مواجه شد</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>اولیه‌سازی مجدد بافر موفقیت آمیز نبود</translation>
+        <translation>اینیشیال دوباره کردن بفر با شکست مواجه شد</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>افزودن بافر به صف موفقیت آمیز نبود: %1</translation>
+        <translation>افزودن بفر به صف با شکست مواجه شد: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>شروع جریان ویدئویی موفقیت آمیز نبود: %1</translation>
+        <translation>شروع جریان ویدئو با شکست مواجه شد: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>دستگاه اولیه‌سازی نشده یا فایل دسکریپتور نامعتبر است</translation>
+        <translation>دستگاه ایニشیال نشده یا فایل دسکریپتور نامعتبر است</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>شروع جریان ویدئویی موفقیت آمیز نبود، ثبت تصویر شکست خورد</translation>
+        <translation>شروع جریان ویدئو با شکست مواجه شد، ثبت تصویر با شکست مواجه شد</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>دریافت فریم تصویر موفقیت آمیز نبود</translation>
+        <translation>دریافت فریم تصویر با شکست مواجه شد</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>ثبت تصویر معتبر شکست خورد، لطفاً اتصال کامیرا را بررسی کنید</translation>
+        <translation>تصویر معتبری ثبت نشد، لطفاً اتصال کاميرای را بررسی کنید</translation>
     </message>
 </context>
 </TS>

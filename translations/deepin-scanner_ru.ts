@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Scanner Manager — это инструмент сканирования, поддерживающий различные сканирующие устройства</translation>
+        <translation>Scanner Manager - это инструмент для сканирования, поддерживающий различные сканирующие устройства</translation>
     </message>
 </context>
 <context>
@@ -75,7 +75,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>История сканирования будет отображена здесь</translation>
+        <translation>История сканирования будет отображаться здесь</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
@@ -85,12 +85,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>Плоский сканер</translation>
+        <translation>Плоское сканирование</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation>Формат видео</translation>
+        <translation>Видеоформат</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
@@ -141,16 +141,16 @@
 6. Reconnect USB cable or restart computer</source>
         <translation>Сканирующих устройств не найдено. Возможные решения:
 1. Убедитесь, что сканер подключен и включен
-2. Запустите команду: sudo gpasswd -a $USER scanner
+2. Выполните команду: sudo gpasswd -a $USER scanner
 3. Перезапустите SANE: sudo service saned restart
 4. Установите необходимый драйвер: sudo apt-get install libsane-extras
 5. Для сетевых сканеров проверьте настройки сети
-6. Переподключите USB-кабель или перезапустите компьютер</translation>
+6. Переподключите кабель USB или перезагрузите компьютер</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Сканирование не начато</translation>
+        <translation>Сканер не открыт</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
@@ -178,12 +178,12 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>Сканирование</translation>
+        <translation>Сканер</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>Ожидание</translation>
+        <translation>Неактивный</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
@@ -208,7 +208,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>Сканировать</translation>
+        <translation>Сканирование</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
@@ -221,27 +221,27 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>Невозможно получить путь устройства, невозможно установить разрешение</translation>
+        <translation>Невозможно получить путь к устройству, невозможно установить разрешение</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>Не удалось перезапустить устройство</translation>
+        <translation>Не удалось переоткрыть устройство</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>Не удалось установить запрошенное разрешение</translation>
+        <translation>Не удалось установить запрашиваемое разрешение</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>Не удалось создать отображение памяти</translation>
+        <translation>Не удалось выполнить отображение памяти</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>Устройство не было инициализировано должным образом</translation>
+        <translation>Устройство не инициализировано должным образом</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
@@ -271,7 +271,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Не удалось запустить видеопоток, запись не удалась</translation>
+        <translation>Не удалось запустить видеопоток, захват не удался</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
@@ -281,7 +281,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Не удалось зафиксировать корректное изображение, пожалуйста, проверьте подключение камеры</translation>
+        <translation>Не удалось захватить корректное изображение, пожалуйста, проверьте соединение с камерой</translation>
     </message>
 </context>
 </TS>

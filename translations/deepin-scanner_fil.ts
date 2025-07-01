@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Ang Scanner Manager ay isang tool para sa scanner na nagtataguyod ng iba't ibang mga scanning devices</translation>
+        <translation>Ang Scanner Manager ay isang tool para sa scanner na suporta ang iba&apos;t-ibang mga scanning devices</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>Naglalagay...</translation>
+        <translation>Nagloload...</translation>
     </message>
 </context>
 <context>
@@ -32,12 +32,12 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>Naglalagay ng mga device...</translation>
+        <translation>Nagloload ng mga device...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>Nagpapalabas ng device...</translation>
+        <translation>Nagbubuksan ng device...</translation>
     </message>
 </context>
 <context>
@@ -45,17 +45,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>Mga Setting ng Pag-scan</translation>
+        <translation>Mga Setting ng Scan</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>Resolusyon</translation>
+        <translation>Resolution</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>Mga Mode ng Kulay</translation>
+        <translation>Mga Mode ng Color</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
@@ -65,22 +65,22 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>I-scan</translation>
+        <translation>Scan</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>Pangunahing Larawan ng Pag-scan</translation>
+        <translation>Panoorin ang Larawan na Nai-scan</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>Ang kasaysayan ng pag-scan ay ipapakita dito</translation>
+        <translation>Ang kasaysayan ng scan ay isusumite dito</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>Mga Mode ng Pag-scan</translation>
+        <translation>Mga Mode ng Scan</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
@@ -95,7 +95,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Color</source>
-        <translation>Kulay</translation>
+        <translation>Color</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
@@ -115,12 +115,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>Naglalagay ng preview...</translation>
+        <translation>Naglalapat ng preview...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>Hindi magagamit ang preview ng device</translation>
+        <translation>Ang preview ng device ay hindi magagamit</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
@@ -140,32 +140,32 @@
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
         <translation>Walang nakita na scanner devices. Mga posibleng solusyon:
-1. Siguraduhin na konektado at nakapagana ang scanner
+1. Siguraduhin na mayroon kang konektadong scanner at nakapagana
 2. I-execute ang command: sudo gpasswd -a $USER scanner
 3. I-restart ang SANE: sudo service saned restart
-4. I-install ang kinakailangang package ng driver: sudo apt-get install libsane-extras
-5. Para sa mga network scanner, tingnan ang network configuration
+4. I-install ang kinakailangang driver package: sudo apt-get install libsane-extras
+5. Para sa network scanners, tingnan ang network configuration
 6. I-reconnect ang USB cable o i-restart ang computer</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Hindi pa nakabuksan ang scanner</translation>
+        <translation>Ang scanner ay hindi nabuksan</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Nagkagawa ng error sa pagkuha ng scanner parameters: %1</translation>
+        <translation>Nagkamalay ang scanner parameters: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Nagkagawa ng error sa pagsimula ng scan: %1</translation>
+        <translation>Nagkamalay ang pagmamarka ng scan: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Nagkagawa ng error sa pag-save ng test image</translation>
+        <translation>Nagkamalay ang pag-save ng test image</translation>
     </message>
 </context>
 <context>
@@ -183,7 +183,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>Wala pang aktibo</translation>
+        <translation>Wala</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
@@ -193,7 +193,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>Walang mga device na nakita</translation>
+        <translation>Walang mga device</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
@@ -203,7 +203,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="153"/>
         <source>Status: %1</source>
-        <translation>Sukat: %1</translation>
+        <translation>Status: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
@@ -221,17 +221,17 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>Hindi maaaring makuha ang landas ng device, hindi maaaring i-set ang resolusyon</translation>
+        <translation>Hindi maaaring makuha ang path ng device, hindi maaaring itakda ang resolution</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>Nagkaroon ng error sa pag-reopen ng device</translation>
+        <translation>Nagkaroon ng error sa pag-ibayon ng device</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>Nagkaroon ng error sa pag-set ng kinakailangang resolusyon</translation>
+        <translation>Nagkaroon ng error sa pag-ibayon ng resolution</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
@@ -241,22 +241,22 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>Hindi maayos na inisyalize ang device</translation>
+        <translation>Hindi naka-setup nang tama ang device</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>Nagkaroon ng error sa pag-init ng buffer</translation>
+        <translation>Nagkaroon ng error sa pag-setup ng buffer</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>Nagkaroon ng error sa pag-reinit ng buffer</translation>
+        <translation>Nagkaroon ng error sa pag-ibayon ng buffer</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Nagkaroon ng error sa pag-enqueue ng buffer: %1</translation>
+        <translation>Nagkaroon ng error sa pag-ibayon ng buffer: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
@@ -266,12 +266,12 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Hindi inisyalize ang device o hindi wastong file descriptor</translation>
+        <translation>Hindi naka-setup ang device o walidong file descriptor</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Nagkaroon ng error sa pag-start ng video stream, pagkapagboto ay napatagalan</translation>
+        <translation>Nagkaroon ng error sa pag-start ng video stream, pag-capture ay naging mali</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
@@ -281,7 +281,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Nagkaroon ng error sa pagkapagboto ng valid image, tignan ang koneksyong camera</translation>
+        <translation>Nagkaroon ng error sa pag-capture ng valid image, tignan ang koneksyon sa camera</translation>
     </message>
 </context>
 </TS>
