@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Skenerių valdymo programa yra skenerių įrankis, kuris palaiko kelių skenerių įrenginių</translation>
+        <translation>Skenerių valdymo įrankis yra skenerių įrankis, kuris palaiko įvairius skeneriavimo įrenginius</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>Kraunama...</translation>
+        <translation>Įkeliamas...</translation>
     </message>
 </context>
 <context>
@@ -32,7 +32,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>Kraunama įrenginiai...</translation>
+        <translation>Įkeliami įrenginiai...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
@@ -45,12 +45,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>Skanavimo nustatymai</translation>
+        <translation>Skeneriavimo nustatymai</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>Raiška</translation>
+        <translation>Raiškumas</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
@@ -65,27 +65,27 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>Skanuoti</translation>
+        <translation>Skeneriuoti</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>Peržiūrėti skanuotą vaizdą</translation>
+        <translation>Peržiūrėti skeneriuotą vaizdą</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>Skanavimo istorija bus rodoma čia</translation>
+        <translation>Skeneriuotojo istorija bus rodoma čia</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>Skanavimo režimas</translation>
+        <translation>Skeneriavimo režimas</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>Pločių skeneris</translation>
+        <translation>Plakė</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
@@ -100,12 +100,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>Tamsiai juoda</translation>
+        <translation>Tamsi šviesa</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>Juoda ir baltas</translation>
+        <translation>Balta juoda</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
@@ -115,12 +115,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>Inicijuoja peržiūrą...</translation>
+        <translation>Inicijavimas peržiūros...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>Neprieinama įrenginio peržiūra</translation>
+        <translation>Įrenginio peržiūra nėra prieinama</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
@@ -143,14 +143,14 @@
 1. Patikrinkite, ar skeneris yra prisijungęs ir įjungęs
 2. Paleiskite komandą: sudo gpasswd -a $USER scanner
 3. Paleiskite SANE: sudo service saned restart
-4. Įdiekite reikiamą vartotojo paketą: sudo apt-get install libsane-extras
-5. Tinklo skeneriams patikrinkite tinklo konfigūraciją
-6. Prisijunkite prie USB kabelio arba išjunkite kompiuterį</translation>
+4. Įdiekite reikiamą įrenginio paketą: sudo apt-get install libsane-extras
+5. Jei naudojate tinklo skenerius, patikrinkite tinklo konfigūraciją
+6. Prisijunkite USB kabelį arba paleiskite kompiuterį</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Skeneris neatsiųstas</translation>
+        <translation>Skeneris neatsidarė</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
@@ -160,12 +160,12 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Nepavyko paleisti skanavimą: %1</translation>
+        <translation>Nepavyko paleisti skeneriavimo: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Nepavyko išsaugoti testinio vaizdo</translation>
+        <translation>Nepavyko išsaugoti testo vaizdo</translation>
     </message>
 </context>
 <context>
@@ -183,7 +183,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>Nepalaikoma</translation>
+        <translation>Nepriklausoma</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
@@ -193,7 +193,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>Nerasta joki įrenginys</translation>
+        <translation>Nerasta jokio įrenginio</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
@@ -213,7 +213,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
         <source>Offline</source>
-        <translation>Offline</translation>
+        <translation>Atjungta</translation>
     </message>
 </context>
 <context>
@@ -221,7 +221,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>Nepavyko gauti įrenginio kelių, nepavyko nustatyti rezoliucijos</translation>
+        <translation>Negalima gauti įrenginio kelių, negalima nustatyti skaliavimo</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
@@ -231,32 +231,32 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>Nepavyko nustatyti prašytos rezoliucijos</translation>
+        <translation>Nepavyko nustatyti prašytos skaliavimo</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>Atminties kartojimo nepavyko</translation>
+        <translation>Atminties karta nebaigėsi</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>Įrenginys neteisingai inicijuotas</translation>
+        <translation>Įrenginys neteisingai inicijavimas</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>Buferio inicijavimas nepavyko</translation>
+        <translation>Buferis nebaigėsi inicijavimo</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>Buferio atkūrimas nepavyko</translation>
+        <translation>Buferis nebaigėsi atkūrimo</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Nepavyko įterpti buferio: %1</translation>
+        <translation>Nepavyko įtraukti buferio: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
@@ -266,12 +266,12 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Įrenginys neinicijuotas arba neteisingas failo aprašymas</translation>
+        <translation>Įrenginys neinicializuotas arba neteisingas failo aprašymas</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Nepavyko paleisti vaizdo srauto, užfiksuoti vaizdas nepavyko</translation>
+        <translation>Nepavyko paleisti vaizdo srautą, įrašymas nepavyko</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
@@ -281,7 +281,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Nepavyko užfiksuoti galiojančio vaizdo, prašome patikrinti kamerą</translation>
+        <translation>Nepavyko įrašyti galiojančio vaizdo, peržiūrėkite kamerą ryšį</translation>
     </message>
 </context>
 </TS>

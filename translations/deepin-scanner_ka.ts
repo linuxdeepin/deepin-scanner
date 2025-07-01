@@ -6,12 +6,12 @@
     <message>
         <location filename="../src/main.cpp" line="34"/>
         <source>Deepin Scanner</source>
-        <translation>დეიპინ სკანერი</translation>
+        <translation>დეპინ სკანერი</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>სკანერის მენეჯერი სკანერის ინსტრუმენტია, რომელიც ხელს უწყობს სხვადასხვა სკანირების მოწყობილობების მხარდაჭერას</translation>
+        <translation>სკანერის მენეჯერი არის სკანერის ინსტრუმენტი, რომელიც მხარდაჭერის საშინა სკანერის მოწყობილოებებს</translation>
     </message>
 </context>
 <context>
@@ -32,7 +32,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>ჩამოტვირთვა მოწყობილობები...</translation>
+        <translation>ჩამოტვირთვა მოწყობილოებების...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
@@ -75,7 +75,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>სკანირების ისტორია ამ ადგილზე გამოჩნდება</translation>
+        <translation>სკანირების ისტორია ჩანახულია აქ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
@@ -105,22 +105,22 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>შავ-თეთრი</translation>
+        <translation>შესაბამისი ფერი</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>მოწყობილობა არ არის დაწყებული</translation>
+        <translation>მოწყობილობა არ არის შესახსნელი</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>პრევიევის დაწყება...</translation>
+        <translation>პრევიევის შესახსნელის დასაწყებად...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>მოწყობილობის პრევიევი ხელმისაწვდომი არ არის</translation>
+        <translation>მოწყობილობის პრევიევი არ არის ხელმისაწვდომი</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
@@ -139,13 +139,13 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>სკანერის მოწყობილობები არ მოიძებნა. შესაძლებელი ამოხსნები:
-1. დარწმუნდით, რომ სკანერი შეესაბამება და მუშაობს
-2. შესრულეთ ბრძანება: sudo gpasswd -a $USER scanner
-3. ახალი სახელმწიფო სერვისის გასასვლელად: sudo service saned restart
-4. დააყენეთ საჭირო დრაივერის პაკეტი: sudo apt-get install libsane-extras
-5. სინამდვილეში სკანერებისთვის, შეამოწმეთ ქსელის კონფიგურაცია
-6. დააკავშირეთ თავიდან USB კაბელი ან გადატვირთეთ კომპიუტერი</translation>
+        <translation>სკანერის მოწყობილოებები არ არის ნახსენიერებული. შესაძლო ამონახსნები:
+1. დარწმუნდით, რომ სკანერი შეერთდება და მუშაობს
+2. შესატანი ბრძანება: sudo gpasswd -a $USER scanner
+3. გადატვირთეთ SANE: sudo service saned restart
+4. დაყენეთ საჭირო დრაივების პაკეტი: sudo apt-get install libsane-extras
+5. სინამდვილესთან ერთად სკანერებისთვის, შეამოწმეთ ქსელის კონფიგურაცია
+6. უკან დააკავშირეთ USB კაბელი ან გადატვირთეთ კომპიუტერი</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
@@ -155,17 +155,17 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>სკანერის პარამეტრების მიღება ვერ მოხდა: %1</translation>
+        <translation>სკანერის პარამეტრების მიღება წარუმატებლად დასრულდა: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>სკანირების დაწყება ვერ მოხდა: %1</translation>
+        <translation>სკანირების დასაწყებად წარუმატებლად დასრულდა: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>ტესტის სურათის შენახვა ვერ მოხდა</translation>
+        <translation>ტესტის სურათის შენახვა წარუმატებლად დასრულდა</translation>
     </message>
 </context>
 <context>
@@ -173,7 +173,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>სკანერის მოწყობილობები</translation>
+        <translation>სკანერის მოწყობილოებები</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
@@ -183,37 +183,37 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation type="unfinished"></translation>
+        <translation>მოძრაობის მომხმარებელი</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation type="unfinished"></translation>
+        <translation>ვებკამერა</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation type="unfinished"></translation>
+        <translation>მას არ არის მონაცემები</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
         <source>Model: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>მოდელი: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="153"/>
         <source>Status: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>სტატუსი: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation type="unfinished"></translation>
+        <translation>სკანირება</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>ოფლაინ</translation>
     </message>
 </context>
 <context>
@@ -221,67 +221,67 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>მოწყობილობის გზას არ არის მიღებული, საშინაულებას არ არის მითიშვალი</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation type="unfinished"></translation>
+        <translation>მოწყობილობის ხელახლა გახსნĂს ვერ მიაღწევს</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>მოთხოვნილი საშინაულების გადასაყოფის გადასაყოფის გადასაყოფის დამატებას ვერ მიაღწევს</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation type="unfinished"></translation>
+        <translation>მეხსიერების მართვის დამატებას ვერ მიაღწევს</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation type="unfinished"></translation>
+        <translation>მოწყობილობა უკან არ არის შესახსნელი</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation type="unfinished"></translation>
+        <translation>ბუფერის შესახსნელის დამატშვალის ვერ მიაღწევს</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation type="unfinished"></translation>
+        <translation>ბუფერის ხელახლა შესახსნელის დამატებას ვერ მიაღწევს</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ბუფერის დამატებას ვერ მიაღწევს: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ვიდეო სტრეამის დასაწყებად ვერ მიაღწევს: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation type="unfinished"></translation>
+        <translation>მოწყობილობა არ არის შესახსნელი ან უნარის მოწყობილობა არასწორია</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation type="unfinished"></translation>
+        <translation>ვიდეო სტრეამის დასაწყებად ვერ მიაღწევს, დამატება ვერ მიაღწევს</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation type="unfinished"></translation>
+        <translation>სურათის ფრეიმის მიღებას ვერ მიაღწევს</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation type="unfinished"></translation>
+        <translation>საშინაულების საშინაულებას ვერ მიაღწევს, გთავაზობით შეამოწმოთ კამერის შეერთება</translation>
     </message>
 </context>
 </TS>

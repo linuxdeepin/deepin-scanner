@@ -27,7 +27,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>Scanner Manager</translation>
+        <translation>Managerul de Scanner</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
@@ -45,7 +45,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>Setări scanare</translation>
+        <translation>Setări Scanare</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
@@ -55,12 +55,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>Modul de culoare</translation>
+        <translation>Modul de Culori</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>Format imagine</translation>
+        <translation>Formatul Imaginei</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
@@ -70,7 +70,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>Vizualizare imagine scanată</translation>
+        <translation>Vizualizare Imagine Scansionată</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
@@ -80,27 +80,27 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>Mod scanare</translation>
+        <translation>Mod Scanare</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>Plată</translation>
+        <translation>Placa plată</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation>Format video</translation>
+        <translation>Formatul Video</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Color</source>
-        <translation>Culoare</translation>
+        <translation>Culori</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>Albului</translation>
+        <translation>Albului-negrui</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
@@ -141,7 +141,7 @@
 6. Reconnect USB cable or restart computer</source>
         <translation>Nu s-au găsit dispozitive de scanare. Soluții posibile:
 1. Asigurați-vă că scannerul este conectat și pornit
-2. Rulați comanda: sudo gpasswd -a $USER scanner
+2. Rulați comanda: sudo gpassword -a $USER scanner
 3. Reporniți SANE: sudo service saned restart
 4. Instalați pachetul de driver necesar: sudo apt-get install libsane-extras
 5. Pentru scannerii de rețea, verificați configurarea rețelei
@@ -155,17 +155,17 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Eșec la obținerea parametrilor scannerului: %1</translation>
+        <translation>Eroare la obținerea parametrilor scannerului: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Eșec la pornirea scanării: %1</translation>
+        <translation>Eroare la începerea scanării: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Eșec la salvarea imaginii de test</translation>
+        <translation>Eroare la salvarea imaginii de test</translation>
     </message>
 </context>
 <context>
@@ -173,7 +173,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>Dispozitive de scanare</translation>
+        <translation>Dispozitive de Scanner</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
@@ -203,12 +203,12 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="153"/>
         <source>Status: %1</source>
-        <translation>Status: %1</translation>
+        <translation>Stare: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>Scanează</translation>
+        <translation>Scan</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
@@ -226,17 +226,17 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>Eșecul redobândirii dispozitivului</translation>
+        <translation>Eșec în redobândirea dispozitivului</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>Eșecul setării rezoluției solicitate</translation>
+        <translation>Eșec în setarea rezoluției solicitate</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>Eșecul mapării memoriei</translation>
+        <translation>Eșec în maparea memoriei</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
@@ -246,22 +246,22 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>Inițializarea bufferului a eșuat</translation>
+        <translation>Eșec în inițializarea bufferului</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>Reinițializarea bufferului a eșuat</translation>
+        <translation>Eșec în reinițializarea bufferului</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Eșecul adăugării bufferului în coadă: %1</translation>
+        <translation>Eșec în adăugarea bufferului în coadă: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>Eșecul pornirii fluxului video: %1</translation>
+        <translation>Eșec în pornirea fluxului video: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
@@ -271,17 +271,17 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Eșecul pornirii fluxului video, capturarea a eșuat</translation>
+        <translation>Eșec în pornirea fluxului video, capturarea a eșuat</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>Eșecul obținerii frame-ului de imagine</translation>
+        <translation>Eșec în obținerea frame-ului de imagine</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Eșecul capturării unei imagini valide, vă rugăm să verificați conexiunea cu camerea</translation>
+        <translation>Eșec în capturarea unei imagini valide, vă rugăm să verificați conexiunea cu camera</translation>
     </message>
 </context>
 </TS>

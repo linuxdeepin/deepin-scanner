@@ -85,7 +85,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>Bàn phẳng</translation>
+        <translation>Bàn chải</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
@@ -110,17 +110,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>Thiết bị chưa được khởi tạo</translation>
+        <translation>Thiết bị chưa được khởi động</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>Đang khởi tạo bản xem trước...</translation>
+        <translation>Đang khởi động hình ảnh xem trước...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>Không có bản xem trước thiết bị</translation>
+        <translation>Hình ảnh xem trước thiết bị không khả dụng</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
@@ -143,9 +143,9 @@
 1. Đảm bảo thiết bị quét được kết nối và bật nguồn
 2. Chạy lệnh: sudo gpasswd -a $USER scanner
 3. Khởi động lại SANE: sudo service saned restart
-4. Cài đặt gói trình điều khiển cần thiết: sudo apt-get install libsane-extras
-5. Đối với thiết bị quét mạng, kiểm tra cấu hình mạng
-6. Nối lại dây USB hoặc khởi động lại máy tính</translation>
+4. Cài đặt gói điều khiển cần thiết: sudo apt-get install libsane-extras
+5. Đối với thiết bị quét mạng, hãy kiểm tra cấu hình mạng
+6. Kết nối lại cáp USB hoặc khởi động lại máy tính</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
@@ -165,7 +165,7 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Không thể lưu hình ảnh kiểm tra</translation>
+        <translation>Không thể lưu hình ảnh thử</translation>
     </message>
 </context>
 <context>
@@ -183,17 +183,17 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>Giải phóng</translation>
+        <translation>Đang chờ</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation>Webcam</translation>
+        <translation>Máy quay phim</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>Không tìm thấy thiết bị nào</translation>
+        <translation>Không có thiết bị nào được tìm thấy</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
@@ -231,7 +231,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>Không thể thiết lập độ phân giải yêu cầu</translation>
+        <translation>Không thể thiết lập độ phân giải đã yêu cầu</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
@@ -241,22 +241,22 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>Thiết bị không được khởi tạo đúng cách</translation>
+        <translation>Thiết bị không được khởi initializing đúng cách</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>Khởi tạo bộ đệm thất bại</translation>
+        <translation>Khởi tạo buffer thất bại</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>Khởi tạo lại bộ đệm thất bại</translation>
+        <translation>Khởi tạo lại buffer thất bại</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Không thể thêm bộ đệm vào hàng đợi: %1</translation>
+        <translation>Không thể thêm buffer vào hàng đợi: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
@@ -266,7 +266,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Thiết bị không được khởi tạo hoặc mô tả tệp không hợp lệ</translation>
+        <translation>Thiết bị chưa được khởi initializing hoặc mô tả tệp không hợp lệ</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
@@ -281,7 +281,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Không thể chụp ảnh hợp lệ, vui lòng kiểm tra kết nối camera</translation>
+        <translation>Không thể ghi hình ảnh hợp lệ, vui lòng kiểm tra kết nối máy quay</translation>
     </message>
 </context>
 </TS>

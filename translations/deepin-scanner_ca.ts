@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Scanner Manager és una eina de scanner que suporta una varietat d'equipaments de scanning</translation>
+        <translation>El gestor de escaners és una eina d&apos;escaneig que suporta una varietat d&apos;equipaments d&apos;escaneig</translation>
     </message>
 </context>
 <context>
@@ -27,7 +27,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>Scanner Manager</translation>
+        <translation>Gestor d&apos;escaners</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
@@ -37,7 +37,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>Obreix dispositiu...</translation>
+        <translation>Obert dispositiu...</translation>
     </message>
 </context>
 <context>
@@ -45,7 +45,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>Configuració de Scan</translation>
+        <translation>Configuració d&apos;escaneig</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
@@ -60,32 +60,32 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>Format d'imatge</translation>
+        <translation>Format d&apos;imatge</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>Scan</translation>
+        <translation>Escanejar</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>Veure imatge escanejada</translation>
+        <translation>Veure la imatge escanejada</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>La història de scans es mostrarà aquí</translation>
+        <translation>La història d&apos;escaneig es mostrarà aquí</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>Mode de scan</translation>
+        <translation>Mode d&apos;escaneig</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>Taula de planxa</translation>
+        <translation>Escàner de taula</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
@@ -110,22 +110,22 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>Dispositiu no inicialitzat</translation>
+        <translation>El dispositiu no s&apos;ha inicialitzat</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>Iniciant vista prèvia...</translation>
+        <translation>Inicialitzant la vista prèvia...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>Vista prèvia del dispositiu no disponible</translation>
+        <translation>La vista prèvia del dispositiu no està disponible</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>Sense imatge de vista prèvia</translation>
+        <translation>No hi ha imatge de vista prèvia</translation>
     </message>
 </context>
 <context>
@@ -139,28 +139,28 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>No s'han trobat dispositius de scanner. Solucions possibles:
-1. Assegureu-vos que el scanner està connectat i encès
-2. Executeu el comandament: sudo gpasswd -a $USER scanner
-3. Reinicieu SANE: sudo service saned restart
-4. Instaleu el paquet de drivers necessari: sudo apt-get install libsane-extras
-5. Per a scanners de xarxa, comproveu la configuració de xarxa
-6. Reconnecteu el cable USB o reinicieu la màquina</translation>
+        <translation>No s&apos;han trobat dispositius d&apos;escaneig. Solucions possibles:
+1. Assegurar-se que l&apos;escaner està connectat i encès
+2. Executar el comandament: sudo gpasswd -a $USER scanner
+3. Reiniciar SANE: sudo service saned restart
+4. Instal·lar el paquet de controlador necessari: sudo apt-get install libsane-extras
+5. Per a escaners de xarxa, comprovar la configuració de xarxa
+6. Reconnectar el cable USB o reiniciar el dispositiu</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Scanner no obert</translation>
+        <translation>L&apos;escaner no s&apos;ha obert</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Ha fallat obtenir els paràmetres del scanner: %1</translation>
+        <translation>Ha fallat obtenir els paràmetres de l&apos;escaner: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Ha fallat iniciar el scan: %1</translation>
+        <translation>Ha fallat iniciar l&apos;escaneig: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
@@ -173,12 +173,12 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>Dispositius de scanner</translation>
+        <translation>Dispositius d&apos;escaneig</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>Scanner</translation>
+        <translation>Escaner</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
@@ -193,7 +193,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>No s'han trobat dispositius</translation>
+        <translation>No s&apos;han trobat dispositius</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
@@ -208,7 +208,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>Escaneig</translation>
+        <translation>Escanejar</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
@@ -221,17 +221,17 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>No es pot obtenir la ruta del dispositiu, no es pot configurar la resolució</translation>
+        <translation>No es pot obtenir la ruta del dispositiu, no es pot ajustar la resolució</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>Ha fallat la reapertura del dispositiu</translation>
+        <translation>Ha fallat l&apos;obertura de nou del dispositiu</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>Ha fallat la configuració de la resolució sol·licitada</translation>
+        <translation>Ha fallat l&apos;establiment de la resolució sol·licitada</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
@@ -241,7 +241,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>El dispositiu no s'ha inicialitzat correctament</translation>
+        <translation>El dispositiu no s&apos;ha inicialitzat correctament</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
@@ -256,32 +256,32 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Ha fallat l'afegiment del buffer a la cua: %1</translation>
+        <translation>Ha fallat l&apos;afegiment del buffer a la cua: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>Ha fallat l'inici del flux de vídeo: %1</translation>
+        <translation>Ha fallat l&apos;inici de la transmissió de vídeo: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>El dispositiu no s'ha inicialitzat o el descriptor de fitxer és invàlid</translation>
+        <translation>El dispositiu no s&apos;ha inicialitzat o el descriptor de fitxer és invàlid</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Ha fallat l'inici del flux de vídeo, la captura ha fallat</translation>
+        <translation>Ha fallat l&apos;inici de la transmissió de vídeo, la captura ha fallat</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>Ha fallat l'obtenció del marc de imatge</translation>
+        <translation>Ha fallat l&apos;obtenció del quadre de la imatge</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Ha fallat la captura d'una imatge vàlida, comproveu la connexió de la càmera</translation>
+        <translation>Ha fallat la captura de la imatge vàlida, si us plau, comprovi la connexió de la càmera</translation>
     </message>
 </context>
 </TS>

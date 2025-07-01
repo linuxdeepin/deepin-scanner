@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Manager ถุงมือสแกนเป็นเครื่องมือสแกนที่รองรับอุปกรณ์สแกนหลายประเภท</translation>
+        <translation>Scanner Manager เป็นเครื่องมือในการสแกนที่รองรับอุปกรณ์สแกนหลายประเภท</translation>
     </message>
 </context>
 <context>
@@ -27,7 +27,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>Manager ถุงมือสแกน</translation>
+        <translation>Scanner Manager</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
@@ -85,12 +85,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>แบบวางแผ่น</translation>
+        <translation>โต๊ะสแกน</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation>รูปแบบวิดีโอ</translation>
+        <translation>รูปร่างวิดีโอ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
@@ -100,12 +100,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>โทนสีเทา</translation>
+        <translation>สีเทา</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>ดำขาว</translation>
+        <translation>ขาวดำ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
@@ -115,12 +115,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>กำลังตั้งค่าภาพตัวอย่าง...</translation>
+        <translation>กำลังตั้งค่าภาพตัวอย่าง</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>ไม่มีภาพตัวอย่างอุปกรณ์</translation>
+        <translation>ภาพตัวอย่างอุปกรณ์ไม่สามารถใช้งานได้</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
@@ -139,18 +139,18 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>ไม่พบอุปกรณ์สแกนใด ๆ วิธีแก้ไขที่เป็นไปได้:
-1. ตรวจสอบว่าอุปกรณ์สแกนได้เชื่อมต่อและเปิดเครื่องแล้ว
+        <translation>ไม่พบอุปกรณ์สแกนใด ๆ อาจมีวิธีแก้ไขดังนี้:
+1. ตรวจสอบว่าอุปกรณ์สแกนได้เชื่อมต่อและเปิดใช้งานแล้ว
 2. รันคำสั่ง: sudo gpasswd -a $USER scanner
-3. เริ่มต้น SANE ใหม่: sudo service saned restart
+3. รีสตาร์ท SANE: sudo service saned restart
 4. ติดตั้งแพ็กเกจขับเคลื่อนที่จำเป็น: sudo apt-get install libsane-extras
 5. สำหรับอุปกรณ์สแกนเครือข่าย ตรวจสอบการตั้งค่าเครือข่าย
-6. ต่อสาย USB ใหม่หรือรีสตาร์ทคอมพิวเตอร์</translation>
+6. ต่อสาย USB ใหม่ หรือรีสตาร์ทคอมพิวเตอร์</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>อุปกรณ์สแกนไม่ได้เปิด</translation>
+        <translation>ไม่สามารถเปิดอุปกรณ์สแกนได้</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
@@ -178,7 +178,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>สแกน</translation>
+        <translation>สแกนเนอร์</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
@@ -193,7 +193,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>ไม่พบอุปกรณ์ใด ๆ</translation>
+        <translation>ไม่พบอุปกรณ์</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
@@ -236,42 +236,42 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>การจับแมปความจำล้มเหลว</translation>
+        <translation>การจับคู่หน่วยความจำล้มเหลว</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>อุปกรณ์ไม่ได้รับการจัดการอย่างถูกต้อง</translation>
+        <translation>อุปกรณ์ไม่ได้รับการตั้งค่าอย่างถูกต้อง</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>การจัดการบัฟเฟอร์ล้มเหลว</translation>
+        <translation>การตั้งค่าบัฟเฟอร์ล้มเหลว</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>การจัดการบัฟเฟอร์ซ้ำล้มเหลว</translation>
+        <translation>การตั้งค่าบัฟเฟอร์ซ้ำล้มเหลว</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>ไม่สามารถเพิ่มบัฟเฟอร์เข้าไปในคิว: %1</translation>
+        <translation>ไม่สามารถเพิ่มบัฟเฟอร์เข้าไปในคิวได้: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>ไม่สามารถเริ่มต้นการถ่ายทอดวิดีโอได้: %1</translation>
+        <translation>ไม่สามารถเริ่มต้นการสตรีมวิดีโอได้: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>อุปกรณ์ไม่ได้รับการจัดการหรือไม่ถูกต้อง file descriptor</translation>
+        <translation>อุปกรณ์ไม่ได้รับการตั้งค่าหรือไม่ถูกต้อง</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>ไม่สามารถเริ่มต้นการถ่ายทอดวิดีโอได้ การถ่ายภาพล้มเหลว</translation>
+        <translation>ไม่สามารถเริ่มต้นการสตรีมวิดีโอได้ การบันทึกล้มเหลว</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
@@ -281,7 +281,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>ไม่สามารถจับภาพที่ถูกต้องได้ กรุณาตรวจสอบการเชื่อมต่อกล้อง</translation>
+        <translation>ไม่สามารถบันทึกภาพที่ถูกต้องได้ กรุณาตรวจสอบการเชื่อมต่อกล้อง</translation>
     </message>
 </context>
 </TS>

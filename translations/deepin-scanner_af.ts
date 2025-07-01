@@ -6,12 +6,12 @@
     <message>
         <location filename="../src/main.cpp" line="34"/>
         <source>Deepin Scanner</source>
-        <translation>Deepin Skanner</translation>
+        <translation>Deepin Scanner</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Skannerbeheerder is 'n skannerinstrument wat verskeie skannerapparate ondersteun</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>Ladende...</translation>
+        <translation>Lading...</translation>
     </message>
 </context>
 <context>
@@ -27,17 +27,17 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>Skannerbeheerder</translation>
+        <translation>Scanner Manager</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>Ladende apparate...</translation>
+        <translation>Lading toerse...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>Ouende apparaat...</translation>
+        <translation>Ouwend toer...</translation>
     </message>
 </context>
 <context>
@@ -45,7 +45,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>Skanninstellings</translation>
+        <translation>Skansinstellings</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
@@ -65,27 +65,27 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>Skann</translation>
+        <translation>Skans</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>Bekyk skanneerde beeld</translation>
+        <translation>Bekyk geskande beeld</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>Skanngeskiedenis sal hier getoon word</translation>
+        <translation>Skansgeskiedenis sal hier getoon word</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>Skannmodus</translation>
+        <translation>Skansmodus</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>Plaat</translation>
+        <translation>Plaatstuk</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
@@ -110,7 +110,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>Apparaat is nie geinitialiseer nie</translation>
+        <translation>Toer is nie geinitialiseer nie</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
@@ -120,7 +120,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>Apparaatvoorbeeld is nie beskikbaar nie</translation>
+        <translation>Toer voorbeeld is nie beskikbaar nie</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
@@ -139,13 +139,13 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>Geen skannerapparate gevind. Moontlike oplossings:
-1. Stel seker skanner is aangesluit en aangemagtig
-2. Voer die opdrag uit: sudo gpasswd -a $USER scanner
-3. Herlaai SANE: sudo service saned restart
-4. Installeer benodigde stuurprogram: sudo apt-get install libsane-extras
-5. Vir netwerkskanner, kyk na netwerkinstellings
-6. Herverbind USB-kabel of herstart rekenaar</translation>
+        <translation>Geen skanner toer gevind. Mogelike oplossings:
+1. Verifieer dat die skanner gekoppel en aangestel is
+2. Druk die opdrag: sudo gpasswd -a $USER scanner
+3. Herstart SANE: sudo service saned restart
+4. Installeer die benodigde stuurprogram: sudo apt-get install libsane-extras
+5. Vir netwerk skanner, kyk na netwerk konfigurasie
+6. Herkoppel USB kabel of herstart rekenaar</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
@@ -155,12 +155,12 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Gefaal om skannerparameters te kry: %1</translation>
+        <translation>Gefaal om skanner parameters te kry: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Gefaal om skann te begin: %1</translation>
+        <translation>Gefaal om skans te begin: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
@@ -173,7 +173,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>Skannerapparate</translation>
+        <translation>Skanner Toer</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
@@ -198,22 +198,22 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
         <source>Model: %1</source>
-        <translation>Model: %1</translation>
+        <translation>Model: %{1}</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="153"/>
         <source>Status: %1</source>
-        <translation>Status: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>Sken</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
         <source>Offline</source>
-        <translation>Offline</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -221,67 +221,67 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>Kan nie die toestelpad kry nie, kan nie resolusie instel nie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>Kan nie die toestel heropen nie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>Kan nie die gevraarde resolusie instel nie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>Gedrag van geheuekaart misluk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>Toestel is nie korrek geinitialiseer nie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>Buffer initialisering misluk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>Buffer herinitialisering misluk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Kan nie die buffer in die wagtrekken nie: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>Kan nie die videostraal begin nie: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Toestel is nie geinitialiseer nie of ongeldige lêerdescriptor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Kan nie die videostraal begin nie, opname misluk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>Kan nie die beeldraam kry nie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Kan nie geldige beeld kry nie, kontroleer assementkamera aansluiting</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

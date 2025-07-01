@@ -6,12 +6,12 @@
     <message>
         <location filename="../src/main.cpp" line="34"/>
         <source>Deepin Scanner</source>
-        <translation>Deepin Tarama</translation>
+        <translation>Deepin Scanner</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Tarama Yöneticisi, çeşitli tarama cihazlarını destekleyen bir tarama aracıdır</translation>
+        <translation>Scanner Manager, tarayıcı bir araçtır ve çeşitli tarama cihazlarını destekler</translation>
     </message>
 </context>
 <context>
@@ -27,7 +27,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>Tarama Yöneticisi</translation>
+        <translation>Scanner Manager</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
@@ -37,7 +37,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>Cihaz açılıyor...</translation>
+        <translation>Cihazı açıyor...</translation>
     </message>
 </context>
 <context>
@@ -70,12 +70,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>Tarama Görseli Görüntüle</translation>
+        <translation>Tarama Yapılan Görüntüyü Görüntüle</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>Tarama tarihi burada gösterilecektir</translation>
+        <translation>Tarama tarihi burada gösterilecek</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
@@ -100,7 +100,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>Gri Tonlamalı</translation>
+        <translation>Gri Tonlama</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
@@ -139,23 +139,23 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>Tarama cihazı bulunamadı. Mümkün çözümler:
-1. Tarama cihazının bağlı ve açık olduğundan emin olun
+        <translation>Tarama cihazı bulunamadı. Olası çözümler:
+1. Tarayıcının bağlı ve açık olduğundan emin olun
 2. Komutu çalıştırın: sudo gpasswd -a $USER scanner
-3. SANE'ı yeniden başlatın: sudo service saned restart
+3. SANE&apos;yi yeniden başlatın: sudo service saned restart
 4. Gerekli sürücü paketini yükleyin: sudo apt-get install libsane-extras
-5. Ağa bağlı tarama cihazları için ağ yapılandırmasını kontrol edin
-6. USB kablosunu tekrar bağlayın veya bilgisayarı yeniden başlatın</translation>
+5. Ağa bağlı tarayıcılar için ağ yapılandırmasını kontrol edin
+6. USB kablosunu yeniden bağlayın veya bilgisayarı yeniden başlatın</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Tarama cihazı açılmadı</translation>
+        <translation>Tarayıcı açılmadı</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Tarama cihazının parametreleri alınamadı: %1</translation>
+        <translation>Tarayıcı parametreleri alınamadı: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
@@ -173,17 +173,17 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>Tarama Cihazları</translation>
+        <translation>Tarayıcı Cihazları</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>Tarama Cihazı</translation>
+        <translation>Tarayıcı</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>Aktif değil</translation>
+        <translation>Boş</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
@@ -208,7 +208,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>Tarama</translation>
+        <translation>Tarayıcı</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
@@ -236,12 +236,12 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>Hafıza haritası oluşturulamadı</translation>
+        <translation>Hafıza haritalaması başarısız oldu</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>Cihaz düzgün şekilde başlatılmadı</translation>
+        <translation>Cihaz düzgün şekilde başlatılamadı</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
@@ -271,7 +271,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Video akışı başlatılamadı, yakalama başarısız</translation>
+        <translation>Video akışı başlatılamadı, yakalama başarısız oldu</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>

@@ -45,7 +45,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>Pengaturan Pemindaian</translation>
+        <translation>Pengaturan Pemindai</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
@@ -65,22 +65,22 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>Pemindaian</translation>
+        <translation>Pemindai</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>Lihat Gambar yang Dipindai</translation>
+        <translation>Lihat Gambar Pemindai</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>Sejarah pemindaian akan ditampilkan di sini</translation>
+        <translation>Sejarah pemindai akan ditampilkan di sini</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>Mode Pemindaian</translation>
+        <translation>Mode Pemindai</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
@@ -100,7 +100,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>Skala abu-abu</translation>
+        <translation>Skala Grayscale</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
@@ -110,12 +110,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>Perangkat belum diinisialisasi</translation>
+        <translation>Perangkat tidak diinisialisasi</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>Memulai pratinjau...</translation>
+        <translation>Menginisialisasi pratinjau...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
@@ -139,13 +139,13 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>Tidak menemukan perangkat pemindai. Solusi yang mungkin:
+        <translation>Tidak ditemukan perangkat pemindai. Solusi yang mungkin:
 1. Pastikan pemindai terhubung dan dinyalakan
 2. Jalankan perintah: sudo gpasswd -a $USER scanner
 3. Restart SANE: sudo service saned restart
-4. Instal paket driver yang diperlukan: sudo apt-get install libsane-extras
+4. Pasang paket driver yang diperlukan: sudo apt-get install libsane-extras
 5. Untuk pemindai jaringan, periksa konfigurasi jaringan
-6. Rekonekt USB atau restart komputer</translation>
+6. Hubungkan kembali kabel USB atau restart komputer</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
@@ -160,7 +160,7 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Gagal memulai pemindaian: %1</translation>
+        <translation>Gagal memulai pemindai: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
@@ -183,7 +183,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>Menganggur</translation>
+        <translation>Diam</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
@@ -193,7 +193,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>Tidak menemukan perangkat</translation>
+        <translation>Tidak ada perangkat yang ditemukan</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
@@ -208,7 +208,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>Sken</translation>
+        <translation>Scan</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
@@ -241,7 +241,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>Perangkat tidak dialisasi dengan benar</translation>
+        <translation>Perangkat tidak dinyalakan dengan benar</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
@@ -251,7 +251,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>Reinisialisasi buffer gagal</translation>
+        <translation>Pemulihan buffer gagal</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
@@ -266,7 +266,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Perangkat tidak dialisasi atau deskriptor berkas tidak valid</translation>
+        <translation>Perangkat tidak dinyalakan atau deskriptor file tidak valid</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>

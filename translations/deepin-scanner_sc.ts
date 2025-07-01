@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>مدير الرايبر هو أداة للرايبر تدعم مجموعة متنوعة من أجهزة الرايبر</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>جاري التحميل...</translation>
+        <translation>Loading...</translation>
     </message>
 </context>
 <context>
@@ -27,17 +27,17 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>مدير الرايبر</translation>
+        <translation>Scanner Manager</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>جاري تحميل الأجهزة...</translation>
+        <translation>Loading devices...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>فتح الجهاز...</translation>
+        <translation>Opening device...</translation>
     </message>
 </context>
 <context>
@@ -45,87 +45,87 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>إعدادات الرايبر</translation>
+        <translation>Scan Settings</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>الدقة</translation>
+        <translation>Resolution</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>وضع اللون</translation>
+        <translation>Color Mode</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>صيغة الصورة</translation>
+        <translation>Image Format</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>الرايبر</translation>
+        <translation>Scan</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>عرض الصورة المُسَوَّقة</translation>
+        <translation>View Scanned Image</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>ستُعرض سجل الرايبر هنا</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>وضع الرايبر</translation>
+        <translation>Scan Mode</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>الرايبر المسطح</translation>
+        <translation>Flatbed</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation>صيغة الفيديو</translation>
+        <translation>Video Format</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Color</source>
-        <translation>اللون</translation>
+        <translation>Color</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>الظلام بالألوان</translation>
+        <translation>Grayscale</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>أسود وبياض</translation>
+        <translation>Black White</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>الجهاز غير مُنشَّئ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>جاري إنشاء معاينة...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>لا توجد معاينة للجهاز</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>لا توجد صورة معاينة</translation>
+        <translation>No preview image</translation>
     </message>
 </context>
 <context>
@@ -139,33 +139,27 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>لم يتم العثور على أجهزة رايبر. الحلول المحتملة:
-1. تأكد من أن الجهاز متصل ومُفعَّل
-2. قم بتشغيل الأمر: sudo gpasswd -a $USER scanner
-3. إعادة تشغيل SANE: sudo service saned restart
-4. تثبيت حزمة برنامج التشغيل المطلوبة: sudo apt-get install libsane-extras
-5. بالنسبة لأجهزة الرايبر الشبكية، تحقق من إعدادات الشبكة
-6. إعادة توصيل كابل USB أو إعادة تشغيل الكمبيوتر</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>الجهاز غير مفتوح</translation>
+        <translation>Scanner not opened</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>فشل في الحصول على معايير الرايبر: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>فشل في بدء الرايبر: %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>فشل في حفظ صورة الاختبار</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -173,47 +167,47 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>أجهزة الرايبر</translation>
+        <translation>Scanner Devices</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>الرايبر</translation>
+        <translation>Scanner</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>غير مشغول</translation>
+        <translation>Inactivu</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation>الكاميرا</translation>
+        <translation>Càmera</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>لم يتم العثور على أجهزة</translation>
+        <translation>No s’han trobat dispositius</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
         <source>Model: %1</source>
-        <translation>النموذج: %1</translation>
+        <translation>Modelu: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="153"/>
         <source>Status: %1</source>
-        <translation>الحالة: %1</translation>
+        <translation>Status: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>مسح</translation>
+        <translation>Escaneu</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
         <source>Offline</source>
-        <translation>غير متصل</translation>
+        <translation>Offline</translation>
     </message>
 </context>
 <context>
@@ -221,67 +215,67 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>لا يمكن الحصول على مسار الجهاز، لا يمكن ضبط الدقة</translation>
+        <translation>No s’ha pogut obtindre la ruta del dispositiu, no s’ha pogut establir la resolució</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>فشل إعادة فتح الجهاز</translation>
+        <translation>No s’ha pogut tornar a obrir el dispositiu</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>فشل ضبط الدقة المطلوبة</translation>
+        <translation>No s’ha pogut establir la resolució sol·licitada</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>فشل تعيين الخريطة الذاكرة</translation>
+        <translation>Ha fallat l’assignació de memòria</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>لم يتم تهيئة الجهاز بشكل صحيح</translation>
+        <translation>El dispositiu no s’ha inicialitzat correctament</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>فشل تهيئة العامل</translation>
+        <translation>Ha fallat l’inicialització del buffer</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>فشل إعادة تهيئة العامل</translation>
+        <translation>Ha fallat la reinicialització del buffer</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>فشل إدراج العامل في الطابور: %1</translation>
+        <translation>No s’ha pogut afegir el buffer a la cua: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>فشل بدء تدفق الفيديو: %1</translation>
+        <translation>No s’ha pogut iniciar el flux de vídeo: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>لم يتم تهيئة الجهاز أو مُوصِل الملف غير صحيح</translation>
+        <translation>El dispositiu no s’ha inicialitzat o s’ha especificat un descriptor de fitxer invàlid</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>فشل بدء تدفق الفيديو، فشل التقاط الصورة</translation>
+        <translation>No s’ha pogut iniciar el flux de vídeo, la captura ha fallat</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>فشل الحصول على إطار الصورة</translation>
+        <translation>No s’ha pogut obtindre el quadre de l’imatge</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>فشل التقاط صورة صالحة، من فضلك تحقق من اتصال الكاميرا</translation>
+        <translation>No s’ha pogut capturar una imatge vàlida, si us plau comprovi la connexió de la càmera</translation>
     </message>
 </context>
 </TS>

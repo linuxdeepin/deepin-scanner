@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Manager မီးယား မီးယား ကိရိယာများကို ထောက်ပံ့ပေးသည့် မီးယား မီးယား ကိရိယာဖြစ်သည်</translation>
+        <translation>Scanner Manager မှာ စွမ်းဆောင်ရည်ကို အထောက်အပ့ံပေးသည့် စက်ရုပ်များကို ထောက်ပံ့ပေးသည့် စက်ရုပ်ကိရိယာဖြစ်ပါသည်</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>ဒေတာများ တင်ဆိုင်းနေသည်...</translation>
+        <translation>ယူနိုင်နေပါသည်</translation>
     </message>
 </context>
 <context>
@@ -27,17 +27,17 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>မီးယား မီးယား မန်အိုးဖြစ်သည်</translation>
+        <translation>စက်ရုပ်ကိရိယာ</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>ဒေတာများ တင်ဆိုင်းနေသည်...</translation>
+        <translation>စက်ရုပ်များ ယူနိုင်နေပါသည်</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>ဒေတာ ဖွင့်ဆိုင်းနေသည်...</translation>
+        <translation>စက်ရုပ်ကို ဖွင့်နေပါသည်</translation>
     </message>
 </context>
 <context>
@@ -45,87 +45,87 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>စိတ်ကြိုက် စီစဉ်များ</translation>
+        <translation>စက်ရုပ်ပြင်ဆင်မှု</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>အရွယ်အစား</translation>
+        <translation>အကြီးအကျဉ်း</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>အိမ်ရှိ အမျိုးအစား</translation>
+        <translation>အိုးအိုး ပုံစံ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>ဓာတ်ပုံ စီစဉ်များ</translation>
+        <translation>ပုံစံ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>စိတ်ကြိုက် ကို စီစဉ်ပါ</translation>
+        <translation>စက်ရုပ်ကို ဖြစ်ပါသည်</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>စိတ်ကြိုက် ဓာတ်ပုံကို ကြည့်ရှုပါ</translation>
+        <translation>စက်ရုပ်ပြင်ဆင်ပြီး ပုံကို ကြည့်ရှုပါ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>စိတ်ကြိုက် သမိုင်းအကျဉ်းကို ဒီမှာ မှတ်ပြုပါမည်</translation>
+        <translation>စက်ရုပ်ပြင်ဆင်မှု သမိုင်းအကြောင်းကို အောက်မှာ မြင်နိုင်ပါမည်</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>စိတ်ကြိုက် အမျိုးအစား</translation>
+        <translation>စက်ရုပ်ပြင်ဆင်မှု ပုံစံ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>ပလက်ဖောင်း</translation>
+        <translation>ပလတ်ချ်</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation>ဗီဒီယို စီစဉ်များ</translation>
+        <translation>ဗီဒီယို ပုံစံ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Color</source>
-        <translation>အိမ်ရှိ</translation>
+        <translation>အိုးဗီးယား</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>အိမ်ရှိ အမျိုးအစား</translation>
+        <translation>အိုးအိုးအညီအစား</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>အိမ်ရှိ အမျိုးအဦးအစား</translation>
+        <translation>အိုးအိုး</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation>စက်မှာ အကျဉ်းကို မသိရှိသေးပါ</translation>
+        <translation>စက်ရုပ်ကို အကြောင်းကို တည်ဆောက်ထားခြင်း မရှိသေးပါ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>အကျဉ်းကို စစ်ဆေးနေသည်...</translation>
+        <translation>ပုံကြောင်းကို တည်ဆောက်နေပါသည်</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>စက်အကျဉ်းကို မစွမ်းဆောင်နိုင်ပါ</translation>
+        <translation>စက်ရုပ်ပုံကြောင်းကို မရရှိနိုင်ပါ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>အကျဉ်းကို ဓာတ်ပုံ မရှိပါ</translation>
+        <translation>ပုံကြောင်းကို မရရှိနိုင်</translation>
     </message>
 </context>
 <context>
@@ -139,33 +139,33 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>မီးယား မီးယား ကိရိယာများ မတွေ့ရပါ။ ဖြေရှင်းနည်းလမ်းများ:
-1. မီးယား ကိရိယာကို ချိတ်ဆက်ပြီး အားပေးထားသောကြောင်း သေချာစွာ စစ်ဆေးပါ
-2. နှိပ်ပါ: sudo gpasswd -a $USER scanner
-3. SANE ကို ပြန်လည်စတင်ပါ: sudo service saned restart
-4. လိုအပ်သော မှိုက်နှိပ်ပါ: sudo apt-get install libsane-extras
-5. နှိုင်းပြေး မီးယား ကိရိယာများအတွက် ကွန်ရက် စီစဉ်များကို စစ်ဆေးပါ
-6. USB ကျော်ကြားမှုကို ပြန်လည်ချိတ်ဆက်ပါ သို့မဟုတ် ကွန်ပျက်စီးနှိပ်ပါ</translation>
+        <translation>စက်ရုပ်ကိရိယာများ မတွေ့ရပါသည်။ ဖြေရှင်းချက်များ:
+1. စက်ရုပ်ကို ချိတ်ဆက်ပြီး အားလုံး ဖွင့်လှစ်ပါ
+2. ထည့်သွင်းရန်: sudo gpasswd -a $USER scanner
+3. SANE ကို ပြန်လည်စတင်ရန်: sudo service saned restart
+4. လိုအပ်သော နှိပ်ထားသော အိုးကို ထည့်သွင်းရန်: sudo apt-get install libsane-extras
+5. စက်ရုပ်ကိရိယာများအတွက် ကွန်ယက် ပြင်ဆင်မှုကို စစ်ဆေးပါ
+6. USB ကျော်ကြားကို ပြန်လည်ချိတ်ဆက်ပါ သို့မဟုတ် ကွန်ပျူတာကို ပြန်လည်စတင်ပါ</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>မီးယား ကိရိယာ မဖွင့်ထားသေးပါ</translation>
+        <translation>စက်ရုပ်ကို ဖွင့်လှစ်ခြင်း မရှိသေးပါ</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>မီးယား ကိရိယာ ပြင်ပြီး မရရှိပါ: %1</translation>
+        <translation>စက်ရုပ်ကိရိယာ မှတ်ပုံတင်ရန် ကြိုးစားခဲ့ပါက: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>စိတ်ကြိုက် မှိုက်နှိပ်ပါ: %1</translation>
+        <translation>စက်ရုပ်ကိရိယာကို စတင်ရန် ကြိုးစားခဲ့ပါက: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>စမ်းသပ်ပြီး ဓာတ်ပုံကို သိမ်းဆည်းမရရှိပါ</translation>
+        <translation>စမ်းသပ်ပုံကို သိမ်းဆည်းရန် ကြိုးစားခဲ့ပါက</translation>
     </message>
 </context>
 <context>
@@ -173,47 +173,47 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>မီးယား ကိရိယာများ</translation>
+        <translation>စက်ရုပ်ကိရိယာများ</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>မီးယား ကိရိယာ</translation>
+        <translation>စက်ရုပ်ကိရိယာ</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>ว่าง</translation>
+        <translation>အိမ်တွင်း</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation>กล้องวีดีโอ</translation>
+        <translation>ဝိုင်ကိမ်း</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>ไม่พบอุปกรณ์</translation>
+        <translation>အပ်ဗ်ကိရိယာများ မတွေ့ပါ</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
         <source>Model: %1</source>
-        <translation>โมเดล: %1</translation>
+        <translation>မျိုးဆောင်ရာ: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="153"/>
         <source>Status: %1</source>
-        <translation>สถานะ: %1</translation>
+        <translation>အခြေအနေ: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>สแกน</translation>
+        <translation>စုံစမ်း</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
         <source>Offline</source>
-        <translation>ออฟไลน์</translation>
+        <translation>အိုပလိုပ်</translation>
     </message>
 </context>
 <context>
@@ -221,67 +221,67 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>ไม่สามารถดึงเส้นทางอุปกรณ์ได้ จึงไม่สามารถตั้งค่าความละเอียดได้</translation>
+        <translation>အပ်ဗ်ကိရိယာလမ်းကြောင်းကို ရယူရန် မပိုင်ဆိုင်နိုင်ပါ၊ အပ်ဗ်ကိရိယာ အရွယ်အစားကို ပြုလုပ်ရန် မပိုင်ဆိုင်နိုင်ပါ</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>ไม่สามารถเปิดอุปกรณ์ซ้ำได้</translation>
+        <translation>အပ်ဗ်ကိရိယာကို ပြန်လည်ဖွင့်ရန် ကြိုးစားခြင်း ကြောင့် ကြားပါသည်</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>ไม่สามารถตั้งค่าความละเอียดที่ขอได้</translation>
+        <translation>တောင်းဆိုထားသော အရွယ်အစားကို ပြုလုပ်ရန် ကြိုးစားခြင်း ကြောင့် ကြားပါသည်</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>การแมปหน่วยความจำล้มเหลว</translation>
+        <translation>မီမီးရှင်းမီးကို ပြန်လည်လုပ်ဆောင်ရန် ကြိုးဆောင်ရန် ကြားပါသည်</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>อุปกรณ์ไม่ได้รับการเริ่มต้นอย่างถูกต้อง</translation>
+        <translation>အပ်ဗ်ကိရိယာကို မကြားထားသော အပ်ဗ်ကိရိယာကို စတင်ခြင်း ကြားပါသည်</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>การเริ่มต้นบัฟเฟอร์ล้มเหลว</translation>
+        <translation>ဘားပ်ကို စတင်ခြင်း ကြားပါသည်</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>การเริ่มต้นบัฟเฟอร์ซ้ำล้มเหลว</translation>
+        <translation>ဘားပ်ကို ပြန်လည်စတင်ခြင်း ကြားပါသည်</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>ไม่สามารถเพิ่มบัฟเฟอร์เข้าไปในคิว: %1</translation>
+        <translation>ဘားပ်ကို အပ်ဗ်ကိရိယာတွင် ပြန်လည်လုပ်ဆောင်ရန် ကြားပါသည်: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>ไม่สามารถตั้งค่ากระแสวีดีโอได้: %1</translation>
+        <translation>ဗီဒီယို စီးရီးကို စတင်ခြင်း ကြားပါသည်: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>อุปกรณ์ไม่ได้รับการเริ่มต้นหรือไฟล์เดสคริปเตอร์ไม่ถูกต้อง</translation>
+        <translation>အပ်ဗ်ကိရိယာကို စတင်ခြင်း မပိုင်ဆိုင်နိုင်ပါ၊ သို့မဟုတ် မမှန်ကန်သော ဖိုင်လမ်းကြောင်း</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>ไม่สามารถเริ่มต้นกระแสวีดีโอได้ การจับภาพล้มเหลว</translation>
+        <translation>ဗီဒီယို စီးရီးကို စတင်ခြင်း ကြားပါသည်၊ ဖိုင်ကို မပိုင်ဆိုင်နိုင်ပါ</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>ไม่สามารถดึงเฟรมภาพได้</translation>
+        <translation>ပုံသဏ္ဍာန်ကို ရယူရန် ကြိုးစားခြင်း ကြားပါသည်</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>ไม่สามารถจับภาพที่ถูกต้องได้ กรุณาตรวจสอบการเชื่อมต่อกล้อง</translation>
+        <translation>မမှန်ကန်သော ပုံသဏ္ဍာန်ကို မပိုင်ဆိုင်နိုင်ပါ၊ ကိုက်ညီမှုကို စစ်ဆေးပါ</translation>
     </message>
 </context>
 </TS>

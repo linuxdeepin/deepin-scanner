@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Správce skenerů je nástroj pro skenování, který podporuje různé zařízení pro skenování</translation>
+        <translation>Scanner Manager je nástroj pro skenování, který podporuje různé skenovací zařízení</translation>
     </message>
 </context>
 <context>
@@ -27,7 +27,7 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>Správce skenerů</translation>
+        <translation>Scanner Manager</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
@@ -90,7 +90,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation>Formát videa</translation>
+        <translation>Video formát</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
@@ -120,12 +120,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>Náhled zařízení není k dispozici</translation>
+        <translation>Náhled zařízení není dostupný</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>Žádný náhled obrázku</translation>
+        <translation>Žádný náhledový obrázek</translation>
     </message>
 </context>
 <context>
@@ -139,33 +139,33 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>Nenalezeno žádné skenerovací zařízení. Možné řešení:
-1. Ujistěte se, že je skener připojen a zapnutý
+        <translation>Nebyly nalezeny žádné skenovací zařízení. Možné řešení:
+1. Ujistěte se, že skener je připojen a zapnutý
 2. Spusťte příkaz: sudo gpasswd -a $USER scanner
 3. Restartujte SANE: sudo service saned restart
-4. Nainstalujte vyžadovaný balíček s ovladači: sudo apt-get install libsane-extras
+4. Nainstalujte potřebný ovladač: sudo apt-get install libsane-extras
 5. Pro síťové skenery ověřte nastavení sítě
 6. Připojte USB kabel znovu nebo restartujte počítač</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Skener není otevřen</translation>
+        <translation>Skenery nejsou otevřeny</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Nezdařilo se získat parametry skeneru: %1</translation>
+        <translation>Selhalo získání parametrů skeneru: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Nezdařilo se spustit skenování: %1</translation>
+        <translation>Selhalo spuštění skenování: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Nezdařilo se uložit testovací obrázek</translation>
+        <translation>Selhalo ukládání testovacího obrázku</translation>
     </message>
 </context>
 <context>
@@ -173,17 +173,17 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>Skenerovací zařízení</translation>
+        <translation>Skenovací zařízení</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>Skener</translation>
+        <translation>Skenovací zařízení</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>Neaktivní</translation>
+        <translation>Nečinnost</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
@@ -193,7 +193,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>Zařízení nenalezena</translation>
+        <translation>Žádné zařízení nenalezeno</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
@@ -226,12 +226,12 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>Zařízení se nepodařilo znovu otevřít</translation>
+        <translation>Nepodařilo se znovu otevřít zařízení</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>Nelze nastavit požadované rozlišení</translation>
+        <translation>Nepodařilo se nastavit požadované rozlišení</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
@@ -251,37 +251,37 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>Reinicializace bufferu selhala</translation>
+        <translation>Přeinicializace bufferu selhala</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Nelze přidat buffer do fronty: %1</translation>
+        <translation>Nepodařilo se zaslat buffer do fronty: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>Nelze spustit videostream: %1</translation>
+        <translation>Nepodařilo se spustit videostream: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Zařízení není inicializováno nebo neplatný popisovací popis souboru</translation>
+        <translation>Zařízení není inicializováno nebo neplatný popisovací soubor</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Nelze spustit videostream, zachytávání selhalo</translation>
+        <translation>Nepodařilo se spustit videostream, zachytávání selhalo</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>Nelze získat obrázek snímku</translation>
+        <translation>Nepodařilo se získat obrázový rám</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Nelze zachytit platný obrázek, prosím zkontrolujte připojení kamery</translation>
+        <translation>Nepodařilo se zachytit platný obrázek, prosím zkontrolujte připojení kamery</translation>
     </message>
 </context>
 </TS>

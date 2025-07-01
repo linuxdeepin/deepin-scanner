@@ -6,12 +6,12 @@
     <message>
         <location filename="../src/main.cpp" line="34"/>
         <source>Deepin Scanner</source>
-        <translation>Deepin Skaner</translation>
+        <translation>Deepin Scanner</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Skaner Menecer skaner alətindir və bir neçə skaner cihazına dəstək verir</translation>
+        <translation>Scanner Manager, tarixi scanner aləmətli bir alətdir və bir çox tarixi cihazları dəstəkləyir</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>Yüklənir...</translation>
+        <translation>Yüklenir...</translation>
     </message>
 </context>
 <context>
@@ -27,17 +27,17 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation>Skaner Menecer</translation>
+        <translation>Scanner Manager</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation>Cihazları yüklənir...</translation>
+        <translation>Cihazlar yüklənir...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation>Cihazı açılır...</translation>
+        <translation>Cihaz açılır...</translation>
     </message>
 </context>
 <context>
@@ -45,12 +45,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation>Skan Parametrləri</translation>
+        <translation>Skan Ayarları</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>Qərarlıq</translation>
+        <translation>Çözünürlük</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
@@ -60,22 +60,22 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>Şəkər Formatı</translation>
+        <translation>Şəkil Formatı</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation>Skan</translation>
+        <translation>Skan et</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>Skan Edilən Şəkəri Gör</translation>
+        <translation>Skan edilmiş şəkili gör</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation>Skan tarixi bu yerdə göstəriləcək</translation>
+        <translation>Skan tarixi bu yerdə göstərilməlidir</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
@@ -85,7 +85,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation>Yatay</translation>
+        <translation>Sənəd qatı</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
@@ -105,7 +105,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>Qara Beyn</translation>
+        <translation>Qara Beynə</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
@@ -115,17 +115,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>Kəşf edici yüklənir...</translation>
+        <translation>Öncəzəmə başlatılır...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>Cihaz kəşf edici mövcud deyil</translation>
+        <translation>Cihaz öncəzəməsi mövcud deyil</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>Kəşf edici şəkəri yoxdur</translation>
+        <translation>Öncəzəmə şəkli yoxdur</translation>
     </message>
 </context>
 <context>
@@ -139,23 +139,23 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>Skaner cihazları tapılmadı. Mümkin həllər:
-1. Skanerin bağlı və işləyərək olduğundan əmin olun
-2. Komandı: sudo gpasswd -a $USER scanner
+        <translation>Tarixi cihaz tapılmadı. Mümkin həlli:
+1. Tarixi cihazın bağlı və işləyərli olduğundan əmin olun
+2. Komandı dəyişdirin: sudo gpasswd -a $USER scanner
 3. SANE-i yenidən başlatın: sudo service saned restart
-4. Tələb edilən sürücü paketini instali edin: sudo apt-get install libsane-extras
-5. Ağı tərəfindən skanerlər üçün ağı tənzimləməsini yoxlayın
+4. Tələb olunan sürücü paketini dəyişdirin: sudo apt-get install libsane-extras
+5. Axtarış cihazları üçün şəbəkə konfiqurasiyasını yoxlayın
 6. USB kabelini yenidən qoşun və ya komputeri yenidən başlatın</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Skaner açılmadı</translation>
+        <translation>Tarixi cihaz açılmadı</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Skaner parametrləri alınamadı: %1</translation>
+        <translation>Tarixi cihaz parametrləri alınamadı: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
@@ -165,7 +165,7 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Test şəkəri saxlanılmadı</translation>
+        <translation>Test şəkli saxlanılmadı</translation>
     </message>
 </context>
 <context>
@@ -173,17 +173,17 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation>Skaner Cihazları</translation>
+        <translation>Tarixi Cihazlar</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation>Skaner</translation>
+        <translation>Tarixi cihaz</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>Davamlı</translation>
+        <translation>Tərəvəz</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
@@ -221,67 +221,67 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>Cihaz yolu alınamadı, çözünürlük ayarlanamadı</translation>
+        <translation>Cihaz yolu almaq olmaz, yoxsa izləmə dərəcəsi təyin edilə bilməz</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>Cihaz yeniden açıla didn't</translation>
+        <translation>Cihaz yenidən açıla bilməz</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation>İstənilən çözünürlük ayarlanmadı</translation>
+        <translation>Tələb edilən izləmə dərəcəsi təyin edilə bilməz</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>Yaddaş xətti qurulmadı</translation>
+        <translation>Xətti yoxlamaları yoxlaya bilməz</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation>Cihaz düzgün şəkildə inicializasiya edilmədi</translation>
+        <translation>Cihaz düzgün təyin edilməyib</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation>Buffer inicializasiya edilmədi</translation>
+        <translation>Təyin edilməmiş bufer</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation>Buffer yenidən inicializasiya edilmədi</translation>
+        <translation>Bufer yenidən təyin edilməməsi</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Buffer enqueue edilmədi: %1</translation>
+        <translation>Buferi yığıla bilməz: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>Video stream başlatılmadı: %1</translation>
+        <translation>Video axını başlatmaq olmaz: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Cihaz inicializasiya edilmədi və ya yanlış dosya ifadəsi</translation>
+        <translation>Cihaz təyin edilməyib və ya yanlış fayl işarəçəsi</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Video stream başlatılmadı, qəbul edilmədi</translation>
+        <translation>Video axını başlatmaq olmaz, cəhər almaq olmaz</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>Görüntü çubuğu alınamadı</translation>
+        <translation>Şəklin əsasını almaq olmaz</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Düzgün görüntü qəbul edilmədi, kamera bağlantısını yoxlayın</translation>
+        <translation>Düzgün şəkri almaq olmaz, kamera bələdçəsini yoxlamaq lazımdır</translation>
     </message>
 </context>
 </TS>

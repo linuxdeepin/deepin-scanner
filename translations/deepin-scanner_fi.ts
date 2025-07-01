@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation>Scanner Manager on työkalu, joka tukee useita eri skannauslaiteja</translation>
+        <translation>Scanner Manager on suunnitelma, joka tukee useita skannauslaiteja</translation>
     </message>
 </context>
 <context>
@@ -50,17 +50,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation>Resoluutio</translation>
+        <translation>Lukema</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation>Värilähteenä</translation>
+        <translation>Värilähteen</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation>Kuvaformaatti</translation>
+        <translation>Kuvan muoto</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
@@ -70,7 +70,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation>Näytä skannattu kuva</translation>
+        <translation>Katselkaa skannattua kuvaa</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
@@ -80,7 +80,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation>Skannauslähde</translation>
+        <translation>Skannauslomake</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
@@ -90,7 +90,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation>Videoformaatti</translation>
+        <translation>Videoformaat</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
@@ -100,12 +100,12 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation>Päivävärit</translation>
+        <translation>Värivapaat</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation>Musta valkoinen</translation>
+        <translation>Musta ja valkoinen</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
@@ -115,17 +115,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation>Aloitetaan esikatsaus...</translation>
+        <translation>Alustetaan esikatselua...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation>Laiteesikatsaus ei ole saatavilla</translation>
+        <translation>Laiteesikatselu ei ole saatavilla</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation>Ei esikatsauskuvaa</translation>
+        <translation>Ei esikatselukuvaa</translation>
     </message>
 </context>
 <context>
@@ -140,32 +140,32 @@
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
         <translation>Skannerilaitteita ei löytynyt. Mahdolliset ratkaisut:
-1. Varmista, että skanneri on yhdistetty ja käynnissä
+1. Varmista, että skanneri on yhdistetty ja päällä
 2. Suorita komento: sudo gpasswd -a $USER scanner
 3. Käynnistä SANE: sudo service saned restart
-4. Asenna vaadittu ohjaimipaketti: sudo apt-get install libsane-extras
-5. Verkkoskannerille tarkoitettujen laitteiden tapauksessa tarkista verkkokonfiguraatio
-6. Yhdistä USB-käytävä uudelleen tai käynnistä tietokone</translation>
+4. Asenna vaadittu kuljetuspaketti: sudo apt-get install libsane-extras
+5. Verkkoskannerille tarkoitetuille skannerille tarkista verkkokonfiguraatio
+6. Yhdistä USB-kableja uudelleen tai käynnistä tietokone</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation>Skanneria ei ole avattu</translation>
+        <translation>Skanneri ei ole avattu</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>Skannerin parametreja ei voitu hankkia: %1</translation>
+        <translation>Skanneriparametreja ei saatu: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>Skannaus ei voi aloittaa: %1</translation>
+        <translation>Skannaus ei aloitettu: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>Testikuva ei voitu tallentaa</translation>
+        <translation>Testikuvaa ei voitu tallentaa</translation>
     </message>
 </context>
 <context>
@@ -183,7 +183,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation>Käytön päättyminen</translation>
+        <translation>Käynnissä</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
@@ -193,7 +193,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation>Laitekäytöksiä ei löytynyt</translation>
+        <translation>Laiteeihtoja ei löytynyt</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
@@ -208,7 +208,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation>Skannaus</translation>
+        <translation>Skannaa</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
@@ -221,12 +221,12 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation>Laitepolkua ei voida hankkia, resoluuttiä ei voida asettaa</translation>
+        <translation>Laitepolkua ei voida hankkia, resoluutiota ei voida asettaa</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation>Laitea ei voitu uudelleenkäynnistää</translation>
+        <translation>Laitea ei voitu uudelleenavata</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
@@ -236,7 +236,7 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation>Muistimappaus epäonnistui</translation>
+        <translation>Muistinkarttatukseen ei päästy</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
@@ -256,32 +256,32 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation>Puffern jono epäonnistui: %1</translation>
+        <translation>Puffern jonoontulo epäonnistui: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation>Videovirtausta ei voitu aloittaa: %1</translation>
+        <translation>Videovirtausta ei voitu käynnistää: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation>Laite ei ole alustettu tai virheellinen tiedostokuvio</translation>
+        <translation>Laite ei ole alustettu tai epäkelpo tiedostokuvaimerkit</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation>Videovirtausta ei voitu aloittaa, kuvankäyttö epäonnistui</translation>
+        <translation>Videovirtausta ei voitu käynnistää, kuvanottoprosessi epäonnistui</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation>Kuvakerrosta ei voitu hankkia</translation>
+        <translation>Kuvakäyttöä ei voitu hankkia</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation>Kuvankäyttö ei onnistunut, tarkista kamera-yhteys</translation>
+        <translation>Kuvanotto epäonnistui, tarkista kamera-yhteys</translation>
     </message>
 </context>
 </TS>
