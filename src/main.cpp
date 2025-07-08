@@ -34,7 +34,6 @@ int main(int argc, char *argv[])
     app.setApplicationDisplayName(app.translate("Application", "Deepin Scanner"));
     app.setApplicationVersion(APP_VERSION);
     app.setProductIcon(QIcon::fromTheme("deepin-scanner"));
-    app.setApplicationAcknowledgementPage("https://www.deepin.org/acknowledgments/");
     app.setApplicationDescription(app.translate("Application", "Scanner Manager is a scanner tool that supports a variety of scanning devices"));
 
     // Initialize logging system
