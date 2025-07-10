@@ -1,3 +1,10 @@
+deepin-scanner (0.1.11) unstable; urgency=medium
+
+  * Update version to 0.1.11
+  * Fix combo box select block and black-white image save issues.
+
+ -- re2zero <yangwu@uniontech.com>  Thu, 10 Jul 2025 16:38:16 +0800
+
 deepin-scanner (0.1.10) unstable; urgency=medium
 
   * chore: update translations
