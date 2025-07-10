@@ -140,8 +140,8 @@ bool WebcamDevice::openDevice(const QString &devicePath)
     }
     qCDebug(app) << "Extracted device path:" << actualPath;
 
-    // Open device
-    m_fd = open(actualPath.toUtf8().constData(), O_RDWR);
+    // Open device with O_NONBLOCK flag
+    m_fd = open(actualPath.toUtf8().constData(), O_RDWR | O_NONBLOCK);
     if (m_fd <= 0) {
         qCCritical(app) << "Failed to open webcam device:" << strerror(errno) << "(errno:" << errno << ")";
         m_fd = -1;
@@ -420,6 +420,15 @@ bool WebcamDevice::startCapturing()
 
         int result = ioctl(m_fd, VIDIOC_QBUF, &buf);
         if (result == -1) {
+            // Handle special cases in non-blocking mode
+            if (errno == EAGAIN) {
+                // In non-blocking mode, we may need multiple attempts
+                qCDebug(app) << "Buffer not ready yet (EAGAIN), retrying...";
+                QThread::msleep(10);
+                i--; // Retry current buffer
+                continue;
+            }
+            
             qCWarning(app) << "Failed to enqueue buffer" << i << ":" << strerror(errno) << "(errno:" << errno << ")";
 
             // Clean up any already enqueued buffers
@@ -444,6 +453,21 @@ bool WebcamDevice::startCapturing()
     // Start video stream
     v4l2_buf_type type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     if (ioctl(m_fd, VIDIOC_STREAMON, &type) == -1) {
+        // Handle special cases in non-blocking mode
+        if (errno == EAGAIN) {
+            // In non-blocking mode, we may need multiple attempts
+            for (int retry = 0; retry < 5; retry++) {
+                QThread::msleep(50);
+                if (ioctl(m_fd, VIDIOC_STREAMON, &type) != -1) {
+                    qCInfo(app) << "Video capture stream started successfully after retry";
+                    return true;
+                }
+                if (errno != EAGAIN) {
+                    break; // If error is not EAGAIN, stop retrying
+                }
+            }
+        }
+        
         qCCritical(app) << "Failed to start video stream:" << strerror(errno);
         emit errorOccurred(tr("Failed to start video stream: %1").arg(strerror(errno)));
         return false;
@@ -502,7 +526,13 @@ void WebcamDevice::updatePreview()
     buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     buf.memory = V4L2_MEMORY_MMAP;
 
+    // Try to get a frame in non-blocking mode (device is already opened with O_NONBLOCK)
     if (ioctl(m_fd, VIDIOC_DQBUF, &buf) == -1) {
+        // EAGAIN means no frame is available at the moment, which is normal in non-blocking mode
+        if (errno == EAGAIN) {
+            return;
+        }
+        
         qCWarning(app) << "Preview update failed:" << strerror(errno);
         return;
     }
@@ -575,7 +605,14 @@ void WebcamDevice::captureImage()
 
         qCDebug(app) << "Attempting to get frame directly from device (attempt" << (retry + 1) << ")";
 
+        // Temporarily switch to blocking mode to ensure frame capture
+        int flags = fcntl(m_fd, F_GETFL, 0);
+        fcntl(m_fd, F_SETFL, flags & ~O_NONBLOCK);
+
         if (ioctl(m_fd, VIDIOC_DQBUF, &buf) == -1) {
+            // Restore non-blocking mode
+            fcntl(m_fd, F_SETFL, flags);
+            
             qCWarning(app) << "Failed to get frame:" << strerror(errno);
             if (retry == 2) {   // Last attempt failed
                 // Try to use existing preview frame (if available)
@@ -611,6 +648,9 @@ void WebcamDevice::captureImage()
             QThread::msleep(100);
             continue;
         }
+
+        // Restore non-blocking mode
+        fcntl(m_fd, F_SETFL, flags);
 
         // Ensure buffer index is valid
         if (buf.index >= 4 || !m_buffers[buf.index]) {
