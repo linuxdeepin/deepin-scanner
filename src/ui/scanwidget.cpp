@@ -28,8 +28,8 @@ using namespace DDLog;
 static const QStringList FORMATS = { "PNG", "JPG", "BMP", "TIFF", "PDF", "OFD" };
 
 // fixed width for label and combo box
-static const int SETTING_LABEL_WIDTH = 120;
-static const int SETTING_COMBO_WIDTH = 220;
+static const int SETTING_LABEL_WIDTH = 80;
+static const int SETTING_COMBO_WIDTH = 160;
 
 ScanWidget::ScanWidget(QWidget *parent) : QWidget(parent),
                                           m_isScanner(false),
@@ -77,7 +77,7 @@ void ScanWidget::setupUI()
     QVBoxLayout *groupLayout = new QVBoxLayout(settingsGroup);
     groupLayout->setSpacing(10);
     settingsGroup->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
-    settingsGroup->setMinimumWidth(350);
+    settingsGroup->setMinimumWidth(260);
 
     // Device mode options
     m_modeLabel = new DLabel();
@@ -437,7 +437,11 @@ void ScanWidget::onScanFinished(const QImage &image)
     if (m_imageSettings->colorMode == 1) {   // GRAYSCALE
         processedImage = image.convertToFormat(QImage::Format_Grayscale8);
     } else if (m_imageSettings->colorMode == 2) {   // BLACKWHITE
-        processedImage = image.convertToFormat(QImage::Format_Mono);
+        // 首先转换为灰度图
+        QImage grayImage = image.convertToFormat(QImage::Format_Grayscale8);
+        
+        // 使用Floyd-Steinberg抖动算法进行二值化处理，这种方法可以更好地保留边缘细节
+        processedImage = grayImage.convertToFormat(QImage::Format_Mono, Qt::MonoOnly | Qt::DiffuseDither);
     }
 
     QString filePath = QDir(scanDir).filePath(fileName);
