@@ -437,11 +437,8 @@ void ScanWidget::onScanFinished(const QImage &image)
     if (m_imageSettings->colorMode == 1) {   // GRAYSCALE
         processedImage = image.convertToFormat(QImage::Format_Grayscale8);
     } else if (m_imageSettings->colorMode == 2) {   // BLACKWHITE
-        // 首先转换为灰度图
-        QImage grayImage = image.convertToFormat(QImage::Format_Grayscale8);
-        
-        // 使用Floyd-Steinberg抖动算法进行二值化处理，这种方法可以更好地保留边缘细节
-        processedImage = grayImage.convertToFormat(QImage::Format_Mono, Qt::MonoOnly | Qt::DiffuseDither);
+        // 使用改进的黑白转换算法
+        processedImage = convertToBlackWhite(image);
     }
 
     QString filePath = QDir(scanDir).filePath(fileName);
@@ -510,3 +507,198 @@ void ScanWidget::onScanModeChanged(int index)
     // 实现扫描模式变更逻辑
     emit deviceSettingsChanged();
 }
+
+QImage ScanWidget::convertToBlackWhite(const QImage &sourceImage)
+{
+    // 首先转换为灰度图
+    QImage grayImage = sourceImage.convertToFormat(QImage::Format_Grayscale8);
+
+    const int width = grayImage.width();
+    const int height = grayImage.height();
+
+    qDebug() << "Starting hybrid threshold binarization...";
+
+    // 步骤1: 计算全局阈值 (Otsu方法的简化版本)
+    int histogram[256] = {0};
+
+    // 构建直方图
+    for (int y = 0; y < height; ++y) {
+        const uchar* line = reinterpret_cast<const uchar*>(grayImage.scanLine(y));
+        for (int x = 0; x < width; ++x) {
+            histogram[line[x]]++;
+        }
+    }
+
+    // 计算全局阈值 (Otsu方法)
+    int totalPixels = width * height;
+    long long sum = 0;
+    for (int i = 0; i < 256; ++i) {
+        sum += i * histogram[i];
+    }
+
+    int globalThreshold = 128; // 默认值
+    double maxVariance = 0;
+
+    long long sumB = 0;
+    int wB = 0;
+
+    for (int t = 0; t < 256; ++t) {
+        wB += histogram[t];
+        if (wB == 0) continue;
+        
+        int wF = totalPixels - wB;
+        if (wF == 0) break;
+        
+        sumB += t * histogram[t];
+        
+        double mB = (double)sumB / wB;
+        double mF = (double)(sum - sumB) / wF;
+        
+        double betweenVar = (double)wB * wF * (mB - mF) * (mB - mF);
+        
+        if (betweenVar > maxVariance) {
+            maxVariance = betweenVar;
+            globalThreshold = t;
+        }
+    }
+
+    qDebug() << "Global threshold (Otsu):" << globalThreshold;
+    
+    // 步骤2: 创建全局阈值结果
+    QImage globalResult(width, height, QImage::Format_Mono);
+    for (int y = 0; y < height; ++y) {
+        const uchar* grayLine = reinterpret_cast<const uchar*>(grayImage.scanLine(y));
+        for (int x = 0; x < width; ++x) {
+            globalResult.setPixel(x, y, (grayLine[x] < globalThreshold) ? 0 : 1);
+        }
+    }
+
+    // 步骤3: 局部自适应阈值处理
+    QImage localResult(width, height, QImage::Format_Mono);
+    const int windowSize = 21; // 局部窗口大小
+    
+    for (int y = 0; y < height; ++y) {
+        const uchar* grayLine = reinterpret_cast<const uchar*>(grayImage.scanLine(y));
+        
+        for (int x = 0; x < width; ++x) {
+            // 计算局部窗口内的平均值
+            int sum = 0;
+            int count = 0;
+            
+            int startY = qMax(0, y - windowSize / 2);
+            int endY = qMin(height - 1, y + windowSize / 2);
+            int startX = qMax(0, x - windowSize / 2);
+            int endX = qMin(width - 1, x + windowSize / 2);
+            
+            for (int wy = startY; wy <= endY; wy += 2) { // 跳步采样加速
+                const uchar* windowLine = reinterpret_cast<const uchar*>(grayImage.scanLine(wy));
+                for (int wx = startX; wx <= endX; wx += 2) {
+                    sum += windowLine[wx];
+                    count++;
+                }
+            }
+            
+            int localThreshold = (count > 0) ? (sum / count) * 0.9 : globalThreshold;
+            localResult.setPixel(x, y, (grayLine[x] < localThreshold) ? 0 : 1);
+        }
+    }
+
+    // 步骤4: 混合两种结果
+    QImage hybridResult(width, height, QImage::Format_Mono);
+    
+    // 分析图像特征，决定混合权重
+    int brightPixels = 0;
+    for (int y = 0; y < height; ++y) {
+        const uchar* grayLine = reinterpret_cast<const uchar*>(grayImage.scanLine(y));
+        for (int x = 0; x < width; ++x) {
+            if (grayLine[x] > 180) brightPixels++;
+        }
+    }
+
+    double brightRatio = (double)brightPixels / totalPixels;
+    qDebug() << "Bright pixel ratio:" << brightRatio;
+
+    // 根据图像特征选择策略
+    for (int y = 0; y < height; ++y) {
+        const uchar* grayLine = reinterpret_cast<const uchar*>(grayImage.scanLine(y));
+        
+        for (int x = 0; x < width; ++x) {
+            int currentPixel = grayLine[x];
+            int globalPixel = globalResult.pixelIndex(x, y);
+            int localPixel = localResult.pixelIndex(x, y);
+            
+            int finalPixel;
+            
+            if (brightRatio > 0.3) {
+                // 高亮度图像：偏向局部阈值，保护文字细节
+                if (currentPixel > 160) {
+                    // 亮区域使用局部阈值
+                    finalPixel = localPixel;
+                } else if (currentPixel < 80) {
+                    // 暗区域使用全局阈值
+                    finalPixel = globalPixel;
+                } else {
+                    // 中等亮度：权重融合
+                    if (globalPixel == localPixel) {
+                        finalPixel = globalPixel;
+                    } else {
+                        // 倾向于保留文字（黑色）
+                        finalPixel = (globalPixel == 0 || localPixel == 0) ? 0 : 1;
+                    }
+                }
+            } else {
+                // 正常或低亮度图像：偏向全局阈值
+                if (currentPixel > 140 && currentPixel < 200) {
+                    // 中等亮度区域使用局部阈值增强细节
+                    finalPixel = localPixel;
+                } else {
+                    // 其他区域使用全局阈值
+                    finalPixel = globalPixel;
+                }
+            }
+            
+            hybridResult.setPixel(x, y, finalPixel);
+        }
+    }
+
+    // 步骤5: 后处理 - 形态学操作
+    QImage finalResult = hybridResult.copy();
+    
+    // 简单的去噪和连接
+    for (int y = 1; y < height - 1; ++y) {
+        for (int x = 1; x < width - 1; ++x) {
+            int blackCount = 0;
+            
+            // 统计3x3邻域的黑色像素
+            for (int dy = -1; dy <= 1; ++dy) {
+                for (int dx = -1; dx <= 1; ++dx) {
+                    if (hybridResult.pixelIndex(x + dx, y + dy) == 0) {
+                        blackCount++;
+                    }
+                }
+            }
+            
+            int currentPixel = hybridResult.pixelIndex(x, y);
+            
+            // 去除孤立噪点
+            if (currentPixel == 0 && blackCount <= 2) {
+                finalResult.setPixel(x, y, 1);
+            }
+            // 填充小空洞
+            else if (currentPixel == 1 && blackCount >= 6) {
+                finalResult.setPixel(x, y, 0);
+            }
+        }
+    }
+
+    // // 保存调试图像
+    // QString debugDir = getSaveDirectory();
+    // globalResult.convertToFormat(QImage::Format_RGB32).save(QDir(debugDir).filePath("debug_global_threshold.png"));
+    // localResult.convertToFormat(QImage::Format_RGB32).save(QDir(debugDir).filePath("debug_local_threshold.png"));
+    // hybridResult.convertToFormat(QImage::Format_RGB32).save(QDir(debugDir).filePath("debug_hybrid_result.png"));
+    
+    qDebug() << "Hybrid threshold binarization completed.";
+    
+    return finalResult;
+}
+
