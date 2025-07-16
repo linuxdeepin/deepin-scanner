@@ -65,6 +65,7 @@ private:
     void setupUI();
     void connectDeviceSignals(bool bind);
     void updateDeviceSettings();
+    QImage convertToBlackWhite(const QImage &sourceImage);
 
     DeviceBase* m_device = nullptr;
     bool m_isScanner;
