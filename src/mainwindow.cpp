@@ -27,9 +27,10 @@ MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
 {
     // --- Initialize Devices ---
-    QSharedPointer<ScannerDevice> scannerDevice(new ScannerDevice(this));
+    // Note: Don't pass 'this' as parent when using QSharedPointer to avoid double-deletion
+    QSharedPointer<ScannerDevice> scannerDevice(new ScannerDevice(nullptr));
     scannerDevice->initialize();
-    QSharedPointer<WebcamDevice> webcamDevice(new WebcamDevice(this));
+    QSharedPointer<WebcamDevice> webcamDevice(new WebcamDevice(nullptr));
     webcamDevice->initialize();
 
     // Store devices in map
@@ -106,14 +107,30 @@ void MainWindow::updateDeviceList()
     auto webcam = qSharedPointerCast<WebcamDevice>(m_devices["webcam"]);
 
     if (scanner && webcam) {
-        // 更新ScannersWidget中的设备列表
-        m_scannersWidget->updateDeviceList(scanner, webcam);
+        // 给网络设备发现预留更多时间（特别是首次启动）
+        static bool firstRun = true;
+        int delay = firstRun ? 3000 : 500; // 首次启动等待3秒，后续等待0.5秒
+        
+        if (firstRun) {
+            qCInfo(app) << "First device list update, allowing extra time for network device discovery...";
+            firstRun = false;
+        }
+        
+        // 使用定时器延迟更新设备列表
+        QTimer::singleShot(delay, this, [this]() {
+            // 重新获取设备指针，避免捕获过期指针
+            auto scanner = qSharedPointerCast<ScannerDevice>(m_devices["scanner"]);
+            auto webcam = qSharedPointerCast<WebcamDevice>(m_devices["webcam"]);
+            
+            if (scanner && webcam) {
+                m_scannersWidget->updateDeviceList(scanner, webcam);
+            }
+            QTimer::singleShot(500, this, &MainWindow::hideLoading);
+        });
     } else {
         qDebug(app) << "Error: Failed to cast device pointers";
+        QTimer::singleShot(500, this, &MainWindow::hideLoading);
     }
-
-
-    QTimer::singleShot(500, this, &MainWindow::hideLoading);
 }
 
 void MainWindow::showScanView(const QString &device, bool isScanner)
