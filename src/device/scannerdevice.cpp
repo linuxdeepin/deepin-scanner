@@ -80,7 +80,7 @@ ScannerDevice::ScannerDevice(QObject *parent)
     //   2      print normal messages
     //   3      print debugging messages
     //   4      print everything
-    QString logLevel = "1";
+    QString logLevel = "2";
 #ifdef QT_DEBUG
     logLevel = "2";
 #endif
@@ -97,10 +97,11 @@ ScannerDevice::ScannerDevice(QObject *parent)
 ScannerDevice::~ScannerDevice()
 {
 #ifndef _WIN32
+    qCInfo(app) << "🔥 ScannerDevice destructor called - this should NOT happen during device list refresh!";
     closeDevice();   // Ensure device is closed if open
     if (m_saneInitialized) {
         sane_exit();
-        qCDebug(app) << "SANE backend exited successfully";
+        qCInfo(app) << "SANE backend exited from destructor";
     }
 #endif
 }
@@ -140,17 +141,28 @@ QStringList ScannerDevice::getAvailableDevices()
         return deviceNames;
     }
 
-
-    // Try calling sane_get_devices with different parameters
-    qCDebug(app) << "Attempting to get device list (include network devices)";
     const SANE_Device **device_list = nullptr;
-    SANE_Status status = sane_get_devices(&device_list, SANE_TRUE);
+
+    // First attempt: Get ALL devices including network devices (ESCL/AirScan)
+    qCDebug(app) << "First attempt: Getting ALL devices (including network devices)";
+    SANE_Status status = sane_get_devices(&device_list, SANE_FALSE);
     qCDebug(app) << "Device list status:" << sane_strstatus(status);
 
-    if (status != SANE_STATUS_GOOD || !device_list) {
-        qCDebug(app) << "Retrying device list (local devices only)";
+    // If first attempt fails or returns no devices, wait and retry
+    // This is especially important for network devices (ESCL/AirScan) which need discovery time
+    if (status != SANE_STATUS_GOOD || !device_list || (device_list && !device_list[0])) {
+        qCInfo(app) << "First attempt returned no devices, waiting for network discovery...";
+        QThread::msleep(2000); // Wait 2 seconds for network device discovery
+        
+        qCDebug(app) << "Retrying: Getting ALL devices (including network devices)";
         status = sane_get_devices(&device_list, SANE_FALSE);
         qCDebug(app) << "Device list retry status:" << sane_strstatus(status);
+        
+        if (status != SANE_STATUS_GOOD || !device_list || (device_list && !device_list[0])) {
+            qCDebug(app) << "Still no devices, trying local devices only";
+            status = sane_get_devices(&device_list, SANE_TRUE);
+            qCDebug(app) << "Local devices only status:" << sane_strstatus(status);
+        }
     }
 
     if (status != SANE_STATUS_GOOD) {
@@ -193,14 +205,22 @@ QStringList ScannerDevice::getAvailableDevices()
     }
 
     qCDebug(app) << "Enumerating available scanner devices";
+    int deviceCount = 0;
+    
+    // First count devices
+    for (int i = 0; device_list[i] != nullptr; ++i) {
+        deviceCount++;
+    }
+    qCInfo(app) << "Found" << deviceCount << "SANE devices total";
+    
     for (int i = 0; device_list[i] != nullptr; ++i) {
         const SANE_Device *dev = device_list[i];
         if (dev) {
-            qCDebug(app) << "Device found:";
-            qCDebug(app) << "  Name:" << (dev->name ? dev->name : "null");
-            qCDebug(app) << "  Vendor:" << (dev->vendor ? dev->vendor : "null");
-            qCDebug(app) << "  Model:" << (dev->model ? dev->model : "null");
-            qCDebug(app) << "  Type:" << (dev->type ? dev->type : "null");
+            qCInfo(app) << "Device" << (i+1) << "/" << deviceCount << ":";
+            qCInfo(app) << "  Name:" << (dev->name ? dev->name : "null");
+            qCInfo(app) << "  Vendor:" << (dev->vendor ? dev->vendor : "null");
+            qCInfo(app) << "  Model:" << (dev->model ? dev->model : "null");
+            qCInfo(app) << "  Type:" << (dev->type ? dev->type : "null");
 
             if (dev->name) {
                 deviceNames.append(QString::fromUtf8(dev->name));
@@ -211,10 +231,16 @@ QStringList ScannerDevice::getAvailableDevices()
                                              .arg(dev->model ? QString::fromUtf8(dev->model) : "Unknown")
                                              .arg(dev->type ? QString::fromUtf8(dev->type) : "Unknown");
 
-                qCDebug(app) << "Added device:" << dev->name << "-" << deviceInfo;
+                qCInfo(app) << "✅ Successfully added device:" << dev->name << "-" << deviceInfo;
+            } else {
+                qCWarning(app) << "❌ Device has null name, skipping";
             }
+        } else {
+            qCWarning(app) << "❌ Device at index" << i << "is null";
         }
     }
+    
+    qCInfo(app) << "Final device list contains" << deviceNames.size() << "devices:" << deviceNames;
 
 #if ADD_TEST_DEVICE
     // If no devices found, add a virtual test device
