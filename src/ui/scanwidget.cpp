@@ -229,6 +229,13 @@ void ScanWidget::connectDeviceSignals(bool bind)
         connect(m_device, &DeviceBase::imageCaptured, this, &ScanWidget::onScanFinished);
         connect(m_device, &ScannerDevice::errorOccurred, this, &ScanWidget::handleDeviceError);
 
+        if (m_isScanner) {
+            auto scanner = dynamic_cast<ScannerDevice*>(m_device);
+            if (scanner) {
+                connect(scanner, &ScannerDevice::deviceOpened, this, &ScanWidget::onDeviceOpened);
+            }
+        }
+
         connect(m_modeCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onScanModeChanged);
         connect(m_resolutionCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onResolutionChanged);
         connect(m_colorCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onColorModeChanged);
@@ -237,6 +244,13 @@ void ScanWidget::connectDeviceSignals(bool bind)
         disconnect(m_device, &DeviceBase::previewUpdated, this, &ScanWidget::onUpdatePreview);
         disconnect(m_device, &DeviceBase::imageCaptured, this, &ScanWidget::onScanFinished);
         disconnect(m_device, &ScannerDevice::errorOccurred, this, &ScanWidget::handleDeviceError);
+
+        if (m_isScanner) {
+            auto scanner = dynamic_cast<ScannerDevice*>(m_device);
+            if (scanner) {
+                disconnect(scanner, &ScannerDevice::deviceOpened, this, &ScanWidget::onDeviceOpened);
+            }
+        }
 
         disconnect(m_modeCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onScanModeChanged);
         disconnect(m_resolutionCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onResolutionChanged);
@@ -252,6 +266,7 @@ void ScanWidget::startScanning()
         return;
     }
 
+    resetPreview();
     m_device->startCapture();
 }
 
@@ -350,6 +365,20 @@ void ScanWidget::handleDeviceError(const QString &error)
 {
     qCWarning(app) << "Device error:" << error;
     m_previewLabel->setText(error);
+}
+
+void ScanWidget::onDeviceOpened()
+{
+    qCDebug(app) << "Device opened signal received, updating UI settings.";
+    updateDeviceSettings();
+}
+void ScanWidget::resetPreview()
+{
+    QIcon icon = QIcon::fromTheme("blank_doc");
+    QPixmap pixmap = icon.pixmap(200, 200);
+    m_previewLabel->setPixmap(pixmap);
+    // m_previewLabel->setText(tr("Click 'Scan' to begin"));
+    m_previewLabel->setAlignment(Qt::AlignCenter);
 }
 
 // 以下为参数变更处理函数

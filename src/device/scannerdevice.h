@@ -9,17 +9,14 @@
 #include <QString>
 #include <QStringList>
 #include <QImage>
+#include <QThread>
 #include "devicebase.h"
 
-// Only include and use SANE on non-Windows platforms
-#ifndef _WIN32   // Or use Q_OS_WIN if preferred
+#ifndef _WIN32
 #    include <sane/sane.h>
-#    include <png.h>   // For the scan_it implementation details
-#    include <stdio.h>   // For FILE* used in scan_it
 #endif
 
-// Forward declaration for Image struct if needed within scan_it
-struct Image;
+class ScannerWorker;
 
 class ScannerDevice : public DeviceBase
 {
@@ -32,17 +29,6 @@ public:
         SCAN_MODE_ADF_DUPLEX   // ADF duplex scan
     };
     Q_ENUM(ScanMode)
-
-    // Helper structure used by scanning logic
-    // You need to provide the definition for this based on your original code.
-    struct Image
-    {
-        unsigned char *data;
-        int width;
-        int height;
-        int x, y;
-        int line_buffer_size;   // Example member, adjust as needed
-    };
 
     explicit ScannerDevice(QObject *parent = nullptr);
     ~ScannerDevice() override;
@@ -61,54 +47,82 @@ public:
     // Extended scanner-specific interface
     void startScan(const QString &tempOutputFilePath);
     void cancelScan();
-    bool advance(Image *im);
-
-    // Scan mode related methods
-    // Set scan mode (flatbed, ADF simplex, ADF duplex)
     bool setScanMode(ScanMode mode);
-    
-    // Get supported scan modes list
     QList<ScanMode> getSupportedScanModes();
-    
-    // Set scan resolution (DPI)
     bool setResolution(int dpi);
-    
-    // Get current resolution
     int getResolution() const;
-    
-    // Get supported resolutions list
     QList<int> getSupportedResolutions();
 
 signals:
-    // // Emitted when the scan successfully completes.
-    // void scanCompleted(const QImage &scannedImage);
+    // Signals to trigger worker operations
+    void triggerOpenDevice(const QString &deviceName);
+    void triggerCloseDevice();
+    void triggerStartScan(const QString &filePath, int dpi, ScanMode mode);
+    void triggerCancelScan();
 
-    // // Emitted if an error occurs during initialization, opening, or scanning.
-    // void errorOccurred(const QString &errorMessage);
-
-    // Emitted periodically during scanning to report progress (0-100).
-    // Note: Requires modification in scan_it to emit this.
+    // Forwarded signals from worker
     void scanProgress(int percentage);
+    void deviceOpened();
+    void deviceClosed();
 
-    // New signal
-    void previewLineAvailable(const QImage &line);   // For real-time scan line preview
+private slots:
+    // Slots to handle results from the worker thread
+    void onWorkerError(const QString &errorMessage);
+    void onDeviceOpened(const QList<int> &resolutions, const QList<ScannerDevice::ScanMode> &modes);
+    void onDeviceClosed();
+    void onCaptureCompleted(const QString &filePath);
+
+private:
+    QString m_currentDeviceName;
+    bool m_isCapturing = false;
+    bool m_deviceOpen = false;
+    bool m_scanPending = false; // True if a scan was requested before device was open
+
+    QThread m_workerThread;
+    ScannerWorker *m_worker = nullptr;
+
+    QList<int> m_supportedResolutions;
+    QList<ScanMode> m_supportedScanModes;
+    int m_currentResolutionDPI = 300;
+    ScanMode m_currentScanMode = SCAN_MODE_FLATBED;
+};
+
+// --- Worker Class for background scanning ---
+class ScannerWorker : public QObject
+{
+    Q_OBJECT
+
+public:
+    explicit ScannerWorker();
+    ~ScannerWorker() override;
+
+public slots:
+    void doOpenDevice(const QString &deviceName);
+    void doCloseDevice();
+    void doStartScan(const QString &tempOutputFilePath, int dpi, ScannerDevice::ScanMode mode);
+    void doCancelScan();
+
+signals:
+    void errorOccurred(const QString &errorMessage);
+    void deviceOpened(const QList<int> &resolutions, const QList<ScannerDevice::ScanMode> &modes);
+    void deviceClosed();
+    void captureCompleted(const QString &filePath);
+    void scanProgress(int percentage);
 
 private:
 #ifndef _WIN32
-    // The core scanning function (refactored from your original code).
-    // Returns SANE_STATUS_GOOD on success.
+    struct Image;
     SANE_Status scan_it(FILE *ofp);
+    void updateSupportedOptions();
+    void doSetResolution(int dpi);
+    void doSetScanMode(ScannerDevice::ScanMode mode);
 
-    SANE_Handle m_device = nullptr;   // Handle for the currently open device
-    bool m_saneInitialized = false;   // Flag indicating if sane_init was called
+    SANE_Handle m_device = nullptr;
+    bool m_deviceOpen = false;
+    volatile bool m_scanCancelled = false;
 #endif
-    bool m_deviceOpen = false;   // Flag indicating if a device is open
     bool m_usingTestDevice = false;
-
-    ScanMode m_currentScanMode = SCAN_MODE_FLATBED; // Current scan mode
-    int m_currentResolutionDPI = 300; // Current scan resolution (DPI)
-
     void generateTestImage(const QString &outputPath);
 };
 
-#endif   // SCANNERDEVICE_H
+#endif // SCANNERDEVICE_H
