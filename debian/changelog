@@ -1,3 +1,9 @@
+deepin-scanner (0.1.15) unstable; urgency=medium
+
+  * chore: Add new Lao translation file
+
+ -- dengzhongyuan <dengzhongyuan@uniontech.com>  Thu, 14 Aug 2025 09:20:32 +0800
+
 deepin-scanner (0.1.14) unstable; urgency=medium
 
   * chore: Add new Lao translation file

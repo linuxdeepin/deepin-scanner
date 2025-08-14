@@ -14,16 +14,19 @@ X-Deepin-Vendor=deepin
 # Translations:
 # Do not manually modify!
 Comment[en_US]=Scanner Manager is a scanner tool that supports a variety of scanning devices
+Comment[lo]=ຕົວຈັດການສະແກນເປັນເຄື່ອງມືສະແກນທີ່ສະໜັບສະໜູນອຸປະກອນສະແກນຫຼາກຫຼາຍປະເພດ
 Comment[zh_CN]=扫描管理器是一款支持多种扫描设备的工具
 Comment[zh_HK]=掃描管理器是一款支援多種掃描設備的工具
 Comment[zh_TW]=掃描管理器是一款支援多種掃描設備的工具
 
 GenericName[en_US]=Scanner Manager
+GenericName[lo]=ຕົວຈັດການສະແກນ
 GenericName[zh_CN]=扫描管理器
 GenericName[zh_HK]=掃描管理器
 GenericName[zh_TW]=掃描管理器
 
 Name[en_US]=Scanner Manager
+Name[lo]=ຕົວຈັດການສະແກນ
 Name[zh_CN]=扫描管理器
 Name[zh_HK]=掃描管理器
 Name[zh_TW]=掃描管理器
