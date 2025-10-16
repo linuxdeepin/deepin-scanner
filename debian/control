@@ -5,7 +5,6 @@ Priority: optional
 Maintainer: deepin <packages@deepin.com>
 Build-Depends:
  debhelper (>= 11),
- pkg-config,
  cmake,
  qt6-5compat-dev | libqt5x11extras5-dev,
  qt6-base-dev | qtbase5-dev,
