@@ -1,6 +1,8 @@
 #!/usr/bin/make -f
 include /usr/share/dpkg/default.mk
 
+export DEB_LDFLAGS_APPEND = -Wl,-z,now
+
 # 有的Qt5环境需要设置环境变量，Qt6不需要
 export QT_SELECT=5
 
