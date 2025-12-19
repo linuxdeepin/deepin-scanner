@@ -37,17 +37,17 @@ Scanner functionality will be unavailable.</source>
         <translation type="vanished">掃描器錯誤</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="40"/>
+        <location filename="../src/mainwindow.cpp" line="41"/>
         <source>Scanner Manager</source>
         <translation>掃描管理器</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="96"/>
+        <location filename="../src/mainwindow.cpp" line="97"/>
         <source>Loading devices...</source>
         <translation>加載設備...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="124"/>
+        <location filename="../src/mainwindow.cpp" line="141"/>
         <source>Opening device...</source>
         <translation>正在打開設備...</translation>
     </message>
@@ -55,32 +55,37 @@ Scanner functionality will be unavailable.</source>
 <context>
     <name>ScanWidget</name>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="68"/>
+        <location filename="../src/ui/scanwidget.cpp" line="73"/>
         <source>Scan Settings</source>
         <translation>掃描設定</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="94"/>
+        <location filename="../src/ui/scanwidget.cpp" line="99"/>
         <source>Resolution</source>
         <translation>解析度</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="105"/>
+        <location filename="../src/ui/scanwidget.cpp" line="110"/>
         <source>Color Mode</source>
         <translation>色彩模式</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="116"/>
+        <location filename="../src/ui/scanwidget.cpp" line="121"/>
         <source>Image Format</source>
         <translation>圖像格式</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="141"/>
+        <location filename="../src/ui/scanwidget.cpp" line="132"/>
+        <source>Paper Size</source>
+        <translation>紙張尺寸</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="157"/>
         <source>View Scanned Image</source>
         <translation>查看掃描圖像</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="134"/>
+        <location filename="../src/ui/scanwidget.cpp" line="150"/>
         <source>Scan</source>
         <translation>掃描</translation>
     </message>
@@ -89,12 +94,12 @@ Scanner functionality will be unavailable.</source>
         <translation type="vanished">儲存</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="202"/>
+        <location filename="../src/ui/scanwidget.cpp" line="219"/>
         <source>Scan Mode</source>
         <translation>掃描模式</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="203"/>
+        <location filename="../src/ui/scanwidget.cpp" line="220"/>
         <source>Flatbed</source>
         <translation>平板掃描</translation>
     </message>
@@ -103,22 +108,22 @@ Scanner functionality will be unavailable.</source>
         <translation type="vanished">雙面掃描</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="206"/>
+        <location filename="../src/ui/scanwidget.cpp" line="223"/>
         <source>Video Format</source>
         <translation>視頻格式</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="210"/>
+        <location filename="../src/ui/scanwidget.cpp" line="227"/>
         <source>Color</source>
         <translation>彩色</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="210"/>
+        <location filename="../src/ui/scanwidget.cpp" line="227"/>
         <source>Grayscale</source>
         <translation>灰度</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="210"/>
+        <location filename="../src/ui/scanwidget.cpp" line="227"/>
         <source>Black White</source>
         <translation>黑白</translation>
     </message>
@@ -127,27 +132,32 @@ Scanner functionality will be unavailable.</source>
         <translation type="vanished">ADF</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="155"/>
+        <location filename="../src/ui/scanwidget.cpp" line="171"/>
         <source>Scan history will be shown here</source>
         <translation>掃描歷史將顯示在這裡</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="251"/>
+        <location filename="../src/ui/scanwidget.cpp" line="233"/>
+        <source>Auto</source>
+        <translation>自動</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="297"/>
         <source>Device not initialized</source>
         <translation>設備未初始化</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="305"/>
+        <location filename="../src/ui/scanwidget.cpp" line="352"/>
         <source>Initializing preview...</source>
         <translation>正在初始化預覽...</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="311"/>
+        <location filename="../src/ui/scanwidget.cpp" line="358"/>
         <source>Device preview not available</source>
         <translation>設備預覽不可用</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="336"/>
+        <location filename="../src/ui/scanwidget.cpp" line="383"/>
         <source>No preview image</source>
         <translation>無預覽圖像</translation>
     </message>
@@ -155,7 +165,6 @@ Scanner functionality will be unavailable.</source>
 <context>
     <name>ScannerDevice</name>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="227"/>
         <source>No scanner devices found. Possible solutions:
 1. Ensure scanner is connected and powered on
 2. Run command: sudo gpasswd -a $USER scanner
@@ -163,7 +172,7 @@ Scanner functionality will be unavailable.</source>
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation>未找到掃描設備。可能的解決方案：
+        <translation type="vanished">未找到掃描設備。可能的解決方案：
 1. 確保掃描儀已連接並通電
 2. 運行命令：sudo gpasswd -a $USER scanner
 3. 重啟SANE：sudo service saned restart
@@ -172,27 +181,68 @@ Scanner functionality will be unavailable.</source>
 6. 重新連接USB線或重啟電腦</translation>
     </message>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="364"/>
-        <location filename="../src/device/scannerdevice.cpp" line="910"/>
-        <location filename="../src/device/scannerdevice.cpp" line="1097"/>
-        <location filename="../src/device/scannerdevice.cpp" line="1197"/>
         <source>Scanner not opened</source>
-        <translation>掃描儀未打開</translation>
+        <translation type="vanished">掃描儀未打開</translation>
     </message>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation>獲取掃描儀參數失敗：%1</translation>
+        <translation type="vanished">獲取掃描儀參數失敗：%1</translation>
     </message>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation>開始掃描失敗：%1</translation>
+        <translation type="vanished">開始掃描失敗：%1</translation>
     </message>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation>保存測試圖像失敗</translation>
+        <translation type="vanished">保存測試圖像失敗</translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="91"/>
+        <source>Failed to get device list: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="140"/>
+        <source>A scan is already in progress.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="296"/>
+        <source>Failed to load scanned image from temp file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ScannerWorker</name>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="355"/>
+        <source>Failed to open SANE device &apos;%1&apos;: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="398"/>
+        <source>Scanner not opened</source>
+        <translation type="unfinished">掃描儀未打開</translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="412"/>
+        <source>Failed to start scan: %1</source>
+        <translation type="unfinished">開始掃描失敗：%1</translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="420"/>
+        <source>Failed to open temporary output file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="432"/>
+        <source>Scan canceled by user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="437"/>
+        <source>Scan failed during read: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -285,32 +335,32 @@ Scanner functionality will be unavailable.</source>
         <translation>緩衝區重新初始化失敗</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="437"/>
+        <location filename="../src/device/webcamdevice.cpp" line="446"/>
         <source>Failed to enqueue buffer: %1</source>
         <translation>緩衝隊列失敗：%1</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="448"/>
+        <location filename="../src/device/webcamdevice.cpp" line="472"/>
         <source>Failed to start video stream: %1</source>
         <translation>啟動視頻流失敗：%1</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="539"/>
+        <location filename="../src/device/webcamdevice.cpp" line="569"/>
         <source>Device not initialized or invalid file descriptor</source>
         <translation>設備未初始化或文件描述符無效</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="559"/>
+        <location filename="../src/device/webcamdevice.cpp" line="589"/>
         <source>Failed to start video stream, capture failed</source>
         <translation>啟動視頻流失敗，捕獲失敗</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="600"/>
+        <location filename="../src/device/webcamdevice.cpp" line="637"/>
         <source>Failed to get image frame</source>
         <translation>獲取圖像幀失敗</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="654"/>
+        <location filename="../src/device/webcamdevice.cpp" line="694"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>捕獲有效圖像失敗，請檢查攝像頭連接</translation>
     </message>

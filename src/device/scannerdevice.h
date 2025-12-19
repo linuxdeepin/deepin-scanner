@@ -29,6 +29,17 @@ public:
         SCAN_MODE_ADF_DUPLEX   // ADF duplex scan
     };
     Q_ENUM(ScanMode)
+    
+    enum PaperSize {
+        PAPER_SIZE_AUTO = 0,  // Auto detect
+        PAPER_SIZE_A4 = 1,    // 210×297mm
+        PAPER_SIZE_A3 = 2,    // 297×420mm
+        PAPER_SIZE_A5 = 3,    // 148×210mm
+        PAPER_SIZE_A6 = 4,    // 105×148mm
+        PAPER_SIZE_B4 = 5,    // 250×353mm
+        PAPER_SIZE_B5 = 6     // 176×250mm
+    };
+    Q_ENUM(PaperSize)
 
     explicit ScannerDevice(QObject *parent = nullptr);
     ~ScannerDevice() override;
@@ -52,6 +63,11 @@ public:
     bool setResolution(int dpi);
     int getResolution() const;
     QList<int> getSupportedResolutions();
+    
+    // Paper size methods
+    void setPaperSize(PaperSize size);
+    PaperSize getPaperSize() const;
+    static QSizeF getPaperSizeDimensions(PaperSize size);  // Returns size in mm
 
 signals:
     // Signals to trigger worker operations
@@ -85,6 +101,7 @@ private:
     QList<ScanMode> m_supportedScanModes;
     int m_currentResolutionDPI = 300;
     ScanMode m_currentScanMode = SCAN_MODE_FLATBED;
+    PaperSize m_currentPaperSize = PAPER_SIZE_A4;
 };
 
 // --- Worker Class for background scanning ---

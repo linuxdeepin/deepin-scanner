@@ -17,6 +17,11 @@
 #include <QPlainTextEdit>
 #include <QDesktopServices>
 #include <QPrinter>
+#include <QTransform>
+#include <QPainter>
+#include <QMap>
+#include <qmath.h>
+#include <limits>
 
 #include <DFrame>
 #include <DPushButton>
@@ -123,6 +128,17 @@ void ScanWidget::setupUI()
     formatLayout->addWidget(m_formatCombo);
     groupLayout->addLayout(formatLayout);
 
+    // Paper size options
+    m_paperSizeLabel = new DLabel(tr("Paper Size"));
+    m_paperSizeLabel->setFixedWidth(SETTING_LABEL_WIDTH);
+    m_paperSizeCombo = new QComboBox();
+    m_paperSizeCombo->setMaximumWidth(SETTING_COMBO_WIDTH);
+    QHBoxLayout *paperSizeLayout = new QHBoxLayout();
+    paperSizeLayout->setSpacing(20);
+    paperSizeLayout->addWidget(m_paperSizeLabel);
+    paperSizeLayout->addWidget(m_paperSizeCombo);
+    groupLayout->addLayout(paperSizeLayout);
+
     settingsLayout->addWidget(settingsGroup);
     settingsLayout->addSpacing(20);
 
@@ -196,6 +212,7 @@ void ScanWidget::setupDeviceMode(DeviceBase* device, QString name)
     m_resolutionCombo->clear();
     m_colorCombo->clear();
     m_formatCombo->clear();
+    m_paperSizeCombo->clear();
 
     m_device = device;
     if (m_isScanner) {
@@ -210,10 +227,23 @@ void ScanWidget::setupDeviceMode(DeviceBase* device, QString name)
     const QStringList colorModes = { tr("Color"), tr("Grayscale"), tr("Black White") };
     m_colorCombo->addItems(colorModes);
     m_formatCombo->addItems(FORMATS);
+    
+    // Add paper size options
+    const QStringList paperSizes = { 
+        tr("Auto"), 
+        "A4 (210×297mm)", 
+        "A3 (297×420mm)",  
+        "A5 (148×210mm)", 
+        "A6 (105×148mm)",
+        "B4 (250×353mm)",
+        "B5 (176×250mm)"
+    };
+    m_paperSizeCombo->addItems(paperSizes);
 
     // 设置初始选中项
     m_colorCombo->setCurrentIndex(m_imageSettings->colorMode);
     m_formatCombo->setCurrentIndex(m_imageSettings->format);
+    m_paperSizeCombo->setCurrentIndex(m_imageSettings->paperSize);
 
     updateDeviceSettings();
 
@@ -240,6 +270,7 @@ void ScanWidget::connectDeviceSignals(bool bind)
         connect(m_resolutionCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onResolutionChanged);
         connect(m_colorCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onColorModeChanged);
         connect(m_formatCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onFormatChanged);
+        connect(m_paperSizeCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onPaperSizeChanged);
     } else {
         disconnect(m_device, &DeviceBase::previewUpdated, this, &ScanWidget::onUpdatePreview);
         disconnect(m_device, &DeviceBase::imageCaptured, this, &ScanWidget::onScanFinished);
@@ -256,6 +287,7 @@ void ScanWidget::connectDeviceSignals(bool bind)
         disconnect(m_resolutionCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onResolutionChanged);
         disconnect(m_colorCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onColorModeChanged);
         disconnect(m_formatCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onFormatChanged);
+        disconnect(m_paperSizeCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ScanWidget::onPaperSizeChanged);
     }
 }
 
@@ -420,6 +452,21 @@ void ScanWidget::onFormatChanged(int index)
     emit deviceSettingsChanged();
 }
 
+void ScanWidget::onPaperSizeChanged(int index)
+{
+    m_imageSettings->paperSize = index;
+    
+    // Update scanner device paper size
+    if (m_device && m_isScanner) {
+        auto scanner = dynamic_cast<ScannerDevice*>(m_device);
+        if (scanner) {
+            scanner->setPaperSize(static_cast<ScannerDevice::PaperSize>(index));
+        }
+    }
+    
+    emit deviceSettingsChanged();
+}
+
 QString ScanWidget::getSaveDirectory()
 {
     if (m_saveDir.isEmpty()) {
@@ -469,6 +516,34 @@ void ScanWidget::onScanFinished(const QImage &image)
         // 使用改进的黑白转换算法
         processedImage = convertToBlackWhite(image);
     }
+    
+    // Paper size handling
+    ScannerDevice::PaperSize targetPaperSize = static_cast<ScannerDevice::PaperSize>(m_imageSettings->paperSize);
+    
+    // Get current DPI for scaling
+    int currentDPI = 300;  // Default DPI
+    if (m_device && m_isScanner) {
+        auto scanner = dynamic_cast<ScannerDevice*>(m_device);
+        if (scanner) {
+            currentDPI = scanner->getResolution();
+        }
+    }
+    
+    // Handle paper size detection and scaling
+    if (targetPaperSize == ScannerDevice::PAPER_SIZE_AUTO) {
+        // Auto-detect paper size
+        ScannerDevice::PaperSize detectedSize = detectPaperSize(processedImage);
+        qDebug() << "Auto-detected paper size:" << detectedSize;
+        
+        // Scale to detected size if needed
+        if (detectedSize != ScannerDevice::PAPER_SIZE_AUTO) {
+            processedImage = scaleToPaperSize(processedImage, detectedSize, currentDPI);
+        }
+    } else {
+        // Use manually selected paper size
+        qDebug() << "Using selected paper size:" << targetPaperSize;
+        processedImage = scaleToPaperSize(processedImage, targetPaperSize, currentDPI);
+    }
 
     QString filePath = QDir(scanDir).filePath(fileName);
     bool saveSuccess = false;
@@ -479,7 +554,36 @@ void ScanWidget::onScanFinished(const QImage &image)
         QPrinter printer(QPrinter::HighResolution);
         printer.setOutputFormat(QPrinter::PdfFormat);
         printer.setOutputFileName(filePath);
-        printer.setPageSize(QPageSize(QPageSize::A4));
+        
+        // Set page size based on selected paper size
+        QPageSize::PageSizeId pageSizeId = QPageSize::A4;  // Default
+        switch (targetPaperSize) {
+            case ScannerDevice::PAPER_SIZE_A3:
+                pageSizeId = QPageSize::A3;
+                break;
+            case ScannerDevice::PAPER_SIZE_A4:
+                pageSizeId = QPageSize::A4;
+                break;
+            case ScannerDevice::PAPER_SIZE_A5:
+                pageSizeId = QPageSize::A5;
+                break;
+            case ScannerDevice::PAPER_SIZE_A6:
+                pageSizeId = QPageSize::A6;
+                break;
+            case ScannerDevice::PAPER_SIZE_B4:
+                pageSizeId = QPageSize::B4;
+                break;
+            case ScannerDevice::PAPER_SIZE_B5:
+                pageSizeId = QPageSize::B5;
+                break;
+            case ScannerDevice::PAPER_SIZE_AUTO:
+            default:
+                // For auto mode, use the detected paper size or default to A4
+                // Note: The image has already been scaled to the correct size
+                pageSizeId = QPageSize::A4;
+                break;
+        }
+        printer.setPageSize(QPageSize(pageSizeId));
         
         QPainter painter;
         if (painter.begin(&printer)) {
@@ -499,7 +603,12 @@ void ScanWidget::onScanFinished(const QImage &image)
 
         // Write OFD file
         ofd::Writer writer;
-        saveSuccess = writer.createFromImages(filePath, images, 0, 0);
+        
+        // Get paper size dimensions in mm for OFD
+        QSizeF paperSizeMM = ScannerDevice::getPaperSizeDimensions(targetPaperSize);
+        
+        saveSuccess = writer.createFromImages(filePath, images, 0, 0, 
+                                              paperSizeMM.width(), paperSizeMM.height());
         if (!saveSuccess) {
             qCWarning(app) << "Failed to create OFD file";
         }
@@ -729,5 +838,130 @@ QImage ScanWidget::convertToBlackWhite(const QImage &sourceImage)
     qDebug() << "Hybrid threshold binarization completed.";
     
     return finalResult;
+}
+
+ScannerDevice::PaperSize ScanWidget::detectPaperSize(const QImage &image)
+{
+    if (image.isNull()) {
+        return ScannerDevice::PAPER_SIZE_A4;  // Default to A4
+    }
+    
+    // Get current DPI from scanner device
+    int currentDPI = 300;  // Default DPI
+    if (m_device && m_isScanner) {
+        auto scanner = dynamic_cast<ScannerDevice*>(m_device);
+        if (scanner) {
+            currentDPI = scanner->getResolution();
+        }
+    }
+    
+    // Calculate physical dimensions in millimeters
+    double widthMM = (image.width() * 25.4) / currentDPI;
+    double heightMM = (image.height() * 25.4) / currentDPI;
+    
+    qDebug() << "Detected image size:" << widthMM << "x" << heightMM << "mm";
+    
+    // Define paper size tolerances (in mm)
+    const double tolerance = 15.0;  // 15mm tolerance for detection
+    
+    // Map of paper sizes to their dimensions
+    QMap<ScannerDevice::PaperSize, QSizeF> paperSizes = {
+        {ScannerDevice::PAPER_SIZE_A3, QSizeF(297, 420)},
+        {ScannerDevice::PAPER_SIZE_A4, QSizeF(210, 297)},
+        {ScannerDevice::PAPER_SIZE_A5, QSizeF(148, 210)},
+        {ScannerDevice::PAPER_SIZE_A6, QSizeF(105, 148)},
+        {ScannerDevice::PAPER_SIZE_B4, QSizeF(250, 353)},
+        {ScannerDevice::PAPER_SIZE_B5, QSizeF(176, 250)}
+    };
+    
+    // Find the best matching paper size
+    ScannerDevice::PaperSize bestMatch = ScannerDevice::PAPER_SIZE_A4;
+    double minError = std::numeric_limits<double>::max();
+    
+    for (auto it = paperSizes.begin(); it != paperSizes.end(); ++it) {
+        QSizeF paperSize = it.value();
+        
+        // Check both orientations
+        double error1 = qAbs(widthMM - paperSize.width()) + qAbs(heightMM - paperSize.height());
+        double error2 = qAbs(widthMM - paperSize.height()) + qAbs(heightMM - paperSize.width());
+        
+        double minErrorForThisSize = qMin(error1, error2);
+        
+        if (minErrorForThisSize < minError && minErrorForThisSize <= tolerance * 2) {
+            minError = minErrorForThisSize;
+            bestMatch = it.key();
+        }
+    }
+    
+    qDebug() << "Detected paper size:" << bestMatch;
+    return bestMatch;
+}
+
+QImage ScanWidget::scaleToPaperSize(const QImage &image, ScannerDevice::PaperSize targetSize, int dpi)
+{
+    if (image.isNull() || targetSize == ScannerDevice::PAPER_SIZE_AUTO) {
+        return image;
+    }
+    
+    // Get target paper dimensions in mm
+    QSizeF targetSizeMM = ScannerDevice::getPaperSizeDimensions(targetSize);
+    
+    // Convert target dimensions to pixels at given DPI
+    int targetWidth = qRound((targetSizeMM.width() * dpi) / 25.4);
+    int targetHeight = qRound((targetSizeMM.height() * dpi) / 25.4);
+    
+    QSize targetPixelSize(targetWidth, targetHeight);
+    
+    // Check if scaling is needed
+    // If image is smaller than target size, don't scale up (avoid quality loss)
+    if (image.width() <= targetWidth && image.height() <= targetHeight) {
+        qDebug() << "Image is smaller than target size, no scaling applied";
+        return image;
+    }
+    
+    // Determine if we need to consider orientation
+    bool needsRotation = false;
+    QSize scaledSize = image.size();
+    
+    // Calculate scaling factors for both orientations
+    double scaleNormal = qMin((double)targetWidth / image.width(), 
+                              (double)targetHeight / image.height());
+    double scaleRotated = qMin((double)targetWidth / image.height(), 
+                               (double)targetHeight / image.width());
+    
+    // Choose the better scaling (allows rotation if it provides better fit)
+    if (scaleRotated > scaleNormal * 1.1) {  // 10% threshold for preferring rotation
+        needsRotation = true;
+        scaledSize = QSize(qRound(image.height() * scaleRotated), 
+                          qRound(image.width() * scaleRotated));
+    } else {
+        scaledSize = QSize(qRound(image.width() * scaleNormal), 
+                          qRound(image.height() * scaleNormal));
+    }
+    
+    qDebug() << "Scaling from" << image.size() << "to" << scaledSize;
+    
+    // Perform scaling with high quality
+    QImage scaledImage = image.scaled(scaledSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    
+    // If rotation is needed, rotate the image
+    if (needsRotation) {
+        QTransform transform;
+        transform.rotate(90);
+        scaledImage = scaledImage.transformed(transform, Qt::SmoothTransformation);
+    }
+    
+    // Create final image with exact target dimensions, centered
+    QImage finalImage(targetWidth, targetHeight, image.format());
+    finalImage.fill(Qt::white);  // White background for letter/paper images
+    
+    QPainter painter(&finalImage);
+    int x = (targetWidth - scaledImage.width()) / 2;
+    int y = (targetHeight - scaledImage.height()) / 2;
+    painter.drawImage(x, y, scaledImage);
+    painter.end();
+    
+    qDebug() << "Final image size:" << finalImage.size();
+    return finalImage;
 }
 

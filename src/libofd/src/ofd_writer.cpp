@@ -40,7 +40,9 @@ Writer::~Writer() {}
 bool Writer::createFromImages(const QString &outputPath,
                             const QVector<QImage> &images,
                             float leftMargin,
-                            float topMargin)
+                            float topMargin,
+                            float pageWidth,
+                            float pageHeight)
 {
     QFileInfo fileInfo(outputPath);
     QString tempPath = QDir::tempPath() + QDir::separator() + fileInfo.baseName();
@@ -51,7 +53,7 @@ bool Writer::createFromImages(const QString &outputPath,
 
     QString basePath = tempPath + QDir::separator();
     createOFDXmlFile(basePath);
-    createDocFile(basePath, leftMargin, topMargin, images);
+    createDocFile(basePath, leftMargin, topMargin, images, pageWidth, pageHeight);
 
     bool success = compressOFD(outputPath, tempPath);
     removeDir(tempPath);
@@ -92,14 +94,14 @@ void Writer::createOFDXmlFile(const QString &path)
     file.close();
 }
 
-void Writer::writeDocumentHeader(QTextStream &stream, int maxId)
+void Writer::writeDocumentHeader(QTextStream &stream, int maxId, float pageWidth, float pageHeight)
 {
     stream << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
            << "<ofd:Document xmlns:ofd=\"http://www.ofdspec.org\">\n"
            << "  <ofd:CommonData>\n"
            << "    <ofd:MaxUnitID>" << maxId << "</ofd:MaxUnitID>\n"
            << "    <ofd:PageArea>\n"
-           << "      <ofd:PhysicalBox>0.00 0.00 " << PAGE_WIDTH << " " << PAGE_HEIGHT << "</ofd:PhysicalBox>\n"
+           << "      <ofd:PhysicalBox>0.00 0.00 " << pageWidth << " " << pageHeight << "</ofd:PhysicalBox>\n"
            << "    </ofd:PageArea>\n"
            << "    <ofd:PublicRes>PublicRes.xml</ofd:PublicRes>\n"
            << "  </ofd:CommonData>\n"
@@ -129,7 +131,8 @@ void Writer::writePublicResFooter(QTextStream &stream, bool hasImages)
     stream << "</ofd:Res>\n";
 }
 
-QSize Writer::calculateImageSize(const QImage &image, float leftM, float topM)
+QSize Writer::calculateImageSize(const QImage &image, float leftM, float topM,
+                                  float pageWidth, float pageHeight)
 {
     double width = (double)image.width() * 1000 / image.dotsPerMeterX();
     double height = (double)image.height() * 1000 / image.dotsPerMeterY();
@@ -137,7 +140,7 @@ QSize Writer::calculateImageSize(const QImage &image, float leftM, float topM)
     double scaledWidth = width * DPI_FACTOR;
     double scaledHeight = height * DPI_FACTOR;
 
-    QRect pageRect(leftM * 25.4, topM * 25.4, PAGE_WIDTH * 25.4, PAGE_HEIGHT * 25.4);
+    QRect pageRect(leftM * 25.4, topM * 25.4, pageWidth * 25.4, pageHeight * 25.4);
     QSize size(scaledWidth, scaledHeight);
     size.scale(pageRect.size(), Qt::KeepAspectRatio);
 
@@ -147,7 +150,9 @@ QSize Writer::calculateImageSize(const QImage &image, float leftM, float topM)
 void Writer::createDocFile(const QString &path,
                          float leftM,
                          float topM,
-                         const QVector<QImage> &images)
+                         const QVector<QImage> &images,
+                         float pageWidth,
+                         float pageHeight)
 {
     QString docPath = path + DOC_DIR;
     QDir(docPath).mkpath(".");
@@ -175,7 +180,7 @@ void Writer::createDocFile(const QString &path,
     int maxId = images.isEmpty() ? 5 : 2 + images.count() * 5;
     int currentId = 1;
 
-    writeDocumentHeader(docStream, maxId);
+    writeDocumentHeader(docStream, maxId, pageWidth, pageHeight);
     writePublicResHeader(publicResStream);
 
     if (!images.isEmpty()) {
@@ -187,7 +192,7 @@ void Writer::createDocFile(const QString &path,
     pagesPath += QDir::separator();
 
     for (int i = 0; i < (images.isEmpty() ? 1 : images.size()); ++i) {
-        writePage(docStream, publicResStream, pagesPath, images, i, leftM, topM, currentId);
+        writePage(docStream, publicResStream, pagesPath, images, i, leftM, topM, currentId, pageWidth, pageHeight);
     }
 
     writeDocumentFooter(docStream);
@@ -199,7 +204,8 @@ void Writer::createDocFile(const QString &path,
 
 void Writer::writePage(QTextStream &docStream, QTextStream &publicResStream,
                       const QString &pagesPath, const QVector<QImage> &images,
-                      int pageIndex, float leftM, float topM, int &currentId)
+                      int pageIndex, float leftM, float topM, int &currentId,
+                      float pageWidth, float pageHeight)
 {
     docStream << QString("<ofd:Page ID=\"%1\" BaseLoc=\"Pages/Page_%2/Content.xml\"/>")
                        .arg(currentId).arg(pageIndex);
@@ -209,17 +215,17 @@ void Writer::writePage(QTextStream &docStream, QTextStream &publicResStream,
     QString contentPath = pageDirPath + QDir::separator() + "Content.xml";
 
     if (images.isEmpty()) {
-        createPageContent(contentPath, "0", "0", "0", "0", currentId, false);
+        createPageContent(contentPath, "0", "0", "0", "0", currentId, false, pageWidth, pageHeight);
     } else {
         const QImage &image = images.at(pageIndex);
-        QSize size = calculateImageSize(image, leftM, topM);
+        QSize size = calculateImageSize(image, leftM, topM, pageWidth, pageHeight);
         
         QString maxWidth = QString::number(size.width() / 25.4 - leftM, 'f', 2);
         QString maxHeight = QString::number(size.height() / 25.4 - topM, 'f', 2);
         QString minX = QString::number(leftM, 'f', 2);
         QString minY = QString::number(topM, 'f', 2);
 
-        createPageContent(contentPath, minX, minY, maxWidth, maxHeight, currentId, true);
+        createPageContent(contentPath, minX, minY, maxWidth, maxHeight, currentId, true, pageWidth, pageHeight);
 
         publicResStream << QString("    <ofd:MultiMedia ID=\"%1\" Type=\"Image\">\n").arg(currentId)
                        << QString("      <ofd:MediaFile>Image_%1.png</ofd:MediaFile>\n").arg(pageIndex + 1)
@@ -230,7 +236,8 @@ void Writer::writePage(QTextStream &docStream, QTextStream &publicResStream,
 
 void Writer::createPageContent(const QString &path, const QString &minX,
                              const QString &minY, const QString &maxX,
-                             const QString &maxY, int &id, bool hasImage)
+                             const QString &maxY, int &id, bool hasImage,
+                             float pageWidth, float pageHeight)
 {
     QFile file(path);
     if (!file.open(QIODevice::WriteOnly)) {
@@ -247,7 +254,7 @@ void Writer::createPageContent(const QString &path, const QString &minX,
     stream << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
            << "<ofd:Page xmlns:ofd=\"http://www.ofdspec.org\">\n"
            << "  <ofd:Area>\n"
-           << "    <ofd:PhysicalBox>0.00 0.00 " << PAGE_WIDTH << " " << PAGE_HEIGHT << "</ofd:PhysicalBox>\n"
+           << "    <ofd:PhysicalBox>0.00 0.00 " << pageWidth << " " << pageHeight << "</ofd:PhysicalBox>\n"
            << "  </ofd:Area>\n"
            << "  <ofd:Content>\n"
            << QString("    <ofd:Layer ID=\"%1\">\n").arg(id++);
@@ -255,14 +262,14 @@ void Writer::createPageContent(const QString &path, const QString &minX,
     // 背景路径对象
     stream << QString("      <ofd:PathObject ID=\"%1\" Boundary=\"0.00 0.00 %2 %3\" ")
                      .arg(id++)
-                     .arg(PAGE_WIDTH + 0.01)
-                     .arg(PAGE_HEIGHT)
+                     .arg(pageWidth + 0.01)
+                     .arg(pageHeight)
            << "MiterLimit=\"4.23\" Stroke=\"false\" Fill=\"true\" Rule=\"Even-Odd\">\n"
            << "        <ofd:FillColor Value=\"255 255 255\" ColorSpace=\"4\"/>\n"
            << "        <ofd:AbbreviatedData>M 0.00 0.00 L "
-           << PAGE_WIDTH + 0.01 << " 0.00 L "
-           << PAGE_WIDTH + 0.01 << " " << PAGE_HEIGHT << " L "
-           << "0.00 " << PAGE_HEIGHT << " L "
+           << pageWidth + 0.01 << " 0.00 L "
+           << pageWidth + 0.01 << " " << pageHeight << " L "
+           << "0.00 " << pageHeight << " L "
            << "0.00 0.00 C </ofd:AbbreviatedData>\n"
            << "      </ofd:PathObject>\n";
 

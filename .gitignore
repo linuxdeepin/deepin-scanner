@@ -45,12 +45,17 @@ NUL
 # vscode
 .vscode
 .clang-format
+.cache/
 compile_commands.json
 
 # AI
 .roomodes
 project_journal/
 .roo/
+.cursor/
+.kiro/
+.specstory/
+.claude/
 
 # deepin-IDE
 .unioncode
@@ -66,3 +71,7 @@ project_journal/
 *.tar.gz
 *.log
 *.substvars
+
+# OpenMemory - IDE/Assistant specific rules
+.qoder/rules/openmemory.md
+CLAUDE.md

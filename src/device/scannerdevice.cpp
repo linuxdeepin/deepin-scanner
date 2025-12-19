@@ -18,7 +18,7 @@
 
 using namespace DDLog;
 
-#define ADD_TEST_DEVICE 1
+#define ADD_TEST_DEVICE 0
 
 // =================================================================
 //  ScannerDevice Implementation (UI Thread)
@@ -198,6 +198,38 @@ int ScannerDevice::getResolution() const
 QList<int> ScannerDevice::getSupportedResolutions()
 {
     return m_supportedResolutions;
+}
+
+// Paper size methods
+void ScannerDevice::setPaperSize(PaperSize size)
+{
+    m_currentPaperSize = size;
+}
+
+ScannerDevice::PaperSize ScannerDevice::getPaperSize() const
+{
+    return m_currentPaperSize;
+}
+
+QSizeF ScannerDevice::getPaperSizeDimensions(PaperSize size)
+{
+    switch(size) {
+        case PAPER_SIZE_A3:
+            return QSizeF(297, 420);  // A3: 297×420mm (standard ISO size)
+        case PAPER_SIZE_A4:
+            return QSizeF(210, 297);  // A4: 210×297mm (standard ISO size)
+        case PAPER_SIZE_A5:
+            return QSizeF(148, 210);  // A5: 148×210mm (standard ISO size)
+        case PAPER_SIZE_A6:
+            return QSizeF(105, 148);  // A6: 105×148mm (standard ISO size)
+        case PAPER_SIZE_B4:
+            return QSizeF(250, 353);  // B4: 250×353mm (standard ISO size)
+        case PAPER_SIZE_B5:
+            return QSizeF(176, 250);  // B5: 176×250mm (standard ISO size)
+        case PAPER_SIZE_AUTO:
+        default:
+            return QSizeF(210, 297);  // Default to A4
+    }
 }
 
 // --- SLOTS to handle results from worker ---

@@ -26,6 +26,7 @@ struct ImageSettings
 {
     int colorMode = 0;   // 0=COLOR, 1=GRAYSCALE, 2=BLACKWHITE
     int format = 0;   // 0=PNG, 1=JPG, 2=BMP, 3=TIFF, 4=PDF, 5=OFD
+    int paperSize = 1;   // 0=AUTO, 1=A4, 2=A3, 3=A5, 4=A6, 5=B4, 6=B5
 };
 
 class ScanWidget : public QWidget
@@ -58,6 +59,7 @@ private slots:
     void onColorModeChanged(int index);
     void onFormatChanged(int index);
     void onScanModeChanged(int index);
+    void onPaperSizeChanged(int index);
     void onScanFinished(const QImage &image);
     void handleDeviceError(const QString &error);
     void onDeviceOpened();
@@ -68,6 +70,10 @@ private:
     void updateDeviceSettings();
     void resetPreview();
     QImage convertToBlackWhite(const QImage &sourceImage);
+    
+    // Paper size handling methods
+    ScannerDevice::PaperSize detectPaperSize(const QImage &image);
+    QImage scaleToPaperSize(const QImage &image, ScannerDevice::PaperSize targetSize, int dpi);
 
     DeviceBase* m_device = nullptr;
     bool m_isScanner;
@@ -82,6 +88,10 @@ private:
     QComboBox *m_resolutionCombo;
     QComboBox *m_colorCombo;
     QComboBox *m_formatCombo;
+    
+    // Paper size controls
+    DLabel *m_paperSizeLabel;
+    QComboBox *m_paperSizeCombo;
 
     QScopedPointer<ImageSettings> m_imageSettings;
     QPlainTextEdit *m_historyEdit;   // Scan history display box
