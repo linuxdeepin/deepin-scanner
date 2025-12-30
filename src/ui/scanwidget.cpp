@@ -30,7 +30,7 @@
 
 using namespace DDLog;
 
-static const QStringList FORMATS = { "PNG", "JPG", "BMP", "TIFF", "PDF", "OFD" };
+static const QStringList FORMATS = { "PNG", "JPEG", "BMP", "TIFF", "PDF", "OFD" };
 
 // fixed width for label and combo box
 static const int SETTING_LABEL_WIDTH = 80;
