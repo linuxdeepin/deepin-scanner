@@ -83,6 +83,9 @@ if(UNIX AND NOT APPLE)
     # No need for else here, pkg_check_modules already handles REQUIRED errors
 endif()
 
+# 若编译器是 GNU/Clang, 则添加 -pie, 这将启用位置无关可执行文件，提高安全性
+target_link_options(${PROJECT_NAME} PRIVATE "$<IF:$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang>>,-pie,>")
+
 # 添加资源文件
 if(QT_DESIRED_VERSION MATCHES 6)
     qt_add_resources(qrc_RESOURCES
