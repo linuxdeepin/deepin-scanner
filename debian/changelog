@@ -1,3 +1,9 @@
+deepin-scanner (0.1.21) unstable; urgency=medium
+
+  * fix: Fix sw64 gcc not support pie by default
+
+ -- wangrong <wangrong@uniontech.com>  Thu, 22 Jan 2026 19:14:24 +0800
+
 deepin-scanner (0.1.20) unstable; urgency=medium
 
   * Update version to 0.1.20
