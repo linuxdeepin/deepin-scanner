@@ -41,6 +41,13 @@ public:
     };
     Q_ENUM(PaperSize)
 
+    enum ColorMode {
+        COLOR_MODE_COLOR = 0,     
+        COLOR_MODE_GRAYSCALE = 1, 
+        COLOR_MODE_LINEART = 2    
+    };
+    Q_ENUM(ColorMode)
+
     explicit ScannerDevice(QObject *parent = nullptr);
     ~ScannerDevice() override;
 
@@ -69,11 +76,14 @@ public:
     PaperSize getPaperSize() const;
     static QSizeF getPaperSizeDimensions(PaperSize size);  // Returns size in mm
 
+    void setColorMode(ColorMode mode);
+    ColorMode getColorMode() const;
+
 signals:
     // Signals to trigger worker operations
     void triggerOpenDevice(const QString &deviceName);
     void triggerCloseDevice();
-    void triggerStartScan(const QString &filePath, int dpi, ScanMode mode);
+    void triggerStartScan(const QString &filePath, int dpi, ScanMode mode, ColorMode colorMode, PaperSize paperSize);
     void triggerCancelScan();
 
     // Forwarded signals from worker
@@ -102,6 +112,7 @@ private:
     int m_currentResolutionDPI = 300;
     ScanMode m_currentScanMode = SCAN_MODE_FLATBED;
     PaperSize m_currentPaperSize = PAPER_SIZE_A4;
+    ColorMode m_currentColorMode = COLOR_MODE_COLOR;
 };
 
 // --- Worker Class for background scanning ---
@@ -116,7 +127,7 @@ public:
 public slots:
     void doOpenDevice(const QString &deviceName);
     void doCloseDevice();
-    void doStartScan(const QString &tempOutputFilePath, int dpi, ScannerDevice::ScanMode mode);
+    void doStartScan(const QString &tempOutputFilePath, int dpi, ScannerDevice::ScanMode mode, ScannerDevice::ColorMode colorMode, ScannerDevice::PaperSize paperSize);
     void doCancelScan();
 
 signals:
@@ -133,6 +144,8 @@ private:
     void updateSupportedOptions();
     void doSetResolution(int dpi);
     void doSetScanMode(ScannerDevice::ScanMode mode);
+    void doSetColorMode(ScannerDevice::ColorMode colorMode);
+    void doSetPageSize(double widthMM, double heightMM);
 
     SANE_Handle m_device = nullptr;
     bool m_deviceOpen = false;

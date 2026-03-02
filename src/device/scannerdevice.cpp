@@ -146,7 +146,7 @@ void ScannerDevice::startCapture()
     
     m_isCapturing = true;
     setState(Capturing);
-    emit triggerStartScan(tempPath, m_currentResolutionDPI, m_currentScanMode);
+    emit triggerStartScan(tempPath, m_currentResolutionDPI, m_currentScanMode, m_currentColorMode, m_currentPaperSize);
 }
 
 void ScannerDevice::stopCapture()
@@ -211,6 +211,16 @@ ScannerDevice::PaperSize ScannerDevice::getPaperSize() const
     return m_currentPaperSize;
 }
 
+void ScannerDevice::setColorMode(ColorMode mode)
+{
+    m_currentColorMode = mode;
+}
+
+ScannerDevice::ColorMode ScannerDevice::getColorMode() const
+{
+    return m_currentColorMode;
+}
+
 QSizeF ScannerDevice::getPaperSizeDimensions(PaperSize size)
 {
     switch(size) {
@@ -258,6 +268,16 @@ void ScannerDevice::onDeviceOpened(const QList<int> &resolutions, const QList<Sc
                 m_currentResolutionDPI = resolutions.first();
             }
             qCInfo(app) << "Setting new default resolution to" << m_currentResolutionDPI;
+        }
+    }
+
+    // --- Validate and set a correct default scan mode ---
+    if (!modes.isEmpty()) {
+        if (!modes.contains(m_currentScanMode)) {
+            qCWarning(app) << "Current default scan mode" << m_currentScanMode << "is not supported by the device.";
+            qCWarning(app) << "  Supported modes:" << modes;
+            m_currentScanMode = modes.first();
+            qCInfo(app) << "Setting new default scan mode to" << m_currentScanMode;
         }
     }
     
@@ -385,7 +405,7 @@ void ScannerWorker::doCloseDevice()
     emit deviceClosed();
 }
 
-void ScannerWorker::doStartScan(const QString &tempOutputFilePath, int dpi, ScannerDevice::ScanMode mode)
+void ScannerWorker::doStartScan(const QString &tempOutputFilePath, int dpi, ScannerDevice::ScanMode mode, ScannerDevice::ColorMode colorMode, ScannerDevice::PaperSize paperSize)
 {
 #ifndef _WIN32
     if (m_usingTestDevice) {
@@ -399,10 +419,14 @@ void ScannerWorker::doStartScan(const QString &tempOutputFilePath, int dpi, Scan
         return;
     }
 
-    // Set options synchronously before starting scan to avoid race conditions
-    qCDebug(app) << "Worker: Setting options before scan: resolution=" << dpi << "mode=" << static_cast<int>(mode);
-    doSetResolution(dpi);
     doSetScanMode(mode);
+    doSetColorMode(colorMode);
+    doSetResolution(dpi);
+
+    if (mode != ScannerDevice::SCAN_MODE_FLATBED) {
+        QSizeF pageSize = ScannerDevice::getPaperSizeDimensions(paperSize);
+        doSetPageSize(pageSize.width(), pageSize.height());
+    }
     
     m_scanCancelled = false;
 
@@ -466,24 +490,28 @@ void ScannerWorker::doSetResolution(int dpi)
     const SANE_Option_Descriptor *opt_desc = nullptr;
     while ((opt_desc = sane_get_option_descriptor(m_device, opt_index))) {
         if (opt_desc && opt_desc->name && strcmp(opt_desc->name, SANE_NAME_SCAN_RESOLUTION) == 0) {
-            if (!(opt_desc->cap & SANE_CAP_INACTIVE)) {
-                SANE_Status status;
-                SANE_Int info;
-                int value_to_set = dpi; // SANE API might modify the value, so use a copy
-                status = sane_control_option(m_device, opt_index, SANE_ACTION_SET_VALUE, &value_to_set, &info);
-                if (status != SANE_STATUS_GOOD) {
-                    qCWarning(app) << "Failed to set resolution:" << sane_strstatus(status);
-                } else {
-                    qCDebug(app) << "Resolution set to" << dpi;
-                }
-            } else {
-                qCWarning(app) << "Resolution option is inactive.";
+            if (opt_desc->cap & SANE_CAP_INACTIVE) {
+                qCWarning(app) << "Resolution option is INACTIVE";
+                return;
+            }
+
+            if (!(opt_desc->cap & SANE_CAP_SOFT_SELECT)) {
+                qCWarning(app) << "Resolution option is not settable";
+                return;
+            }
+
+            SANE_Status status;
+            SANE_Int info;
+            int value_to_set = dpi;
+            status = sane_control_option(m_device, opt_index, SANE_ACTION_SET_VALUE, &value_to_set, &info);
+            if (status != SANE_STATUS_GOOD) {
+                qCWarning(app) << "Failed to set resolution:" << sane_strstatus(status);
             }
             return;
         }
         opt_index++;
     }
-    qCWarning(app) << "Could not find the resolution option (" << SANE_NAME_SCAN_RESOLUTION << ").";
+    qCWarning(app) << "Could not find resolution option";
 #endif
 }
 
@@ -491,23 +519,136 @@ void ScannerWorker::doSetScanMode(ScannerDevice::ScanMode mode)
 {
 #ifndef _WIN32
     if (!m_device) return;
-    const char *mode_str = "Flatbed";
-    if (mode == ScannerDevice::SCAN_MODE_ADF_SIMPLEX) mode_str = "ADF";
-    if (mode == ScannerDevice::SCAN_MODE_ADF_DUPLEX) mode_str = "ADF Duplex";
+    QString sourceValue = "Flatbed";
+    if (mode == ScannerDevice::SCAN_MODE_ADF_SIMPLEX) sourceValue = "ADF Front";
+    if (mode == ScannerDevice::SCAN_MODE_ADF_DUPLEX) sourceValue = "ADF Duplex";
     
     int opt_index = 0;
     const SANE_Option_Descriptor *opt_desc = nullptr;
     while ((opt_desc = sane_get_option_descriptor(m_device, opt_index++))) {
         if (opt_desc && opt_desc->name && strcmp(opt_desc->name, SANE_NAME_SCAN_SOURCE) == 0) {
-            SANE_Status status = sane_control_option(m_device, opt_index - 1, SANE_ACTION_SET_VALUE, (void*)mode_str, nullptr);
+            if (opt_desc->cap & SANE_CAP_INACTIVE) {
+                qCWarning(app) << "Source option is INACTIVE";
+                return;
+            }
+
+            if (!(opt_desc->cap & SANE_CAP_SOFT_SELECT)) {
+                qCWarning(app) << "Source option is not settable";
+                return;
+            }
+
+            QByteArray sourceBytes = sourceValue.toUtf8();
+            SANE_Int info = 0;
+            SANE_Status status = sane_control_option(m_device, opt_index - 1, SANE_ACTION_SET_VALUE, 
+                                                      (void*)sourceBytes.constData(), &info);
             if (status != SANE_STATUS_GOOD) {
                 qCWarning(app) << "Failed to set scan source:" << sane_strstatus(status);
-            } else {
-                qCDebug(app) << "Scan source set to" << mode_str;
             }
             return;
         }
     }
+    qCWarning(app) << "Could not find scan source option";
+#endif
+}
+
+void ScannerWorker::doSetColorMode(ScannerDevice::ColorMode colorMode)
+{
+#ifndef _WIN32
+    if (!m_device) return;
+
+    QString modeValue = "Color";
+    if (colorMode == ScannerDevice::COLOR_MODE_GRAYSCALE) modeValue = "Gray";
+    if (colorMode == ScannerDevice::COLOR_MODE_LINEART) modeValue = "Lineart";
+
+    qCInfo(app) << "=== Setting Color Mode ===";
+    qCInfo(app) << "Target mode:" << modeValue;
+
+    int opt_index = 0;
+    const SANE_Option_Descriptor *opt_desc = nullptr;
+    while ((opt_desc = sane_get_option_descriptor(m_device, opt_index++))) {
+        if (opt_desc && opt_desc->name && strcmp(opt_desc->name, SANE_NAME_SCAN_MODE) == 0) {
+            qCInfo(app) << "Found color mode option at index" << opt_index - 1;
+            qCInfo(app) << "  Option cap:" << opt_desc->cap;
+            qCInfo(app) << "  Option type:" << opt_desc->type;
+
+            if (opt_desc->cap & SANE_CAP_INACTIVE) {
+                qCWarning(app) << "  Color mode option is INACTIVE!";
+                return;
+            }
+
+            QByteArray modeBytes = modeValue.toUtf8();
+            SANE_Int info = 0;
+            SANE_Status status = sane_control_option(m_device, opt_index - 1, SANE_ACTION_SET_VALUE, 
+                                                      (void*)modeBytes.constData(), &info);
+            if (status != SANE_STATUS_GOOD) {
+                qCWarning(app) << "  Failed to set color mode:" << sane_strstatus(status);
+                if (opt_desc->constraint_type == SANE_CONSTRAINT_STRING_LIST) {
+                    qCWarning(app) << "  Available color modes:";
+                    for (int i = 0; opt_desc->constraint.string_list[i] != NULL; ++i) {
+                        qCWarning(app) << "    - [" << opt_desc->constraint.string_list[i];
+                    }
+                }
+            } else {
+                qCInfo(app) << "  Color mode set to" << modeValue << "(info:" << info << ")";
+            }
+            return;
+        }
+    }
+    qCWarning(app) << "Could not find color mode option (" << SANE_NAME_SCAN_MODE << ").";
+#endif
+}
+
+void ScannerWorker::doSetPageSize(double widthMM, double heightMM)
+{
+#ifndef _WIN32
+    if (!m_device) return;
+
+    qCInfo(app) << "=== Setting Page Size ===";
+    qCInfo(app) << "Target: width=" << widthMM << "mm, height=" << heightMM << "mm";
+
+    int opt_index = 0;
+    const SANE_Option_Descriptor *opt_desc = nullptr;
+    bool widthSet = false;
+    bool heightSet = false;
+
+    while ((opt_desc = sane_get_option_descriptor(m_device, opt_index++))) {
+        if (opt_desc && opt_desc->name) {
+            if (strcmp(opt_desc->name, "page-width") == 0 || strcmp(opt_desc->name, "tl-x") == 0) {
+                if (opt_desc->cap & SANE_CAP_INACTIVE) {
+                    qCWarning(app) << "  Page width option is INACTIVE";
+                } else {
+                    SANE_Word value = static_cast<SANE_Word>(widthMM);
+                    SANE_Int info = 1;
+                    SANE_Status status = sane_control_option(m_device, opt_index - 1, SANE_ACTION_SET_VALUE, &value, &info);
+                    if (status != SANE_STATUS_GOOD) {
+                        qCWarning(app) << "  Failed to set page-width:" << sane_strstatus(status);
+                    } else {
+                        qCInfo(app) << "  Page width set to" << value << "mm (info:" << info << ")";
+                        widthSet = true;
+                    }
+                }
+            }
+            if (strcmp(opt_desc->name, "page-height") == 0 || strcmp(opt_desc->name, "tl-y") == 0 || strcmp(opt_desc->name, "br-y") == 0) {
+                if (opt_desc->cap & SANE_CAP_INACTIVE) {
+                    qCWarning(app) << "  Page height option is INACTIVE";
+                } else {
+                    SANE_Word value = static_cast<SANE_Word>(heightMM);
+                    SANE_Int info = 1;
+                    SANE_Status status = sane_control_option(m_device, opt_index - 1, SANE_ACTION_SET_VALUE, &value, &info);
+                    if (status != SANE_STATUS_GOOD) {
+                        qCWarning(app) << "  Failed to set page-height:" << sane_strstatus(status);
+                    } else {
+                        qCInfo(app) << "  Page height set to" << value << "mm (info:" << info << ")";
+                        heightSet = true;
+                    }
+                }
+            }
+        }
+    }
+
+    if (!widthSet) qCWarning(app) << "Could not find page-width option!";
+    if (!heightSet) qCWarning(app) << "Could not find page-height option!";
+    qCInfo(app) << "=== End Page Size ===";
 #endif
 }
 
@@ -584,30 +725,63 @@ void ScannerWorker::updateSupportedOptions() {
 
     int opt_index = 0;
     const SANE_Option_Descriptor *opt;
+
+    qCInfo(app) << "=== Scanner Device Options Discovery ===";
     
     while ((opt = sane_get_option_descriptor(m_device, opt_index++))) {
         if (opt->name && strcmp(opt->name, SANE_NAME_SCAN_RESOLUTION) == 0) {
+            qCInfo(app) << "Found resolution option, cap:" << opt->cap << "type:" << opt->type;
             if (opt->constraint_type == SANE_CONSTRAINT_RANGE) {
+                qCInfo(app) << "  Resolution range:" << opt->constraint.range->min << "-" << opt->constraint.range->max;
                 for (int i = opt->constraint.range->min; i <= opt->constraint.range->max; i += 100) {
                    resolutions.append(i);
                 }
             } else if (opt->constraint_type == SANE_CONSTRAINT_WORD_LIST) {
+                qCInfo(app) << "  Resolution list:" << opt->constraint.word_list[0] << "values";
                 for (int i = 1; i <= opt->constraint.word_list[0]; ++i) {
                     resolutions.append(opt->constraint.word_list[i]);
                 }
             }
         }
         if (opt->name && strcmp(opt->name, SANE_NAME_SCAN_SOURCE) == 0) {
+            qCInfo(app) << "Found source option, cap:" << opt->cap << "type:" << opt->type;
             if(opt->constraint_type == SANE_CONSTRAINT_STRING_LIST){
+                 qCInfo(app) << "  Available sources:";
                  for (int i = 0; opt->constraint.string_list[i] != NULL; ++i) {
                      QString mode(opt->constraint.string_list[i]);
+                     qCInfo(app) << "    [" << i << "]" << mode;
                      if(mode.compare("Flatbed", Qt::CaseInsensitive) == 0) modes.append(ScannerDevice::SCAN_MODE_FLATBED);
-                     if(mode.compare("ADF", Qt::CaseInsensitive) == 0) modes.append(ScannerDevice::SCAN_MODE_ADF_SIMPLEX);
-                     if(mode.compare("ADF Duplex", Qt::CaseInsensitive) == 0) modes.append(ScannerDevice::SCAN_MODE_ADF_DUPLEX);
+                     else if(mode.compare("ADF", Qt::CaseInsensitive) == 0 || 
+                             mode.contains("ADF Front", Qt::CaseInsensitive) ||
+                             mode.compare("Feeder", Qt::CaseInsensitive) == 0 ||
+                             mode.compare("Auto", Qt::CaseInsensitive) == 0) {
+                         modes.append(ScannerDevice::SCAN_MODE_ADF_SIMPLEX);
+                         qCInfo(app) << "      -> Mapped to ADF_SIMPLEX";
+                     }
+                     else if(mode.compare("ADF Duplex", Qt::CaseInsensitive) == 0 ||
+                             mode.contains("ADF Back", Qt::CaseInsensitive) ||
+                             mode.compare("Duplex", Qt::CaseInsensitive) == 0) {
+                         modes.append(ScannerDevice::SCAN_MODE_ADF_DUPLEX);
+                         qCInfo(app) << "      -> Mapped to ADF_DUPLEX";
+                     }
                  }
             }
         }
+        if (opt->name && strcmp(opt->name, SANE_NAME_SCAN_MODE) == 0) {
+            qCInfo(app) << "Found scan mode option, cap:" << opt->cap;
+            if(opt->constraint_type == SANE_CONSTRAINT_STRING_LIST){
+                 qCInfo(app) << "  Available color modes:";
+                 for (int i = 0; opt->constraint.string_list[i] != NULL; ++i) {
+                     qCInfo(app) << "    [" << i << "]" << opt->constraint.string_list[i];
+                 }
+            }
+        }
+        if (opt->name && (strcmp(opt->name, "page-width") == 0 || strcmp(opt->name, "page-height") == 0)) {
+            qCInfo(app) << "Found" << opt->name << "option, cap:" << opt->cap;
+        }
     }
+
+    qCInfo(app) << "=== End Options Discovery ===";
     
     if (resolutions.isEmpty()) resolutions << 100 << 300 << 600;
     if (modes.isEmpty()) modes << ScannerDevice::SCAN_MODE_FLATBED;
