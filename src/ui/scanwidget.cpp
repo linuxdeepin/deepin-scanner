@@ -217,7 +217,33 @@ void ScanWidget::setupDeviceMode(DeviceBase* device, QString name)
     m_device = device;
     if (m_isScanner) {
         m_modeLabel->setText(tr("Scan Mode"));
-        const QStringList scanModes = { tr("Flatbed") }; //, tr("ADF"), tr("Duplex")
+
+        auto scanner = dynamic_cast<ScannerDevice*>(m_device);
+        QStringList scanModes;
+        if (scanner) {
+            auto supportedModes = scanner->getSupportedScanModes();
+            qCInfo(app) << "Device supported scan modes:" << supportedModes;
+            
+            for (auto mode : supportedModes) {
+                switch (mode) {
+                    case ScannerDevice::SCAN_MODE_FLATBED:
+                        scanModes << tr("Flatbed");
+                        break;
+                    case ScannerDevice::SCAN_MODE_ADF_SIMPLEX:
+                        scanModes << tr("ADF");
+                        break;
+                    case ScannerDevice::SCAN_MODE_ADF_DUPLEX:
+                        scanModes << tr("Duplex");
+                        break;
+                }
+            }
+            
+            if (scanModes.isEmpty()) {
+                scanModes << tr("Flatbed");
+            }
+        } else {
+            scanModes << tr("Flatbed");
+        }
         m_modeCombo->addItems(scanModes);
     } else {
         m_modeLabel->setText(tr("Video Format"));
@@ -443,6 +469,14 @@ void ScanWidget::onResolutionChanged(int index)
 void ScanWidget::onColorModeChanged(int index)
 {
     m_imageSettings->colorMode = index;
+
+    if (m_device && m_isScanner) {
+        auto scanner = dynamic_cast<ScannerDevice*>(m_device);
+        if (scanner) {
+            scanner->setColorMode(static_cast<ScannerDevice::ColorMode>(index));
+        }
+    }
+
     emit deviceSettingsChanged();
 }
 
