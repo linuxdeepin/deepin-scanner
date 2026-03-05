@@ -1,3 +1,10 @@
+deepin-scanner (0.1.22) unstable; urgency=medium
+
+  * Update version to 0.1.22
+  * feat: add ADF scanner support with color mode and page size settings
+
+ -- re2zero <yangwu@uniontech.com>  Thu, 05 Mar 2026 20:20:29 +0800
+
 deepin-scanner (0.1.21) unstable; urgency=medium
 
   * fix: Fix sw64 gcc not support pie by default
