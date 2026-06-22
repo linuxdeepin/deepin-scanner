@@ -1,5 +1,5 @@
 [Desktop Entry]
-Categories=Utility;Application
+Categories=Utility;Application;
 Comment=Scanner Manager is a scanner tool that supports a variety of scanning devices
 Exec=deepin-scanner
 GenericName=Scanner Manager
