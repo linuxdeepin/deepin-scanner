@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2025 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -534,6 +534,13 @@ void WebcamDevice::updatePreview()
         }
         
         qCWarning(app) << "Preview update failed:" << strerror(errno);
+        // The video stream is broken (e.g. device unplugged). Clear the cached
+        // frame so captureImage() cannot serve stale data from it.
+        {
+            QMutexLocker locker(&m_frameMutex);
+            m_latestFrame = QImage();
+        }
+        emit errorOccurred(tr("Device has been disconnected"));
         return;
     }
 
@@ -615,26 +622,9 @@ void WebcamDevice::captureImage()
             
             qCWarning(app) << "Failed to get frame:" << strerror(errno);
             if (retry == 2) {   // Last attempt failed
-                // Try to use existing preview frame (if available)
-                QMutexLocker locker(&m_frameMutex);
-                if (!m_latestFrame.isNull()) {
-                    qCWarning(app) << "Using existing preview frame after capture failure";
-                    QImage capturedImage = m_latestFrame.copy();
-                    locker.unlock();
-
-                    // Restore preview state
-                    if (previewWasRunning) {
-                        m_previewTimer.start();
-                    } else {
-                        stopCapturing();
-                    }
-
-                    emit imageCaptured(capturedImage);
-                    return;
-                }
-
-                // If no preview frame available, report error
-                emit errorOccurred(tr("Failed to get image frame"));
+                // The video stream is broken (e.g. device unplugged). Report
+                // the disconnection instead of serving a stale cached frame.
+                emit errorOccurred(tr("Device has been disconnected"));
 
                 // Restore preview state
                 if (previewWasRunning) {

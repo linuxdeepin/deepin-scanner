@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2025 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -283,7 +283,7 @@ void ScanWidget::connectDeviceSignals(bool bind)
     if (bind) {
         connect(m_device, &DeviceBase::previewUpdated, this, &ScanWidget::onUpdatePreview);
         connect(m_device, &DeviceBase::imageCaptured, this, &ScanWidget::onScanFinished);
-        connect(m_device, &ScannerDevice::errorOccurred, this, &ScanWidget::handleDeviceError);
+        connect(m_device, &DeviceBase::errorOccurred, this, &ScanWidget::handleDeviceError);
 
         if (m_isScanner) {
             auto scanner = dynamic_cast<ScannerDevice*>(m_device);
@@ -300,7 +300,7 @@ void ScanWidget::connectDeviceSignals(bool bind)
     } else {
         disconnect(m_device, &DeviceBase::previewUpdated, this, &ScanWidget::onUpdatePreview);
         disconnect(m_device, &DeviceBase::imageCaptured, this, &ScanWidget::onScanFinished);
-        disconnect(m_device, &ScannerDevice::errorOccurred, this, &ScanWidget::handleDeviceError);
+        disconnect(m_device, &DeviceBase::errorOccurred, this, &ScanWidget::handleDeviceError);
 
         if (m_isScanner) {
             auto scanner = dynamic_cast<ScannerDevice*>(m_device);

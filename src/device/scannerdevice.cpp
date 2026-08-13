@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2025 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -133,6 +133,21 @@ void ScannerDevice::startCapture()
         m_scanPending = true;
         // Optionally set a state to indicate connecting/opening
         setState(Connected); // Use 'Connected' as a transitional state
+        return;
+    }
+
+    // Verify the device is still physically connected before scanning.
+    // Without this check, a scanner that was unplugged after opening would
+    // still allow scan attempts on a stale SANE handle.
+    QStringList availableDevices = getAvailableDevices();
+    // An empty list may indicate a transient SANE enumeration failure rather
+    // than a real disconnection. Only treat it as a disconnect when the
+    // enumeration succeeded (non-empty list) but our device is missing.
+    if (!availableDevices.isEmpty() && !availableDevices.contains(m_currentDeviceName)) {
+        qCWarning(app) << "Device" << m_currentDeviceName << "is no longer available.";
+        m_deviceOpen = false;
+        closeDevice();
+        emit errorOccurred(tr("Scanner has been disconnected"));
         return;
     }
 
