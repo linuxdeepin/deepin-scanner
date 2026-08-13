@@ -48,6 +48,9 @@ bool Reader::uncompressFile(const QString &path, const QString &extractPath)
         return false;
     }
 
+    // 规范化解压根目录，用于 Zip Slip（路径穿越）防护
+    const QString cleanRoot = QDir::cleanPath(extractPath);
+
     for (bool f = zip.goToFirstFile(); f; f = zip.goToNextFile()) {
         QuaZipFile zipFile(&zip);
         if (!zipFile.open(QIODevice::ReadOnly)) {
@@ -55,7 +58,15 @@ bool Reader::uncompressFile(const QString &path, const QString &extractPath)
             return false;
         }
 
-        QString filePath = extractPath + QDir::separator() + zip.getCurrentFileName();
+        // 拼接并规范化目标路径，解析条目名中的 "."/".."，防止逃逸出解压根目录
+        QString filePath = QDir::cleanPath(cleanRoot + QLatin1Char('/') + zip.getCurrentFileName());
+
+        // 校验目标路径必须位于解压根目录之内，否则跳过该条目（不创建目录、不写入）
+        if (!filePath.startsWith(cleanRoot + QLatin1Char('/'), Qt::CaseSensitive)) {
+            zipFile.close();
+            continue;
+        }
+
         QFileInfo fileInfo(filePath);
         QDir().mkpath(fileInfo.path());
 
