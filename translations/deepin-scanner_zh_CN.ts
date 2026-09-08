@@ -211,6 +211,11 @@ Scanner functionality will be unavailable.</source>
         <source>Failed to load scanned image from temp file.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>扫描仪已断开连接</translation>
+    </message>
 </context>
 <context>
     <name>ScannerWorker</name>
@@ -363,6 +368,11 @@ Scanner functionality will be unavailable.</source>
         <location filename="../src/device/webcamdevice.cpp" line="694"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>捕获有效图像失败，请检查摄像头连接</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>设备已断开连接</translation>
     </message>
 </context>
 </TS>
