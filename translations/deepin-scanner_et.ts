@@ -167,6 +167,11 @@
         <source>Failed to save test image</source>
         <translation>Testpildi salvestamine ebaõnnestus</translation>
     </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>Skanner on lahti ühendatud</translation>
+    </message>
 </context>
 <context>
     <name>ScannersWidget</name>
@@ -282,6 +287,11 @@
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>Korralikku pilti kujutamiseks ebaõnnestus, kontrollige kamera ühendust</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>Seade on lahti ühendatud</translation>
     </message>
 </context>
 </TS>

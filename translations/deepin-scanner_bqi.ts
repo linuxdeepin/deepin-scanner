@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation type="unfinished"></translation>
+        <translation>مدیریت اسکنر یک ابزار اسکن است که از انواع دستگاه‌های اسکن پشتیبانی می‌کند</translation>
     </message>
 </context>
 <context>
@@ -75,7 +75,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation type="unfinished"></translation>
+        <translation>تاریخچه اسکن اینجا نمایش داده می‌شود</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
@@ -110,17 +110,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation type="unfinished"></translation>
+        <translation>دستگاه مقداردهی نشده است</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation type="unfinished"></translation>
+        <translation>در حال مقداردهی پیش‌نمایش...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation type="unfinished"></translation>
+        <translation>پیش‌نمایش دستگاه در دسترس نیست</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
@@ -139,7 +139,13 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation type="unfinished"></translation>
+        <translation>هیچ دستگاه اسکنری یافت نشد. راه‌حل‌های ممکن:
+1. مطمئن شوید اسکنر متصل و روشن است
+2. دستور را اجرا کنید: sudo gpasswd -a $USER scanner
+3. SANE را مجدداً راه‌اندازی کنید: sudo service saned restart
+4. بسته درایور مورد نیاز را نصب کنید: sudo apt-get install libsane-extras
+5. برای اسکنرهای شبکه‌ای، تنظیمات شبکه را بررسی کنید
+6. کابل USB را دوباره وصل کنید یا کامپیوتر را مجدداً راه‌اندازی کنید</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
@@ -149,17 +155,22 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>دریافت پارامترهای اسکنر ناموفق بود: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>شروع اسکن ناموفق بود: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation type="unfinished"></translation>
+        <translation>ذخیره تصویر آزمایشی ناموفق بود</translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>اسکنر قطع شد</translation>
     </message>
 </context>
 <context>
@@ -276,6 +287,11 @@
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>საჩვენებელი იმაჟის მიღება შეუძლებელია, გთხოვთ შეამოწოდოთ კამერის კონნექცია</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>دستگاه قطع شد</translation>
     </message>
 </context>
 </TS>

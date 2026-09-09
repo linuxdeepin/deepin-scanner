@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Skandeerderbestuurder is &apos;n skandeergereedskap wat &apos;n verskeidenheid skandeertoestelle ondersteun</translation>
     </message>
 </context>
 <context>
@@ -167,6 +167,11 @@
         <source>Failed to save test image</source>
         <translation>Gefaal om toetsbeeld te spaar</translation>
     </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>Skandeerder is ontkoppel</translation>
+    </message>
 </context>
 <context>
     <name>ScannersWidget</name>
@@ -203,17 +208,17 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="153"/>
         <source>Status: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Status: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Skandeer</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Vanlyn</translation>
     </message>
 </context>
 <context>
@@ -221,67 +226,72 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan nie toestelpad kry nie, kan nie resolusie stel nie</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation type="unfinished"></translation>
+        <translation>Kon nie toestel heropen nie</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Kon nie versoekte resolusie stel nie</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Geheuetoewysing het misluk</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation type="unfinished"></translation>
+        <translation>Toestel nie behoorlik geïnitialiseer nie</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Bufferinitialisering het misluk</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Bufferherinitialisering het misluk</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kon nie buffer in ry plaas nie: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kon nie videostroom begin nie: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation type="unfinished"></translation>
+        <translation>Toestel nie geïnitialiseer of ongelderige lêerbeskrywer nie</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Kon nie videostroom begin nie, vaslegging het misluk</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Kon nie beeldraam kry nie</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Kon nie geldige beeld vaslê nie, kontroleer kameraaansluiting asseblief</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>Toestel is ontkoppel</translation>
     </message>
 </context>
 </TS>

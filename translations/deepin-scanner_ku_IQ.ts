@@ -167,6 +167,11 @@
         <source>Failed to save test image</source>
         <translation>Kêmkirina wisa test</translation>
     </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>سكانەر بڕایەوە</translation>
+    </message>
 </context>
 <context>
     <name>ScannersWidget</name>
@@ -282,6 +287,11 @@
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>ئەگەر دەوەت بەرەق ھەرەتی بەرەق نەدۆزەن، لەوە بەرەق ھەرەتی بەرەق نەدۆزەن</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>ئامێرەکە بڕایەوە</translation>
     </message>
 </context>
 </TS>

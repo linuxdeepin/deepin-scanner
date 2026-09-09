@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Ing Scanner Manager metung yang scanner tool a susuporta kareng miyayaliwang scanning devices</translation>
     </message>
 </context>
 <context>
@@ -75,7 +75,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation type="unfinished"></translation>
+        <translation>Ing scan history ipapakit king keni</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
@@ -110,7 +110,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation type="unfinished"></translation>
+        <translation>Ali ya me-initialize ing device</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
@@ -120,7 +120,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation type="unfinished"></translation>
+        <translation>Ali maki device preview</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
@@ -155,17 +155,22 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Memali ya king pamagkuang scanner parameters: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Memali ya king pamagumpisang scan: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation type="unfinished"></translation>
+        <translation>Memali ya king pamag-save king test image</translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>Miyalis ya ing scanner</translation>
     </message>
 </context>
 <context>
@@ -282,6 +287,11 @@
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>Nagkakasala na capture valid image, palihog tsek camera connection</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>Miyalis ya ing device</translation>
     </message>
 </context>
 </TS>

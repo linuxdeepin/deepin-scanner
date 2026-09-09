@@ -199,17 +199,22 @@ Scanner functionality will be unavailable.</source>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="91"/>
         <source>Failed to get device list: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>获取设备列表失败：%1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="140"/>
         <source>A scan is already in progress.</source>
-        <translation type="unfinished"></translation>
+        <translation>扫描正在进行中。</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="296"/>
         <source>Failed to load scanned image from temp file.</source>
-        <translation type="unfinished"></translation>
+        <translation>从临时文件加载扫描图片失败。</translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>扫描仪已断开连接</translation>
     </message>
 </context>
 <context>
@@ -217,32 +222,32 @@ Scanner functionality will be unavailable.</source>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="355"/>
         <source>Failed to open SANE device &apos;%1&apos;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>打开SANE设备&apos;%1&apos;失败：%2</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="398"/>
         <source>Scanner not opened</source>
-        <translation type="unfinished">扫描仪未打开</translation>
+        <translation>扫描仪未打开</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="412"/>
         <source>Failed to start scan: %1</source>
-        <translation type="unfinished">开始扫描失败：%1</translation>
+        <translation>开始扫描失败：%1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="420"/>
         <source>Failed to open temporary output file.</source>
-        <translation type="unfinished"></translation>
+        <translation>打开临时输出文件失败。</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="432"/>
         <source>Scan canceled by user</source>
-        <translation type="unfinished"></translation>
+        <translation>用户取消了扫描</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="437"/>
         <source>Scan failed during read: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>读取时扫描失败：%1</translation>
     </message>
 </context>
 <context>
@@ -363,6 +368,11 @@ Scanner functionality will be unavailable.</source>
         <location filename="../src/device/webcamdevice.cpp" line="694"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>捕获有效图像失败，请检查摄像头连接</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>设备已断开连接</translation>
     </message>
 </context>
 </TS>

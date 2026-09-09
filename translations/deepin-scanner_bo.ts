@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation type="unfinished"></translation>
+        <translation>བཤེར་འཁོར་དོ་དམ་པ་ནི་བཤེར་འཁོར་སྒྲིག་ཆས་སྣ་ཚོགས་ལ་རྒྱབ་སྐྱོར་བྱེད་པའི་བཤེར་འཁོར་ཡོ་བྱད་ཅིག་རེད</translation>
     </message>
 </context>
 <context>
@@ -75,7 +75,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation type="unfinished"></translation>
+        <translation>བཤེར་འཁོར་གྱི་ལོ་རྒྱུས་འདི་རུ་སྟོན་རྒྱུ་རེད</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
@@ -110,17 +110,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation type="unfinished"></translation>
+        <translation>སྒྲིག་ཆས་ initialized བྱས་མེད</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation type="unfinished"></translation>
+        <translation>སྔོན་ལྟ་ initialized བྱེད་བཞིན་པ...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation type="unfinished"></translation>
+        <translation>སྒྲིག་ཆས་སྔོན་ལྟ་མེད</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
@@ -139,7 +139,13 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation type="unfinished"></translation>
+        <translation>བཤེར་འཁོར་སྒྲིག་ཆས་རྙེད་མ་བྱུང༌། ཐག་གཅོད་ཐབས་ལམ་:
+1. བཤེར་འཁོར་མཐུད་ཡོད་པ་དང་གློག་ཡོད་པ་ཁག་ཐག་བྱེད
+2. བཀའ་སྒྲུབ་: sudo gpasswd -a $USER scanner
+3. SANE བསྐྱར་འགོ་: sudo service saned restart
+4. དགོས་མཁོ་ཡོད་པའི་འདེད་ཆས་སྒྲིག་འཇུག་: sudo apt-get install libsane-extras
+5. དྲ་བའི་བཤེར་འཁོར་ལ་དྲ་བའི་སྒྲིག་འགོད་ཞིབ་བཤེར་བྱེད
+6. USB སྐུད་པ་བསྐྱར་དུ་སྦྲེལ་རོགས་སམ་གློག་ཀླད་བསྐྱར་དུ་ཁ་ཕྱེ</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
@@ -149,17 +155,22 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>བཤེར་འཁོར་གྱི་ཁུངས་གྲངས་ལེན་མ་ཐུབ: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>བཤེར་འཁོར་འགོ་བརྩམས་མ་ཐུབ: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation type="unfinished"></translation>
+        <translation>ཚོད་ལྟའི་པར་རིས་ཉར་མ་ཐུབ</translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>བཤེར་འཁོར་ཁ་བྲལ་སོང༌</translation>
     </message>
 </context>
 <context>
@@ -276,6 +287,11 @@
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>གྱོན་གྱི་རྒྱལ་མེད་ནི་ཡང་པོ་གཞིགས་མེད། འོག་ཆེད་གྱོན་གྱི་རྒྱལ་མེད།</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>སྒྲིག་ཆས་ཁ་བྲལ་སོང༌</translation>
     </message>
 </context>
 </TS>

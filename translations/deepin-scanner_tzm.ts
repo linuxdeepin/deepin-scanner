@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Amsefrak n uskaner d afecku n uskanar i yessefraken tarayt n ibenkan n uskanar</translation>
     </message>
 </context>
 <context>
@@ -75,7 +75,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation type="unfinished"></translation>
+        <translation>Amazray n uskanar ad d-yettwasekne dagi</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
@@ -110,17 +110,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation type="unfinished"></translation>
+        <translation>Ibenk ur yettwarni ara</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation type="unfinished"></translation>
+        <translation>Asenqed n ttwiq yella...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation type="unfinished"></translation>
+        <translation>Taskant n ubenk ulac</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
@@ -139,7 +139,13 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Ulac ibenkan n uskanar. Ifarisen imenza:
+1. Ḍfer belli askanar yedda yerna itteddu
+2. Selkem tanarest: sudo gpasswd -a $USER scanner
+3. Ales-as i SANE: sudo service saned restart
+4. Sebded ukaylu n usekcem: sudo apt-get install libsane-extras
+5. I yiskanaren n uzeṭṭa, selkem tawila n uzeṭṭa
+6. Ales asekked n USB neɣ ales tanekra n uselkim</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
@@ -149,17 +155,22 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuccḍa deg tuṭṭfa n yiseftiyen n uskanar: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuccḍa deg taggara n uskanar: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuccḍa deg usekles n tugna n usekyed</translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>Askanar yexdeḍ</translation>
     </message>
 </context>
 <context>
@@ -276,6 +287,11 @@
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>فشل التقاط صورة صالحة، من فضلك تحقق من اتصال الكاميرا</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>Ibenk yexdeḍ</translation>
     </message>
 </context>
 </TS>

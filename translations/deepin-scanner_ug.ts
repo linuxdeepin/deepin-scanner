@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation type="unfinished"></translation>
+        <translation>سايانېر باشقۇرغۇچى كۆپ خىل سايانېر ئۈسكۈنىلىرىنى قوللايدىغان سايانېر قورالى</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation type="unfinished"></translation>
+        <translation>يۈكلىنىۋاتىدۇ...</translation>
     </message>
 </context>
 <context>
@@ -27,17 +27,17 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="40"/>
         <source>Scanner Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>سايانېر باشقۇرغۇچ</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="96"/>
         <source>Loading devices...</source>
-        <translation type="unfinished"></translation>
+        <translation>ئۈسكۈنىلەر يۈكلىنىۋاتىدۇ...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="124"/>
         <source>Opening device...</source>
-        <translation type="unfinished"></translation>
+        <translation>ئۈسكۈنە ئېچىلىۋاتىدۇ...</translation>
     </message>
 </context>
 <context>
@@ -45,87 +45,87 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="68"/>
         <source>Scan Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>سايانېر تەڭشىكى</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="94"/>
         <source>Resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>ئېنىقلىق دەرىجىسى</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="105"/>
         <source>Color Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>رەڭ ھالىتى</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="116"/>
         <source>Image Format</source>
-        <translation type="unfinished"></translation>
+        <translation>رەسىم فورماتى</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="134"/>
         <source>Scan</source>
-        <translation type="unfinished"></translation>
+        <translation>سايانېر</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation type="unfinished"></translation>
+        <translation>سايانېرلانغان رەسىمنى كۆرسىتىش</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation type="unfinished"></translation>
+        <translation>سايانېر تارىخى بۇ يەردە كۆرسىتىلىدۇ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>سايانېر ھالىتى</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation type="unfinished"></translation>
+        <translation>تەكشى تاختا</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation type="unfinished"></translation>
+        <translation>سىن فورماتى</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>رەڭلىك</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation type="unfinished"></translation>
+        <translation>كۈلرەڭ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation type="unfinished"></translation>
+        <translation>ئاق قارا</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation type="unfinished"></translation>
+        <translation>ئۈسكۈنە دەسلەپلەشتۈرۈلمىگەن</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation type="unfinished"></translation>
+        <translation>ئالدىن كۆرۈش دەسلەپلەشتۈرۈلىۋاتىدۇ...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation type="unfinished"></translation>
+        <translation>ئۈسكۈنە ئالدىن كۆرۈش ئىشلەتكىلى بولمايدۇ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation type="unfinished"></translation>
+        <translation>ئالدىن كۆرۈش رەسىمى يوق</translation>
     </message>
 </context>
 <context>
@@ -139,27 +139,38 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation type="unfinished"></translation>
+        <translation>سايانېر ئۈسكۈنىسى تېپىلمىدى. مۇمكىن بولغان ھەل قىلىش چارىلىرى:
+1. سايانېرنىڭ ئۇلانغان ۋە توكقا چېتىلغانلىقىنى جەزملەشتۈرۈڭ
+2. بۇيرۇقنى ئىجرا قىلىڭ: sudo gpasswd -a $USER scanner
+3. SANE نى قايتا قوزغىتىڭ: sudo service saned restart
+4. زۆرۈر قوزغاتقۇچ بولىقىنى قاچىلاڭ: sudo apt-get install libsane-extras
+5. تور سايانېرلىرى ئۈچۈن، تور تەڭشىكىنى تەكشۈرۈڭ
+6. USB سىمىنى قايتا ئۇلاڭ ياكى كومپيۇتېرنى قايتا قوزغىتىڭ</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation type="unfinished"></translation>
+        <translation>سايانېر ئېچىلمىغان</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>سايانېر پارامېتىرلىرىغا ئېرىشىش مەغلۇپ بولدى: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>سايانېرنى باشلاش مەغلۇپ بولدى: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation type="unfinished"></translation>
+        <translation>سىناق رەسىمىنى ساقلاش مەغلۇپ بولدى</translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>سايانېر ئۈزۈلدى</translation>
     </message>
 </context>
 <context>
@@ -167,12 +178,12 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>سايانېر ئۈسكۈنىلىرى</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation type="unfinished"></translation>
+        <translation>سايانېر</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
@@ -276,6 +287,11 @@
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>ياخشى ئىمەجىنى ئېتىشىنىپ قالدى، كامېرا ئۇلاشىنى تەكشۈرۈڭ</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>ئۈسكۈنە ئۈزۈلدى</translation>
     </message>
 </context>
 </TS>

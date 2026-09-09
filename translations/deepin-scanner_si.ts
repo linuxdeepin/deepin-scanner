@@ -161,6 +161,11 @@
         <source>Failed to save test image</source>
         <translation>ස්කාන් කරන පරීක්ෂා අතර්ගතය නොසිතිය අවස්ථාව</translation>
     </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>ස්කෑනරය විසන්ධි වී ඇත</translation>
+    </message>
 </context>
 <context>
     <name>ScannersWidget</name>
@@ -275,7 +280,12 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation type="unfinished"></translation>
+        <translation>වලංගු පින්තූරය ගැනීමට අසමත් විය, කරුණාකර කැමරා සම්බන්ධතාවය පරීක්ෂා කරන්න</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>උපාංගය විසන්ධි වී ඇත</translation>
     </message>
 </context>
 </TS>

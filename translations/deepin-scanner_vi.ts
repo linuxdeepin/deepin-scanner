@@ -167,6 +167,11 @@
         <source>Failed to save test image</source>
         <translation>Không thể lưu hình ảnh thử</translation>
     </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>Máy quét đã bị ngắt kết nối</translation>
+    </message>
 </context>
 <context>
     <name>ScannersWidget</name>
@@ -282,6 +287,11 @@
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>Không thể ghi hình ảnh hợp lệ, vui lòng kiểm tra kết nối máy quay</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>Thiết bị đã bị ngắt kết nối</translation>
     </message>
 </context>
 </TS>

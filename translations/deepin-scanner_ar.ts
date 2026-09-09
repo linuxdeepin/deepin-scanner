@@ -70,62 +70,62 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="141"/>
         <source>View Scanned Image</source>
-        <translation type="unfinished"></translation>
+        <translation>عرض الصورة الممسوحة</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation type="unfinished"></translation>
+        <translation>سيتم عرض سجل المسح هنا</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
         <source>Scan Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>وضع المسح</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="203"/>
         <source>Flatbed</source>
-        <translation type="unfinished"></translation>
+        <translation>مسطح</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="206"/>
         <source>Video Format</source>
-        <translation type="unfinished"></translation>
+        <translation>تنسيق الفيديو</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>ملون</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Grayscale</source>
-        <translation type="unfinished"></translation>
+        <translation>تدرج رمادي</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="210"/>
         <source>Black White</source>
-        <translation type="unfinished"></translation>
+        <translation>أبيض وأسود</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation type="unfinished"></translation>
+        <translation>لم تتم تهيئة الجهاز</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation type="unfinished"></translation>
+        <translation>جارٍ تهيئة المعاينة...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation type="unfinished"></translation>
+        <translation>معاينة الجهاز غير متاحة</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
         <source>No preview image</source>
-        <translation type="unfinished"></translation>
+        <translation>لا توجد صورة معاينة</translation>
     </message>
 </context>
 <context>
@@ -139,27 +139,38 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation type="unfinished"></translation>
+        <translation>لم يتم العثور على أجهزة مسح ضوئي. الحلول الممكنة:
+1. تأكد من أن الماسح الضوئي متصل ومشغل
+2. شغّل الأمر: sudo gpasswd -a $USER scanner
+3. أعد تشغيل SANE: sudo service saned restart
+4. ثبّت حزمة التعريف المطلوبة: sudo apt-get install libsane-extras
+5. لأجهزة المسح الشبكية، تحقق من إعدادات الشبكة
+6. أعد توصيل كابل USB أو أعد تشغيل الكمبيوتر</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
         <source>Scanner not opened</source>
-        <translation type="unfinished"></translation>
+        <translation>لم يتم فتح الماسح الضوئي</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>فشل الحصول على معلمات الماسح الضوئي: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>فشل بدء المسح: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation type="unfinished"></translation>
+        <translation>فشل حفظ صورة الاختبار</translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>تم فصل الماسح الضوئي</translation>
     </message>
 </context>
 <context>
@@ -167,12 +178,12 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>أجهزة المسح الضوئي</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation type="unfinished"></translation>
+        <translation>ماسح ضوئي</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
@@ -276,6 +287,11 @@
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>فشل في التقاط صورة صالحة، من فضلك تحقق من اتصال الكاميرا</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>تم فصل الجهاز</translation>
     </message>
 </context>
 </TS>

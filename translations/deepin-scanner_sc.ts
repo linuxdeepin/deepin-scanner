@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Su Gestore de Iscàner est un&apos;aina de iscansionada chi suportat una variedade de dispositivos de iscansionada</translation>
     </message>
 </context>
 <context>
@@ -75,7 +75,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;istòria de is iscansionadas at a èssere ammustrada inoghe</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
@@ -110,17 +110,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation type="unfinished"></translation>
+        <translation>Dispositivu non initializadu</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation type="unfinished"></translation>
+        <translation>Initializende s&apos;anteprima...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation type="unfinished"></translation>
+        <translation>Anteprima de su dispositivu no a disponimentu</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
@@ -139,7 +139,13 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Perunu dispositivu de iscansionada agatadu. Solutziones possìbiles:
+1. Assegura chi s&apos;iscàner siat connètidu e allutadu
+2. Esecuta su cumandu: sudo gpasswd -a $USER scanner
+3. Torra a allùchi SANE: sudo service saned restart
+4. Installa su pachete de driver netzessàriu: sudo apt-get install libsane-extras
+5. Pro iscàner de retze, controlla sa configuratzione de retze
+6. Torra a connètere su cavu USB o torra a allùchi s&apos;elaboradore</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
@@ -149,17 +155,22 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Faddita in s&apos;otuèitu de is paràmetros de s&apos;iscàner: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Faddita in s&apos;incumpramentu de s&apos;iscansionada: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation type="unfinished"></translation>
+        <translation>Faddita in s&apos;sarvamentu de s&apos;immàgine de proa</translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>S&apos;iscàner est istadu disconnètidu</translation>
     </message>
 </context>
 <context>
@@ -276,6 +287,11 @@
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>No s’ha pogut capturar una imatge vàlida, si us plau comprovi la connexió de la càmera</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>Su dispositivu est istadu disconnètidu</translation>
     </message>
 </context>
 </TS>

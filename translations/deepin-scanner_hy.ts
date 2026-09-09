@@ -139,7 +139,13 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Սկաների սարքեր չեն գտնվել: Հնարավոր լուծումներ՝
+1. Համոզվեք, որ սկաները միացված է և սնուցվում է
+2. Գործարկել հրամանը՝ sudo gpasswd -a $USER scanner
+3. Վերագործարկել SANE՝ sudo service saned restart
+4. Տեղադրել պահանջվող դրայվերի փաթեթը՝ sudo apt-get install libsane-extras
+5. Ցանցային սկաներների համար ստուգեք ցանցի կարգավորումները
+6. Կրկին միացրեք USB մալուխը կամ վերագործարկեք համակարգիչը</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
@@ -161,6 +167,11 @@
         <source>Failed to save test image</source>
         <translation>Ընթերցման տեսանյութը պահպանելու ընթացքում սխալ տեղի ունեցավ</translation>
     </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>Սկաները անջատվել է</translation>
+    </message>
 </context>
 <context>
     <name>ScannersWidget</name>
@@ -172,7 +183,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation type="unfinished"></translation>
+        <translation>Սկաներ</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
@@ -250,32 +261,37 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Հերթի մեջ բուֆեր դնելը ձախողվեց՝ %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Տեսահոսքի սկսումը ձախողվեց՝ %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation type="unfinished"></translation>
+        <translation>Սարքը նախասկզբնականացված չէ կամ անվավեր ֆայլի նկարագրիչ</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Տեսահոսքի սկսումը ձախողվեց, գրանցումը ձախողվեց</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Չհաջողվեց ստանալ պատկերի կադրը</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Չհաջողվեց գրանցել վավեր պատկեր, խնդրում ենք ստուգել տեսախցիկի միացումը</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>Սարքը անջատվել է</translation>
     </message>
 </context>
 </TS>

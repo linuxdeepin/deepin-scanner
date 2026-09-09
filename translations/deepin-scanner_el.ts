@@ -167,6 +167,11 @@
         <source>Failed to save test image</source>
         <translation>Αποτυχία αποθήκευσης εικόνας δοκιμής</translation>
     </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>Ο σαρωτής αποσυνδέθηκε</translation>
+    </message>
 </context>
 <context>
     <name>ScannersWidget</name>
@@ -282,6 +287,11 @@
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>Αποτυχία ανάληψης έγκυρης εικόνας, ελέγξτε τη σύνδεση με την κάμερα</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>Η συσκευή αποσυνδέθηκε</translation>
     </message>
 </context>
 </TS>

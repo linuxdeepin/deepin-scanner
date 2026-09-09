@@ -167,6 +167,11 @@
         <source>Failed to save test image</source>
         <translation>Nem sikerült elmenteni a teszt képet</translation>
     </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>A szkenner lecsatlakozott</translation>
+    </message>
 </context>
 <context>
     <name>ScannersWidget</name>
@@ -282,6 +287,11 @@
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>Sikertelen érvényes kép elkértetése, kérjük ellenőrizze a kamera csatlakozását</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>Az eszköz lecsatlakozott</translation>
     </message>
 </context>
 </TS>

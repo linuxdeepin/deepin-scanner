@@ -167,6 +167,11 @@
         <source>Failed to save test image</source>
         <translation>Test şəkli qeytlənmədi</translation>
     </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>Сканер ажыратылды</translation>
+    </message>
 </context>
 <context>
     <name>ScannersWidget</name>
@@ -281,7 +286,12 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Жарактуу сүрөт тартуу ишке айганбады, камера туташуусун текшериңиз</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>Түзүлмө ажыратылды</translation>
     </message>
 </context>
 </TS>

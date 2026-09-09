@@ -139,7 +139,13 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation type="unfinished"></translation>
+        <translation>스캐너 장치를 찾을 수 없습니다. 가능한 해결 방법:
+1. 스캐너가 연결되어 있고 전원이 켜져 있는지 확인하세요
+2. 명령어 실행: sudo gpasswd -a $USER scanner
+3. SANE 재시작: sudo service saned restart
+4. 필요한 드라이버 패키지 설치: sudo apt-get install libsane-extras
+5. 네트워크 스캐너의 경우 네트워크 구성을 확인하세요
+6. USB 케이블을 다시 연결하거나 컴퓨터를 재시작하세요</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
@@ -160,6 +166,11 @@
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
         <translation>테스트 이미지를 저장하는 데 실패했습니다</translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>스캐너 연결이 끊어졌습니다</translation>
     </message>
 </context>
 <context>
@@ -276,6 +287,11 @@
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>올바른 이미지를 캡처할 수 없습니다. 카메라 연결을 확인해 주세요</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>장치 연결이 끊어졌습니다</translation>
     </message>
 </context>
 </TS>

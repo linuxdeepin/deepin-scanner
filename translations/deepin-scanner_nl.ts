@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Scannerbeheer is een scangereedschap dat diverse scanapparaten ondersteunt</translation>
     </message>
 </context>
 <context>
@@ -167,6 +167,11 @@
         <source>Failed to save test image</source>
         <translation>Kan testafbeelding niet opslaan</translation>
     </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>Scanner is losgekoppeld</translation>
+    </message>
 </context>
 <context>
     <name>ScannersWidget</name>
@@ -282,6 +287,11 @@
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>Kon geldig beeld niet opnemen, controleer aub de cameraverbinding</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>Apparaat is losgekoppeld</translation>
     </message>
 </context>
 </TS>

@@ -167,6 +167,11 @@
         <source>Failed to save test image</source>
         <translation>টেস্ট ছবি বাঁধা যায়নি</translation>
     </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>স্ক্যানার সংযোগ বিচ্ছিন্ন হয়েছে</translation>
+    </message>
 </context>
 <context>
     <name>ScannersWidget</name>
@@ -282,6 +287,11 @@
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>বৈধ ছবি ধরা যায় নি, দয়া করে ক্যামেরা সংযোগ পরীক্ষা করুন</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>ডিভাইস সংযোগ বিচ্ছিন্ন হয়েছে</translation>
     </message>
 </context>
 </TS>

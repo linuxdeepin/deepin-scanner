@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation type="unfinished"></translation>
+        <translation>የስካነር አስተዳዳሪ የተለያዩ የስካን መሳሪያዎችን የሚደግፍ የስካን መሳሪያ ነው</translation>
     </message>
 </context>
 <context>
@@ -75,7 +75,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation type="unfinished"></translation>
+        <translation>የስካን ታሪክ እዚህ ይታያል</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
@@ -110,17 +110,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation type="unfinished"></translation>
+        <translation>መሳሪያው አልተጀማራም</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation type="unfinished"></translation>
+        <translation>ቅድመ-እይታ በመጀመር ላይ...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation type="unfinished"></translation>
+        <translation>የመሳሪያ ቅድመ-እይታ አይገኝም</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
@@ -139,7 +139,13 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation type="unfinished"></translation>
+        <translation>የስካን መሳሪያ አልተገኘም። የሚቻሉ መፍትሄዎች:
+1. ስካነር መገናኘቱን እና ኃይል እንዳለበት ያረጋግጡ
+2. ትእዛዝ ያሂዱ: sudo gpasswd -a $USER scanner
+3. SANE ን እንደገና ያስጀምሩ: sudo service saned restart
+4. የሚያስፈልገውን ድራይቨር ጥቅል ይጫኑ: sudo apt-get install libsane-extras
+5. ለአውታረ መረብ ስካነሮች፣ የአውታረ መረብ ማዋቀር ያረጋግጡ
+6. የUSB ገመድ እንደገና ያገናኙ ወይም ኮምፒውተርዎን እንደገና ያስጀምሩ</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
@@ -149,17 +155,22 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>የስካነር ጠቋሚዎችን መውሰድ አልተሳካም: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ስካን ማስጀመር አልተሳካም: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation type="unfinished"></translation>
+        <translation>የሙከራ ምስል ማስቀመጥ አልተሳካም</translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>ስካነሩ ተለይቷል</translation>
     </message>
 </context>
 <context>
@@ -177,7 +188,7 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation type="unfinished"></translation>
+        <translation>በንግድ</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
@@ -187,27 +198,27 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation type="unfinished"></translation>
+        <translation>ምንም መሳሪያ አልተገኘም</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
         <source>Model: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ሞዴል: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="153"/>
         <source>Status: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ሁኔታ: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation type="unfinished"></translation>
+        <translation>ስካን</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>ከመስመር ውጭ</translation>
     </message>
 </context>
 <context>
@@ -215,67 +226,72 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>የመሳሪያ መንገድ መውሰድ አልቻለም፣ ሬዞሉሽን መሰናድ አልቻለም</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation type="unfinished"></translation>
+        <translation>መሳሪያውን እንደገና መክፈት አልተሳካም</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>የተጠየቀውን ሬዞሉሽን ማሰናድ አልተሳካም</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation type="unfinished"></translation>
+        <translation>የማህደረ ትውስታ ካርታ አልተሳካም</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation type="unfinished"></translation>
+        <translation>መሳሪያው በትክክል አልተጀማራም</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation type="unfinished"></translation>
+        <translation>የቋት ማስጀመር አልተሳካም</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation type="unfinished"></translation>
+        <translation>የቋት እንደገና ማስጀመር አልተሳካም</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="437"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ቋት ወደ ሰንጠረዥ ማስገባት አልተሳካም: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="448"/>
         <source>Failed to start video stream: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>የቪዲዮ ሥርጭት ማስጀመር አልተሳካም: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="539"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation type="unfinished"></translation>
+        <translation>መሳሪያው አልተጀማራም ወይም ዋጋ የሌለው የፋይል ገላጭ</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="559"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation type="unfinished"></translation>
+        <translation>የቪዲዮ ሥርጭት ማስጀመር አልተሳካም፣ ውሰድ አልተሳካም</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="600"/>
         <source>Failed to get image frame</source>
-        <translation type="unfinished"></translation>
+        <translation>የምስል ክወና መውሰድ አልተሳካም</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation type="unfinished"></translation>
+        <translation>ዋጋ ያለው ምስል መውሰድ አልተሳካም፣ እባክዎ የካሜራ ግንኙነት ያረጋግጡ</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>መሳሪያው ተለይቷል</translation>
     </message>
 </context>
 </TS>

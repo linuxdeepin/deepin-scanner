@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Сканер менеджеррэ сканер Ӏырагъэу абы кⅠэс хъугъэ сканер аппарат хэхъуагъэхэр ахъшэ</translation>
     </message>
 </context>
 <context>
@@ -75,7 +75,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="155"/>
         <source>Scan history will be shown here</source>
-        <translation type="unfinished"></translation>
+        <translation>Сканер тарихъхэр мыщ фэдэгъэх</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="202"/>
@@ -110,17 +110,17 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="251"/>
         <source>Device not initialized</source>
-        <translation type="unfinished"></translation>
+        <translation>Аппаратэр инициализациэ щӀамыгъэ</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="305"/>
         <source>Initializing preview...</source>
-        <translation type="unfinished"></translation>
+        <translation>Предпросмотр initializing...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="311"/>
         <source>Device preview not available</source>
-        <translation type="unfinished"></translation>
+        <translation>Аппарат предпросмотрэу ихьапӀэ ылъэс</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="336"/>
@@ -139,7 +139,13 @@
 4. Install required driver package: sudo apt-get install libsane-extras
 5. For network scanners, check network configuration
 6. Reconnect USB cable or restart computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Сканер аппаратэхэр мэзэгъуэщ. Хъулъэгъэ хьэⅠулъхэр:
+1. Сканерэр зэгъэз макъэмэ абы хьэпӀэ
+2. Командэр къегъэлъэгъуон: sudo gpasswd -a $USER scanner
+3. SANE-р къегъэжьын: sudo service saned restart
+4. Драйвер пакет къэзыгъэлъэгъуон: sudo apt-get install libsane-extras
+5. Сетевай сканерхэмкӀэ, сетэ конфигурациэ къэгъэлъэгъуон
+6. USB кабель къегъэжьын эбэ компьютер къегъэжьын</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="364"/>
@@ -149,17 +155,22 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="374"/>
         <source>Failed to get scanner parameters: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Сканер параметрхэр етын мэзэⅠуэ: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="389"/>
         <source>Failed to start scan: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Сканер къэгъэлъэгъуон мэзэⅠуэ: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="901"/>
         <source>Failed to save test image</source>
-        <translation type="unfinished"></translation>
+        <translation>Тест напэ къэгъэлъэгъуон мэзэⅠуэ</translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>Сканерэр хэкугъэ</translation>
     </message>
 </context>
 <context>
@@ -276,6 +287,11 @@
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>Туры рәсм әйләнеп әләтмәй, кәмера тоташтырылышын тексерегез</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>Аппаратэр хэкугъэ</translation>
     </message>
 </context>
 </TS>

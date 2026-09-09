@@ -167,6 +167,11 @@
         <source>Failed to save test image</source>
         <translation>தீர்வு படத்தை சேமிக்க வேண்டியிருக்கிறது</translation>
     </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>ஸ்கேனர் துண்டிக்கப்பட்டது</translation>
+    </message>
 </context>
 <context>
     <name>ScannersWidget</name>
@@ -281,7 +286,12 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation type="unfinished"></translation>
+        <translation>செல்லுபடியான படத்தை பிடிக்க முடியவில்லை, காமிரா இணைப்பை சரிபார்க்கவும்</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>சாதனம் துண்டிக்கப்பட்டது</translation>
     </message>
 </context>
 </TS>

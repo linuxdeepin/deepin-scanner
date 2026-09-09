@@ -175,17 +175,22 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="91"/>
         <source>Failed to get device list: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Failed to get device list: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="140"/>
         <source>A scan is already in progress.</source>
-        <translation type="unfinished"></translation>
+        <translation>A scan is already in progress.</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="296"/>
         <source>Failed to load scanned image from temp file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Failed to load scanned image from temp file.</translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>Scanner has been disconnected</translation>
     </message>
 </context>
 <context>
@@ -193,32 +198,32 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="355"/>
         <source>Failed to open SANE device &apos;%1&apos;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Failed to open SANE device &apos;%1&apos;: %2</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="398"/>
         <source>Scanner not opened</source>
-        <translation type="unfinished">Scanner not opened</translation>
+        <translation>Scanner not opened</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="412"/>
         <source>Failed to start scan: %1</source>
-        <translation type="unfinished">Failed to start scan: %1</translation>
+        <translation>Failed to start scan: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="420"/>
         <source>Failed to open temporary output file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Failed to open temporary output file.</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="432"/>
         <source>Scan canceled by user</source>
-        <translation type="unfinished"></translation>
+        <translation>Scan canceled by user</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="437"/>
         <source>Scan failed during read: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Scan failed during read: %1</translation>
     </message>
 </context>
 <context>
@@ -335,6 +340,11 @@
         <location filename="../src/device/webcamdevice.cpp" line="694"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>Failed to capture valid image, please check camera connection</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>Device has been disconnected</translation>
     </message>
 </context>
 </TS>

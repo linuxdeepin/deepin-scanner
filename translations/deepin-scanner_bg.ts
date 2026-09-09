@@ -167,6 +167,11 @@
         <source>Failed to save test image</source>
         <translation>Грешка при запазване на тестовото изображение</translation>
     </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>Скенерът е изключен</translation>
+    </message>
 </context>
 <context>
     <name>ScannersWidget</name>
@@ -282,6 +287,11 @@
         <location filename="../src/device/webcamdevice.cpp" line="654"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>Неуспешно възприемане на валидно изображение, моля проверете връзката с камерата</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>Устройството е изключено</translation>
     </message>
 </context>
 </TS>

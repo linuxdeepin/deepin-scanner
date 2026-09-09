@@ -6,12 +6,12 @@
     <message>
         <location filename="../src/main.cpp" line="34"/>
         <source>Deepin Scanner</source>
-        <translation type="unfinished"></translation>
+        <translation>Deepin Scanner</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="38"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
-        <translation type="unfinished"></translation>
+        <translation>スキャナーマネージャーは、さまざまなスキャンデバイスをサポートするスキャンツールです</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/ui/loadingdialog.cpp" line="23"/>
         <source>Loading...</source>
-        <translation type="unfinished"></translation>
+        <translation>読み込み中...</translation>
     </message>
 </context>
 <context>
@@ -27,17 +27,17 @@
     <message>
         <location filename="../src/mainwindow.cpp" line="41"/>
         <source>Scanner Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>スキャナーマネージャー</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="97"/>
         <source>Loading devices...</source>
-        <translation type="unfinished"></translation>
+        <translation>デバイスを読み込み中...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="141"/>
         <source>Opening device...</source>
-        <translation type="unfinished"></translation>
+        <translation>デバイスを開いています...</translation>
     </message>
 </context>
 <context>
@@ -45,22 +45,22 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="73"/>
         <source>Scan Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>スキャン設定</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="99"/>
         <source>Resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>解像度</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="110"/>
         <source>Color Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>カラーモード</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="121"/>
         <source>Image Format</source>
-        <translation type="unfinished"></translation>
+        <translation>画像形式</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="132"/>
@@ -70,47 +70,47 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="150"/>
         <source>Scan</source>
-        <translation type="unfinished"></translation>
+        <translation>スキャン</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="157"/>
         <source>View Scanned Image</source>
-        <translation type="unfinished"></translation>
+        <translation>スキャン画像を表示</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="171"/>
         <source>Scan history will be shown here</source>
-        <translation type="unfinished"></translation>
+        <translation>スキャン履歴がここに表示されます</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="218"/>
         <source>Scan Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>スキャンモード</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="219"/>
         <source>Flatbed</source>
-        <translation type="unfinished"></translation>
+        <translation>フラットベッド</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="222"/>
         <source>Video Format</source>
-        <translation type="unfinished"></translation>
+        <translation>動画形式</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="226"/>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>カラー</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="226"/>
         <source>Grayscale</source>
-        <translation type="unfinished"></translation>
+        <translation>グレースケール</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="226"/>
         <source>Black White</source>
-        <translation type="unfinished"></translation>
+        <translation>白黒</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="232"/>
@@ -120,52 +120,52 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="233"/>
         <source>A4 (210×297mm)</source>
-        <translation type="unfinished"></translation>
+        <translation>A4 (210×297mm)</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="234"/>
         <source>A3 (297×420mm)</source>
-        <translation type="unfinished"></translation>
+        <translation>A3 (297×420mm)</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="235"/>
         <source>A5 (148×210mm)</source>
-        <translation type="unfinished"></translation>
+        <translation>A5 (148×210mm)</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="236"/>
         <source>A6 (105×148mm)</source>
-        <translation type="unfinished"></translation>
+        <translation>A6 (105×148mm)</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="237"/>
         <source>B4 (250×353mm)</source>
-        <translation type="unfinished"></translation>
+        <translation>B4 (250×353mm)</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="238"/>
         <source>B5 (176×250mm)</source>
-        <translation type="unfinished"></translation>
+        <translation>B5 (176×250mm)</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="296"/>
         <source>Device not initialized</source>
-        <translation type="unfinished"></translation>
+        <translation>デバイスが初期化されていません</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="351"/>
         <source>Initializing preview...</source>
-        <translation type="unfinished"></translation>
+        <translation>プレビューを初期化中...</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="357"/>
         <source>Device preview not available</source>
-        <translation type="unfinished"></translation>
+        <translation>デバイスのプレビューは利用できません</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="382"/>
         <source>No preview image</source>
-        <translation type="unfinished"></translation>
+        <translation>プレビュー画像がありません</translation>
     </message>
 </context>
 <context>
@@ -173,17 +173,22 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="91"/>
         <source>Failed to get device list: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>デバイスリストの取得に失敗しました: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="140"/>
         <source>A scan is already in progress.</source>
-        <translation type="unfinished"></translation>
+        <translation>スキャンは既に進行中です。</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="296"/>
         <source>Failed to load scanned image from temp file.</source>
-        <translation type="unfinished"></translation>
+        <translation>一時ファイルからスキャン画像の読み込みに失敗しました。</translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <source>Scanner has been disconnected</source>
+        <translation>スキャナーが切断されました</translation>
     </message>
 </context>
 <context>
@@ -191,32 +196,32 @@
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="355"/>
         <source>Failed to open SANE device &apos;%1&apos;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>SANEデバイス&apos;%1&apos;を開けませんでした: %2</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="398"/>
         <source>Scanner not opened</source>
-        <translation type="unfinished"></translation>
+        <translation>スキャナーが開かれていません</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="412"/>
         <source>Failed to start scan: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>スキャンの開始に失敗しました: %1</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="420"/>
         <source>Failed to open temporary output file.</source>
-        <translation type="unfinished"></translation>
+        <translation>一時出力ファイルを開けませんでした。</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="432"/>
         <source>Scan canceled by user</source>
-        <translation type="unfinished"></translation>
+        <translation>ユーザーによってスキャンがキャンセルされました</translation>
     </message>
     <message>
         <location filename="../src/device/scannerdevice.cpp" line="437"/>
         <source>Scan failed during read: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>読み取り中にスキャンが失敗しました: %1</translation>
     </message>
 </context>
 <context>
@@ -224,47 +229,47 @@
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="29"/>
         <source>Scanner Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>スキャンデバイス</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="72"/>
         <source>Scanner</source>
-        <translation type="unfinished"></translation>
+        <translation>スキャナー</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="144"/>
         <source>Idle</source>
-        <translation type="unfinished"></translation>
+        <translation>アイドル</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="78"/>
         <source>Webcam</source>
-        <translation type="unfinished"></translation>
+        <translation>ウェブカメラ</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="83"/>
         <source>No devices found</source>
-        <translation type="unfinished"></translation>
+        <translation>デバイスが見つかりません</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="152"/>
         <source>Model: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>モデル: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="153"/>
         <source>Status: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ステータス: %1</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="128"/>
         <source>Scan</source>
-        <translation type="unfinished"></translation>
+        <translation>スキャン</translation>
     </message>
     <message>
         <location filename="../src/ui/scannerswidget.cpp" line="148"/>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>オフライン</translation>
     </message>
 </context>
 <context>
@@ -272,67 +277,72 @@
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="264"/>
         <source>Cannot get device path, cannot set resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>デバイスパスを取得できません、解像度を設定できません</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="273"/>
         <source>Failed to reopen device</source>
-        <translation type="unfinished"></translation>
+        <translation>デバイスを再び開けませんでした</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="307"/>
         <source>Failed to set requested resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>要求された解像度の設定に失敗しました</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="320"/>
         <source>Memory mapping failed</source>
-        <translation type="unfinished"></translation>
+        <translation>メモリマッピングに失敗しました</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="360"/>
         <source>Device not properly initialized</source>
-        <translation type="unfinished"></translation>
+        <translation>デバイスが正しく初期化されていません</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="390"/>
         <source>Buffer initialization failed</source>
-        <translation type="unfinished"></translation>
+        <translation>バッファの初期化に失敗しました</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="406"/>
         <source>Buffer reinitialization failed</source>
-        <translation type="unfinished"></translation>
+        <translation>バッファの再初期化に失敗しました</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="446"/>
         <source>Failed to enqueue buffer: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>バッファのエンキューに失敗しました: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="472"/>
         <source>Failed to start video stream: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ビデオストリームの開始に失敗しました: %1</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="569"/>
         <source>Device not initialized or invalid file descriptor</source>
-        <translation type="unfinished"></translation>
+        <translation>デバイスが初期化されていないか、ファイル記述子が無効です</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="589"/>
         <source>Failed to start video stream, capture failed</source>
-        <translation type="unfinished"></translation>
+        <translation>ビデオストリームの開始に失敗しました、キャプチャに失敗しました</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="637"/>
         <source>Failed to get image frame</source>
-        <translation type="unfinished"></translation>
+        <translation>画像フレームの取得に失敗しました</translation>
     </message>
     <message>
         <location filename="../src/device/webcamdevice.cpp" line="694"/>
         <source>Failed to capture valid image, please check camera connection</source>
-        <translation type="unfinished"></translation>
+        <translation>有効な画像のキャプチャに失敗しました、カメラの接続を確認してください</translation>
+    </message>
+    <message>
+        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <source>Device has been disconnected</source>
+        <translation>デバイスが切断されました</translation>
     </message>
 </context>
 </TS>
