@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2025 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -64,17 +64,37 @@ void ScannersWidget::setupUI()
 
 void ScannersWidget::updateDeviceList(QSharedPointer<ScannerDevice> scanner, QSharedPointer<WebcamDevice> webcam)
 {
+    // Enumerating SANE devices while the worker is using an open handle can invalidate
+    // that handle (the backend may rebuild its device cache), so the known scanner list
+    // is kept until no scan is running and no open request is in flight.
+    if (!scanner->isCapturing() && !scanner->isOpening()) {
+        m_scannerNames = scanner->getAvailableDevices();
+    }
+    m_webcamNames = webcam->getAvailableDevices();
+    rebuildList();
+}
+
+void ScannersWidget::updateWebcamDevices(const QStringList &names)
+{
+    m_webcamNames = names;
+    rebuildList();
+}
+
+void ScannersWidget::removeDeviceItem(const QString &name)
+{
+    if (m_scannerNames.removeOne(name) || m_webcamNames.removeOne(name)) {
+        rebuildList();
+    }
+}
+
+void ScannersWidget::rebuildList()
+{
     deviceList->clear();
 
-    // Add scanner devices
-    QStringList scannerDevices = scanner->getAvailableDevices();
-    for (const QString &name : scannerDevices) {
+    for (const QString &name : m_scannerNames) {
         addDeviceItem(name, tr("Scanner"), DeviceBase::DeviceStatus::Idle, true);
     }
-
-    // Add webcam devices
-    QStringList webcamDevices = webcam->getAvailableDevices();
-    for (const QString &name : webcamDevices) {
+    for (const QString &name : m_webcamNames) {
         addDeviceItem(name, tr("Webcam"), DeviceBase::DeviceStatus::Idle, false);
     }
 

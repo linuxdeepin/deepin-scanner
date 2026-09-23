@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2025 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -62,6 +62,9 @@ signals:
     // void captureError(const QString &error);
     // 新增信号
     void resolutionsChanged(const QList<QSize> &resolutions);
+    // Emitted when the device turned out to be gone (e.g. it was unplugged), carrying a
+    // message that can be shown to the user as is.
+    void deviceUnavailable(const QString &deviceName, const QString &message);
 
 private slots:
     void updatePreview();
@@ -73,6 +76,9 @@ private:
     int m_currentBuffer;   // Currently used buffer
     bool m_isInitialized;
     bool m_deviceSelected;
+    // Set once a broken stream has been reported, so a device that is gone is reported
+    // only once instead of on every preview tick.
+    bool m_disconnectReported = false;
     QTimer m_previewTimer;
     int m_width;
     int m_height;

@@ -46,6 +46,11 @@ ScannerDevice::ScannerDevice(QObject *parent)
     connect(m_worker, &ScannerWorker::errorOccurred, this, &ScannerDevice::onWorkerError);
     connect(m_worker, &ScannerWorker::deviceOpened, this, &ScannerDevice::onDeviceOpened);
     connect(m_worker, &ScannerWorker::deviceClosed, this, &ScannerDevice::onDeviceClosed);
+    connect(m_worker, &ScannerWorker::deviceDisconnected, this, [this](const QString &deviceName) {
+        emit errorOccurred(tr("Scanner has been disconnected"));
+        emit deviceUnavailable(deviceName);
+    });
+    connect(m_worker, &ScannerWorker::deviceUnavailable, this, &ScannerDevice::deviceUnavailable);
     connect(m_worker, &ScannerWorker::captureCompleted, this, &ScannerDevice::onCaptureCompleted);
     connect(m_worker, &ScannerWorker::scanProgress, this, &ScannerDevice::scanProgress); // Forward signal
 
@@ -116,6 +121,7 @@ QStringList ScannerDevice::getAvailableDevices()
 bool ScannerDevice::openDevice(const QString &deviceName)
 {
     m_currentDeviceName = deviceName;
+    m_deviceOpening = true;
     emit triggerOpenDevice(deviceName);
     return true; // Asynchronous operation, success is reported via signal
 }
@@ -128,6 +134,13 @@ void ScannerDevice::closeDevice()
 void ScannerDevice::startCapture()
 {
     if (!m_deviceOpen) {
+        if (m_currentDeviceName.isEmpty()) {
+            // No open is in flight, so the device is not available any more (it was
+            // disconnected): report it instead of queueing a scan that nothing will
+            // ever start.
+            emit errorOccurred(tr("Scanner has been disconnected"));
+            return;
+        }
         // Device is still opening, queue the scan request.
         qCDebug(app) << "Scan requested before device was open. Setting pending flag.";
         m_scanPending = true;
@@ -136,21 +149,9 @@ void ScannerDevice::startCapture()
         return;
     }
 
-    // Verify the device is still physically connected before scanning.
-    // Without this check, a scanner that was unplugged after opening would
-    // still allow scan attempts on a stale SANE handle.
-    QStringList availableDevices = getAvailableDevices();
-    // An empty list may indicate a transient SANE enumeration failure rather
-    // than a real disconnection. Only treat it as a disconnect when the
-    // enumeration succeeded (non-empty list) but our device is missing.
-    if (!availableDevices.isEmpty() && !availableDevices.contains(m_currentDeviceName)) {
-        qCWarning(app) << "Device" << m_currentDeviceName << "is no longer available.";
-        m_deviceOpen = false;
-        closeDevice();
-        emit errorOccurred(tr("Scanner has been disconnected"));
-        return;
-    }
-
+    // Device availability is checked in the worker right before the scan
+    // (ScannerWorker::reopenDevice): re-opening the device proves it is still there
+    // and yields a handle that no device enumeration can have invalidated.
     if (m_isCapturing) {
         emit errorOccurred(tr("A scan is already in progress."));
         return;
@@ -262,6 +263,13 @@ QSizeF ScannerDevice::getPaperSizeDimensions(PaperSize size)
 void ScannerDevice::onWorkerError(const QString &errorMessage)
 {
     m_isCapturing = false;
+    m_deviceOpening = false;
+    if (!m_deviceOpen) {
+        // The error came from an open attempt: no open is in flight any more, so drop
+        // the queued scan request together with the device name that marks it.
+        m_scanPending = false;
+        m_currentDeviceName.clear();
+    }
     setState(m_deviceOpen ? Connected : Initialized);
     emit errorOccurred(errorMessage);
 }
@@ -269,6 +277,7 @@ void ScannerDevice::onWorkerError(const QString &errorMessage)
 void ScannerDevice::onDeviceOpened(const QList<int> &resolutions, const QList<ScannerDevice::ScanMode> &modes)
 {
     m_deviceOpen = true;
+    m_deviceOpening = false;
     m_supportedResolutions = resolutions;
     m_supportedScanModes = modes;
 
@@ -312,6 +321,7 @@ void ScannerDevice::onDeviceClosed()
 {
     m_deviceOpen = false;
     m_isCapturing = false;
+    m_scanPending = false;
     m_currentDeviceName.clear();
     m_supportedResolutions.clear();
     m_supportedScanModes.clear();
@@ -383,6 +393,8 @@ void ScannerWorker::doOpenDevice(const QString &deviceName)
         doCloseDevice();
     }
 
+    m_deviceName = deviceName;
+
     QByteArray deviceNameBytes = deviceName.toUtf8();
     SANE_Status status = sane_open(deviceNameBytes.constData(), &m_device);
     
@@ -390,6 +402,11 @@ void ScannerWorker::doOpenDevice(const QString &deviceName)
         emit errorOccurred(tr("Failed to open SANE device '%1': %2").arg(deviceName).arg(sane_strstatus(status)));
         m_device = nullptr;
         m_deviceOpen = false;
+        // A device that cannot be opened is dropped from the device list, unless it is
+        // only temporarily unusable (busy) or present but not accessible.
+        if (status != SANE_STATUS_DEVICE_BUSY && status != SANE_STATUS_ACCESS_DENIED) {
+            emit deviceUnavailable(deviceName);
+        }
         return;
     }
 
@@ -412,6 +429,7 @@ void ScannerWorker::doCloseDevice()
     m_device = nullptr;
     m_deviceOpen = false;
     m_usingTestDevice = false;
+    m_deviceName.clear();
     qCDebug(app) << "Worker: Closed SANE device.";
 #else
     m_deviceOpen = false;
@@ -419,6 +437,75 @@ void ScannerWorker::doCloseDevice()
 #endif
     emit deviceClosed();
 }
+
+#ifndef _WIN32
+// Re-open the device before every scan: re-opening is both the availability check
+// and the only way to be sure the handle is usable, because enumerating devices
+// rebuilds the device cache of some backends (the deepin cloud scan backend does)
+// and thereby invalidates every handle obtained before the enumeration.
+bool ScannerWorker::reopenDevice()
+{
+    if (m_deviceOpen && m_device) {
+        sane_close(m_device);
+    }
+    m_device = nullptr;
+    m_deviceOpen = false;
+
+    QByteArray deviceNameBytes = m_deviceName.toUtf8();
+    SANE_Status status = sane_open(deviceNameBytes.constData(), &m_device);
+    if (status != SANE_STATUS_GOOD) {
+        qCWarning(app) << "Worker: Failed to re-open device" << m_deviceName << ":" << sane_strstatus(status);
+        m_device = nullptr;
+        m_deviceOpen = false;
+        return false;
+    }
+
+    m_deviceOpen = true;
+    return true;
+}
+
+void ScannerWorker::reportDeviceDisconnected()
+{
+    // The name has to be read before closing, doCloseDevice() clears it.
+    const QString deviceName = m_deviceName;
+    doCloseDevice();
+    emit deviceDisconnected(deviceName);
+}
+
+// Report a failed scan: a device that is no longer enumerated, or that cannot be
+// re-opened, has been disconnected; any other failure keeps the status the backend
+// reported. The handle is released before the enumeration below, because that
+// enumeration invalidates it (see reopenDevice()).
+void ScannerWorker::reportScanFailure(const QString &errorMessage)
+{
+    if (m_deviceOpen && m_device) {
+        sane_close(m_device);
+    }
+    m_device = nullptr;
+    m_deviceOpen = false;
+
+    const SANE_Device **deviceList = nullptr;
+    bool devicePresent = true; // a failed enumeration is not a disconnect
+    if (sane_get_devices(&deviceList, SANE_FALSE) == SANE_STATUS_GOOD) {
+        devicePresent = false;
+        for (int i = 0; deviceList && deviceList[i] != nullptr; ++i) {
+            if (deviceList[i]->name && m_deviceName == QString::fromUtf8(deviceList[i]->name)) {
+                devicePresent = true;
+                break;
+            }
+        }
+    }
+
+    if (!devicePresent) {
+        qCWarning(app) << "Worker: Device" << m_deviceName << "is no longer available.";
+    } else if (reopenDevice()) {
+        emit errorOccurred(errorMessage);
+        return;
+    }
+
+    reportDeviceDisconnected();
+}
+#endif
 
 void ScannerWorker::doStartScan(const QString &tempOutputFilePath, int dpi, ScannerDevice::ScanMode mode, ScannerDevice::ColorMode colorMode, ScannerDevice::PaperSize paperSize)
 {
@@ -431,6 +518,11 @@ void ScannerWorker::doStartScan(const QString &tempOutputFilePath, int dpi, Scan
 
     if (!m_deviceOpen || !m_device) {
         emit errorOccurred(tr("Scanner not opened"));
+        return;
+    }
+
+    if (!reopenDevice()) {
+        reportDeviceDisconnected();
         return;
     }
 
@@ -448,7 +540,7 @@ void ScannerWorker::doStartScan(const QString &tempOutputFilePath, int dpi, Scan
     // Start the scan
     SANE_Status status = sane_start(m_device);
     if (status != SANE_STATUS_GOOD) {
-        emit errorOccurred(tr("Failed to start scan: %1").arg(sane_strstatus(status)));
+        reportScanFailure(tr("Failed to start scan: %1").arg(sane_strstatus(status)));
         return;
     }
 
@@ -473,8 +565,8 @@ void ScannerWorker::doStartScan(const QString &tempOutputFilePath, int dpi, Scan
     }
 
     if (status != SANE_STATUS_GOOD && status != SANE_STATUS_EOF) {
-        emit errorOccurred(tr("Scan failed during read: %1").arg(sane_strstatus(status)));
         QFile::remove(tempOutputFilePath);
+        reportScanFailure(tr("Scan failed during read: %1").arg(sane_strstatus(status)));
     } else {
         emit captureCompleted(tempOutputFilePath);
     }

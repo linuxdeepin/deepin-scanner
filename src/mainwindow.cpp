@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2025 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -20,6 +20,7 @@
 #include <QtConcurrent>
 
 #include <DTitlebar>
+#include <DMessageManager>
 
 using namespace DDLog;
 
@@ -65,6 +66,19 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::showScanView);
     connect(m_scannersWidget, &ScannersWidget::updateDeviceListRequested,
             this, [this]() { updateDeviceList(); });
+
+    // A device that is known to be unusable (it was disconnected, or it cannot be
+    // opened) is dropped from the list instead of staying there as a dead entry.
+    connect(scannerDevice.data(), &ScannerDevice::deviceUnavailable,
+            m_scannersWidget, &ScannersWidget::removeDeviceItem);
+
+    // A camera that turned out to be gone (it was unplugged) is dropped from the list and
+    // reported to the user.
+    connect(webcamDevice.data(), &WebcamDevice::deviceUnavailable, this,
+            [this](const QString &deviceName, const QString &message) {
+                m_scannersWidget->removeDeviceItem(deviceName);
+                DMessageManager::instance()->sendMessage(this, QIcon::fromTheme("dialog-warning"), message);
+            });
 
     // 设置标题栏logo
     auto titleBar = titlebar();
@@ -143,21 +157,35 @@ void MainWindow::showScanView(const QString &device, bool isScanner)
     // 设置当前设备指针
     auto devicePtr = isScanner ? m_devices["scanner"] : m_devices["webcam"];
     qDebug(app) << "Current device: " << m_currentDevice;
-    // open the device first via concurrent thread
-    QFuture<bool> future = QtConcurrent::run([=]() {
-        return devicePtr->openDevice(m_currentDevice);
-    });
 
-    // 等待任务完成
-    QFutureWatcher<bool> watcher;
-    QEventLoop loop;
-    QObject::connect(&watcher, &QFutureWatcher<bool>::finished, &loop, &QEventLoop::quit);
-    watcher.setFuture(future);
-    loop.exec();
-    if (!watcher.result()) {
+    bool opened = false;
+    if (isScanner) {
+        // The scanner only queues the request, the SANE call itself happens in the worker
+        // thread, so it is started here: that keeps the scanner state owned by the UI
+        // thread.
+        opened = devicePtr->openDevice(m_currentDevice);
+    } else {
+        // The camera is opened synchronously (V4L2), so it is opened off the UI thread.
+        QFuture<bool> future = QtConcurrent::run([=]() {
+            return devicePtr->openDevice(m_currentDevice);
+        });
+
+        // 等待任务完成
+        QFutureWatcher<bool> watcher;
+        QEventLoop loop;
+        QObject::connect(&watcher, &QFutureWatcher<bool>::finished, &loop, &QEventLoop::quit);
+        watcher.setFuture(future);
+        loop.exec();
+        opened = watcher.result();
+    }
+    if (!opened) {
         QTimer::singleShot(500, this, &MainWindow::hideLoading);
-        // TODO: show error message
         qDebug(app) << "Failed to open device" << m_currentDevice;
+        // The device could not be opened, so it is not there any more: drop it from the
+        // list and tell the user instead of leaving a dead entry behind.
+        m_scannersWidget->removeDeviceItem(m_currentDevice);
+        DMessageManager::instance()->sendMessage(this, QIcon::fromTheme("dialog-warning"),
+                                                 tr("Failed to open the device."));
         return;
     }
     m_scanWidget->setupDeviceMode(devicePtr.data(), m_currentDevice);
@@ -174,6 +202,18 @@ void MainWindow::showDeviceListView()
     m_backBtn->setVisible(false);
     // 切换到设备列表界面
     m_stackLayout->setCurrentWidget(m_scannersWidget);
+
+    // Refresh the camera entries: enumerating /dev/video* is a local operation, so a
+    // camera that was unplugged does not stay in the list as a clickable dead entry.
+    // SANE devices are deliberately not re-enumerated here, that can block for seconds
+    // on network devices and stays with the refresh button.
+    auto webcam = qSharedPointerCast<WebcamDevice>(m_devices["webcam"]);
+    if (webcam) {
+        // The preview keeps the camera open; stop it before enumerating so that the
+        // enumeration does not have to open a camera that this process still holds.
+        webcam->stopPreview();
+        m_scannersWidget->updateWebcamDevices(webcam->getAvailableDevices());
+    }
 }
 
 void MainWindow::showLoading(const QString &message, int timeoutMs)

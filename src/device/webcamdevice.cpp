@@ -213,6 +213,7 @@ bool WebcamDevice::openDevice(const QString &devicePath)
     m_isInitialized = true;
     m_deviceSelected = true;
     m_currentDeviceName = devicePath;
+    m_disconnectReported = false;
     setState(Connected);
 
     // Enumerate supported resolutions
@@ -540,7 +541,11 @@ void WebcamDevice::updatePreview()
             QMutexLocker locker(&m_frameMutex);
             m_latestFrame = QImage();
         }
-        emit errorOccurred(tr("Device has been disconnected"));
+        if (!m_disconnectReported) {
+            m_disconnectReported = true;
+            emit errorOccurred(tr("Device has been disconnected"));
+            emit deviceUnavailable(m_currentDeviceName, tr("Device has been disconnected"));
+        }
         return;
     }
 
@@ -624,7 +629,11 @@ void WebcamDevice::captureImage()
             if (retry == 2) {   // Last attempt failed
                 // The video stream is broken (e.g. device unplugged). Report
                 // the disconnection instead of serving a stale cached frame.
-                emit errorOccurred(tr("Device has been disconnected"));
+                if (!m_disconnectReported) {
+                    m_disconnectReported = true;
+                    emit errorOccurred(tr("Device has been disconnected"));
+                    emit deviceUnavailable(m_currentDeviceName, tr("Device has been disconnected"));
+                }
 
                 // Restore preview state
                 if (previewWasRunning) {

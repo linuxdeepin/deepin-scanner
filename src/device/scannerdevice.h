@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2025 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -61,6 +61,8 @@ public:
     bool isCapturing() const override;
     DeviceType getDeviceType() const override { return DeviceType::Scanner; }
     QString currentDeviceName() const override { return m_currentDeviceName; }
+    // True while an open request has been issued but its result has not arrived yet.
+    bool isOpening() const { return m_deviceOpening; }
 
     // Extended scanner-specific interface
     void startScan(const QString &tempOutputFilePath);
@@ -90,6 +92,7 @@ signals:
     void scanProgress(int percentage);
     void deviceOpened();
     void deviceClosed();
+    void deviceUnavailable(const QString &deviceName);
 
 private slots:
     // Slots to handle results from the worker thread
@@ -102,6 +105,7 @@ private:
     QString m_currentDeviceName;
     bool m_isCapturing = false;
     bool m_deviceOpen = false;
+    bool m_deviceOpening = false; // True while an open request is in flight
     bool m_scanPending = false; // True if a scan was requested before device was open
 
     QThread m_workerThread;
@@ -134,6 +138,8 @@ signals:
     void errorOccurred(const QString &errorMessage);
     void deviceOpened(const QList<int> &resolutions, const QList<ScannerDevice::ScanMode> &modes);
     void deviceClosed();
+    void deviceDisconnected(const QString &deviceName);
+    void deviceUnavailable(const QString &deviceName);
     void captureCompleted(const QString &filePath);
     void scanProgress(int percentage);
 
@@ -142,6 +148,9 @@ private:
     struct Image;
     SANE_Status scan_it(FILE *ofp);
     void updateSupportedOptions();
+    bool reopenDevice();
+    void reportScanFailure(const QString &errorMessage);
+    void reportDeviceDisconnected();
     void doSetResolution(int dpi);
     void doSetScanMode(ScannerDevice::ScanMode mode);
     void doSetColorMode(ScannerDevice::ColorMode colorMode);
@@ -149,6 +158,7 @@ private:
 
     SANE_Handle m_device = nullptr;
     bool m_deviceOpen = false;
+    QString m_deviceName;
     volatile bool m_scanCancelled = false;
 #endif
     bool m_usingTestDevice = false;
