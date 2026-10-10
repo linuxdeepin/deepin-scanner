@@ -14,7 +14,10 @@
 
 DWIDGET_USE_NAMESPACE
 /**
- * @brief The LoadingDialog class provides a modal loading dialog with timeout
+ * @brief The LoadingDialog class provides a loading overlay on the main window, with timeout
+ *
+ * It is a child widget of the window it belongs to, not a second window: the window stays
+ * movable while loading, and the overlay follows it because they share the same surface.
  */
 class LoadingDialog : public QDialog
 {
@@ -26,7 +29,12 @@ public:
     void showWithTimeout(int timeoutMs = 10000);
     void setText(const QString &text);
 
+protected:
+    bool eventFilter(QObject *watched, QEvent *event) override;
+
 private:
+    void centerOnParent();
+
     QTimer *m_timeoutTimer;
     QLabel *m_loadingLabel;
     QLabel *m_textLabel;

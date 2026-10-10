@@ -4,12 +4,12 @@
 <context>
     <name>Application</name>
     <message>
-        <location filename="../src/main.cpp" line="34"/>
+        <location filename="../src/main.cpp" line="37"/>
         <source>Deepin Scanner</source>
         <translation>Deepin Scanner</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="38"/>
+        <location filename="../src/main.cpp" line="41"/>
         <source>Scanner Manager is a scanner tool that supports a variety of scanning devices</source>
         <translation>Scanner Manager is a scanner tool that supports a variety of scanning devices</translation>
     </message>
@@ -17,7 +17,7 @@
 <context>
     <name>LoadingDialog</name>
     <message>
-        <location filename="../src/ui/loadingdialog.cpp" line="23"/>
+        <location filename="../src/ui/loadingdialog.cpp" line="30"/>
         <source>Loading...</source>
         <translation>Loading...</translation>
     </message>
@@ -25,117 +25,134 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/mainwindow.cpp" line="41"/>
+        <location filename="../src/mainwindow.cpp" line="42"/>
         <source>Scanner Manager</source>
         <translation>Scanner Manager</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="97"/>
         <source>Loading devices...</source>
-        <translation>Loading devices...</translation>
+        <translation type="vanished">Loading devices...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="141"/>
+        <location filename="../src/mainwindow.cpp" line="173"/>
         <source>Opening device...</source>
         <translation>Opening device...</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="206"/>
+        <source>Failed to open the device.</source>
+        <translation>Failed to open the device.</translation>
     </message>
 </context>
 <context>
     <name>ScanWidget</name>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="73"/>
+        <location filename="../src/ui/scanwidget.cpp" line="76"/>
         <source>Scan Settings</source>
         <translation>Scan Settings</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="99"/>
+        <location filename="../src/ui/scanwidget.cpp" line="102"/>
         <source>Resolution</source>
         <translation>Resolution</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="110"/>
+        <location filename="../src/ui/scanwidget.cpp" line="113"/>
         <source>Color Mode</source>
         <translation>Color Mode</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="121"/>
+        <location filename="../src/ui/scanwidget.cpp" line="124"/>
         <source>Image Format</source>
         <translation>Image Format</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="132"/>
+        <location filename="../src/ui/scanwidget.cpp" line="135"/>
         <source>Paper Size</source>
         <translation>Paper Size</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="150"/>
+        <location filename="../src/ui/scanwidget.cpp" line="153"/>
         <source>Scan</source>
         <translation>Scan</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="157"/>
+        <location filename="../src/ui/scanwidget.cpp" line="160"/>
         <source>View Scanned Image</source>
         <translation>View Scanned Image</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="171"/>
+        <location filename="../src/ui/scanwidget.cpp" line="174"/>
         <source>Scan history will be shown here</source>
         <translation>Scan history will be shown here</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="219"/>
+        <location filename="../src/ui/scanwidget.cpp" line="222"/>
         <source>Scan Mode</source>
         <translation>Scan Mode</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="220"/>
+        <location filename="../src/ui/scanwidget.cpp" line="233"/>
+        <location filename="../src/ui/scanwidget.cpp" line="245"/>
+        <location filename="../src/ui/scanwidget.cpp" line="248"/>
         <source>Flatbed</source>
         <translation>Flatbed</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="223"/>
+        <location filename="../src/ui/scanwidget.cpp" line="252"/>
         <source>Video Format</source>
         <translation>Video Format</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="227"/>
+        <location filename="../src/ui/scanwidget.cpp" line="256"/>
         <source>Color</source>
         <translation>Color</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="227"/>
+        <location filename="../src/ui/scanwidget.cpp" line="256"/>
         <source>Grayscale</source>
         <translation>Grayscale</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="227"/>
+        <location filename="../src/ui/scanwidget.cpp" line="256"/>
         <source>Black White</source>
         <translation>Black White</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="233"/>
+        <location filename="../src/ui/scanwidget.cpp" line="262"/>
         <source>Auto</source>
         <translation>Auto</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="297"/>
+        <location filename="../src/ui/scanwidget.cpp" line="326"/>
         <source>Device not initialized</source>
         <translation>Device not initialized</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="352"/>
+        <location filename="../src/ui/scanwidget.cpp" line="394"/>
+        <location filename="../src/ui/scanwidget.cpp" line="499"/>
         <source>Initializing preview...</source>
         <translation>Initializing preview...</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="358"/>
+        <location filename="../src/ui/scanwidget.cpp" line="403"/>
         <source>Device preview not available</source>
         <translation>Device preview not available</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="383"/>
+        <location filename="../src/ui/scanwidget.cpp" line="435"/>
         <source>No preview image</source>
         <translation>No preview image</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="236"/>
+        <source>ADF</source>
+        <translation>ADF</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="239"/>
+        <source>Duplex</source>
+        <translation>Duplex</translation>
     </message>
 </context>
 <context>
@@ -173,22 +190,22 @@
         <translation type="vanished">Failed to save test image</translation>
     </message>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="91"/>
         <source>Failed to get device list: %1</source>
-        <translation>Failed to get device list: %1</translation>
+        <translation type="vanished">Failed to get device list: %1</translation>
     </message>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="140"/>
+        <location filename="../src/device/scannerdevice.cpp" line="143"/>
         <source>A scan is already in progress.</source>
         <translation>A scan is already in progress.</translation>
     </message>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="296"/>
+        <location filename="../src/device/scannerdevice.cpp" line="326"/>
         <source>Failed to load scanned image from temp file.</source>
         <translation>Failed to load scanned image from temp file.</translation>
     </message>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="150"/>
+        <location filename="../src/device/scannerdevice.cpp" line="52"/>
+        <location filename="../src/device/scannerdevice.cpp" line="128"/>
         <source>Scanner has been disconnected</source>
         <translation>Scanner has been disconnected</translation>
     </message>
@@ -196,34 +213,39 @@
 <context>
     <name>ScannerWorker</name>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="355"/>
+        <location filename="../src/device/scannerdevice.cpp" line="431"/>
         <source>Failed to open SANE device &apos;%1&apos;: %2</source>
         <translation>Failed to open SANE device &apos;%1&apos;: %2</translation>
     </message>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="398"/>
+        <location filename="../src/device/scannerdevice.cpp" line="555"/>
         <source>Scanner not opened</source>
         <translation>Scanner not opened</translation>
     </message>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="412"/>
+        <location filename="../src/device/scannerdevice.cpp" line="586"/>
         <source>Failed to start scan: %1</source>
         <translation>Failed to start scan: %1</translation>
     </message>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="420"/>
+        <location filename="../src/device/scannerdevice.cpp" line="594"/>
         <source>Failed to open temporary output file.</source>
         <translation>Failed to open temporary output file.</translation>
     </message>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="432"/>
+        <location filename="../src/device/scannerdevice.cpp" line="610"/>
         <source>Scan canceled by user</source>
         <translation>Scan canceled by user</translation>
     </message>
     <message>
-        <location filename="../src/device/scannerdevice.cpp" line="437"/>
+        <location filename="../src/device/scannerdevice.cpp" line="616"/>
         <source>Scan failed during read: %1</source>
         <translation>Scan failed during read: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/device/scannerdevice.cpp" line="382"/>
+        <source>Failed to get device list: %1</source>
+        <translation>Failed to get device list: %1</translation>
     </message>
 </context>
 <context>
@@ -234,115 +256,122 @@
         <translation>Scanner Devices</translation>
     </message>
     <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="72"/>
+        <location filename="../src/ui/scannerswidget.cpp" line="120"/>
         <source>Scanner</source>
         <translation>Scanner</translation>
     </message>
     <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="144"/>
+        <location filename="../src/ui/scannerswidget.cpp" line="197"/>
         <source>Idle</source>
         <translation>Idle</translation>
     </message>
     <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="78"/>
+        <location filename="../src/ui/scannerswidget.cpp" line="124"/>
         <source>Webcam</source>
         <translation>Webcam</translation>
     </message>
     <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="83"/>
+        <location filename="../src/ui/scannerswidget.cpp" line="131"/>
         <source>No devices found</source>
         <translation>No devices found</translation>
     </message>
     <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="152"/>
+        <location filename="../src/ui/scannerswidget.cpp" line="205"/>
         <source>Model: %1</source>
         <translation>Model: %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="153"/>
+        <location filename="../src/ui/scannerswidget.cpp" line="206"/>
         <source>Status: %1</source>
         <translation>Status: %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="128"/>
+        <location filename="../src/ui/scannerswidget.cpp" line="181"/>
         <source>Scan</source>
         <translation>Scan</translation>
     </message>
     <message>
-        <location filename="../src/ui/scannerswidget.cpp" line="148"/>
+        <location filename="../src/ui/scannerswidget.cpp" line="201"/>
         <source>Offline</source>
         <translation>Offline</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scannerswidget.cpp" line="46"/>
+        <source>Loading devices...</source>
+        <translation>Loading devices...</translation>
     </message>
 </context>
 <context>
     <name>WebcamDevice</name>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="264"/>
+        <location filename="../src/device/webcamdevice.cpp" line="288"/>
         <source>Cannot get device path, cannot set resolution</source>
         <translation>Cannot get device path, cannot set resolution</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="273"/>
+        <location filename="../src/device/webcamdevice.cpp" line="299"/>
         <source>Failed to reopen device</source>
         <translation>Failed to reopen device</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="307"/>
+        <location filename="../src/device/webcamdevice.cpp" line="333"/>
         <source>Failed to set requested resolution</source>
         <translation>Failed to set requested resolution</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="320"/>
+        <location filename="../src/device/webcamdevice.cpp" line="346"/>
         <source>Memory mapping failed</source>
         <translation>Memory mapping failed</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="360"/>
+        <location filename="../src/device/webcamdevice.cpp" line="399"/>
         <source>Device not properly initialized</source>
         <translation>Device not properly initialized</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="390"/>
+        <location filename="../src/device/webcamdevice.cpp" line="427"/>
         <source>Buffer initialization failed</source>
         <translation>Buffer initialization failed</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="406"/>
+        <location filename="../src/device/webcamdevice.cpp" line="443"/>
         <source>Buffer reinitialization failed</source>
         <translation>Buffer reinitialization failed</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="446"/>
+        <location filename="../src/device/webcamdevice.cpp" line="487"/>
         <source>Failed to enqueue buffer: %1</source>
         <translation>Failed to enqueue buffer: %1</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="472"/>
+        <location filename="../src/device/webcamdevice.cpp" line="517"/>
         <source>Failed to start video stream: %1</source>
         <translation>Failed to start video stream: %1</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="569"/>
+        <location filename="../src/device/webcamdevice.cpp" line="717"/>
         <source>Device not initialized or invalid file descriptor</source>
         <translation>Device not initialized or invalid file descriptor</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="589"/>
+        <location filename="../src/device/webcamdevice.cpp" line="740"/>
         <source>Failed to start video stream, capture failed</source>
         <translation>Failed to start video stream, capture failed</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="637"/>
         <source>Failed to get image frame</source>
-        <translation>Failed to get image frame</translation>
+        <translation type="vanished">Failed to get image frame</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="694"/>
+        <location filename="../src/device/webcamdevice.cpp" line="842"/>
         <source>Failed to capture valid image, please check camera connection</source>
         <translation>Failed to capture valid image, please check camera connection</translation>
     </message>
     <message>
-        <location filename="../src/device/webcamdevice.cpp" line="543"/>
+        <location filename="../src/device/webcamdevice.cpp" line="649"/>
+        <location filename="../src/device/webcamdevice.cpp" line="650"/>
+        <location filename="../src/device/webcamdevice.cpp" line="791"/>
+        <location filename="../src/device/webcamdevice.cpp" line="792"/>
         <source>Device has been disconnected</source>
         <translation>Device has been disconnected</translation>
     </message>
