@@ -3,19 +3,20 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "loadingdialog.h"
-#include <QApplication>
-#include <QScreen>
-#include <QGuiApplication>
+#include <QEvent>
 #include <DSpinner>
 
 LoadingDialog::LoadingDialog(QWidget *parent)
     : QDialog(parent)
 {
-    // Qt::Tool keeps the dialog out of the taskbar: it is an overlay on the main window,
-    // not a second application window.
-    setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Tool);
+    // A child widget of the parent window, not a window of its own: it does not take the
+    // input away from the window (Qt::Dialog would, which made the title bar of the main
+    // window undraggable while loading) and it moves together with the window.
+    setWindowFlags(Qt::Widget);
+    // setWindowFlags() clears the hidden state, so a child overlay would otherwise become
+    // visible together with the parent window: it must stay hidden until showWithTimeout().
+    hide();
     setAttribute(Qt::WA_TranslucentBackground);
-    setModal(true);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->setContentsMargins(20, 20, 20, 20);
@@ -37,6 +38,11 @@ LoadingDialog::LoadingDialog(QWidget *parent)
 
     m_timeoutTimer = new QTimer(this);
     connect(m_timeoutTimer, &QTimer::timeout, this, &LoadingDialog::close);
+
+    // Keep the overlay centered when the window is resized while loading.
+    if (parent) {
+        parent->installEventFilter(this);
+    }
 }
 
 LoadingDialog::~LoadingDialog()
@@ -48,21 +54,29 @@ void LoadingDialog::showWithTimeout(int timeoutMs)
 {
     m_timeoutTimer->start(timeoutMs);
     m_spinner->start();
-    
-    // Center dialog on parent or screen
-    if (parentWidget()) {
-        move(parentWidget()->mapToGlobal(parentWidget()->rect().center()) - rect().center());
-    } else {
-        QScreen *screen = QGuiApplication::screenAt(QCursor::pos());
-        if (screen) {
-            move(screen->geometry().center() - rect().center());
-        }
-    }
-    
+
+    centerOnParent();
     show();
+    raise();   // stay above the device list or scan page underneath
 }
 
 void LoadingDialog::setText(const QString &text)
 {
     m_textLabel->setText(text);
+}
+
+void LoadingDialog::centerOnParent()
+{
+    QWidget *parent = parentWidget();
+    if (parent) {
+        move((parent->width() - width()) / 2, (parent->height() - height()) / 2);
+    }
+}
+
+bool LoadingDialog::eventFilter(QObject *watched, QEvent *event)
+{
+    if (isVisible() && watched == parentWidget() && event->type() == QEvent::Resize) {
+        centerOnParent();
+    }
+    return QDialog::eventFilter(watched, event);
 }

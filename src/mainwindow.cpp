@@ -85,10 +85,27 @@ MainWindow::MainWindow(QWidget *parent)
             [this](const QStringList &) {
                 auto scanner = qSharedPointerCast<ScannerDevice>(m_devices["scanner"]);
                 auto webcam = qSharedPointerCast<WebcamDevice>(m_devices["webcam"]);
+
+                // A network scanner can still be getting discovered while the first
+                // enumeration runs, so ask once more before leaving the list without it. The
+                // list stays in the searching state until that retry is back, otherwise it
+                // would claim "no devices found" while the answer is still coming.
+                static bool retriedOnce = false;
+                const bool retry = !retriedOnce && scanner && scanner->getAvailableDevices().isEmpty();
+                if (retry) {
+                    retriedOnce = true;
+                    QTimer::singleShot(3000, this, [this]() {
+                        auto scanner = qSharedPointerCast<ScannerDevice>(m_devices["scanner"]);
+                        if (scanner) {
+                            scanner->requestAvailableDevices();
+                        }
+                    });
+                }
+
                 if (scanner && webcam) {
+                    m_scannersWidget->setScannerSearching(retry);
                     m_scannersWidget->updateDeviceList(scanner, webcam);
                 }
-                hideLoading();
             });
 
     // 设置标题栏logo
@@ -122,7 +139,6 @@ MainWindow::~MainWindow()
 void MainWindow::updateDeviceList()
 {
     qDebug(app) << "Updating device list...";
-    showLoading(tr("Loading devices..."));
 
     // 使用类型安全的指针转换
     auto scanner = qSharedPointerCast<ScannerDevice>(m_devices["scanner"]);
@@ -130,32 +146,27 @@ void MainWindow::updateDeviceList()
 
     if (!scanner || !webcam) {
         qDebug(app) << "Error: Failed to cast device pointers";
-        QTimer::singleShot(500, this, &MainWindow::hideLoading);
         return;
     }
 
-    // 给网络设备发现预留更多时间（特别是首次启动）
-    static bool firstRun = true;
-    int delay = firstRun ? 3000 : 500; // 首次启动等待3秒，后续等待0.5秒
+    // The cameras are a local enumeration and the scanner list arrives later, so the list is
+    // shown right away with the scanner section marked as still searching. No overlay here:
+    // the SANE enumeration blocks for seconds when a network backend is slow, and waiting for
+    // it would only hide the cameras that are already known.
+    m_scannersWidget->setScannerSearching(true);
+    m_scannersWidget->updateDeviceList(scanner, webcam);
 
-    if (firstRun) {
-        qCInfo(app) << "First device list update, allowing extra time for network device discovery...";
-        firstRun = false;
-    }
-
-    // The SANE enumeration happens in the worker thread, it can block for seconds on
-    // network backends. The list is rebuilt when the worker reports the result (see the
-    // availableDevicesReady() connection), so the UI stays responsive meanwhile.
-    QTimer::singleShot(delay, this, [this]() {
-        auto scanner = qSharedPointerCast<ScannerDevice>(m_devices["scanner"]);
-        if (scanner) {
-            scanner->requestAvailableDevices();
-        }
-    });
+    scanner->requestAvailableDevices();
 }
 
 void MainWindow::showScanView(const QString &device, bool isScanner)
 {
+    if (m_loadingDialog->isVisible()) {
+        // Something is already loading. The window stays movable while loading, so a second
+        // click on a device has to be ignored instead of opening the device a second time.
+        return;
+    }
+
     m_currentDevice = device;
     m_isCurrentScanner = isScanner;
 

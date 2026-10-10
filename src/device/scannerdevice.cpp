@@ -372,8 +372,13 @@ void ScannerWorker::doGetAvailableDevices()
     const SANE_Device **device_list = nullptr;
     QStringList deviceNames;
 
+    // Enumerating can block for seconds: the network backends (mDNS discovery, a cloud
+    // scanner that is not reachable) do their work here.
+    QElapsedTimer enumTimer;
+    enumTimer.start();
     SANE_Status status = sane_get_devices(&device_list, SANE_FALSE);
     if (status != SANE_STATUS_GOOD) {
+        qCWarning(app) << "Worker: sane_get_devices failed after" << enumTimer.elapsed() << "ms:" << sane_strstatus(status);
         emit errorOccurred(tr("Failed to get device list: %1").arg(sane_strstatus(status)));
         emit availableDevicesReady(deviceNames);
         return;
@@ -391,6 +396,7 @@ void ScannerWorker::doGetAvailableDevices()
         deviceNames.append("test:0");
     }
 
+    qCInfo(app) << "Worker: device list enumerated in" << enumTimer.elapsed() << "ms, devices:" << deviceNames.size();
     emit availableDevicesReady(deviceNames);
 #else
     emit availableDevicesReady(ADD_TEST_DEVICE ? QStringList() << "test:0" : QStringList());

@@ -36,8 +36,21 @@ void ScannersWidget::setupUI()
     refreshButton->setIcon(QIcon::fromTheme("refresh"));
     refreshButton->setIconSize(QSize(40, 40));
     refreshButton->setFixedSize(50, 50);
+    m_refreshButton = refreshButton;
+
+    // Searching feedback, centered between the title and the refresh button. The SANE
+    // enumeration takes seconds on network backends, so it is worth showing what is going
+    // on - but not in the device list: the cameras are already known and must stay usable.
+    m_searchSpinner = new DSpinner();
+    m_searchSpinner->setFixedSize(20, 20);
+    m_searchLabel = new DLabel(tr("Loading devices..."));
+    setScannerSearching(false);
+
     titleLayout->addSpacing(20);
     titleLayout->addWidget(titleLabel);
+    titleLayout->addStretch();
+    titleLayout->addWidget(m_searchSpinner);
+    titleLayout->addWidget(m_searchLabel);
     titleLayout->addStretch();
     titleLayout->addWidget(refreshButton);
     titleLayout->addSpacing(20);
@@ -85,6 +98,20 @@ void ScannersWidget::removeDeviceItem(const QString &name)
     }
 }
 
+void ScannersWidget::setScannerSearching(bool searching)
+{
+    m_scannerSearching = searching;
+    m_searchSpinner->setVisible(searching);
+    m_searchLabel->setVisible(searching);
+    m_refreshButton->setEnabled(!searching);
+
+    if (searching) {
+        m_searchSpinner->start();
+    } else {
+        m_searchSpinner->stop();
+    }
+}
+
 void ScannersWidget::rebuildList()
 {
     deviceList->clear();
@@ -92,17 +119,25 @@ void ScannersWidget::rebuildList()
     for (const QString &name : m_scannerNames) {
         addDeviceItem(name, tr("Scanner"), DeviceBase::DeviceStatus::Idle, true);
     }
+
     for (const QString &name : m_webcamNames) {
         addDeviceItem(name, tr("Webcam"), DeviceBase::DeviceStatus::Idle, false);
     }
 
-    // Update UI based on device availability
-    if (deviceList->count() == 0) {
-        DLabel *emptyLabel = new DLabel(tr("No devices found"));
-        emptyLabel->setAlignment(Qt::AlignCenter);
-        deviceList->addItem(new QListWidgetItem());
-        deviceList->setItemWidget(deviceList->item(0), emptyLabel);
+    // Update UI based on device availability. An enumeration that is still in flight means the
+    // list is not known yet, so saying "no devices found" at the same time as the title row
+    // says "Loading devices..." would contradict it.
+    if (deviceList->count() == 0 && !m_scannerSearching) {
+        addPlaceholder(tr("No devices found"));
     }
+}
+
+void ScannersWidget::addPlaceholder(const QString &text)
+{
+    DLabel *label = new DLabel(text);
+    label->setAlignment(Qt::AlignCenter);
+    deviceList->addItem(new QListWidgetItem());
+    deviceList->setItemWidget(deviceList->item(deviceList->count() - 1), label);
 }
 
 void ScannersWidget::addDeviceItem(const QString &name, const QString &model,
