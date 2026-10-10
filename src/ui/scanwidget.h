@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2025 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -11,6 +11,7 @@
 #include <QTimer>
 #include <QMutex>
 #include <QScopedPointer>
+#include <QFutureWatcher>
 
 #include <DLabel>
 #include "device/devicebase.h"
@@ -41,6 +42,10 @@ public:
     void startCameraPreview();
     void stopCameraPreview();
 
+    // A camera reconfiguration runs on a worker thread and keeps using the device: the
+    // owner has to wait for it before releasing the device.
+    void waitForPendingCameraWork();
+
     QString getSaveDirectory();
     void setSaveDirectory(const QString &dir);
 
@@ -65,18 +70,45 @@ private slots:
     void onDeviceOpened();
 
 private:
+    // Everything the worker needs to process and save a scan; gathered on the UI thread
+    // because the image settings and the device belong to it.
+    struct ScanSaveRequest {
+        QImage image;
+        QString filePath;
+        int formatIndex = 0;
+        int colorMode = 0;
+        ScannerDevice::PaperSize paperSize = ScannerDevice::PAPER_SIZE_AUTO;
+        int dpi = 300;
+    };
+
+    // Result of saveScan().
+    struct ScanSaveResult {
+        QString filePath;
+        bool success = false;
+    };
+
     void setupUI();
     void connectDeviceSignals(bool bind);
     void updateDeviceSettings();
     void resetPreview();
-    QImage convertToBlackWhite(const QImage &sourceImage);
-    
+
+    // Processing and saving run on a worker thread, so these must not touch widget state.
+    static ScanSaveResult saveScan(const ScanSaveRequest &request);
+    static bool renderPdf(const QImage &image, const QString &filePath, ScannerDevice::PaperSize paperSize);
+    static QImage convertToBlackWhite(const QImage &sourceImage);
+
     // Paper size handling methods
-    ScannerDevice::PaperSize detectPaperSize(const QImage &image);
-    QImage scaleToPaperSize(const QImage &image, ScannerDevice::PaperSize targetSize, int dpi);
+    static ScannerDevice::PaperSize detectPaperSize(const QImage &image, int dpi);
+    static QImage scaleToPaperSize(const QImage &image, ScannerDevice::PaperSize targetSize, int dpi);
 
     DeviceBase* m_device = nullptr;
     bool m_isScanner;
+    // True while the camera is being reconfigured off the UI thread, so a scan cannot be
+    // started against a device that is currently closing and re-opening.
+    bool m_cameraBusy = false;
+    // The reconfiguration task of the camera, or null when none is in flight. It has to be
+    // waited for before the device it works on is destroyed, see waitForPendingCameraWork().
+    QFutureWatcher<bool> *m_resolutionWatcher = nullptr;
 
     QMutex m_previewMutex;
 

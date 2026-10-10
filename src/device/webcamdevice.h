@@ -12,7 +12,10 @@
 #include <linux/videodev2.h>
 #include <QMutex>
 #include <QThread>
+#include <QThreadPool>
 #include <QDebug>
+#include <atomic>
+#include <mutex>
 #include "devicebase.h"
 
 class WebcamDevice : public DeviceBase
@@ -35,6 +38,9 @@ public:
     QString currentDeviceName() const override { return m_currentDeviceName; }
 
     // Extended webcam-specific interface
+    // S_FMT/REQBUFS/STREAMON, which takes about a second on a 1080p camera. The caller
+    // decides on which thread it runs; it does nothing when the stream is already on.
+    bool startStream();
     void startPreview();
     void stopPreview();
 
@@ -74,11 +80,25 @@ private:
     void *m_buffers[4];   // Video buffers
     size_t m_bufferSizes[4];   // Buffer sizes
     int m_currentBuffer;   // Currently used buffer
-    bool m_isInitialized;
+    std::atomic<bool> m_isInitialized = false;
     bool m_deviceSelected;
+    // Opening, closing and reconfiguring all close and re-open the descriptor, and they can
+    // be asked for from the UI thread and from worker threads at the same time. Recursive
+    // because openDevice() and setResolution() close the previous device as their first step.
+    std::recursive_mutex m_deviceMutex;
+    // Whether the V4L2 stream is on, so that startStream() does not restart an active one.
+    std::atomic<bool> m_streaming = false;
     // Set once a broken stream has been reported, so a device that is gone is reported
     // only once instead of on every preview tick.
-    bool m_disconnectReported = false;
+    std::atomic<bool> m_disconnectReported = false;
+    // Dequeuing a frame, waiting for one and converting it are all too slow for the UI
+    // thread, so they run here: a single thread that keeps the preview and the capture
+    // from touching the device at the same time.
+    QThreadPool m_ioPool;
+    std::atomic<bool> m_frameTaskRunning = false;   // a preview frame is being processed
+    std::atomic<bool> m_captureRunning = false;   // a capture is in flight
+    std::atomic<bool> m_captureAbort = false;   // a capture in flight has to give up
+    std::atomic<bool> m_previewRunning = false;   // the preview timer is running
     QTimer m_previewTimer;
     int m_width;
     int m_height;
@@ -91,7 +111,15 @@ private:
     bool initMmap();
     void uninitMmap();
     QImage frameToQImage(const void *data, int width, int height, int format);
+    // captureImage() and dequeueFrame() run on the I/O thread, see m_ioPool.
     void captureImage();
+    QImage dequeueFrame();
+    // The preview timer belongs to the UI thread, so the I/O thread reaches it through these.
+    void pausePreviewTimer();
+    void resumePreviewTimer();
+    // Gives up the capture in flight and waits for the I/O thread to go idle, so that the
+    // device can be closed, re-opened or reconfigured safely.
+    void stopIoWork();
     bool startCapturing();
     void stopCapturing();
     bool selectBestPixelFormat();
