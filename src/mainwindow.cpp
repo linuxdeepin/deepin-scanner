@@ -80,6 +80,17 @@ MainWindow::MainWindow(QWidget *parent)
                 DMessageManager::instance()->sendMessage(this, QIcon::fromTheme("dialog-warning"), message);
             });
 
+    // The device list is rebuilt once the worker has enumerated the scanners.
+    connect(scannerDevice.data(), &ScannerDevice::availableDevicesReady, this,
+            [this](const QStringList &) {
+                auto scanner = qSharedPointerCast<ScannerDevice>(m_devices["scanner"]);
+                auto webcam = qSharedPointerCast<WebcamDevice>(m_devices["webcam"]);
+                if (scanner && webcam) {
+                    m_scannersWidget->updateDeviceList(scanner, webcam);
+                }
+                hideLoading();
+            });
+
     // 设置标题栏logo
     auto titleBar = titlebar();
     // titleBar->setIcon(QIcon(":/resources/logo.svg"));
@@ -102,6 +113,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    // A camera reconfiguration started from the UI keeps using the device on a worker
+    // thread: let it finish before the devices are released here.
+    m_scanWidget->waitForPendingCameraWork();
     m_devices.clear();
 }
 
@@ -110,41 +124,34 @@ void MainWindow::updateDeviceList()
     qDebug(app) << "Updating device list...";
     showLoading(tr("Loading devices..."));
 
-    // 检查设备是否初始化
-    if (!m_devices["scanner"] || !m_devices["webcam"]) {
-        qDebug(app) << "Error: Devices not initialized";
-        return;
-    }
-
     // 使用类型安全的指针转换
     auto scanner = qSharedPointerCast<ScannerDevice>(m_devices["scanner"]);
     auto webcam = qSharedPointerCast<WebcamDevice>(m_devices["webcam"]);
 
-    if (scanner && webcam) {
-        // 给网络设备发现预留更多时间（特别是首次启动）
-        static bool firstRun = true;
-        int delay = firstRun ? 3000 : 500; // 首次启动等待3秒，后续等待0.5秒
-        
-        if (firstRun) {
-            qCInfo(app) << "First device list update, allowing extra time for network device discovery...";
-            firstRun = false;
-        }
-        
-        // 使用定时器延迟更新设备列表
-        QTimer::singleShot(delay, this, [this]() {
-            // 重新获取设备指针，避免捕获过期指针
-            auto scanner = qSharedPointerCast<ScannerDevice>(m_devices["scanner"]);
-            auto webcam = qSharedPointerCast<WebcamDevice>(m_devices["webcam"]);
-            
-            if (scanner && webcam) {
-                m_scannersWidget->updateDeviceList(scanner, webcam);
-            }
-            QTimer::singleShot(500, this, &MainWindow::hideLoading);
-        });
-    } else {
+    if (!scanner || !webcam) {
         qDebug(app) << "Error: Failed to cast device pointers";
         QTimer::singleShot(500, this, &MainWindow::hideLoading);
+        return;
     }
+
+    // 给网络设备发现预留更多时间（特别是首次启动）
+    static bool firstRun = true;
+    int delay = firstRun ? 3000 : 500; // 首次启动等待3秒，后续等待0.5秒
+
+    if (firstRun) {
+        qCInfo(app) << "First device list update, allowing extra time for network device discovery...";
+        firstRun = false;
+    }
+
+    // The SANE enumeration happens in the worker thread, it can block for seconds on
+    // network backends. The list is rebuilt when the worker reports the result (see the
+    // availableDevicesReady() connection), so the UI stays responsive meanwhile.
+    QTimer::singleShot(delay, this, [this]() {
+        auto scanner = qSharedPointerCast<ScannerDevice>(m_devices["scanner"]);
+        if (scanner) {
+            scanner->requestAvailableDevices();
+        }
+    });
 }
 
 void MainWindow::showScanView(const QString &device, bool isScanner)

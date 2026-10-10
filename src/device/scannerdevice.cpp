@@ -15,6 +15,7 @@
 #include <QDateTime>
 #include <QStandardPaths>
 #include <QMetaType>
+#include <QElapsedTimer>
 
 using namespace DDLog;
 
@@ -41,6 +42,7 @@ ScannerDevice::ScannerDevice(QObject *parent)
     connect(this, &ScannerDevice::triggerCloseDevice, m_worker, &ScannerWorker::doCloseDevice);
     connect(this, &ScannerDevice::triggerStartScan, m_worker, &ScannerWorker::doStartScan);
     connect(this, &ScannerDevice::triggerCancelScan, m_worker, &ScannerWorker::doCancelScan);
+    connect(this, &ScannerDevice::triggerGetAvailableDevices, m_worker, &ScannerWorker::doGetAvailableDevices);
 
     // --- Connect signals from worker back to this (UI) thread's ddslots ---
     connect(m_worker, &ScannerWorker::errorOccurred, this, &ScannerDevice::onWorkerError);
@@ -51,8 +53,9 @@ ScannerDevice::ScannerDevice(QObject *parent)
         emit deviceUnavailable(deviceName);
     });
     connect(m_worker, &ScannerWorker::deviceUnavailable, this, &ScannerDevice::deviceUnavailable);
+    connect(m_worker, &ScannerWorker::availableDevicesReady, this, &ScannerDevice::onAvailableDevicesReady);
     connect(m_worker, &ScannerWorker::captureCompleted, this, &ScannerDevice::onCaptureCompleted);
-    connect(m_worker, &ScannerWorker::scanProgress, this, &ScannerDevice::scanProgress); // Forward signal
+    connect(m_worker, &ScannerWorker::captureCompletedImage, this, &ScannerDevice::onCaptureCompletedImage);
 
     m_workerThread.start();
     qCInfo(app) << "Scanner worker thread started.";
@@ -86,42 +89,26 @@ bool ScannerDevice::initialize()
 
 QStringList ScannerDevice::getAvailableDevices()
 {
-    // This is synchronous for now, but could be moved to the worker if it proves slow.
-#ifndef _WIN32
-    const SANE_Device **device_list;
-    QStringList deviceNames;
+    // The SANE enumeration runs in the worker thread, see requestAvailableDevices(): it can
+    // block for seconds on network backends, which must not happen on the UI thread.
+    // Callers get the last list reported by the worker.
+    return m_availableDevices;
+}
 
-    SANE_Status status = sane_get_devices(&device_list, SANE_FALSE);
-    if (status != SANE_STATUS_GOOD) {
-        emit errorOccurred(tr("Failed to get device list: %1").arg(sane_strstatus(status)));
-        return deviceNames;
-    }
+void ScannerDevice::requestAvailableDevices()
+{
+    emit triggerGetAvailableDevices();
+}
 
-    if (device_list) {
-        for (int i = 0; device_list[i] != nullptr; ++i) {
-            if (device_list[i]->name) {
-                deviceNames.append(QString::fromUtf8(device_list[i]->name));
-            }
-        }
-    }
-    
-    if (deviceNames.isEmpty() && ADD_TEST_DEVICE) {
-        deviceNames.append("test:0");
-    }
-
-    return deviceNames;
-#else
-    if (ADD_TEST_DEVICE) {
-        return QStringList() << "test:0";
-    }
-    return QStringList();
-#endif
+void ScannerDevice::onAvailableDevicesReady(const QStringList &deviceNames)
+{
+    m_availableDevices = deviceNames;
+    emit availableDevicesReady(deviceNames);
 }
 
 bool ScannerDevice::openDevice(const QString &deviceName)
 {
     m_currentDeviceName = deviceName;
-    m_deviceOpening = true;
     emit triggerOpenDevice(deviceName);
     return true; // Asynchronous operation, success is reported via signal
 }
@@ -263,7 +250,6 @@ QSizeF ScannerDevice::getPaperSizeDimensions(PaperSize size)
 void ScannerDevice::onWorkerError(const QString &errorMessage)
 {
     m_isCapturing = false;
-    m_deviceOpening = false;
     if (!m_deviceOpen) {
         // The error came from an open attempt: no open is in flight any more, so drop
         // the queued scan request together with the device name that marks it.
@@ -277,7 +263,6 @@ void ScannerDevice::onWorkerError(const QString &errorMessage)
 void ScannerDevice::onDeviceOpened(const QList<int> &resolutions, const QList<ScannerDevice::ScanMode> &modes)
 {
     m_deviceOpen = true;
-    m_deviceOpening = false;
     m_supportedResolutions = resolutions;
     m_supportedScanModes = modes;
 
@@ -344,6 +329,14 @@ void ScannerDevice::onCaptureCompleted(const QString &filePath)
 }
 
 
+void ScannerDevice::onCaptureCompletedImage(const QImage &image)
+{
+    m_isCapturing = false;
+    setState(Connected);
+
+    emit imageCaptured(image);
+}
+
 // =================================================================
 //  ScannerWorker Implementation (Worker Thread)
 // =================================================================
@@ -361,11 +354,6 @@ struct ScannerWorker::Image
 
 ScannerWorker::ScannerWorker() : QObject(nullptr)
 {
-    // Set SANE_DEBUG env vars for more info
-    qputenv("SANE_DEBUG_DLL", "2");
-    qputenv("SANE_DEBUG_NET", "2");
-    qputenv("SANE_DEBUG_HPAIO", "2");
-    qputenv("SANE_DEBUG_USB", "2");
 }
 
 ScannerWorker::~ScannerWorker()
@@ -377,6 +365,37 @@ ScannerWorker::~ScannerWorker()
     qCInfo(app) << "SANE backend exited from worker destructor.";
 }
 
+
+void ScannerWorker::doGetAvailableDevices()
+{
+#ifndef _WIN32
+    const SANE_Device **device_list = nullptr;
+    QStringList deviceNames;
+
+    SANE_Status status = sane_get_devices(&device_list, SANE_FALSE);
+    if (status != SANE_STATUS_GOOD) {
+        emit errorOccurred(tr("Failed to get device list: %1").arg(sane_strstatus(status)));
+        emit availableDevicesReady(deviceNames);
+        return;
+    }
+
+    if (device_list) {
+        for (int i = 0; device_list[i] != nullptr; ++i) {
+            if (device_list[i]->name) {
+                deviceNames.append(QString::fromUtf8(device_list[i]->name));
+            }
+        }
+    }
+
+    if (deviceNames.isEmpty() && ADD_TEST_DEVICE) {
+        deviceNames.append("test:0");
+    }
+
+    emit availableDevicesReady(deviceNames);
+#else
+    emit availableDevicesReady(ADD_TEST_DEVICE ? QStringList() << "test:0" : QStringList());
+#endif
+}
 
 void ScannerWorker::doOpenDevice(const QString &deviceName)
 {
@@ -395,8 +414,12 @@ void ScannerWorker::doOpenDevice(const QString &deviceName)
 
     m_deviceName = deviceName;
 
+    QElapsedTimer openTimer;
+    openTimer.start();
+
     QByteArray deviceNameBytes = deviceName.toUtf8();
     SANE_Status status = sane_open(deviceNameBytes.constData(), &m_device);
+    const qint64 openMs = openTimer.elapsed();
     
     if (status != SANE_STATUS_GOOD) {
         emit errorOccurred(tr("Failed to open SANE device '%1': %2").arg(deviceName).arg(sane_strstatus(status)));
@@ -411,7 +434,9 @@ void ScannerWorker::doOpenDevice(const QString &deviceName)
     }
 
     m_deviceOpen = true;
+    openTimer.restart();
     updateSupportedOptions();
+    qCInfo(app) << "Worker: Device" << deviceName << "opened in" << openMs << "ms, options read in" << openTimer.elapsed() << "ms";
     qCDebug(app) << "Worker: Device" << deviceName << "opened successfully.";
 #else
     m_usingTestDevice = true;
@@ -451,16 +476,20 @@ bool ScannerWorker::reopenDevice()
     m_device = nullptr;
     m_deviceOpen = false;
 
+    QElapsedTimer openTimer;
+    openTimer.start();
+
     QByteArray deviceNameBytes = m_deviceName.toUtf8();
     SANE_Status status = sane_open(deviceNameBytes.constData(), &m_device);
     if (status != SANE_STATUS_GOOD) {
-        qCWarning(app) << "Worker: Failed to re-open device" << m_deviceName << ":" << sane_strstatus(status);
+        qCWarning(app) << "Worker: Failed to re-open device" << m_deviceName << "after" << openTimer.elapsed() << "ms:" << sane_strstatus(status);
         m_device = nullptr;
         m_deviceOpen = false;
         return false;
     }
 
     m_deviceOpen = true;
+    qCInfo(app) << "Worker: Device" << m_deviceName << "re-opened in" << openTimer.elapsed() << "ms";
     return true;
 }
 
@@ -526,6 +555,9 @@ void ScannerWorker::doStartScan(const QString &tempOutputFilePath, int dpi, Scan
         return;
     }
 
+    QElapsedTimer scanTimer;
+    scanTimer.start();
+
     doSetScanMode(mode);
     doSetColorMode(colorMode);
     doSetResolution(dpi);
@@ -537,8 +569,13 @@ void ScannerWorker::doStartScan(const QString &tempOutputFilePath, int dpi, Scan
     
     m_scanCancelled = false;
 
+    const qint64 optionsMs = scanTimer.elapsed();
+    scanTimer.restart();
+
     // Start the scan
     SANE_Status status = sane_start(m_device);
+    const qint64 startMs = scanTimer.elapsed();
+    scanTimer.restart();
     if (status != SANE_STATUS_GOOD) {
         reportScanFailure(tr("Failed to start scan: %1").arg(sane_strstatus(status)));
         return;
@@ -552,8 +589,12 @@ void ScannerWorker::doStartScan(const QString &tempOutputFilePath, int dpi, Scan
         return;
     }
 
-    status = scan_it(ofp); // The blocking call
+    QImage scannedImage;
+    status = scan_it(ofp, scannedImage); // The blocking call
+    const qint64 readMs = scanTimer.elapsed();
     fclose(ofp);
+
+    qCInfo(app) << "Worker: scan timing: options" << optionsMs << "ms, sane_start" << startMs << "ms, read" << readMs << "ms";
 
     if (m_scanCancelled) {
         QFile::remove(tempOutputFilePath);
@@ -567,6 +608,10 @@ void ScannerWorker::doStartScan(const QString &tempOutputFilePath, int dpi, Scan
     if (status != SANE_STATUS_GOOD && status != SANE_STATUS_EOF) {
         QFile::remove(tempOutputFilePath);
         reportScanFailure(tr("Scan failed during read: %1").arg(sane_strstatus(status)));
+    } else if (!scannedImage.isNull()) {
+        // The page is already an image, the temp file stayed empty.
+        QFile::remove(tempOutputFilePath);
+        emit captureCompletedImage(scannedImage);
     } else {
         emit captureCompleted(tempOutputFilePath);
     }
@@ -761,7 +806,29 @@ void ScannerWorker::doSetPageSize(double widthMM, double heightMM)
 
 
 #ifndef _WIN32
-SANE_Status ScannerWorker::scan_it(FILE *ofp)
+// The QImage format that matches the SANE frame, or Format_Invalid when the page has to go
+// through the PNG temp file: lineart is bit packed and JPEG/G42D are not raw pixels.
+static QImage::Format imageFormatFor(const SANE_Parameters &parm)
+{
+    if (parm.format == SANE_FRAME_GRAY) {
+        if (parm.depth == 8) {
+            return QImage::Format_Grayscale8;
+        }
+        if (parm.depth == 16) {
+            return QImage::Format_Grayscale16;
+        }
+        return QImage::Format_Invalid;
+    }
+    if (parm.format == SANE_FRAME_RGB && parm.depth == 8) {
+        return QImage::Format_RGB888;
+    }
+    return QImage::Format_Invalid;
+}
+
+// Reads the page. When the frame format can be handed over as an image, `image` is filled
+// and nothing is written to `ofp`; otherwise the page is written there as PNG, which is
+// also what happens when the backend does not tell the line count in advance.
+SANE_Status ScannerWorker::scan_it(FILE *ofp, QImage &image)
 {
     SANE_Parameters parm;
     SANE_Status status;
@@ -776,20 +843,35 @@ SANE_Status ScannerWorker::scan_it(FILE *ofp)
 
     unsigned char *buffer = new unsigned char[parm.bytes_per_line];
 
-    // Dummy PNG write header function.
-    // Replace with your actual implementation if you have one.
-    int bit_depth = (parm.depth == 1) ? 8 : parm.depth;
-    png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
-    info_ptr = png_create_info_struct(png_ptr);
-    png_init_io(png_ptr, ofp);
-    png_set_IHDR(png_ptr, info_ptr, parm.pixels_per_line, parm.lines, bit_depth,
-                 parm.format == SANE_FRAME_RGB ? PNG_COLOR_TYPE_RGB : PNG_COLOR_TYPE_GRAY,
-                 PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
-    png_write_info(png_ptr, info_ptr);
-    // End dummy png header
+    QImage::Format imageFormat = QImage::Format_Invalid;
+    if (parm.lines > 0) {
+        imageFormat = imageFormatFor(parm);
+        if (imageFormat != QImage::Format_Invalid) {
+            image = QImage(parm.pixels_per_line, parm.lines, imageFormat);
+            if (image.isNull()) {
+                imageFormat = QImage::Format_Invalid;
+            }
+        }
+    }
 
-    int total_lines = parm.lines > 0 ? parm.lines : 1000; // Guess if not provided
-    int lines_read = 0;
+    const bool writePng = imageFormat == QImage::Format_Invalid;
+    if (writePng) {
+        // Dummy PNG write header function.
+        // Replace with your actual implementation if you have one.
+        int bit_depth = (parm.depth == 1) ? 8 : parm.depth;
+        png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+        info_ptr = png_create_info_struct(png_ptr);
+        png_init_io(png_ptr, ofp);
+        png_set_IHDR(png_ptr, info_ptr, parm.pixels_per_line, parm.lines, bit_depth,
+                     parm.format == SANE_FRAME_RGB ? PNG_COLOR_TYPE_RGB : PNG_COLOR_TYPE_GRAY,
+                     PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+        png_write_info(png_ptr, info_ptr);
+        // End dummy png header
+    }
+
+    QElapsedTimer readTimer;
+    readTimer.start();
+    int linesRead = 0;
 
     do {
         if (m_scanCancelled) {
@@ -797,19 +879,34 @@ SANE_Status ScannerWorker::scan_it(FILE *ofp)
             break;
         }
 
+        if (!writePng && linesRead >= parm.lines) {
+            break;   // the image is complete
+        }
+
         status = sane_read(m_device, buffer, parm.bytes_per_line, &len);
         
         if (status == SANE_STATUS_GOOD) {
-            png_write_row(png_ptr, buffer);
-            lines_read++;
-            if (parm.lines > 0) {
-                emit scanProgress((lines_read * 100) / total_lines);
+            if (writePng) {
+                png_write_row(png_ptr, buffer);
+            } else {
+                memcpy(image.scanLine(linesRead), buffer, qMin(len, image.bytesPerLine()));
             }
+            linesRead++;
         }
     } while (status == SANE_STATUS_GOOD);
 
-    png_write_end(png_ptr, info_ptr);
-    png_destroy_write_struct(&png_ptr, &info_ptr);
+    if (!writePng && linesRead > 0 && linesRead < parm.lines) {
+        // The backend stopped early, keep only the lines that arrived.
+        image = image.copy(0, 0, image.width(), linesRead);
+    }
+
+    qCInfo(app) << "Worker: read" << linesRead << "of" << parm.lines << "lines in" << readTimer.elapsed() << "ms"
+                << (writePng ? "(via PNG temp file)" : "(direct image)");
+
+    if (writePng) {
+        png_write_end(png_ptr, info_ptr);
+        png_destroy_write_struct(&png_ptr, &info_ptr);
+    }
     delete[] buffer;
 
     if (status != SANE_STATUS_EOF) {

@@ -64,12 +64,10 @@ void ScannersWidget::setupUI()
 
 void ScannersWidget::updateDeviceList(QSharedPointer<ScannerDevice> scanner, QSharedPointer<WebcamDevice> webcam)
 {
-    // Enumerating SANE devices while the worker is using an open handle can invalidate
-    // that handle (the backend may rebuild its device cache), so the known scanner list
-    // is kept until no scan is running and no open request is in flight.
-    if (!scanner->isCapturing() && !scanner->isOpening()) {
-        m_scannerNames = scanner->getAvailableDevices();
-    }
+    // Both calls are cheap here: the scanner returns the list the worker has already
+    // enumerated (see ScannerDevice::requestAvailableDevices()) and the cameras are a
+    // local /dev scan.
+    m_scannerNames = scanner->getAvailableDevices();
     m_webcamNames = webcam->getAvailableDevices();
     rebuildList();
 }

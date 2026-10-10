@@ -11,7 +11,9 @@
 LoadingDialog::LoadingDialog(QWidget *parent)
     : QDialog(parent)
 {
-    setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+    // Qt::Tool keeps the dialog out of the taskbar: it is an overlay on the main window,
+    // not a second application window.
+    setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Tool);
     setAttribute(Qt::WA_TranslucentBackground);
     setModal(true);
 

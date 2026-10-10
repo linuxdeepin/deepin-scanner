@@ -14,8 +14,10 @@
 #include <QThread>
 #include <QMutex>
 #include <QMutexLocker>
+#include <QtConcurrent>
 
 #include <fcntl.h>
+#include <poll.h>
 #include <unistd.h>
 #include <errno.h>
 #include <sys/ioctl.h>
@@ -35,12 +37,24 @@
 
 using namespace DDLog;
 
+// Waiting for a frame needs a timeout: a camera can take well over a second for the first
+// frame at its highest resolution, but a stream that stopped (unplugged device) must not
+// block the caller forever.
+static const int FRAME_WAIT_TIMEOUT_MS = 2000;
+
+// The wait for a frame is done in slices, so that a capture in flight can be told to give up
+// within this delay instead of holding the device for the whole timeout.
+static const int FRAME_WAIT_SLICE_MS = 100;
+
 // WebcamDevice implementation
 WebcamDevice::WebcamDevice(QObject *parent)
-    : DeviceBase(parent), m_fd(-1), m_currentBuffer(0), m_isInitialized(false), m_deviceSelected(false), m_width(640), m_height(480), m_pixelFormat(V4L2_PIX_FMT_YUYV)
+    : DeviceBase(parent), m_fd(-1), m_currentBuffer(0), m_deviceSelected(false), m_width(640), m_height(480), m_pixelFormat(V4L2_PIX_FMT_YUYV)
 {
     memset(m_buffers, 0, sizeof(m_buffers));
     memset(m_bufferSizes, 0, sizeof(m_bufferSizes));
+
+    // One thread, so that the preview and the capture never use the device at once.
+    m_ioPool.setMaxThreadCount(1);
 
     m_previewTimer.setInterval(33);   // ~30 fps
     connect(&m_previewTimer, &QTimer::timeout, this, &WebcamDevice::updatePreview);
@@ -48,6 +62,8 @@ WebcamDevice::WebcamDevice(QObject *parent)
 
 WebcamDevice::~WebcamDevice()
 {
+    // The I/O thread uses the device, so nothing may be running when it is torn down.
+    stopIoWork();
     closeDevice();
 }
 
@@ -100,6 +116,10 @@ bool WebcamDevice::initialize()
 
 bool WebcamDevice::openDevice(const QString &devicePath)
 {
+    // Device-level operations close and re-open the descriptor, and they can arrive from the
+    // UI thread and from worker threads at the same time.
+    std::lock_guard<std::recursive_mutex> lock(m_deviceMutex);
+
     // Make sure to close previous device first
     closeDevice();
     qCInfo(app) << "Opening webcam device:" << devicePath;
@@ -219,17 +239,28 @@ bool WebcamDevice::openDevice(const QString &devicePath)
     // Enumerate supported resolutions
     enumerateSupportedResolutions();
 
+    // Open the stream here, at the end of the device setup: openDevice() runs on a worker
+    // thread, so the ~1 s STREAMON of a 1080p camera no longer freezes the UI. It has to
+    // stay after enumerateSupportedResolutions(), which probes formats.
+    startStream();
+
     return true;
 }
 
 bool WebcamDevice::setResolution(int width, int height)
 {
+    std::lock_guard<std::recursive_mutex> lock(m_deviceMutex);
+
     qCDebug(app) << "Attempting to set resolution:" << width << "x" << height;
+
+    // The preview and the capture use the device on the I/O thread: let them go before it
+    // is closed and re-opened underneath them. The caller refuses to reconfigure while a
+    // capture is in flight, so only the short preview work can be waiting here.
+    stopIoWork();
 
     // Save original state
     bool wasInitialized = m_isInitialized;
     bool wasDeviceSelected = m_deviceSelected;
-    bool wasPreviewActive = m_previewTimer.isActive();
 
     // Save current device path
     QString devicePath;
@@ -249,16 +280,8 @@ bool WebcamDevice::setResolution(int width, int height)
         // Here we can add fallback method to get device path
     }
 
-    // Stop preview and completely close device
-    if (wasPreviewActive) {
-        stopPreview();
-    }
-
     // Completely close device and release all resources
     closeDevice();
-
-    // Give system some time to fully release device
-    QThread::msleep(500);
 
     // Without device path, cannot continue
     if (devicePath.isEmpty()) {
@@ -268,7 +291,9 @@ bool WebcamDevice::setResolution(int width, int height)
 
     // Reopen device
     qCDebug(app) << "Reopening device:" << devicePath;
-    m_fd = open(devicePath.toUtf8().constData(), O_RDWR);
+    // O_NONBLOCK matters here: the preview reads frames with VIDIOC_DQBUF from the UI
+    // thread, and a blocking file descriptor would stall it until the next frame arrives.
+    m_fd = open(devicePath.toUtf8().constData(), O_RDWR | O_NONBLOCK);
     if (m_fd <= 0) {
         qCDebug(app) << "Failed to reopen device:" << strerror(errno);
         emit errorOccurred(tr("Failed to reopen device"));
@@ -329,10 +354,10 @@ bool WebcamDevice::setResolution(int width, int height)
     // Re-enumerate resolutions and notify UI
     enumerateSupportedResolutions();
 
-    // If preview was active before, restore it
-    if (wasPreviewActive) {
-        startPreview();
-    }
+    // Open the stream again, here and not in the caller: this runs on a worker thread,
+    // while the preview timer belongs to the UI thread (see startStream()). The caller is
+    // expected to have stopped the preview before calling, and restarts it afterwards.
+    startStream();
 
     qCDebug(app) << "Successfully completed resolution setting:" << m_width << "x" << m_height;
     return true;
@@ -340,18 +365,31 @@ bool WebcamDevice::setResolution(int width, int height)
 
 void WebcamDevice::startCapture()
 {
-    captureImage();
+    if (m_captureRunning.exchange(true)) {
+        return;   // a capture is already in flight
+    }
+
+    // captureImage() waits for a frame, which takes seconds when the stream has just been
+    // started: it runs on the I/O thread so that the caller, the UI thread, stays free.
+    // The outcome is reported through the device signals, so the future is not kept.
+    (void)QtConcurrent::run(&m_ioPool, [this]() {
+        captureImage();
+        m_captureRunning = false;
+    });
 }
 
 void WebcamDevice::stopCapture()
 {
+    std::lock_guard<std::recursive_mutex> lock(m_deviceMutex);
+
+    stopIoWork();
     stopCapturing();
     setState(Connected);
 }
 
 bool WebcamDevice::isCapturing() const
 {
-    return state() == Capturing;
+    return m_captureRunning;
 }
 
 bool WebcamDevice::startCapturing()
@@ -365,9 +403,7 @@ bool WebcamDevice::startCapturing()
     // Ensure stream is stopped before enqueuing buffers
     v4l2_buf_type stopType = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     ioctl(m_fd, VIDIOC_STREAMOFF, &stopType);
-
-    // Wait for device to stabilize
-    QThread::msleep(100);
+    m_streaming = false;
 
     // Debug buffer status
     qCDebug(app) << "Buffer status:";
@@ -419,17 +455,21 @@ bool WebcamDevice::startCapturing()
         buf.memory = V4L2_MEMORY_MMAP;
         buf.index = i;
 
-        int result = ioctl(m_fd, VIDIOC_QBUF, &buf);
-        if (result == -1) {
-            // Handle special cases in non-blocking mode
-            if (errno == EAGAIN) {
-                // In non-blocking mode, we may need multiple attempts
-                qCDebug(app) << "Buffer not ready yet (EAGAIN), retrying...";
-                QThread::msleep(10);
-                i--; // Retry current buffer
-                continue;
+        int result = -1;
+        // In non-blocking mode a buffer may not be ready yet: retry a bounded number of
+        // times instead of retrying the same buffer forever.
+        for (int attempt = 0; attempt < 50; attempt++) {
+            if (m_captureAbort) {
+                break;   // the device is going away, do not keep the caller waiting
             }
-            
+            result = ioctl(m_fd, VIDIOC_QBUF, &buf);
+            if (result != -1 || errno != EAGAIN) {
+                break;
+            }
+            qCDebug(app) << "Buffer not ready yet (EAGAIN), retrying...";
+            QThread::msleep(10);
+        }
+        if (result == -1) {
             qCWarning(app) << "Failed to enqueue buffer" << i << ":" << strerror(errno) << "(errno:" << errno << ")";
 
             // Clean up any already enqueued buffers
@@ -458,9 +498,13 @@ bool WebcamDevice::startCapturing()
         if (errno == EAGAIN) {
             // In non-blocking mode, we may need multiple attempts
             for (int retry = 0; retry < 5; retry++) {
+                if (m_captureAbort) {
+                    break;   // the device is going away, do not keep the caller waiting
+                }
                 QThread::msleep(50);
                 if (ioctl(m_fd, VIDIOC_STREAMON, &type) != -1) {
                     qCInfo(app) << "Video capture stream started successfully after retry";
+                    m_streaming = true;
                     return true;
                 }
                 if (errno != EAGAIN) {
@@ -475,6 +519,7 @@ bool WebcamDevice::startCapturing()
     }
 
     qCInfo(app) << "Video capture stream started successfully";
+    m_streaming = true;
     return true;
 }
 
@@ -482,20 +527,35 @@ void WebcamDevice::stopCapturing()
 {
     v4l2_buf_type type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     ioctl(m_fd, VIDIOC_STREAMOFF, &type);
+    m_streaming = false;
 }
 
-void WebcamDevice::startPreview()
+bool WebcamDevice::startStream()
 {
     if (!m_isInitialized) {
-        return;
+        return false;
+    }
+
+    if (m_streaming) {
+        return true;
     }
 
     if (!startCapturing()) {
-        return;
+        return false;
     }
 
     adjustCommonCameraSettings();
     setCameraAutoFocus(true);
+    return true;
+}
+
+void WebcamDevice::startPreview()
+{
+    std::lock_guard<std::recursive_mutex> lock(m_deviceMutex);
+
+    if (!startStream()) {
+        return;
+    }
 
     // Clear latest frame
     {
@@ -504,13 +564,20 @@ void WebcamDevice::startPreview()
     }
 
     qCDebug(app) << "Preview started, camera parameters applied";
+    m_previewRunning = true;
     m_previewTimer.start();
     setState(Capturing);
 }
 
 void WebcamDevice::stopPreview()
 {
+    std::lock_guard<std::recursive_mutex> lock(m_deviceMutex);
+
+    m_previewRunning = false;
     m_previewTimer.stop();
+    // A capture in flight and the frame being dequeued on the I/O thread both use the
+    // stream: they are given up and waited for before it is turned off.
+    stopIoWork();
     if (m_isInitialized) {
         stopCapturing();
     }
@@ -523,6 +590,42 @@ void WebcamDevice::updatePreview()
         return;
     }
 
+    // Dequeuing and converting a frame runs on the I/O thread: converting a full frame is
+    // far too slow for the UI thread, and the device is shared with a capture that may be
+    // waiting for a frame on that same thread.
+    if (m_frameTaskRunning.exchange(true)) {
+        return;   // the previous frame is still being processed, skip this tick
+    }
+
+    (void)QtConcurrent::run(&m_ioPool, [this]() {
+        const QImage image = dequeueFrame();
+
+        // Publishing the frame and touching the cache belongs to the UI thread, which also
+        // owns the signal.
+        QMetaObject::invokeMethod(
+                this,
+                [this, image]() {
+                    m_frameTaskRunning = false;
+                    if (image.isNull()) {
+                        return;
+                    }
+
+                    // Save adjusted image as latest frame for capture
+                    {
+                        QMutexLocker locker(&m_frameMutex);
+                        m_latestFrame = image;
+                    }
+
+                    // emit image
+                    emit previewUpdated(image);
+                },
+                Qt::QueuedConnection);
+    });
+}
+
+// Runs on the I/O thread: it only dequeues and converts a frame, the caller publishes it.
+QImage WebcamDevice::dequeueFrame()
+{
     v4l2_buffer buf = {};
     buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     buf.memory = V4L2_MEMORY_MMAP;
@@ -531,9 +634,9 @@ void WebcamDevice::updatePreview()
     if (ioctl(m_fd, VIDIOC_DQBUF, &buf) == -1) {
         // EAGAIN means no frame is available at the moment, which is normal in non-blocking mode
         if (errno == EAGAIN) {
-            return;
+            return QImage();
         }
-        
+
         qCWarning(app) << "Preview update failed:" << strerror(errno);
         // The video stream is broken (e.g. device unplugged). Clear the cached
         // frame so captureImage() cannot serve stale data from it.
@@ -546,36 +649,69 @@ void WebcamDevice::updatePreview()
             emit errorOccurred(tr("Device has been disconnected"));
             emit deviceUnavailable(m_currentDeviceName, tr("Device has been disconnected"));
         }
-        return;
+        return QImage();
     }
 
     // Ensure buffer index is valid
     if (buf.index >= 4 || !m_buffers[buf.index]) {
         qCWarning(app) << "Invalid buffer index:" << buf.index;
         ioctl(m_fd, VIDIOC_QBUF, &buf);   // Try to requeue buffer
-        return;
+        return QImage();
     }
 
-    QImage image = frameToQImage(m_buffers[buf.index], m_width, m_height, m_pixelFormat);
+    const QImage image = frameToQImage(m_buffers[buf.index], m_width, m_height, m_pixelFormat);
 
     // Return buffer - must do this regardless of image conversion success
     if (ioctl(m_fd, VIDIOC_QBUF, &buf) == -1) {
         qCWarning(app) << "Failed to requeue buffer:" << strerror(errno);
-        return;
+        return QImage();
     }
 
-    if (!image.isNull()) {
-        // Save adjusted image as latest frame for capture
-        QMutexLocker locker(&m_frameMutex);
-        m_latestFrame = image;
+    return image;
+}
 
-        // emit image
-        emit previewUpdated(image);
-    }
+void WebcamDevice::pausePreviewTimer()
+{
+    // The timer lives on the UI thread, so it is stopped there.
+    QMetaObject::invokeMethod(
+            this, [this]() { m_previewRunning = false; m_previewTimer.stop(); }, Qt::QueuedConnection);
+}
+
+void WebcamDevice::resumePreviewTimer()
+{
+    QMetaObject::invokeMethod(
+            this,
+            [this]() {
+                // The stream may have been stopped while the capture was running: restarting
+                // the timer then would dequeue from a stopped stream and report the device
+                // that is merely being reconfigured as unplugged.
+                if (!m_streaming) {
+                    return;
+                }
+                m_previewRunning = true;
+                m_previewTimer.start();
+            },
+            Qt::QueuedConnection);
+}
+
+void WebcamDevice::stopIoWork()
+{
+    // A capture waits for a frame for up to a few seconds, so it is told to give up instead
+    // of being waited for. The frame being converted on the I/O thread is short and is
+    // simply waited for.
+    m_captureAbort = true;
+    m_ioPool.waitForDone();
+    m_captureAbort = false;
 }
 
 void WebcamDevice::captureImage()
 {
+    // A device that is going away is not an error the user has to hear about.
+    if (m_captureAbort) {
+        qCDebug(app) << "Capture gave up: the device is being reconfigured";
+        return;
+    }
+
     // Check device state
     if (!m_isInitialized || m_fd <= 0) {
         emit errorOccurred(tr("Device not initialized or invalid file descriptor"));
@@ -586,7 +722,7 @@ void WebcamDevice::captureImage()
     qCInfo(app) << "Starting image capture...";
 
     // Check if preview is running
-    bool previewWasRunning = m_previewTimer.isActive();
+    const bool previewWasRunning = m_previewRunning.load();
 
     // If preview not running, start a temporary capture process
     if (!previewWasRunning) {
@@ -594,19 +730,24 @@ void WebcamDevice::captureImage()
 
         // Ensure current state is cleaned up
         stopCapturing();
-        QThread::msleep(100);
 
         // Start capture process
         if (!startCapturing()) {
+            if (m_captureAbort) {
+                qCDebug(app) << "Capture gave up: the device is being reconfigured";
+                return;
+            }
             emit errorOccurred(tr("Failed to start video stream, capture failed"));
             return;
         }
-
-        // Wait for device to be ready
-        QThread::msleep(300);
     } else {
         // If preview is running, pause timer but keep stream active
-        m_previewTimer.stop();
+        pausePreviewTimer();
+    }
+
+    if (m_captureAbort) {
+        qCDebug(app) << "Capture gave up: the device is being reconfigured";
+        return;
     }
 
     // Try to get frame directly from device, regardless of preview state
@@ -617,13 +758,29 @@ void WebcamDevice::captureImage()
 
         qCDebug(app) << "Attempting to get frame directly from device (attempt" << (retry + 1) << ")";
 
-        // Temporarily switch to blocking mode to ensure frame capture
-        int flags = fcntl(m_fd, F_GETFL, 0);
-        fcntl(m_fd, F_SETFL, flags & ~O_NONBLOCK);
+        // Wait for a frame with a timeout instead of blocking in VIDIOC_DQBUF: the file
+        // descriptor stays in non-blocking mode, so a stalled stream cannot hang here. The
+        // wait is sliced so that a device that is going away ends it without having to wait
+        // for the whole timeout.
+        int ready = 0;
+        for (int waited = 0; waited < FRAME_WAIT_TIMEOUT_MS; waited += FRAME_WAIT_SLICE_MS) {
+            struct pollfd pfd = { m_fd, POLLIN, 0 };
+            ready = poll(&pfd, 1, FRAME_WAIT_SLICE_MS);
+            if (ready != 0 || m_captureAbort) {
+                break;
+            }
+        }
 
-        if (ioctl(m_fd, VIDIOC_DQBUF, &buf) == -1) {
-            // Restore non-blocking mode
-            fcntl(m_fd, F_SETFL, flags);
+        if (m_captureAbort) {
+            // The device is being closed or reconfigured: its stream state is left to the
+            // caller and nothing is reported to the user.
+            qCDebug(app) << "Capture gave up: the device is being reconfigured";
+            return;
+        }
+
+        const bool gotFrame = (ready > 0) && (ioctl(m_fd, VIDIOC_DQBUF, &buf) != -1);
+
+        if (!gotFrame) {
             
             qCWarning(app) << "Failed to get frame:" << strerror(errno);
             if (retry == 2) {   // Last attempt failed
@@ -637,19 +794,14 @@ void WebcamDevice::captureImage()
 
                 // Restore preview state
                 if (previewWasRunning) {
-                    m_previewTimer.start();
+                    resumePreviewTimer();
                 } else {
                     stopCapturing();
                 }
                 return;
             }
-            // Brief wait before retry
-            QThread::msleep(100);
             continue;
         }
-
-        // Restore non-blocking mode
-        fcntl(m_fd, F_SETFL, flags);
 
         // Ensure buffer index is valid
         if (buf.index >= 4 || !m_buffers[buf.index]) {
@@ -673,7 +825,7 @@ void WebcamDevice::captureImage()
 
             // If preview was running before, restore timer
             if (previewWasRunning) {
-                m_previewTimer.start();
+                resumePreviewTimer();
             } else {
                 stopCapturing();
             }
@@ -684,9 +836,6 @@ void WebcamDevice::captureImage()
         } else {
             qCWarning(app) << "Image conversion failed - retrying";
         }
-
-        // Brief wait before retry
-        QThread::msleep(100);
     }
 
     // If all attempts failed
@@ -694,7 +843,7 @@ void WebcamDevice::captureImage()
 
     // Restore preview state
     if (previewWasRunning) {
-        m_previewTimer.start();
+        resumePreviewTimer();
     } else {
         stopCapturing();
     }
@@ -714,66 +863,41 @@ QImage WebcamDevice::frameToQImage(const void *data, int width, int height, int 
         const uint8_t *yuyv = static_cast<const uint8_t *>(data);
 
         // Safety check - ensure enough memory
-        size_t expectedSize = width * height * 2;   // YUYV格式每个像素需要2字节
-        if (expectedSize > 0) {   // 合理的大小上限
-            try {
-                for (int y = 0; y < height; y++) {
-                    for (int x = 0; x < width; x += 2) {
-                        int i = y * width * 2 + x * 2;
-
-                        // Boundary check
-                        if (i + 3 >= expectedSize) {
-                            qCWarning(app) << "Frame data boundary check failed - possible incomplete data";
-                            continue;
-                        }
-
-                        int y0 = yuyv[i];
-                        int u = yuyv[i + 1];
-                        int y1 = yuyv[i + 2];
-                        int v = yuyv[i + 3];
-
-                        // Keep original brightness value
-                        y0 = y0;
-                        y1 = y1;
-
-                        int r, g, b;
-
-                        // First pixel - use more accurate YUV to RGB conversion
-                        r = static_cast<int>(y0 + 1.370705 * (v - 128));
-                        g = static_cast<int>(y0 - 0.337633 * (u - 128) - 0.698001 * (v - 128));
-                        b = static_cast<int>(y0 + 1.732446 * (u - 128));
-
-                        r = qBound(0, r, 255);
-                        g = qBound(0, g, 255);
-                        b = qBound(0, b, 255);
-
-                        if (x < width) {   // Safety check
-                            image.setPixel(x, y, qRgb(r, g, b));
-                        }
-
-                        // Second pixel - use same conversion formula
-                        r = static_cast<int>(y1 + 1.370705 * (v - 128));
-                        g = static_cast<int>(y1 - 0.337633 * (u - 128) - 0.698001 * (v - 128));
-                        b = static_cast<int>(y1 + 1.732446 * (u - 128));
-
-                        r = qBound(0, r, 255);
-                        g = qBound(0, g, 255);
-                        b = qBound(0, b, 255);
-
-                        if (x + 1 < width) {   // Safety check
-                            image.setPixel(x + 1, y, qRgb(r, g, b));
-                        }
-                    }
-                }
-                return image;
-            } catch (const std::exception &e) {
-            qCCritical(app) << "Frame conversion exception:" << e.what();
-            } catch (...) {
-            qCCritical(app) << "Unknown exception during frame conversion";
-            }
-        } else {
+        const size_t expectedSize = static_cast<size_t>(width) * height * 2;   // YUYV: 2 bytes per pixel
+        if (expectedSize == 0) {
             qCWarning(app) << "Invalid frame size:" << expectedSize;
+            return QImage();
         }
+
+        for (int y = 0; y < height; y++) {
+            // Write through the scanline pointer: calling setPixel() for every pixel is far
+            // too slow for a full camera frame.
+            uchar *line = image.scanLine(y);
+            const uint8_t *row = yuyv + static_cast<size_t>(y) * width * 2;
+
+            for (int x = 0; x + 1 < width; x += 2) {
+                const int i = x * 2;
+                const int y0 = row[i];
+                const int u = row[i + 1];
+                const int y1 = row[i + 2];
+                const int v = row[i + 3];
+
+                int r = static_cast<int>(y0 + 1.370705 * (v - 128));
+                int g = static_cast<int>(y0 - 0.337633 * (u - 128) - 0.698001 * (v - 128));
+                int b = static_cast<int>(y0 + 1.732446 * (u - 128));
+                line[3 * x] = static_cast<uchar>(qBound(0, r, 255));
+                line[3 * x + 1] = static_cast<uchar>(qBound(0, g, 255));
+                line[3 * x + 2] = static_cast<uchar>(qBound(0, b, 255));
+
+                r = static_cast<int>(y1 + 1.370705 * (v - 128));
+                g = static_cast<int>(y1 - 0.337633 * (u - 128) - 0.698001 * (v - 128));
+                b = static_cast<int>(y1 + 1.732446 * (u - 128));
+                line[3 * x + 3] = static_cast<uchar>(qBound(0, r, 255));
+                line[3 * x + 4] = static_cast<uchar>(qBound(0, g, 255));
+                line[3 * x + 5] = static_cast<uchar>(qBound(0, b, 255));
+            }
+        }
+        return image;
     } else if (format == V4L2_PIX_FMT_MJPEG) {
         // Get actual data size instead of calculated value
         v4l2_buffer buf;
@@ -804,8 +928,22 @@ QImage WebcamDevice::frameToQImage(const void *data, int width, int height, int 
 
 void WebcamDevice::closeDevice()
 {
-    // First stop preview and stream
-    m_previewTimer.stop();
+    std::lock_guard<std::recursive_mutex> lock(m_deviceMutex);
+
+    // Nothing may touch the device while it is closed.
+    stopIoWork();
+
+    // First stop preview and stream. The initialized flag goes down before the descriptor is
+    // gone, so a preview tick that is already queued cannot report a device that is only
+    // being closed as unplugged.
+    m_isInitialized = false;
+    m_previewRunning = false;
+    // The timer belongs to the UI thread. From another thread it is left alone: queuing the
+    // stop could land after the next startPreview(), and the flag above already keeps its
+    // tick from touching the device.
+    if (QThread::currentThread() == thread()) {
+        m_previewTimer.stop();
+    }
     stopCapturing();
 
     // Clear latest preview frame
@@ -825,7 +963,6 @@ void WebcamDevice::closeDevice()
     }
 
     m_deviceSelected = false;
-    m_isInitialized = false;
     setState(Disconnected);
 }
 
@@ -878,41 +1015,45 @@ QSize WebcamDevice::getMaxResolution()
         }
     }
 
-    // If discrete resolutions found, get largest one (but no more than 1280x720 unless explicitly supported)
+    // If discrete resolutions are available, the default is a resolution that keeps the
+    // stream responsive: the highest resolution a device offers can be far too slow (a
+    // 3264x2448 frame takes about 1.7 s and the stream drops to a few frames per second),
+    // and every size stays selectable in the UI.
     if (resolutionsFound && !supportedSizes.isEmpty()) {
-        // Sort by resolution (total pixels)
+        // Sort by resolution (total pixels), largest first
         std::sort(supportedSizes.begin(), supportedSizes.end(),
                   [](const QSize &a, const QSize &b) {
                       return a.width() * a.height() > b.width() * b.height();
                   });
 
-        // Select largest resolution not exceeding 720p (unless explicitly supports higher)
-        for (const QSize &size : supportedSizes) {
-            // If we find a reasonable resolution, use it
-            maxWidth = size.width();
-            maxHeight = size.height();
-
-            // If at least 720p resolution found, use it directly
-            if (maxWidth >= 1280 && maxHeight >= 720) {
-                // Prefer standard resolutions like 720p or 1080p
-                if (maxWidth == 1280 && maxHeight == 720) {
-                    qCInfo(app) << "Selected standard resolution: 1280x720";
-                    return QSize(maxWidth, maxHeight);
+        const auto selectExact = [&supportedSizes](int width, int height) -> QSize {
+            for (const QSize &size : supportedSizes) {
+                if (size.width() == width && size.height() == height) {
+                    return size;
                 }
-
-                if (maxWidth == 1920 && maxHeight == 1080) {
-                    qCInfo(app) << "Selected standard resolution: 1920x1080";
-                    return QSize(maxWidth, maxHeight);
-                }
-
-                // If no exact match, use the first (largest) resolution
-                qCInfo(app) << "Selected maximum resolution:" << supportedSizes.first().width() << "x" << supportedSizes.first().height();
-                return supportedSizes.first();
             }
+            return QSize();
+        };
 
-            // If no sufficiently large resolution found, use largest in list
-            break;
+        QSize selected = selectExact(1920, 1080);
+        if (selected.isEmpty()) {
+            selected = selectExact(1280, 720);
         }
+        if (selected.isEmpty()) {
+            // No standard HD size: use the largest size that is not above 1920x1080.
+            for (const QSize &size : supportedSizes) {
+                if (size.width() <= 1920 && size.height() <= 1080) {
+                    selected = size;
+                    break;
+                }
+            }
+        }
+        if (selected.isEmpty()) {
+            selected = supportedSizes.last();
+        }
+
+        qCInfo(app) << "Selected resolution:" << selected.width() << "x" << selected.height();
+        return selected;
     }
 
     // If previous methods failed, try to get current format
@@ -1363,7 +1504,12 @@ bool WebcamDevice::adjustCommonCameraSettings()
 
     // Debug info: List camera supported controls
     qCDebug(app) << "=== Starting camera optimization ===";
-    listCameraControls();
+
+    // Walking the control ids costs a few hundred milliseconds on some cameras, so the
+    // listing is only done when debug logging is enabled.
+    if (DDLog::app().isDebugEnabled()) {
+        listCameraControls();
+    }
 
     // Parameter configuration strategy (with smart adaptation)
     struct CameraControlConfig {
@@ -1478,7 +1624,6 @@ bool WebcamDevice::adjustCommonCameraSettings()
                     ioctl(m_fd, VIDIOC_S_CTRL, &fallback);
                 }
             }
-            QThread::msleep(50 * (retry + 1));
         }
     }
 
@@ -1593,9 +1738,6 @@ bool WebcamDevice::initMmap()
     if (release_result == -1) {
         qCDebug(app) << "Failed to release existing buffers:" << strerror(errno);
     }
-
-    // Give device some recovery time
-    QThread::msleep(200);
 
     // Initialize buffer array
     for (int i = 0; i < 4; i++) {
