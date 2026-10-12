@@ -69,7 +69,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="136"/>
         <source>Paper Size</source>
-        <translation>Paper Size</translation>
+        <translation>Page Format</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="154"/>

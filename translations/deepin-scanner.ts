@@ -65,7 +65,7 @@
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="132"/>
         <source>Paper Size</source>
-        <translation>纸张尺寸</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="150"/>
