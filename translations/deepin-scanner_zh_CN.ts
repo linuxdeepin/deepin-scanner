@@ -59,37 +59,37 @@ Scanner functionality will be unavailable.</source>
 <context>
     <name>ScanWidget</name>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="76"/>
+        <location filename="../src/ui/scanwidget.cpp" line="77"/>
         <source>Scan Settings</source>
         <translation>扫描设置</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="102"/>
+        <location filename="../src/ui/scanwidget.cpp" line="103"/>
         <source>Resolution</source>
         <translation>分辨率</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="113"/>
+        <location filename="../src/ui/scanwidget.cpp" line="114"/>
         <source>Color Mode</source>
         <translation>色彩模式</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="124"/>
+        <location filename="../src/ui/scanwidget.cpp" line="125"/>
         <source>Image Format</source>
         <translation>图像格式</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="135"/>
+        <location filename="../src/ui/scanwidget.cpp" line="136"/>
         <source>Paper Size</source>
         <translation>纸张尺寸</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="160"/>
+        <location filename="../src/ui/scanwidget.cpp" line="161"/>
         <source>View Scanned Image</source>
         <translation>查看已扫描图像</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="153"/>
+        <location filename="../src/ui/scanwidget.cpp" line="154"/>
         <source>Scan</source>
         <translation>扫描</translation>
     </message>
@@ -98,75 +98,85 @@ Scanner functionality will be unavailable.</source>
         <translation type="vanished">保存</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="222"/>
+        <location filename="../src/ui/scanwidget.cpp" line="223"/>
         <source>Scan Mode</source>
         <translation>扫描模式</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="233"/>
-        <location filename="../src/ui/scanwidget.cpp" line="245"/>
-        <location filename="../src/ui/scanwidget.cpp" line="248"/>
+        <location filename="../src/ui/scanwidget.cpp" line="234"/>
+        <location filename="../src/ui/scanwidget.cpp" line="246"/>
+        <location filename="../src/ui/scanwidget.cpp" line="249"/>
         <source>Flatbed</source>
         <translation>平板扫描</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="239"/>
+        <location filename="../src/ui/scanwidget.cpp" line="240"/>
         <source>Duplex</source>
         <translation>双面扫描</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="252"/>
+        <location filename="../src/ui/scanwidget.cpp" line="253"/>
         <source>Video Format</source>
         <translation>视频格式</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="256"/>
+        <location filename="../src/ui/scanwidget.cpp" line="257"/>
         <source>Color</source>
         <translation>彩色</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="256"/>
+        <location filename="../src/ui/scanwidget.cpp" line="257"/>
         <source>Grayscale</source>
         <translation>灰度</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="256"/>
+        <location filename="../src/ui/scanwidget.cpp" line="257"/>
         <source>Black White</source>
         <translation>黑白</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="236"/>
+        <location filename="../src/ui/scanwidget.cpp" line="630"/>
+        <source>Scan completed, saved to: %1</source>
+        <translation>扫描完成，已保存至：%1</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="634"/>
+        <source>Failed to save scan.</source>
+        <translation>扫描保存失败。</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="237"/>
         <source>ADF</source>
         <translation>ADF</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="174"/>
+        <location filename="../src/ui/scanwidget.cpp" line="175"/>
         <source>Scan history will be shown here</source>
         <translation>扫描历史将在此处显示</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="262"/>
+        <location filename="../src/ui/scanwidget.cpp" line="263"/>
         <source>Auto</source>
         <translation>自动</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="326"/>
+        <location filename="../src/ui/scanwidget.cpp" line="327"/>
         <source>Device not initialized</source>
         <translation>设备未初始化</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="394"/>
-        <location filename="../src/ui/scanwidget.cpp" line="499"/>
+        <location filename="../src/ui/scanwidget.cpp" line="395"/>
+        <location filename="../src/ui/scanwidget.cpp" line="500"/>
         <source>Initializing preview...</source>
         <translation>正在初始化预览...</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="403"/>
+        <location filename="../src/ui/scanwidget.cpp" line="404"/>
         <source>Device preview not available</source>
         <translation>设备预览不可用</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="435"/>
+        <location filename="../src/ui/scanwidget.cpp" line="436"/>
         <source>No preview image</source>
         <translation>无预览图像</translation>
     </message>

@@ -47,110 +47,120 @@
 <context>
     <name>ScanWidget</name>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="76"/>
+        <location filename="../src/ui/scanwidget.cpp" line="77"/>
         <source>Scan Settings</source>
         <translation>Scan Settings</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="102"/>
+        <location filename="../src/ui/scanwidget.cpp" line="103"/>
         <source>Resolution</source>
         <translation>Resolution</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="113"/>
+        <location filename="../src/ui/scanwidget.cpp" line="114"/>
         <source>Color Mode</source>
         <translation>Color Mode</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="124"/>
+        <location filename="../src/ui/scanwidget.cpp" line="125"/>
         <source>Image Format</source>
         <translation>Image Format</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="135"/>
+        <location filename="../src/ui/scanwidget.cpp" line="136"/>
         <source>Paper Size</source>
         <translation>Paper Size</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="153"/>
+        <location filename="../src/ui/scanwidget.cpp" line="154"/>
         <source>Scan</source>
         <translation>Scan</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="160"/>
+        <location filename="../src/ui/scanwidget.cpp" line="161"/>
         <source>View Scanned Image</source>
         <translation>View Scanned Image</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="174"/>
+        <location filename="../src/ui/scanwidget.cpp" line="175"/>
         <source>Scan history will be shown here</source>
         <translation>Scan history will be shown here</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="222"/>
+        <location filename="../src/ui/scanwidget.cpp" line="223"/>
         <source>Scan Mode</source>
         <translation>Scan Mode</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="233"/>
-        <location filename="../src/ui/scanwidget.cpp" line="245"/>
-        <location filename="../src/ui/scanwidget.cpp" line="248"/>
+        <location filename="../src/ui/scanwidget.cpp" line="234"/>
+        <location filename="../src/ui/scanwidget.cpp" line="246"/>
+        <location filename="../src/ui/scanwidget.cpp" line="249"/>
         <source>Flatbed</source>
         <translation>Flatbed</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="252"/>
+        <location filename="../src/ui/scanwidget.cpp" line="253"/>
         <source>Video Format</source>
         <translation>Video Format</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="256"/>
+        <location filename="../src/ui/scanwidget.cpp" line="257"/>
         <source>Color</source>
         <translation>Color</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="256"/>
+        <location filename="../src/ui/scanwidget.cpp" line="257"/>
         <source>Grayscale</source>
         <translation>Grayscale</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="256"/>
+        <location filename="../src/ui/scanwidget.cpp" line="257"/>
         <source>Black White</source>
         <translation>Black White</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="262"/>
+        <location filename="../src/ui/scanwidget.cpp" line="263"/>
         <source>Auto</source>
         <translation>Auto</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="326"/>
+        <location filename="../src/ui/scanwidget.cpp" line="327"/>
         <source>Device not initialized</source>
         <translation>Device not initialized</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="394"/>
-        <location filename="../src/ui/scanwidget.cpp" line="499"/>
+        <location filename="../src/ui/scanwidget.cpp" line="395"/>
+        <location filename="../src/ui/scanwidget.cpp" line="500"/>
         <source>Initializing preview...</source>
         <translation>Initializing preview...</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="403"/>
+        <location filename="../src/ui/scanwidget.cpp" line="404"/>
         <source>Device preview not available</source>
         <translation>Device preview not available</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="435"/>
+        <location filename="../src/ui/scanwidget.cpp" line="436"/>
         <source>No preview image</source>
         <translation>No preview image</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="236"/>
+        <location filename="../src/ui/scanwidget.cpp" line="630"/>
+        <source>Scan completed, saved to: %1</source>
+        <translation>Scan completed, saved to: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="634"/>
+        <source>Failed to save scan.</source>
+        <translation>Failed to save scan.</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/scanwidget.cpp" line="237"/>
         <source>ADF</source>
         <translation>ADF</translation>
     </message>
     <message>
-        <location filename="../src/ui/scanwidget.cpp" line="239"/>
+        <location filename="../src/ui/scanwidget.cpp" line="240"/>
         <source>Duplex</source>
         <translation>Duplex</translation>
     </message>
