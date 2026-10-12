@@ -30,6 +30,7 @@
 #include <DPushButton>
 #include <DIconButton>
 #include <DLabel>
+#include <DMessageManager>
 
 using namespace DDLog;
 
@@ -625,8 +626,12 @@ void ScanWidget::onScanFinished(const QImage &image)
             // add the saved file path to the top of the history box
             m_historyEdit->moveCursor(QTextCursor::Start);
             m_historyEdit->insertPlainText(result.filePath + "\n");
+            DMessageManager::instance()->sendMessage(window(), QIcon::fromTheme("dialog-ok"),
+                                                     tr("Scan completed, saved to: %1").arg(result.filePath));
         } else {
             qCWarning(app) << "Failed to save scan to:" << result.filePath;
+            DMessageManager::instance()->sendMessage(window(), QIcon::fromTheme("dialog-warning"),
+                                                     tr("Failed to save scan."));
         }
     });
     watcher->setFuture(QtConcurrent::run(&ScanWidget::saveScan, request));
