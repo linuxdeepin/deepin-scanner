@@ -81,7 +81,7 @@ Scanner functionality will be unavailable.</source>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="136"/>
         <source>Paper Size</source>
-        <translation>纸张尺寸</translation>
+        <translation>幅面设置</translation>
     </message>
     <message>
         <location filename="../src/ui/scanwidget.cpp" line="161"/>
