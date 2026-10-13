@@ -253,60 +253,31 @@ bool WebcamDevice::setResolution(int width, int height)
 
     qCDebug(app) << "Attempting to set resolution:" << width << "x" << height;
 
-    // The preview and the capture use the device on the I/O thread: let them go before it
-    // is closed and re-opened underneath them. The caller refuses to reconfigure while a
+    // The preview and the capture use the device on the I/O thread: let them go before
+    // reconfiguring the stream underneath them. The caller refuses to reconfigure while a
     // capture is in flight, so only the short preview work can be waiting here.
     stopIoWork();
 
-    // Save original state
-    bool wasInitialized = m_isInitialized;
-    bool wasDeviceSelected = m_deviceSelected;
-
-    // Save current device path
-    QString devicePath;
-    if (m_fd > 0) {
-        char devPath[256];
-        sprintf(devPath, "/proc/self/fd/%d", m_fd);
-        char realPath[256] = { 0 };
-        if (readlink(devPath, realPath, sizeof(realPath) - 1) != -1) {
-            devicePath = QString(realPath);
-            qCDebug(app) << "Current device path:" << devicePath;
-        }
-    }
-
-    // If device path is empty but initialized, path retrieval may have failed
-    if (devicePath.isEmpty() && m_fd > 0) {
-        qCDebug(app) << "Unable to get current device path, using fallback method";
-        // Here we can add fallback method to get device path
-    }
-
-    // Completely close device and release all resources
-    closeDevice();
-
-    // Without device path, cannot continue
-    if (devicePath.isEmpty()) {
-        emit errorOccurred(tr("Cannot get device path, cannot set resolution"));
-        return false;
-    }
-
-    // Reopen device
-    qCDebug(app) << "Reopening device:" << devicePath;
-    // O_NONBLOCK matters here: the preview reads frames with VIDIOC_DQBUF from the UI
-    // thread, and a blocking file descriptor would stall it until the next frame arrives.
-    m_fd = open(devicePath.toUtf8().constData(), O_RDWR | O_NONBLOCK);
     if (m_fd <= 0) {
-        qCDebug(app) << "Failed to reopen device:" << strerror(errno);
-        emit errorOccurred(tr("Failed to reopen device"));
+        qCDebug(app) << "Device not open, cannot set resolution";
+        emit errorOccurred(tr("Device not open, cannot set resolution"));
         return false;
     }
 
-    // Verify device is a video capture device
-    v4l2_capability cap;
-    if (ioctl(m_fd, VIDIOC_QUERYCAP, &cap) == -1) {
-        qCDebug(app) << "Device verification failed:" << strerror(errno);
-        close(m_fd);
-        m_fd = -1;
-        return false;
+    // Switch format without closing the device fd. V4L2 allows format changes on an open
+    // device: STREAMOFF -> free buffers -> S_FMT -> re-request -> STREAMON. This avoids the
+    // multi-second cost of closing and reopening the device, re-enumerating resolutions
+    // and re-applying camera controls.
+    stopCapturing();
+    uninitMmap();
+
+    // Release kernel buffer request before setting the new format
+    v4l2_requestbuffers releaseReq = {};
+    releaseReq.count = 0;
+    releaseReq.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+    releaseReq.memory = V4L2_MEMORY_MMAP;
+    if (ioctl(m_fd, VIDIOC_REQBUFS, &releaseReq) == -1) {
+        qCDebug(app) << "Failed to release buffers before format change:" << strerror(errno);
     }
 
     // Set format
@@ -317,6 +288,8 @@ bool WebcamDevice::setResolution(int width, int height)
     fmt.fmt.pix.pixelformat = m_pixelFormat;   // Use previous pixel format
     fmt.fmt.pix.field = V4L2_FIELD_NONE;
 
+    const int formatBefore = m_pixelFormat;
+
     bool formatSet = false;
     if (ioctl(m_fd, VIDIOC_S_FMT, &fmt) != -1) {
         formatSet = true;
@@ -324,6 +297,26 @@ bool WebcamDevice::setResolution(int width, int height)
     } else {
         qCDebug(app) << "Failed to set resolution, trying other pixel formats";
         formatSet = selectBestPixelFormat();
+        if (formatSet) {
+            // The fallback changes only the pixel format and keeps the dimensions already in
+            // effect, so the size in fmt is not the size the driver has. Read it back: the
+            // frame conversion uses m_width/m_height and would read past the mapped buffer if
+            // they were larger than the frame the driver actually fills.
+            v4l2_format applied = {};
+            applied.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+            if (ioctl(m_fd, VIDIOC_G_FMT, &applied) == -1) {
+                qCWarning(app) << "Failed to read the format applied by the fallback:" << strerror(errno);
+                close(m_fd);
+                m_fd = -1;
+                emit errorOccurred(tr("Failed to set requested resolution"));
+                return false;
+            }
+            fmt = applied;
+            if (fmt.fmt.pix.width != width || fmt.fmt.pix.height != height) {
+                qCWarning(app) << "Requested resolution" << width << "x" << height
+                               << "was not applied, the stream stays at" << fmt.fmt.pix.width << "x" << fmt.fmt.pix.height;
+            }
+        }
     }
 
     if (!formatSet) {
@@ -338,26 +331,28 @@ bool WebcamDevice::setResolution(int width, int height)
     m_width = fmt.fmt.pix.width;
     m_height = fmt.fmt.pix.height;
 
+    if (m_pixelFormat != formatBefore) {
+        // The resolution list is enumerated per pixel format, so it is stale once the fallback
+        // picked a different one. Refresh it in that case only, so the fast path stays free of
+        // the enumeration.
+        enumerateSupportedResolutions();
+    }
+
     // Initialize memory mapping
     if (!initMmap()) {
         qCDebug(app) << "Failed to initialize memory mapping";
-        close(m_fd);
-        m_fd = -1;
         emit errorOccurred(tr("Memory mapping failed"));
         return false;
     }
 
-    // Restore device state
-    m_isInitialized = true;
-    m_deviceSelected = wasDeviceSelected;
-
-    // Re-enumerate resolutions and notify UI
-    enumerateSupportedResolutions();
-
-    // Open the stream again, here and not in the caller: this runs on a worker thread,
-    // while the preview timer belongs to the UI thread (see startStream()). The caller is
-    // expected to have stopped the preview before calling, and restarts it afterwards.
-    startStream();
+    // Restart the stream (enqueue buffers + STREAMON). Camera control parameters persist
+    // across format changes on an open device, so adjustCommonCameraSettings() and
+    // setCameraAutoFocus() are not needed here.
+    if (!startCapturing()) {
+        qCDebug(app) << "Failed to restart capturing after resolution change";
+        emit errorOccurred(tr("Failed to restart stream after resolution change"));
+        return false;
+    }
 
     qCDebug(app) << "Successfully completed resolution setting:" << m_width << "x" << m_height;
     return true;
@@ -1802,6 +1797,14 @@ bool WebcamDevice::initMmap()
 
     // If any mapping fails, clean up all mapped buffers
     if (!success) {
+        // The driver already allocated the buffers here. Releasing the request matters because
+        // the descriptor stays open: a retained request blocks every other user of the camera
+        // from allocating its own buffers (EBUSY) until the device is closed.
+        v4l2_requestbuffers release_req = {};
+        release_req.count = 0;
+        release_req.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+        release_req.memory = V4L2_MEMORY_MMAP;
+        ioctl(m_fd, VIDIOC_REQBUFS, &release_req);
         uninitMmap();
         return false;
     }

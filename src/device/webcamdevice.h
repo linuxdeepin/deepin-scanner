@@ -82,9 +82,9 @@ private:
     int m_currentBuffer;   // Currently used buffer
     std::atomic<bool> m_isInitialized = false;
     bool m_deviceSelected;
-    // Opening, closing and reconfiguring all close and re-open the descriptor, and they can
-    // be asked for from the UI thread and from worker threads at the same time. Recursive
-    // because openDevice() and setResolution() close the previous device as their first step.
+    // Opening and closing re-open the descriptor, and they can be asked for from the UI
+    // thread and from worker threads at the same time. Recursive because openDevice() and
+    // closeDevice() close the previous device as their first step.
     std::recursive_mutex m_deviceMutex;
     // Whether the V4L2 stream is on, so that startStream() does not restart an active one.
     std::atomic<bool> m_streaming = false;

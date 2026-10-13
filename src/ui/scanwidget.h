@@ -14,6 +14,7 @@
 #include <QFutureWatcher>
 
 #include <DLabel>
+#include <DSpinner>
 #include "device/devicebase.h"
 #include "device/scannerdevice.h"
 #include "device/webcamdevice.h"
@@ -91,6 +92,7 @@ private:
     void connectDeviceSignals(bool bind);
     void updateDeviceSettings();
     void resetPreview();
+    void hidePreviewSpinner();
 
     // Processing and saving run on a worker thread, so these must not touch widget state.
     static ScanSaveResult saveScan(const ScanSaveRequest &request);
@@ -114,6 +116,8 @@ private:
 
     // preview area
     DLabel *m_previewLabel;
+    // Small spinner centered over the preview area while the camera is being reconfigured.
+    DSpinner *m_previewSpinner = nullptr;
 
     DLabel *m_modeLabel;
     QComboBox *m_modeCombo;
