@@ -42,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle(tr("Scanner Manager"));
     QRect screenRect = QGuiApplication::primaryScreen()->geometry();
     resize(screenRect.width() / 2, screenRect.height() / 2);
+    setMinimumSize(800, 571);
     move((screenRect.width() - width()) / 2, (screenRect.height() - height()) / 2);
 
     // 创建中心部件和堆叠布局

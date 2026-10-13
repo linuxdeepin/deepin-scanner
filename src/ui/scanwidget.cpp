@@ -59,7 +59,7 @@ void ScanWidget::setupUI()
 
     // Preview area
     DFrame *previewArea = new DFrame();
-    previewArea->setMinimumSize(480, 360);
+    previewArea->setMinimumSize(300, 200);
     QVBoxLayout *previewLayout = new QVBoxLayout(previewArea);
 
     m_previewLabel = new DLabel();
@@ -71,6 +71,7 @@ void ScanWidget::setupUI()
 
     // Settings area
     QWidget *settingsArea = new QWidget();
+    settingsArea->setMinimumWidth(276);
     QVBoxLayout *settingsLayout = new QVBoxLayout(settingsArea);
     settingsLayout->addSpacing(30);
 
