@@ -67,6 +67,19 @@ void ScanWidget::setupUI()
     m_previewLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     previewLayout->addWidget(m_previewLabel);
 
+    // Reconfiguring the camera takes about a second. A small spinner centered over the
+    // preview area shows that the app is working, instead of looking frozen on static text.
+    m_previewSpinner = new DSpinner(m_previewLabel);
+    m_previewSpinner->setFixedSize(20, 20);
+    m_previewSpinner->setAttribute(Qt::WA_TransparentForMouseEvents);
+    m_previewSpinner->setFocusPolicy(Qt::NoFocus);
+    m_previewSpinner->hide();
+
+    QVBoxLayout *spinnerLayout = new QVBoxLayout(m_previewLabel);
+    spinnerLayout->addStretch();
+    spinnerLayout->addWidget(m_previewSpinner, 0, Qt::AlignCenter);
+    spinnerLayout->addStretch();
+
     mainLayout->addWidget(previewArea, 9);
 
     // Settings area
@@ -432,6 +445,10 @@ void ScanWidget::waitForPendingCameraWork()
 
 void ScanWidget::onUpdatePreview(const QImage &image)
 {
+    if (m_previewSpinner->isVisible()) {
+        hidePreviewSpinner();   // the first frame of the new resolution is here
+    }
+
     if (image.isNull()) {
         m_previewLabel->setText(tr("No preview image"));
         return;
@@ -450,6 +467,7 @@ void ScanWidget::onUpdatePreview(const QImage &image)
 void ScanWidget::handleDeviceError(const QString &error)
 {
     qCWarning(app) << "Device error:" << error;
+    hidePreviewSpinner();
     m_previewLabel->setText(error);
 }
 
@@ -460,11 +478,18 @@ void ScanWidget::onDeviceOpened()
 }
 void ScanWidget::resetPreview()
 {
+    hidePreviewSpinner();
     QIcon icon = QIcon::fromTheme("blank_doc");
     QPixmap pixmap = icon.pixmap(200, 200);
     m_previewLabel->setPixmap(pixmap);
     // m_previewLabel->setText(tr("Click 'Scan' to begin"));
     m_previewLabel->setAlignment(Qt::AlignCenter);
+}
+
+void ScanWidget::hidePreviewSpinner()
+{
+    m_previewSpinner->stop();
+    m_previewSpinner->hide();
 }
 
 // 以下为参数变更处理函数
@@ -497,7 +522,8 @@ void ScanWidget::onResolutionChanged(int index)
                 // The preview is stopped here, on this thread, and restarted when the new
                 // resolution is up.
                 m_cameraBusy = true;
-                m_previewLabel->setText(tr("Initializing preview..."));
+                m_previewSpinner->show();
+                m_previewSpinner->start();
                 webcam->stopPreview();
 
                 const int width = parts[0].toInt();
