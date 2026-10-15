@@ -1,3 +1,16 @@
+deepin-scanner (0.1.25) unstable; urgency=medium
+
+  * Update version to 0.1.25
+  * fix: move the scanner and camera work off the UI thread
+  * fix: keep the device list usable while the scanners are enumerated
+  * fix: add scan completion notification message
+  * fix: prevent the settings panel and preview area from overlapping on small screens
+  * fix: switch webcam resolution without closing the device fd
+  * fix: correct paper size label to page format in translations
+  * fix: correct the scan manager help manual screenshots and step numbering
+
+ -- re2zero <yangwu@uniontech.com>  Thu, 15 Oct 2026 19:54:49 +0800
+
 deepin-scanner (0.1.24) unstable; urgency=medium
 
   * Update version to 0.1.24
