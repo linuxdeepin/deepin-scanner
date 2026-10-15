@@ -75,3 +75,5 @@ project_journal/
 # OpenMemory - IDE/Assistant specific rules
 .qoder/rules/openmemory.md
 CLAUDE.md
+.openbitfun/
+/.openbitfun/search/flashgrep-index/

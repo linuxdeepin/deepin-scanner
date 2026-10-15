@@ -28,7 +28,7 @@
 ## 掃描操作介紹
 將掃描設備與電腦連接，並打開掃描設備的開關。
 打開掃描管理器，系統會自動掃描當前電腦上連接的所有掃描設備，如拍攝儀和掃描儀。如果沒有顯示對應的設備列表，則需要安裝驅動。
-![homepage](../common/homepage.png)
+![homepage](../common/homepage_hk.png)
 
 ### 安裝驅動
 
@@ -42,7 +42,7 @@
 1.  在設備列表中選擇拍攝儀並單擊 **掃描**，進入掃描頁面。
 2.  在頁面右側設置掃描參數，包括掃描設置、裁剪及圖像處理方案等。
     **掃描設置**：設置掃描圖片的分辨率、色彩模式及圖片格式。當前支持彩色 / 灰度 / 黑白三種色彩模式，支持 jpg/bmp/tif/png 四種圖片格式，且支持掃描為 pdf、ofd 文檔。
-    ![camera\_settings](../common/camera_settings.png)
+    ![camera\_settings](../common/camera_settings_hk.png)
 3.  完成設置後，單擊掃描按鈕![scan\_botton](../common/scan_botton.png)，掃描的圖片可以在 “查看已掃描圖像” 中查看。
 
 
