@@ -33,7 +33,7 @@
 
 打开扫描管理器，系统会自动扫描当前电脑上连接的所有扫描设备，如拍摄仪和扫描仪。如果没有显示对应的设备列表，则需要安装驱动。
 
-![homepage](../common/homepage.png)
+![homepage](../common/homepage_zh.png)
 
 ### 安装驱动
 
@@ -44,16 +44,10 @@
 ### 拍摄仪
 
 1. 在设备列表中选择拍摄仪并单击 **扫描**，进入扫描页面。
-   
 2. 在页面右侧设置扫描参数，包括扫描设置、裁剪及图像处理方案等。
-   
     **扫描设置**：设置扫描图片的分辨率、色彩模式及图片格式。当前支持彩色/灰度/黑白三种色彩模式，支持jpg/bmp/tif/png四种图片格式，且支持扫描为pdf、ofd文档。
-    
-    
-    
-    ![camera_settings](../common/camera_settings.png)
-    
-4. 完成设置后，单击扫描按钮![scan_botton](../common/scan_botton.png)，扫描的图片可以在 “查看已扫描图像” 中查看。
+    ![camera\_settings](../common/camera_settings_zh.png)
+3. 完成设置后，单击扫描按钮![scan_botton](../common/scan_botton.png)，扫描的图片可以在 “查看已扫描图像” 中查看。
    
 
 ## 主菜单
