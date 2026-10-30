@@ -1,3 +1,9 @@
+deepin-scanner (0.1.26) unstable; urgency=medium
+
+  * docs(scan-manager): add Portuguese help manual
+
+ -- re2zero <yangwu@uniontech.com>  Fri, 30 Oct 2026 13:48:49 +0800
+
 deepin-scanner (0.1.25) unstable; urgency=medium
 
   * Update version to 0.1.25
