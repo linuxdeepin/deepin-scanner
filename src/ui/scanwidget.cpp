@@ -476,6 +476,34 @@ void ScanWidget::onDeviceOpened()
 {
     qCDebug(app) << "Device opened signal received, updating UI settings.";
     updateDeviceSettings();
+
+    if (m_isScanner) {
+        auto scanner = dynamic_cast<ScannerDevice *>(m_device);
+        if (scanner) {
+            QStringList scanModes;
+            for (auto mode : scanner->getSupportedScanModes()) {
+                switch (mode) {
+                    case ScannerDevice::SCAN_MODE_FLATBED:
+                        scanModes << tr("Flatbed");
+                        break;
+                    case ScannerDevice::SCAN_MODE_ADF_SIMPLEX:
+                        scanModes << tr("ADF");
+                        break;
+                    case ScannerDevice::SCAN_MODE_ADF_DUPLEX:
+                        scanModes << tr("Duplex");
+                        break;
+                }
+            }
+            if (scanModes.isEmpty()) {
+                scanModes << tr("Flatbed");
+            }
+
+            m_modeCombo->blockSignals(true);
+            m_modeCombo->clear();
+            m_modeCombo->addItems(scanModes);
+            m_modeCombo->blockSignals(false);
+        }
+    }
 }
 void ScanWidget::resetPreview()
 {
