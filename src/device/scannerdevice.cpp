@@ -387,7 +387,12 @@ void ScannerWorker::doGetAvailableDevices()
     if (device_list) {
         for (int i = 0; device_list[i] != nullptr; ++i) {
             if (device_list[i]->name) {
-                deviceNames.append(QString::fromUtf8(device_list[i]->name));
+                QString deviceName = QString::fromUtf8(device_list[i]->name);
+                if (deviceName.startsWith(QStringLiteral("v4l:"))) {
+                    qCInfo(app) << "Worker: skipping v4l device (camera, not scanner):" << deviceName;
+                    continue;
+                }
+                deviceNames.append(deviceName);
             }
         }
     }
