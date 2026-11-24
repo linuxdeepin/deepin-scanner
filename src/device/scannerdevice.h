@@ -10,6 +10,8 @@
 #include <QStringList>
 #include <QImage>
 #include <QThread>
+#include <QHash>
+#include <QSet>
 #include "devicebase.h"
 
 #ifndef _WIN32
@@ -157,7 +159,8 @@ private:
     struct Image;
     SANE_Status scan_it(FILE *ofp, QImage &image);
     void updateSupportedOptions();
-    bool reopenDevice();
+    bool reopenDevice(const QString &deviceName);
+    QStringList scanCandidates() const;
     void reportScanFailure(const QString &errorMessage);
     void reportDeviceDisconnected();
     void doSetResolution(int dpi);
@@ -168,6 +171,20 @@ private:
     SANE_Handle m_device = nullptr;
     bool m_deviceOpen = false;
     QString m_deviceName;
+    // Name actually used to start the scan. It is the enumerated name until a scan was
+    // retried through the eSCL endpoint of a WSD-only device (see scanCandidates()), and
+    // is remembered so that later scans use the endpoint that works.
+    QString m_scanDeviceName;
+    // Identity of the open device (hardware model and address), used to recognize it in
+    // a later enumeration even when sane-airscan reports it under another protocol or
+    // discovery index (w0/e0/e1...).
+    QString m_deviceIdentity;
+    // From the last enumeration: WSD airscan names mapped to their direct eSCL endpoints,
+    // and device name -> identity for all devices.
+    QHash<QString, QStringList> m_esclAliases;
+    QHash<QString, QString> m_deviceIdentities;
+    // eSCL endpoints that already scanned successfully, tried before the WSD name.
+    QSet<QString> m_verifiedEsclNames;
     volatile bool m_scanCancelled = false;
 #endif
     bool m_usingTestDevice = false;

@@ -3,15 +3,34 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "scannerswidget.h"
+#include "ddlog.h"
 
 #include <QSharedPointer>
 #include <QHBoxLayout>
 #include <QListWidgetItem>
+#include <QRegularExpression>
+#include <QSet>
 
 #include <DLabel>
 #include <DFrame>
 #include <DIcon>
 #include <DPushButton>
+
+using namespace DDLog;
+
+namespace {
+
+// Device node ("/dev/videoN") a device name refers to, if it has one. The SANE v4l
+// backend names its devices after the node ("v4l:/dev/video0"), while the camera entries
+// carry the node in parentheses ("Integrated Camera: Integrated C (/dev/video0)").
+QString videoDeviceNode(const QString &name)
+{
+    static const QRegularExpression nodePattern(QStringLiteral("(/dev/video\\d+)"));
+    const QRegularExpressionMatch match = nodePattern.match(name);
+    return match.hasMatch() ? match.captured(1) : QString();
+}
+
+}   // namespace
 
 ScannersWidget::ScannersWidget(QWidget *parent) : DWidget(parent)
 {
@@ -116,7 +135,28 @@ void ScannersWidget::rebuildList()
 {
     deviceList->clear();
 
+    // A camera is also reported by the SANE v4l backend ("v4l:/dev/video0"), which lists
+    // the same physical device a second time. The camera entry is the usable one: it
+    // previews the sensor and drives the V4L2 controls, while the v4l entry has no scan
+    // options at all (resolution and colour mode have no effect on it) and keeps the device
+    // busy after a scan, so the camera entry then fails to open with EBUSY. Keep the camera
+    // entry only - but only for a node the camera enumeration really reports, so a capture
+    // device that it does not know is not lost.
+    QSet<QString> cameraNodes;
+    for (const QString &name : m_webcamNames) {
+        const QString node = videoDeviceNode(name);
+        if (!node.isEmpty()) {
+            cameraNodes.insert(node);
+        }
+    }
+
     for (const QString &name : m_scannerNames) {
+        const QString node = name.startsWith("v4l:") ? videoDeviceNode(name) : QString();
+        if (!node.isEmpty() && cameraNodes.contains(node)) {
+            qCInfo(app) << "Hiding v4l entry" << name
+                        << "because the camera entry of the same device is available";
+            continue;
+        }
         addDeviceItem(name, tr("Scanner"), DeviceBase::DeviceStatus::Idle, true);
     }
 
