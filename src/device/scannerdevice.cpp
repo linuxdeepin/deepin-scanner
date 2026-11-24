@@ -390,14 +390,26 @@ QString airscanAddress(const SANE_Device *device)
     return type.mid(ipPos + 3, ipEnd < 0 ? -1 : ipEnd - (ipPos + 3));
 }
 
-// Address of a device reported by the sane-backends escl backend, whose name is the
-// endpoint itself (escl:https://10.20.51.241:443).
-QString esclBackendAddress(const QString &name)
+// Service endpoint (host and port) of an eSCL device. The port belongs to the identity:
+// the same address can expose a different eSCL service or another scanner, and only the
+// same endpoint means the same service.
+QString serviceEndpoint(const QString &host, int port)
+{
+    if (host.isEmpty() || port <= 0) {
+        return {};
+    }
+    return host + ':' + QString::number(port);
+}
+
+// Service endpoint of a device reported by the sane-backends escl backend, whose name is
+// the endpoint itself (escl:https://10.20.51.241:443).
+QString esclBackendEndpoint(const QString &name)
 {
     if (!name.startsWith("escl:")) {
         return {};
     }
-    return QUrl(name.mid(5)).host();
+    const QUrl url(name.mid(5));
+    return serviceEndpoint(url.host(), url.port(url.scheme() == "https" ? 443 : 80));
 }
 
 // Direct eSCL endpoints for an airscan device. Some devices (e.g. the Canon iR series)
@@ -459,12 +471,12 @@ void ScannerWorker::doGetAvailableDevices()
             QString name;
             QString vendor;
             QString identity;
-            QString address;
+            QString endpoint;
             QStringList esclNames;
         };
 
         QList<EnumeratedDevice> devices;
-        QSet<QString> airscanAddresses;
+        QSet<QString> airscanEndpoints;
         QSet<QString> esclIdentities;
 
         for (int i = 0; device_list[i] != nullptr; ++i) {
@@ -478,15 +490,16 @@ void ScannerWorker::doGetAvailableDevices()
             entry.identity = deviceIdentity(device);
             entry.esclNames = directEsclNames(device);
             if (entry.name.startsWith("airscan:")) {
-                entry.address = airscanAddress(device);
-                if (!entry.address.isEmpty()) {
-                    airscanAddresses.insert(entry.address);
+                const QString address = airscanAddress(device);
+                if (!address.isEmpty()) {
+                    airscanEndpoints.insert(serviceEndpoint(address, 80));
+                    airscanEndpoints.insert(serviceEndpoint(address, 443));
                 }
                 if (entry.vendor.compare("eSCL", Qt::CaseInsensitive) == 0) {
                     esclIdentities.insert(entry.identity);
                 }
             } else {
-                entry.address = esclBackendAddress(entry.name);
+                entry.endpoint = esclBackendEndpoint(entry.name);
             }
             devices.append(entry);
         }
@@ -505,10 +518,12 @@ void ScannerWorker::doGetAvailableDevices()
             }
             // The sane-backends escl backend can report the same scanner as airscan; keep
             // the airscan entry (recognizable name, direct eSCL fallback) and drop this one.
-            if (!entry.name.startsWith("airscan:") && !entry.address.isEmpty()
-                && airscanAddresses.contains(entry.address)) {
+            // The comparison includes the port, so a distinct eSCL service or another
+            // scanner behind the same address keeps its entry.
+            if (!entry.name.startsWith("airscan:") && !entry.endpoint.isEmpty()
+                && airscanEndpoints.contains(entry.endpoint)) {
                 qCInfo(app) << "Worker: hiding escl entry" << entry.name
-                            << "because airscan already reports the same address";
+                            << "because airscan already reports the same service endpoint";
                 continue;
             }
 
