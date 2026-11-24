@@ -16,6 +16,7 @@
 #include <QStandardPaths>
 #include <QMetaType>
 #include <QElapsedTimer>
+#include <QUrl>
 
 using namespace DDLog;
 
@@ -365,6 +366,72 @@ ScannerWorker::~ScannerWorker()
     qCInfo(app) << "SANE backend exited from worker destructor.";
 }
 
+#ifndef _WIN32
+namespace {
+
+// Identity of a device independent of the protocol and of the discovery index that
+// sane-airscan puts into its SANE name (airscan:w0:..., airscan:e1:...): the hardware
+// model and the address describe the same physical scanner in every variant it exposes.
+QString deviceIdentity(const SANE_Device *device)
+{
+    return QString::fromUtf8(device->model ? device->model : "") + '|'
+           + QString::fromUtf8(device->type ? device->type : "");
+}
+
+// Address of a device reported by sane-airscan in SANE_Device::type ("ip=10.20.51.241").
+QString airscanAddress(const SANE_Device *device)
+{
+    const QString type = QString::fromUtf8(device->type ? device->type : "");
+    const int ipPos = type.indexOf("ip=");
+    if (ipPos < 0) {
+        return {};
+    }
+    const int ipEnd = type.indexOf(' ', ipPos);
+    return type.mid(ipPos + 3, ipEnd < 0 ? -1 : ipEnd - (ipPos + 3));
+}
+
+// Address of a device reported by the sane-backends escl backend, whose name is the
+// endpoint itself (escl:https://10.20.51.241:443).
+QString esclBackendAddress(const QString &name)
+{
+    if (!name.startsWith("escl:")) {
+        return {};
+    }
+    return QUrl(name.mid(5)).host();
+}
+
+// Direct eSCL endpoints for an airscan device. Some devices (e.g. the Canon iR series)
+// advertise WSD but reject the WSD scan job, while their eSCL service scans fine - and
+// that service is not necessarily advertised through mDNS when the WSD entry is the one
+// that got discovered. sane-airscan accepts "airscan:escl:<name>:<url>" as a device name,
+// so the address reported by the enumeration is enough to reach it. The direct endpoint
+// is also a fallback for an eSCL entry whose discovery index changed.
+QStringList directEsclNames(const SANE_Device *device)
+{
+    const QString name = QString::fromUtf8(device->name ? device->name : "");
+    if (!name.startsWith("airscan:")) {
+        return {};
+    }
+
+    QString address = airscanAddress(device);
+    if (address.isEmpty()) {
+        return {};
+    }
+    if (address.contains(':')) {
+        address = '[' + address + ']';   // IPv6 literal
+    }
+
+    QString label = device->model ? QString::fromUtf8(device->model) : name;
+    label.replace(':', ' ');   // the backend splits the direct name at the second colon
+
+    // The device may expose eSCL over HTTP and/or HTTPS; both are tried in this order.
+    return {QStringLiteral("airscan:escl:%1:http://%2:80/eSCL/").arg(label, address),
+            QStringLiteral("airscan:escl:%1:https://%2:443/eSCL/").arg(label, address)};
+}
+
+} // namespace
+#endif
+
 
 void ScannerWorker::doGetAvailableDevices()
 {
@@ -384,10 +451,72 @@ void ScannerWorker::doGetAvailableDevices()
         return;
     }
 
+    m_esclAliases.clear();
+    m_deviceIdentities.clear();
+
     if (device_list) {
+        struct EnumeratedDevice {
+            QString name;
+            QString vendor;
+            QString identity;
+            QString address;
+            QStringList esclNames;
+        };
+
+        QList<EnumeratedDevice> devices;
+        QSet<QString> airscanAddresses;
+        QSet<QString> esclIdentities;
+
         for (int i = 0; device_list[i] != nullptr; ++i) {
-            if (device_list[i]->name) {
-                deviceNames.append(QString::fromUtf8(device_list[i]->name));
+            const SANE_Device *device = device_list[i];
+            if (!device->name) {
+                continue;
+            }
+            EnumeratedDevice entry;
+            entry.name = QString::fromUtf8(device->name);
+            entry.vendor = QString::fromUtf8(device->vendor ? device->vendor : "");
+            entry.identity = deviceIdentity(device);
+            entry.esclNames = directEsclNames(device);
+            if (entry.name.startsWith("airscan:")) {
+                entry.address = airscanAddress(device);
+                if (!entry.address.isEmpty()) {
+                    airscanAddresses.insert(entry.address);
+                }
+                if (entry.vendor.compare("eSCL", Qt::CaseInsensitive) == 0) {
+                    esclIdentities.insert(entry.identity);
+                }
+            } else {
+                entry.address = esclBackendAddress(entry.name);
+            }
+            devices.append(entry);
+        }
+
+        for (const EnumeratedDevice &entry : devices) {
+            // sane-airscan exposes the same scanner once per discovered protocol. Only the
+            // eSCL entry is kept: the WSD entry of some devices (the Canon iR series is one)
+            // opens but cannot start a scan, and listing a working and a broken entry for
+            // one scanner makes the user pick the broken one.
+            if (entry.name.startsWith("airscan:")
+                && entry.vendor.compare("WSD", Qt::CaseInsensitive) == 0
+                && esclIdentities.contains(entry.identity)) {
+                qCInfo(app) << "Worker: hiding WSD entry" << entry.name
+                            << "because the eSCL entry of the same scanner is available";
+                continue;
+            }
+            // The sane-backends escl backend can report the same scanner as airscan; keep
+            // the airscan entry (recognizable name, direct eSCL fallback) and drop this one.
+            if (!entry.name.startsWith("airscan:") && !entry.address.isEmpty()
+                && airscanAddresses.contains(entry.address)) {
+                qCInfo(app) << "Worker: hiding escl entry" << entry.name
+                            << "because airscan already reports the same address";
+                continue;
+            }
+
+            deviceNames.append(entry.name);
+            m_deviceIdentities.insert(entry.name, entry.identity);
+            if (!entry.esclNames.isEmpty()) {
+                qCInfo(app) << "Worker: device" << entry.name << "can also be scanned through" << entry.esclNames;
+                m_esclAliases.insert(entry.name, entry.esclNames);
             }
         }
     }
@@ -419,6 +548,8 @@ void ScannerWorker::doOpenDevice(const QString &deviceName)
     }
 
     m_deviceName = deviceName;
+    m_scanDeviceName = deviceName;
+    m_deviceIdentity = m_deviceIdentities.value(deviceName);
 
     QElapsedTimer openTimer;
     openTimer.start();
@@ -461,6 +592,8 @@ void ScannerWorker::doCloseDevice()
     m_deviceOpen = false;
     m_usingTestDevice = false;
     m_deviceName.clear();
+    m_scanDeviceName.clear();
+    m_deviceIdentity.clear();
     qCDebug(app) << "Worker: Closed SANE device.";
 #else
     m_deviceOpen = false;
@@ -474,7 +607,7 @@ void ScannerWorker::doCloseDevice()
 // and the only way to be sure the handle is usable, because enumerating devices
 // rebuilds the device cache of some backends (the deepin cloud scan backend does)
 // and thereby invalidates every handle obtained before the enumeration.
-bool ScannerWorker::reopenDevice()
+bool ScannerWorker::reopenDevice(const QString &deviceName)
 {
     if (m_deviceOpen && m_device) {
         sane_close(m_device);
@@ -485,18 +618,43 @@ bool ScannerWorker::reopenDevice()
     QElapsedTimer openTimer;
     openTimer.start();
 
-    QByteArray deviceNameBytes = m_deviceName.toUtf8();
+    QByteArray deviceNameBytes = deviceName.toUtf8();
     SANE_Status status = sane_open(deviceNameBytes.constData(), &m_device);
     if (status != SANE_STATUS_GOOD) {
-        qCWarning(app) << "Worker: Failed to re-open device" << m_deviceName << "after" << openTimer.elapsed() << "ms:" << sane_strstatus(status);
+        qCWarning(app) << "Worker: Failed to re-open device" << deviceName << "after" << openTimer.elapsed() << "ms:" << sane_strstatus(status);
         m_device = nullptr;
         m_deviceOpen = false;
         return false;
     }
 
     m_deviceOpen = true;
-    qCInfo(app) << "Worker: Device" << m_deviceName << "re-opened in" << openTimer.elapsed() << "ms";
+    qCInfo(app) << "Worker: Device" << deviceName << "re-opened in" << openTimer.elapsed() << "ms";
     return true;
+}
+
+// Names to try for one scan. The name that worked last comes first. A WSD device that
+// fails with an I/O error is retried through its direct eSCL endpoint (some devices
+// advertise WSD but reject WSD scan jobs, while eSCL scans fine).
+QStringList ScannerWorker::scanCandidates() const
+{
+    const QString primary = m_scanDeviceName.isEmpty() ? m_deviceName : m_scanDeviceName;
+    const QStringList esclNames = m_esclAliases.value(m_deviceName);
+
+    QStringList candidates;
+    for (const QString &esclName : esclNames) {
+        if (esclName != primary && m_verifiedEsclNames.contains(esclName)) {
+            candidates << esclName;
+        }
+    }
+    if (!candidates.contains(primary)) {
+        candidates << primary;
+    }
+    for (const QString &esclName : esclNames) {
+        if (!candidates.contains(esclName)) {
+            candidates << esclName;
+        }
+    }
+    return candidates;
 }
 
 void ScannerWorker::reportDeviceDisconnected()
@@ -524,7 +682,15 @@ void ScannerWorker::reportScanFailure(const QString &errorMessage)
     if (sane_get_devices(&deviceList, SANE_FALSE) == SANE_STATUS_GOOD) {
         devicePresent = false;
         for (int i = 0; deviceList && deviceList[i] != nullptr; ++i) {
-            if (deviceList[i]->name && m_deviceName == QString::fromUtf8(deviceList[i]->name)) {
+            if (!deviceList[i]->name) {
+                continue;
+            }
+            const QString name = QString::fromUtf8(deviceList[i]->name);
+            // The name alone is not a reliable identity: sane-airscan includes a discovery
+            // index in it and exposes the same scanner under the protocol that was found
+            // (airscan:w0:, airscan:e1:...). The model and address do not change.
+            if (name == m_deviceName
+                || (!m_deviceIdentity.isEmpty() && deviceIdentity(deviceList[i]) == m_deviceIdentity)) {
                 devicePresent = true;
                 break;
             }
@@ -533,7 +699,7 @@ void ScannerWorker::reportScanFailure(const QString &errorMessage)
 
     if (!devicePresent) {
         qCWarning(app) << "Worker: Device" << m_deviceName << "is no longer available.";
-    } else if (reopenDevice()) {
+    } else if (reopenDevice(m_scanDeviceName.isEmpty() ? m_deviceName : m_scanDeviceName)) {
         emit errorOccurred(errorMessage);
         return;
     }
@@ -556,71 +722,106 @@ void ScannerWorker::doStartScan(const QString &tempOutputFilePath, int dpi, Scan
         return;
     }
 
-    if (!reopenDevice()) {
-        reportDeviceDisconnected();
-        return;
-    }
+    const QStringList candidates = scanCandidates();
+    QString errorMessage;
 
     QElapsedTimer scanTimer;
     scanTimer.start();
 
-    doSetScanMode(mode);
-    doSetColorMode(colorMode);
-    doSetResolution(dpi);
+    for (int attempt = 0; attempt < candidates.count(); ++attempt) {
+        const QString &scanName = candidates.at(attempt);
+        const bool canRetry = attempt + 1 < candidates.count();
 
-    if (mode != ScannerDevice::SCAN_MODE_FLATBED) {
-        QSizeF pageSize = ScannerDevice::getPaperSizeDimensions(paperSize);
-        doSetPageSize(pageSize.width(), pageSize.height());
-    }
-    
-    m_scanCancelled = false;
+        if (!reopenDevice(scanName)) {
+            if (errorMessage.isEmpty()) {
+                errorMessage = tr("Failed to open SANE device '%1'").arg(scanName);
+            }
+            continue;
+        }
 
-    const qint64 optionsMs = scanTimer.elapsed();
-    scanTimer.restart();
+        doSetScanMode(mode);
+        doSetColorMode(colorMode);
+        doSetResolution(dpi);
 
-    // Start the scan
-    SANE_Status status = sane_start(m_device);
-    const qint64 startMs = scanTimer.elapsed();
-    scanTimer.restart();
-    if (status != SANE_STATUS_GOOD) {
-        reportScanFailure(tr("Failed to start scan: %1").arg(sane_strstatus(status)));
+        if (mode != ScannerDevice::SCAN_MODE_FLATBED) {
+            QSizeF pageSize = ScannerDevice::getPaperSizeDimensions(paperSize);
+            doSetPageSize(pageSize.width(), pageSize.height());
+        }
+
+        m_scanCancelled = false;
+
+        const qint64 optionsMs = scanTimer.elapsed();
+        scanTimer.restart();
+
+        // Start the scan
+        SANE_Status status = sane_start(m_device);
+        const qint64 startMs = scanTimer.elapsed();
+        scanTimer.restart();
+        if (status != SANE_STATUS_GOOD) {
+            qCWarning(app) << "Worker: sane_start on" << scanName << "failed after" << startMs << "ms:" << sane_strstatus(status);
+            if (errorMessage.isEmpty()) {
+                errorMessage = tr("Failed to start scan: %1").arg(sane_strstatus(status));
+            }
+            // A device that rejects the WSD scan job may still scan over eSCL: retry
+            // through the next endpoint instead of reporting the failure.
+            if (canRetry && status == SANE_STATUS_IO_ERROR) {
+                qCInfo(app) << "Worker: retrying scan through" << candidates.at(attempt + 1);
+                continue;
+            }
+            reportScanFailure(errorMessage);
+            return;
+        }
+
+        QByteArray tempPathBytes = tempOutputFilePath.toLocal8Bit();
+        FILE *ofp = fopen(tempPathBytes.constData(), "wb");
+        if (!ofp) {
+            sane_cancel(m_device);
+            emit errorOccurred(tr("Failed to open temporary output file."));
+            return;
+        }
+
+        QImage scannedImage;
+        status = scan_it(ofp, scannedImage); // The blocking call
+        const qint64 readMs = scanTimer.elapsed();
+        fclose(ofp);
+
+        qCInfo(app) << "Worker: scan timing: options" << optionsMs << "ms, sane_start" << startMs << "ms, read" << readMs << "ms";
+
+        if (m_scanCancelled) {
+            QFile::remove(tempOutputFilePath);
+            // Don't emit error, as it's a user action
+            qCDebug(app) << "Scan was cancelled.";
+            // a cancel implies the device is no longer capturing
+            emit errorOccurred(tr("Scan canceled by user"));
+            return;
+        }
+
+        if (status != SANE_STATUS_GOOD && status != SANE_STATUS_EOF) {
+            QFile::remove(tempOutputFilePath);
+            reportScanFailure(tr("Scan failed during read: %1").arg(sane_strstatus(status)));
+            return;
+        }
+
+        if (scanName != m_scanDeviceName) {
+            m_scanDeviceName = scanName;
+            if (scanName != m_deviceName) {
+                m_verifiedEsclNames.insert(scanName);
+            }
+            qCInfo(app) << "Worker: scanning device" << m_deviceName << "through" << scanName;
+        }
+
+        if (!scannedImage.isNull()) {
+            // The page is already an image, the temp file stayed empty.
+            QFile::remove(tempOutputFilePath);
+            emit captureCompletedImage(scannedImage);
+        } else {
+            emit captureCompleted(tempOutputFilePath);
+        }
         return;
     }
 
-    QByteArray tempPathBytes = tempOutputFilePath.toLocal8Bit();
-    FILE *ofp = fopen(tempPathBytes.constData(), "wb");
-    if (!ofp) {
-        sane_cancel(m_device);
-        emit errorOccurred(tr("Failed to open temporary output file."));
-        return;
-    }
-
-    QImage scannedImage;
-    status = scan_it(ofp, scannedImage); // The blocking call
-    const qint64 readMs = scanTimer.elapsed();
-    fclose(ofp);
-
-    qCInfo(app) << "Worker: scan timing: options" << optionsMs << "ms, sane_start" << startMs << "ms, read" << readMs << "ms";
-
-    if (m_scanCancelled) {
-        QFile::remove(tempOutputFilePath);
-        // Don't emit error, as it's a user action
-        qCDebug(app) << "Scan was cancelled.";
-        // a cancel implies the device is no longer capturing
-        emit errorOccurred(tr("Scan canceled by user"));
-        return;
-    }
-
-    if (status != SANE_STATUS_GOOD && status != SANE_STATUS_EOF) {
-        QFile::remove(tempOutputFilePath);
-        reportScanFailure(tr("Scan failed during read: %1").arg(sane_strstatus(status)));
-    } else if (!scannedImage.isNull()) {
-        // The page is already an image, the temp file stayed empty.
-        QFile::remove(tempOutputFilePath);
-        emit captureCompletedImage(scannedImage);
-    } else {
-        emit captureCompleted(tempOutputFilePath);
-    }
+    // No candidate could be opened: the device is gone.
+    reportDeviceDisconnected();
 #else
     generateTestImage(tempOutputFilePath);
     emit captureCompleted(tempOutputFilePath);
